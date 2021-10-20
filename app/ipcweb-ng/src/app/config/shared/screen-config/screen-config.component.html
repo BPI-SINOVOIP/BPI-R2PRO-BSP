@@ -1,0 +1,31 @@
+<div class="container col-12">
+    <div class="card" id="login-card">
+      <div class="card-header">
+        <h4 class="login-h4">{{'screenConfig' | translate}}</h4>
+      </div>
+      <div class="card-block" [formGroup]="LightForm">
+        <div class="box">
+            <label class="introduce"></label>
+            <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                <input type="checkbox" id="iSaveEnergyEnable" formControlName="iSaveEnergyEnable">
+                <label class="stand"></label>
+                <label class="check-label" for="iSaveEnergyEnable">{{ 'energySavingEnabled' | translate }}</label>
+            </div>
+            <label class="tip"></label>
+        </div>
+        <div class="box">
+            <label class="introduce">{{ 'energySavingBrightness' | translate }}</label>
+            <input formControlName="iSaveEnergyBrightness" class="content radius-input-stand">
+            <label class="tip alarm-tip ml-1">10-100</label>
+        </div>
+        <div class="box">
+            <label class="introduce">{{ 'screenBrightness' | translate }}</label>
+            <input formControlName="iNormalBrightness" class="content radius-input-stand">
+            <label class="tip alarm-tip ml-1">10-100</label>
+        </div>
+        <div class="box">
+            <button class="blue-btn" (click)="onSubmit()">{{'save' | translate}}</button>
+        </div>
+      </div>
+    </div>
+</div>

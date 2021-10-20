@@ -1,0 +1,49 @@
+<div class="container col-12">
+  <div class="card" id="login-card">
+    <div class="card-header">
+      <h4 class="login-h4">{{'pleaseSignIn' | translate}}</h4>
+    </div>
+    <div class="card-block">
+      <form [formGroup]="form" class="form">
+        <div class="form-body">
+          <div class="form-group row ml-2" *ngIf="loginStatus === -1">
+            <label class="alarm-tip">{{'passwordError' | translate}}</label>
+          </div>
+          <div class="form-group row ml-2" *ngIf="loginStatus <= -2">
+            <label class="alarm-tip">{{'userNameNotExist' | translate}}</label>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 introduce">{{'userName' | translate}}</label>
+            <div class="col-md-9">
+              <input type="text" class="form-control" placeholder="{{'userName' | translate}}" formControlName="userName" required>
+              <div *ngIf="(userName.dirty || userName.touched) && userName.errors?.required">
+                {{'pleaseInformYour' | translate}}{{'userName' | translate}}
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 introduce">{{'password' | translate}}</label>
+            <div class="col-md-9">
+              <input type="password" class="form-control" placeholder="{{'password' | translate}}" formControlName="password" required>
+              <div *ngIf="(password.dirty || password.touched) && password.errors?.required">
+                {{'pleaseInformYour' | translate}}{{'password' | translate}}
+              </div>
+            </div>
+          </div>
+          <div class="form-group right">
+            <select formControlName="expire">
+              <ng-container *ngFor="let key of objectKey(expireDict)">
+                <option [value]="expireDict[key]">{{key | translate}}</option>
+              </ng-container>
+            </select>
+            <!-- <input class="form-input" type="checkbox" value="remember-me" disabled>
+            <label>{{'rememberMe' | translate}}</label> -->
+          </div>
+        </div>
+        <div class="form-actions right">
+          <button class="blue-btn" (click)="onSubmit()" [disabled]="form.invalid">{{'signIn' | translate}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

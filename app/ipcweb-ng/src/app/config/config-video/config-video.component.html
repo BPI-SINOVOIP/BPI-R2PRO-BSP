@@ -1,0 +1,14 @@
+<div class=container>
+    <ng-container *ngIf="selectedMenuItem === 'Encoder'">
+        <app-encoder-param></app-encoder-param>
+    </ng-container>
+    <ng-container *ngIf="selectedMenuItem === 'AdvancedEncoder'">
+        <app-advanced-encoder></app-advanced-encoder>
+    </ng-container>
+    <ng-container *ngIf="selectedMenuItem === 'ROI'">
+        <app-roi></app-roi>
+    </ng-container>
+    <ng-container *ngIf="selectedMenuItem === 'RegionCrop'">
+        <app-region-crop></app-region-crop>
+    </ng-container>
+</div>

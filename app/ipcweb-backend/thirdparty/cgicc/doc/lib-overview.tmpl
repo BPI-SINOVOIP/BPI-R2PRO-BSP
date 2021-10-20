@@ -1,0 +1,140 @@
+/* -*-html-*- */
+/*
+ *  $Id: lib-overview.tmpl,v 1.10 2004/06/29 15:13:15 sbooth Exp $
+ *
+ *  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
+ *  Part of the GNU cgicc library, http://www.cgicc.org
+ *
+ *  Permission is granted to copy, distribute and/or modify this document
+ *  under the terms of the GNU Free Documentation License, Version 1.1
+ *  or any later version published by the Free Software Foundation;
+ *  with no Invariant Sections, with no Front-Cover Texts, and with 
+ *  no Back-Cover Texts.
+ *  A copy of the license is included in the section entitled "GNU
+ *  Free Documentation License".
+ */
+
+/*! \page lib_overview Library Overview
+
+The GNU %cgicc library contains classes divided into two broad groups, CGI
+classes and response generation classes.
+
+\htmlonly
+<div class="header">CGI classes</div>
+<div class="subsection">
+\endhtmlonly
+
+CGI classes are used to query and manipulate CGI data, including
+information on the HTTP server, the current request, and the submitted
+form data.
+ 
+cgicc::Cgicc is the main class of the %cgicc library.  It is used to
+retrieve information on specific HTML form elements (such as checkboxes,
+radio buttons, and text fields), on uploaded files, and to save,
+restore, and retrieve information on the CGI environment.
+
+cgicc::CgiEnvironment encapsulates the data passed from the HTTP server
+to the CGI application.  This includes all environment variables set by
+the HTTP server specified in the CGI standard.
+
+cgicc::FormEntry is an immutable class representing a single user entry
+in an HTML form element such as a text field, a radio button, or a
+checkbox.  A FormEntry is essentially a name/value pair, where
+the name is the name of the form element as specified in the HTML form
+itself, and the value is user-entered or user-selected
+value. FormEntry provides methods allowing access to the value as
+a string, integer, or double.
+
+cgicc::FormFile is an immutable class representing a file uploaded via
+the HTTP file upload mechanism.  A FormFile is very similar to a
+FormEntry, but does not provide the numerous methods for
+accessing the value as different types.
+
+\htmlonly
+</div>
+\endhtmlonly
+
+\htmlonly
+<div class="header">Response generation classes</div>
+<div class="subsection">
+\endhtmlonly
+
+Response generation classes are used to generate responses to a CGI
+query. Generally, the response will consist of one or more HTTP
+headers followed by HTML text, but the CGI application may return data
+of any type. The response generation classes are subdivided into two
+groups:
+
+<ol>
+<li><em>HTTP header classes</em><br>
+HTTP header classes are used to indicate to the client information on
+the data being returned as a result of the CGI request.  For example,
+standard HTTP headers indicate the type, size, and modification date of
+the transmitted data.<br>
+
+An cgicc::HTTPCookie is a name/value pair used to store a piece of
+information about the caller using the caller's own machine.  Cookies
+are often used as a means to identify users.  Any of %cgicc's header
+classes may contain an arbitrary number of cookies.
+
+cgicc::HTTPHeader is the base class for all simple HTTP headers.  It
+is rarely used directly; instead, use one of the provided subclasses.
+
+cgicc::HTTPContentHeader is a subclass of cgicc::HTTPHeader used to
+indicate the type of data returned to the client by the CGI application.
+
+cgicc::HTTPRedirectHeader is a subclass of cgicc::HTTPHeader used to
+redirect the client to a different URL.
+
+cgicc::HTTPStatusHeader is a subclass of cgicc::HTTPHeader used to
+return a 3-digit HTTP status code and the associated message.
+
+cgicc::HTTPHTMLHeader is a subclass of cgicc::HTTPContentHeader used for
+data of MIME type \c text/html.
+
+cgicc::HTTPPlainHeader is a subclass of cgicc::HTTPContentHeader used
+for data of MIME type \c text/plain.
+
+cgicc::HTTPResponseHeader is a more powerful, generic HTTP header
+class used to construct a full HTTP response.
+</li>
+
+<li><em>HTML generation classes</em><br>
+HTML generation classes are used to generate an HTML response
+following any HTTP headers.  To be compliant with the HTML 4.0 standard,
+the response must consist of three parts (For a complete
+description see the HTML 4.0 specification at 
+http://www.w3.org/TR/REC-html40/):
+
+<ul>
+<li>A line containing the HTML version information</li>
+<li>A declarative header section (delimited by the \c head element)</li>
+<li>A body, which contains the document's actual content</li>
+
+The %cgicc library provides one class for each HTML element defined in
+the HTML 4.0 specification.  In all cases, the name of the class
+corresponds to the name of the HTML element.  %cgicc tries to produce
+SGML (and therefore XML) compliant output- thus, atomic elements such
+as \c br as rendered as \c \<br />.
+
+There are two special HTML classes defined by %cgicc:
+
+cgicc::HTMLDoctype is used to specify the HTML version information as
+required by the HTML 4.0 standard
+
+cgicc::comment is used to indicate an HTML comment
+</ul></li></ol>
+\htmlonly
+</div>
+\endhtmlonly
+
+\htmlonly
+<div class="nav">
+\endhtmlonly
+Previous: \ref cgi_overview | 
+Current: \ref lib_overview | 
+Next: \ref cgicc_tutorial
+\htmlonly
+</div>
+\endhtmlonly
+*/

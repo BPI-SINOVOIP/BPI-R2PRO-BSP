@@ -1,0 +1,13 @@
+!.gitignore
+build/
+build/*
+example/calc/calc_client_proxy.h
+example/calc/calc_server_adaptor.h
+example/mpp_enc/mediaserver_adaptor.h
+example/mpp_enc/mediaserver_proxy.h
+src/dbus/control/dbus_media_control_adaptor.h
+src/dbus/control/dbus_media_control_proxy.h
+src/dbus/database/dbus_dbserver_adaptor.h
+src/dbus/database/dbus_dbserver_proxy.h
+src/dbus/storage_manager/dbus_storage_manager_adaptor.h
+src/dbus/storage_manager/dbus_storage_manager_proxy.h

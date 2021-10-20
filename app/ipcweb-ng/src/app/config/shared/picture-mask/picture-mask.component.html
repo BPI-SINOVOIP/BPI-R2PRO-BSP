@@ -1,0 +1,62 @@
+<div class="container row py-3 pl-1">
+    <div class="col-lg-7 col-xl-7">
+        <app-player [option]="playerOption" #player></app-player>
+    </div>
+    <div class='col-lg-5 col-xl-5'>
+        <p class="gray-title"><span>{{ 'updatePicture' | translate}}</span></p>
+        <div class="changeInputFile" *ngIf="!isIe">
+            <input type='file' accept='.bmp' (change)="onFileChange($event.target.files)" id="pictur-mask-selector">
+            <label class="blue-btn" (click)="onFileClick('pictur-mask-selector')">{{'selectFile' | translate}}</label>
+            <label class="input-file">{{ fileName | translate }}{{ fileLimitSize }}</label>
+            <button class="blue-btn" (click)="onUpdate()">{{ 'updateFile' | translate }}</button>
+        </div>
+        <div *ngIf="isIe">
+            <input type='file' accept='.bmp' (change)="onFileChange($event.target.files)" id="pictur-mask-selector">
+            <button class="blue-btn" (click)="onUpdate()">{{ 'updateFile' | translate }}</button>
+            <label class="input-file alarm-tip">{{ fileName | translate }}{{ fileLimitSize }}</label>
+        </div>
+        <p class="gray-title mt-2"><span>{{ 'overlaySetting' | translate}}</span></p>
+        <form [formGroup]="PicForm.get('imageOverlay')" class='pl-2'>
+            <div class='form-row mt-1'>
+                <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                    <input type="checkbox" id="iImageOverlay" formControlName="iImageOverlayEnabled">
+                    <label class="stand"></label>
+                    <label class="for-new-check" for="iImageOverlay">{{ 'imageOverlayEnabled' | translate}}</label>
+                </div>
+            </div>
+            <div class="form-row mt-1">
+                <div class="col-4">
+                    <label>{{ "xPosition" | translate}}</label>
+                </div>
+                <div class="col-7">
+                    <input type='text' formControlName="iPositionX" readonly>
+                </div>
+            </div>
+            <div class="form-row mt-1">
+                <div class="col-4">
+                    <label>{{ "yPosition" | translate}}</label>
+                </div>
+                <div class="col-7">
+                    <input type='text' formControlName="iPositionY" readonly>
+                </div>
+            </div>
+            <div class="form-row mt-1">
+                <div class="col-4">
+                    <label>{{ "pictureWidth" | translate}}</label>
+                </div>
+                <div class="col-7">
+                    <input type='text' formControlName="iImageWidth" readonly>
+                </div>
+            </div>
+            <div class="form-row mt-1">
+                <div class="col-4">
+                    <label>{{ "pictureHeight" | translate}}</label>
+                </div>
+                <div class="col-7">
+                    <input type='text' formControlName="iImageHeight" readonly>
+                </div>
+            </div>
+            <button (click)='onSave()' class='blue-btn mt-2 '>{{ 'save' | translate}}</button>
+        </form>
+    </div>
+</div>

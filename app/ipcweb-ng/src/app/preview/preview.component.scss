@@ -1,0 +1,38 @@
+$icon-font-path: "~/fonts" !default;
+@import '~video.js/dist/video-js.css';
+
+@import 'ptz';
+
+.forbid-direction::before {
+    content:'';
+    background-size:30px 30px;
+    width:30px;
+    height:30px;
+    position: absolute;
+    z-index: 32;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+
+.forbid::before {
+    content:'';
+    background-size:37px 28px;
+    width:37px;
+    height:28px;
+    position: absolute;
+    z-index: 32;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.forbid-zo::before {
+    content:'';
+    background-size:36px 30px;
+    width:36px;
+    height:30px;
+    position: relative;
+    z-index: 32;
+    // left: 0px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+

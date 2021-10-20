@@ -1,0 +1,120 @@
+<div class="container">
+    <div class="relative-space">
+      <p class="gray-title"><span>{{ 'hardDisk.management' | translate }}({{'click2showDiskInfo' | translate}})</span></p>
+      <div class="right">
+        <button class="blue-btn" (click)="updateHddList()">{{ 'fresh' | translate }}</button>
+        <button class="red-btn" (click)="format()">{{ 'hardDisk.format' | translate }}</button>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-sm table-striped table-hover table-bordered text-nowrap">
+        <thead>
+          <tr>
+            <th>
+              <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}" [formGroup]="selectForm">
+                <input type="checkbox" (ngModelChange)="checkAll($event)" formControlName="selectAll">
+                <label class="stand"></label>
+              </div>
+            </th>
+            <th>{{ 'hardDisk.diskNumber' | translate }}</th>
+            <th>{{ 'hardDisk.name' | translate }}</th>
+            <th>{{ 'hardDisk.capacity' | translate }}<span>(GB)</span></th>
+            <th>{{ 'hardDisk.remainingSpace' | translate }}<span>(GB)</span></th>
+            <th>{{ 'hardDisk.status' | translate }}</th>
+            <th>{{ 'hardDisk.type' | translate }}</th>
+            <th>{{ 'hardDisk.attributes' | translate }}</th>
+            <th>{{ 'hardDisk.formatProgress' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let hardDisk of hddList" [ngClass]="{'table-primary': isHardDiskSelected(hardDisk)}" (click)="onSelectedHardDisk(hardDisk)">
+            <!-- <td><input type="checkbox" [(checked)]="hardDisk.selected" (click)="checkboxClick($event,i);checkBoxOne()"/></td> -->
+            <td>
+              <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                <input type="checkbox" [(checked)]="hardDisk.selected" [disabled]="hardDisk.sStatus==='unmounted'">
+                <label class="stand"></label>
+              </div>
+            </td>
+            <td class="text-truncate">{{ hardDisk.id }}</td>
+            <td class="text-truncate">{{ hardDisk.sName | translate}}</td>
+            <td class="text-truncate">{{ hardDisk.iTotalSize }}</td>
+            <td class="text-truncate">{{ hardDisk.iFreeSize }}</td>
+            <td class="text-truncate"><span [ngClass]="{ 'badge': true, 'badge-prime': true, 'badge-success': (hardDisk.sStatus === 'mounted') ? true : false}">{{ hardDisk.sStatus | translate}}</span></td>
+            <td class="text-truncate">{{ hardDisk.sType | translate }}</td>
+            <td class="text-truncate">{{ hardDisk.sAttributes | translate }}</td>
+            <td class="text-truncate">{{ hardDisk.iFormatProg }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <form class="form" [formGroup]="QuotaInterfaceForm">
+      <p class="gray-title"><span>{{ 'hardDisk.quota' | translate }}</span></p>
+      <div [ngClass]="{'average-grid': isChrome, 'row': !isChrome}">
+        <div class="form-group" [ngClass]="{'col-6': !isChrome}">
+          <div class="row">
+            <label class="form-group-text col-md-4">{{ 'hardDisk.current' | translate }}</label>
+            <select formControlName="id" class="radius-select-stand col-md-6" (ngModelChange)="onSwitchDisk($event)">
+              <option *ngFor="let item of avalidDisk" [value]="item">{{ item }}</option>
+            </select>
+            <!-- <input type="text" class="form-control col-md-6" > -->
+          </div>
+        </div>
+        <div class="form-group" [ngClass]="{'col-6': !isChrome}">
+          <div class="row">
+            <label class="form-group-text col-md-4">{{ 'quota.pictureCapacity' | translate }}</label>
+            <input type="text" class="form-control col-md-6" formControlName="iTotalPictureVolume">
+            <div class="input-group-append">
+              <span class="input-group-text">GB</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" [ngClass]="{'col-6': !isChrome}">
+          <div class="row">
+            <label class="form-group-text col-md-4">{{ 'quota.pictureRemainingSpace' | translate }}</label>
+            <input type="text" class="form-control col-md-6" formControlName="iFreePictureQuota">
+            <div class="input-group-append">
+              <span class="input-group-text">GB</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" [ngClass]="{'col-6': !isChrome}">
+          <div class="row">
+            <label class="form-group-text col-md-4">{{ 'quota.videoCapacity' | translate }}</label>
+            <input type="text" class="form-control col-md-6" formControlName="iTotalVideoVolume" >
+            <div class="input-group-append">
+              <span class="input-group-text">GB</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" [ngClass]="{'col-6': !isChrome}">
+          <div class="row">
+            <label class="form-group-text col-md-4">{{ 'quota.videoRemainingSpace' | translate }}</label>
+            <input type="text" class="form-control col-md-6" formControlName="iFreeVideoQuota">
+            <div class="input-group-append">
+              <span class="input-group-text">GB</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" [ngClass]="{'col-6': !isChrome}">
+          <div class="row">
+            <label class="form-group-text col-md-4">{{ 'quota.snapshotQuotaPercentage' | translate }}</label>
+            <input type="text" class="form-control col-md-6" formControlName="iPictureQuotaRatio">
+            <div class="input-group-append">
+              <span class="input-group-text">%</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" [ngClass]="{'col-6': !isChrome}">
+          <div class="row">
+            <label class="form-group-text col-md-4">{{ 'quota.videoQuotaPercentage' | translate }}</label>
+            <input type="text" class="form-control col-md-6" formControlName="iVideoQuotaRatio">
+            <div class="input-group-append">
+              <span class="input-group-text">%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="blue-btn" (click)="onSubmit()" [disabled]="QuotaInterfaceForm.invalid">{{ 'switch' | translate }}</button>
+    </form>
+  </div>

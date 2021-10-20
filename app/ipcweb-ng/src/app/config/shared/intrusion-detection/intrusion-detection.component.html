@@ -1,0 +1,53 @@
+<div class="container-fluid pt-3">
+    <div class="col-12">
+        <ul [formGroup]="IntrusionForm">
+            <li>
+                <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                    <input type="checkbox" id="motion-enabled" formControlName="iEnabled">
+                    <label class="stand"></label>
+                    <label for="motion-enabled" class="for-new-check">{{ 'Intrusion.intrusionEnabled' | translate }}</label>
+                </div>
+            </li>
+            <!-- <li>
+                <div class="checkbox-space">
+                    <input type="checkbox" id="dynamic-analysis" formControlName="iHighlightEnabled">
+                    <label class="stand"></label>
+                </div>
+                <label for="dynamic-analysis">{{ 'dynamicAnalysisEnabled' | translate }}</label>
+            </li> -->
+        </ul>
+    </div>
+    <div class="col-12">
+        <div class="contain-fluid">
+            <ul class="nav nav-tabs nav-underline" role="tablist">
+              <ng-container *ngFor="let submenu of menuItems; first as isFirst;">
+                <li class="nav-item">
+                  <a id="{{ submenu }}Tab" [ngClass]="{ 'nav-link': true, 'active': isFirst }" data-toggle="tab"
+                    href="#{{ submenu }}" role="tab" [attr.aria-controls]="'#' + submenu"
+                    [attr.aria-expanded]="isFirst" (click)="onClickTab(submenu)">{{ submenu | translate }}</a>
+                </li>
+              </ng-container>
+            </ul>
+            <div class="tab-content py-1 pl-1">
+              <ng-container *ngIf="selectedTab==='regionSetting'">
+                <!-- <div class="tab-pane active" id="regionSetting" role="tabpanel" aria-expanded="true" aria-labelledby="regionSettingTab"> -->
+                <app-intrusion-region #region></app-intrusion-region>
+                <!-- </div> -->
+              </ng-container>
+              <ng-container *ngIf="selectedTab==='armingTime'">
+                <!-- <div class="tab-pane" id="armingTime" role="tabpanel" aria-expanded="false" aria-labelledby="armingTimeTab"> -->
+                <app-time-table [option]="tabOption" #arming></app-time-table>
+                <!-- </div> -->
+              </ng-container>
+              <ng-container *ngIf="selectedTab==='linkageMode'">
+                <!-- <div class="tab-pane" id="linkageMode" role="tabpanel" aria-expanded="false" aria-labelledby="linkageModeTab"> -->
+                <app-motion-linkage #linkage></app-motion-linkage>
+                <!-- </div> -->
+              </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <button class="blue-btn ml-1" (click)="onSubmit()" id="intrusion-save">{{ 'save' | translate }}</button>
+    </div>
+</div>

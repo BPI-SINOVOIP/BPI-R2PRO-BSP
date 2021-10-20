@@ -1,0 +1,7 @@
+<RCC>
+ <qresource>
+  <file>images/default_user_face.png</file>
+  <file>images/icon_set.png</file>
+  <file>images/icon_close.png</file>
+ </qresource>
+</RCC>

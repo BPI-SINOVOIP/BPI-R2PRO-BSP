@@ -1,0 +1,15 @@
+<ng-container *ngIf="selectedMenuItem === 'MotionDetect'">
+    <app-motion-detect></app-motion-detect>
+</ng-container>
+<ng-container *ngIf="selectedMenuItem === 'IntrusionDetection'">
+    <app-intrusion-detection></app-intrusion-detection>
+</ng-container>
+<ng-container *ngIf="selectedMenuItem === 'AlarmInput'">
+    <app-alarm-input></app-alarm-input>
+</ng-container>
+<ng-container *ngIf="selectedMenuItem === 'AlarmOutput'">
+    <app-alarm-output></app-alarm-output>
+</ng-container>
+<ng-container *ngIf="selectedMenuItem === 'Abnormal'">
+    <app-abnormal></app-abnormal>
+</ng-container>

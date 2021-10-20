@@ -1,0 +1,378 @@
+/* You can add global styles to this file, and also import other style files */
+
+$font-size-base: 0.9rem;
+@import '../node_modules/bootstrap/scss/bootstrap';
+@import 'assets/css/bootstrap-extended';
+
+ul {
+    list-style: none;
+    padding-left: 2px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.alarm-tip {
+    color: red;
+    font-weight: bolder;
+    margin: 0px;
+}
+
+// new checkbox style
+.checkbox-space {
+    display: inline-block;
+    position: relative;
+    padding-left: 0px;
+}
+
+.checkbox-space .stand {
+    width:25px
+}
+
+.checkbox-space input[type="checkbox"] {
+    position: absolute;
+    margin-top: 2px;
+    width: 0;
+    height: 0;
+    z-index: 5;
+}
+
+.checkbox-space input[type="checkbox"]:after {
+    content:'';
+    background-image: url('/assets/images/icon_checkbox_01.png');
+    background-size:20px 20px;
+    width:20px;
+    height:20px;
+    position: absolute;
+    z-index: 5;
+}
+
+.checkbox-space input[type="checkbox"]:hover:after {
+    cursor: pointer;
+    z-index: 5;
+}
+
+.checkbox-space input[type="checkbox"]:checked:after {
+    background-image: url('/assets/images/icon_checkbox_02.png');
+    z-index: 5;
+}
+
+.checkbox-space input[type="checkbox"]:disabled:after {
+    background-color: #c8c8c8;
+    cursor: default;
+    z-index: 5;
+}
+
+.checkbox-space label.for-new-check {
+    margin: 0px;
+    line-height: 20px;
+}
+
+.checkbox-space-ie input[type="checkbox"] {
+    position: absolute;
+    z-index: 5;
+    margin-top: 2px;
+    width: 20px;
+    height: 20px;
+}
+
+.checkbox-space-ie .stand {
+    width:25px
+}
+
+.checkbox-space-ie label.for-new-check {
+    margin: 0px;
+    line-height: 20px;
+}
+
+// new butoon whose color is blue
+.blue-btn {
+    border: hidden;
+    height: 30px;
+    width: 82px;
+    background: url('/assets/images/btn_blue_01.9.png') repeat;
+    text-align: center;
+    font-size: medium;
+    color: black;
+    line-height: 30px;
+}
+.blue-btn:hover {
+    border: hidden;
+    height: 30px;
+    width: 82px;
+    background: url('/assets/images/btn_blue_02.9.png') repeat;
+    text-align: center;
+    font-size: medium;
+    color: white;
+    line-height: 30px;
+    cursor: pointer;
+}
+.blue-btn:disabled {
+    border: hidden;
+    height: 30px;
+    width: 82px;
+    background: url('/assets/images/btn_blue_01.9.png') repeat;
+    text-align: center;
+    font-size: medium;
+    color: rgb(214, 200, 200);
+    line-height: 30px;
+    cursor: default;
+}
+.blue-btn:disabled:hover {
+    border: hidden;
+    height: 30px;
+    width: 82px;
+    background: url('/assets/images/btn_blue_01.9.png') repeat;
+    text-align: center;
+    font-size: medium;
+    color: rgb(214, 200, 200);
+    line-height: 30px;
+    cursor: default;
+}
+
+.label4btn {
+    padding: 0px;
+    line-height: 30px;
+    margin-right: 5px;
+    float: left;
+}
+
+// .label4btn:after {
+//     content:".";
+//     display:block;
+//     clear:both;
+//     visibility:hidden;
+// }
+
+// new butoon whose color is red
+.red-btn {
+    border: hidden;
+    height: 30px;
+    width: 82px;
+    background: url('/assets/images/btn_red_01.9.png') repeat;
+    text-align: center;
+    font-size: medium;
+    color: white;
+    line-height: 30px;
+}
+.red-btn:hover {
+    border: hidden;
+    height: 30px;
+    width: 82px;
+    background: url('/assets/images/btn_red_02.9.png') repeat;
+    text-align: center;
+    font-size: medium;
+    color: white;
+    line-height: 30px;
+    cursor: pointer;
+}
+.red-btn:disabled {
+    height: 30px;
+    width: 82px;
+    background: url('/assets/images/btn_red_02.9.png') repeat;
+    text-align: center;
+    font-size: medium;
+    color: #e4e7ec;
+    line-height: 30px;
+    cursor: default;
+}
+.red-btn:disabled:hover {
+    height: 30px;
+    width: 82px;
+    background: url('/assets/images/btn_red_02.9.png') repeat;
+    text-align: center;
+    font-size: medium;
+    color: #e4e7ec;
+    line-height: 30px;
+    cursor: default;
+}
+
+li.part-title {
+    background-color: #f8f8f8;
+    color: #2e405c;
+    margin: 0px;
+    margin-top: 1rem;
+}
+
+// alter input
+.changeInputFile input[type="file"] {
+    display: none;
+}
+
+.changeInputFile .input-file {
+    margin-left: 5px;
+    margin-top: 2px;
+    width: 15rem;
+    text-align: left;
+}
+
+div.process-func {
+    padding-left: 0px;
+    display: inline;
+}
+
+div.process-func label.process-left {
+    float:bottom;
+    height: 7px;
+    text-align: center;
+    width: 0%;
+    background-color: #007fe0;
+}
+
+div.process-func label.process-right {
+    float:bottom;
+    height: 7px;
+    text-align: center;
+    width: 100%;
+    background-color: #e4e7ec;
+}
+
+// average not for ie
+.average-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+// title line for boundary
+.gray-title {
+    background-color: #f8f8f8;
+    color: #353a40;
+    min-height: 2rem;
+    line-height: 2rem;
+    width: 100%;
+    margin-bottom: 2px;
+}
+
+.gray-title span {
+    padding-left: 1rem;
+}
+
+// for lay right
+.relative-space {
+    position: relative;
+}
+
+.gray-title-no-line-height {
+    background-color: #f8f8f8;
+    color: #353a40;
+    width: 100%;
+}
+
+.relative-space .right {
+    position: absolute;
+    right: 2px;
+    top: 3px;
+}
+
+// input text or number whose edge is radius
+.radius-input-stand {
+    border: 1px solid #ccd6e6;
+    padding: 0;
+    color: #3f587e;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    height: calc(1.5em + 0.75rem + 2px);
+}
+
+.radius-input-stand:disabled {
+    background-color: #ECEFF1;
+}
+
+
+.radius-input-stand:read-only {
+    background-color: #ECEFF1;
+}
+
+.radius-input-stand-introduce {
+    line-height: calc(1.5em + 0.75rem + 2px);
+    margin: 0px;
+}
+
+
+// no gap container
+.container-fluid.whole {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+// padding 0
+.no-padding {
+    padding: 0px;
+}
+
+// like grid in chrome for ie
+.grid-list-ie {
+
+}
+
+.grid-list-ie label.introduce {
+    float: left;
+    width: 14%;
+    line-height: calc(1.5em + 0.75rem + 2px);
+    margin: 0px;
+    margin-top: 2%;
+}
+
+.grid-list-ie input.content {
+    float: left;
+    width: 30%;
+    margin: 0px;
+    margin-right: 5%;
+    margin-top: 2%;
+}
+
+.float-left {
+    float: left;
+}
+
+.standard-label {
+    margin: 0px;
+    padding: 0px;
+    line-height: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+}
+
+.standard-label input[type="radio"] {
+    margin-right: 3px;
+}
+
+.radius-select-stand {
+    border: 1px solid #ccd6e6;
+    padding: 0;
+    color: #3f587e;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    height: calc(1.5em + 0.75rem + 2px);
+}
+
+.radius-select-stand:disabled {
+    background-color: #ECEFF1;
+}
+
+.select-label {
+    line-height: 2rem;
+    margin: 0px;
+    padding-left: 5%;
+}
+
+.rk-no-float {
+    float: none;
+}
+
+.lay-center {
+    text-align: center;
+}
+

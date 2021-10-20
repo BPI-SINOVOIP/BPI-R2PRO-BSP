@@ -1,0 +1,141 @@
+<div class="contain-fluid row">
+    <ul class="condition col-xl-2 col-md-2 col-sm-2">
+        <li class="table-title row">
+            <span class="col-11">{{ "Download.inquireCondition" | translate}}</span>
+        </li>
+        <div class="searchCondition">
+            <ul class="condition-list" [formGroup]="SearchForm">
+                <li class="condition-title mt-2">
+                    <span class="title">{{ "Download.fileType" | translate}}</span>
+                </li>
+                <li class="condition-content">
+                    <select formControlName="searchType">
+                        <ng-container *ngFor="let item of searchTypeDict[pageType.type]">
+                            <option [value]="item">{{item}}</option>
+                        </ng-container>
+                    </select>
+                </li>
+                <li class="condition-title">
+                    <span class="title">{{ "Download.startTime" | translate }}</span>
+                </li>
+                <li class="condition-content">
+                    <input type="datetime-local" step=1 formControlName="startTime">
+                </li>
+                <li class="condition-content" *ngIf="startTime.invalid && (startTime.dirty || startTime.touched)">
+                    <label class="alarm-tip">{{'Download.startTime' | translate}}{{'isRequired' | translate}}</label>
+                </li>
+                <li class="condition-title">
+                    <span class="title">{{ "Download.endTime" | translate }}</span>
+                </li>
+                <li class="condition-content">
+                    <input type="datetime-local" step=1 formControlName="endTime">
+                </li>
+                <li class="condition-content" *ngIf="endTime.invalid && (endTime.dirty || endTime.touched)">
+                    <label class="alarm-tip">{{'Download.endTime' | translate}}{{'isRequired' | translate}}</label>
+                </li>
+                <li *ngIf="SearchForm.errors?.timeOrder && (SearchForm.touched || SearchForm.dirty)">
+                    <label class="alarm-tip">{{ 'timeOrder' | translate}}</label>
+                </li>
+                <li class="condition-title">
+                    <span class="title">{{ "Download.orderedByTime" | translate }}</span>
+                </li>
+                <li class="condition-content">
+                    <label>
+                        <input type="radio" [value]=0 formControlName="order">
+                        {{ "Download.positiveOrder" | translate }}
+                    </label>
+                    <label>
+                        <input type="radio" [value]=1 formControlName="order">
+                        {{ "Download.reverseOrder" | translate }}
+                    </label>
+                </li>
+                <li class="condition-content" *ngIf="order.invalid && (order.dirty || order.touched)">
+                    <label class="alarm-tip">{{'Download.reverseOrder' | translate}}{{'isRequired2' | translate}}</label>
+                </li>
+                <li class="condition-content">
+                    <button class="blue-btn" (click)="onInquire(1)" [disabled]="SearchForm.invalid">{{ "Download.inquire" | translate }}</button>
+                </li>
+            </ul>
+        </div>
+        <div class="preview">
+            <div class="preview-title">
+                <span id="preview-title">{{ "Download.preview" | translate }}</span>
+            </div>
+            <div class="preview-body">
+                <iframe class="preview-iframe"></iframe>
+            </div>
+        </div>
+    </ul>
+    <ul class="download-list col-xl-9 col-md-8 col-sm-7">
+        <li class="table-title row">
+            <div class="gray-title">
+                <div class="float-left">
+                    <span *ngIf="!isIE">{{ pageType.title | translate }}</span>
+                    <span *ngIf="isIE">{{ 'Download.downloadList2' | translate }}</span>
+                </div>
+                <div class="float-right">
+                    <ng-container *ngIf="pageType.delete">
+                        <button class="red-btn ml-1" (click)="onDelete()">{{ "delete" | translate }}</button>
+                    </ng-container>
+                    <button class="blue-btn" (click)="onDownload()">{{ "Download.startDownload" | translate }}</button>
+                </div>
+            </div>
+        </li>
+        <ng-container *ngIf="pageType.type=='videoRecord'">
+            <table class="video-table" id="video-table">
+                <thead>
+                    <td><input class="size1" type="checkbox" id="select-all" [(checked)]="selectAll" (click)="onSelectAll()"></td>
+                    <td><label class="size1">{{ "Download.order" | translate }}</label></td>
+                    <td><label class="size3">{{ "Download.fileName" | translate }}</label></td>
+                    <td><label class="size3">{{ "Download.fileTime" | translate }}</label></td>
+                    <td><label class="size2">{{ "Download.fileSize" | translate }}</label></td>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of downloadList; let i=index;">
+                        <tr>
+                            <td><input class="size1" type="checkbox" [id]=i [(ngModel)]="item.isChecked"></td>
+                            <td><label class="size1">{{ item.fileId + 1 + (nowPage - 1) * 20}}</label></td>
+                            <td (click)="onSelectFile(i)"><label class="size3">{{ item.fileName }}</label></td>
+                            <td><label class="size3">{{ item.fileTime | date:'yyyy-MM-dd HH:mm:ss' }}</label></td>
+                            <td><label class="size2">{{ item.fileSize + 'M'}}</label></td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </ng-container>
+        <ng-container *ngIf="pageType.type=='pictureRecord'">
+            <table class="video-table" id="video-table">
+                <thead>
+                    <td><input class="size1" type="checkbox" id="select-all" [(checked)]="selectAll" (click)="onSelectAll()"></td>
+                    <td><label class="size1">{{ "Download.order" | translate }}</label></td>
+                    <td><label class="size3">{{ "Download.fileName" | translate }}</label></td>
+                    <td><label class="size2">{{ "Download.preview" | translate }}</label></td>
+                    <td><label class="size3">{{ "Download.fileTime" | translate }}</label></td>
+                    <td><label class="size2">{{ "Download.fileSize" | translate }}</label></td>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of downloadList; let i=index;">
+                        <tr>
+                            <td><input class="size1" type="checkbox" [id]=i [(ngModel)]="item.isChecked"></td>
+                            <td><label class="size1">{{ item.fileId + 1 + (nowPage - 1) * 20}}</label></td>
+                            <td (click)="onSelectFile(i)"><label class="size3">{{ item.fileName }}</label></td>
+                            <td><img class="picture-preview" [src]="item.fileAddress"></td>
+                            <td><label class="size3">{{ item.fileTime | date:'yyyy-MM-dd HH:mm:ss' }}</label></td>
+                            <td><label class="size2">{{ item.fileSize + 'M'}}</label></td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </ng-container>
+    </ul>
+    <div class='page-foot col-11'>
+        <div class='foot-part'>
+            <label class='foot-part-son' [innerHTML]="innerNumber"></label>
+            <button class='foot-part-son page-btn' (click)="pageDoubleUp()"><<</button>
+            <button class='foot-part-son page-btn' (click)="pageUp()"><</button>
+            <label class='foot-part-son' [innerHTML]="innerPage"></label>
+            <button class='foot-part-son page-btn' (click)="pageDown()">></button>
+            <button class='foot-part-son page-btn' (click)="pageDoubleDown()">>></button>
+        </div>
+    </div>
+</div>

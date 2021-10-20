@@ -1,0 +1,74 @@
+<div class="container">
+  <form class="form" [formGroup]="audioInterfaceForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <div class="row col-md-6 mt-3">
+        <label class="form-group-text col-md-4">{{ 'audioCodec' | translate }}</label>
+        <select class="custom-select col-md-6" formControlName="sEncodeType">
+          <option *ngFor="let audioCodecItem of audioCodecMenu" [value]="audioCodecItem">{{ audioCodecItem | translate }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div
+      *ngIf="audioInterfaceForm.get('sEncodeType').value.match('MP2')"
+      class="form-group">
+      <div class="row col-md-6">
+        <label class="form-group-text col-md-4">{{ 'sampleRate' | translate }}</label>
+        <select class="custom-select col-md-6" formControlName="iSampleRate">
+          <option *ngFor="let sampleRateItem of sampleRateMenu" [ngValue]="sampleRateItem">
+            {{ sampleRateItem / 1000 }}kHz</option>
+        </select>
+      </div>
+    </div>
+
+    <div *ngIf="audioInterfaceForm.get('sEncodeType').value.match('')" class="form-group">
+      <div class="row col-md-6">
+        <label class="form-group-text col-md-4">{{ 'audioBitrate' | translate }}</label>
+        <select class="custom-select col-md-6" formControlName="iBitRate">
+          <option *ngFor="let bitRateItem of BitRateMenu" [ngValue]="bitRateItem">{{ bitRateItem / 1000 }}kbps</option>
+        </select>
+      </div>
+    </div>
+
+    <div *ngIf="audioInterfaceForm.get('sEncodeType').value.match('MP2')" class="form-group">
+      <div class="row col-md-6">
+        <label class="form-group-text col-md-4">{{ 'audioBitrate' | translate }}</label>
+        <select class="custom-select col-md-6" formControlName="iBitRate">
+          <option *ngFor="let bitRateItem of MP2BitRateMenu" [ngValue]="bitRateItem">{{ bitRateItem / 1000 }}kbps</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row col-md-6">
+        <label class="form-group-text col-md-4">{{ 'audioInput' | translate }}</label>
+        <select class="custom-select col-md-6" formControlName="sInput">
+          <option *ngFor="let audioInputItem of audioInputMenu" [value]="audioInputItem">{{ audioInputItem | translate }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row col-md-6">
+        <label class="form-group-text col-md-4">{{ 'inputVolume' | translate }}</label>
+        <input type="range" class="col-md-6 mt-1 custom-range" min="1" max="100" step="1" value="50" formControlName="iVolume" (ngModelChange)="rangeAndNumber('iVolume', $event)">
+        <input class="col-1 form-control" type="text" formControlName="iVolume" (ngModelChange)="rangeAndNumber('iVolume', $event)">
+      </div>
+    </div>
+
+    <div *ngIf="iVolume.errors?.isNumberJudge">
+      <label class="alarm-tip">{{ 'inputVolume' | translate }}{{'beNumber' | translate}}</label>
+    </div>
+
+    <div class="form-group">
+      <div class="row col-md-6">
+        <label class="form-group-text col-md-4">{{ 'noiseFiltering' | translate }}</label>
+        <select class="custom-select col-md-6" formControlName="sANS">
+          <option *ngFor="let noiseFilteringItem of noiseFilteringMenu" [value]="noiseFilteringItem">{{ noiseFilteringItem | translate }}</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="blue-btn ml-3" type="submit">{{ 'save' | translate }}</button>
+  </form>
+</div>

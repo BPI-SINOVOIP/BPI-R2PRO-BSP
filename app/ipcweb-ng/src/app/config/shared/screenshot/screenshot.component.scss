@@ -1,0 +1,37 @@
+.pat1 {
+    min-width: 10rem;
+    height: calc(1.5em + 0.75rem + 2px);
+    line-height: calc(1.5em + 0.75rem + 2px);
+}
+
+.pat2 {
+    min-width: 15rem;
+    margin-right: 1rem;
+}
+
+.pat3 {
+    min-width: 5rem;
+}
+
+.grid-table {
+    display: grid;
+    grid-template-columns: 10rem 15rem 1rem 8rem 1fr;
+    padding-left: 0px;
+}
+
+.grid-table div {
+    margin-top: 3px;
+}
+
+.no-left {
+    padding-left: 0px;
+}
+
+.radius-input-stand {
+    width: 100%;
+    padding-left: 0.5rem;
+}
+
+.checkbox-space-ie {
+    padding-left: 0px;
+}

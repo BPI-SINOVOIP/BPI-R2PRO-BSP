@@ -1,0 +1,83 @@
+<div class="row container-fluid py-3">
+    <p class="gray-title"><span>{{'config' | translate}}</span></p>
+    <form [formGroup]="coverForm" class="col-12 no-padding">
+        <div class="col-11 mt-2" [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+            <input type="checkbox" id="face" formControlName="iFaceEnabled">
+            <label class="stand"></label>
+            <label class="for-new-check" for="face">{{ 'OverlaySnap.' + itemTransfer("iFaceEnabled") | translate }}</label>
+        </div>
+        <ng-container *ngIf="coverForm.value.iFaceEnabled">
+            <ng-container *ngFor="let enItem of defaultPara.layout.enabled; let i=index">
+                <div class="col-11 mt-2" [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                    <input type="checkbox" [id]="i" [formControlName]="enItem">
+                    <label class="stand"></label>
+                    <label class="for-new-check" [for]="i">{{ 'OverlaySnap.' + itemTransfer(enItem) | translate }}</label>
+                </div>
+            </ng-container>
+        </ng-container>
+    </form>
+    <ng-container *ngIf="testModel">
+        <p class="gray-title mt-1"><span>{{'OverlaySnap.snap' | translate}}</span></p>
+        <div [formGroup]="coverForm" class="man-ml-1">
+            <ng-container *ngFor="let enItem of defaultPara.layout.snap; let i=index">
+                <div *ngIf="enItem==='sTargetImageType'" class="one-line">
+                    <label class="introduce">{{'imageType' | translate}}</label>
+                    <ng-container *ngFor="let item of defaultPara.capability.SmartCover.sTargetImageType">
+                        <label class="standard-label"><input type="radio" formControlName="sTargetImageType" [value]="item">{{'OverlaySnap.' + item | translate}}</label>
+                    </ng-container>
+                </div>
+                <div *ngIf="enItem==='iWidthRatio'" class="one-line">
+                    <label class="introduce">{{'imageWidth' | translate}} <span>&nbsp;{{'faceWidth' | translate}}&nbsp;&nbsp;X&nbsp;</span></label>
+                    <input type="number" class="radius-input-stand content" formControlName="iWidthRatio">
+                    <label class="alarm-tip" *ngIf="iWidthRatio.errors?.isDecimal">{{'imageWidth' | translate}}{{'OverlaySnap.demicalTip' | translate}}</label>
+                </div>
+                <div *ngIf="enItem==='sImageQuality'" class="one-line">
+                    <label class="introduce">{{'imageQuality' | translate}}</label>
+                    <select class="radius-select-stand content" formControlName="sImageQuality">
+                        <option *ngFor="let item of defaultPara.capability.SmartCover.sImageQuality" [value]="item">{{ 'ImgQ.' + item | translate}}</option>
+                    </select> 
+                </div>
+            </ng-container>
+        </div>
+        <p class="gray-title mt-1"><span>{{ 'enableSetting' | translate}}</span></p>
+        <form [formGroup]="coverForm">
+            <div formArrayName="infoOverlay">
+                <ng-container *ngFor="let info of infoOverlay.controls; let i = index">
+                    <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}" [formGroupName]="i">
+                        <input type="checkbox" formControlName="iEnabled">
+                        <label class="stand"></label>
+                        <label class="for-new-check">{{ info.get('sName').value | translate }}</label>
+                    </div>
+                </ng-container>
+            </div>
+            <table class="man-ml-1 mt-3">
+                <tbody>
+                    <tr *ngFor="let item of orderArray; let i=index">
+                        <td><label class="introduce">{{ item | translate }}</label></td>
+                        <td>
+                            <label class="content">
+                                <label class="arrow-btn" (click)="onUp(i)">↑</label>
+                                &nbsp;&nbsp;&nbsp;
+                                <label class="arrow-btn" (click)="onDown(i)">↓</label>
+                            </label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+        <p class="gray-title mt-1"><span>{{'infoSetting' | translate}}</span></p>
+        <form [formGroup]="coverForm">
+            <div formArrayName="infoOverlay" class="man-ml-1">
+                <ng-container *ngFor="let info of infoOverlay.controls; let i = index">
+                    <div [formGroupName]="i" *ngIf="checkInfoNeed(info.get('sName').value)" class="one-line">
+                    <label class="introduce">{{ info.get('sName').value | translate }}</label>
+                    <input class="radius-input-stand content" type="text" formControlName="sInfo">
+                    </div>
+                </ng-container>
+            </div>
+        </form>
+    </ng-container>
+    <div class="bt-line mt-2">
+        <button class="blue-btn" (click)="onSubmit()" [disabled]="coverForm.invalid">{{'save' | translate}}</button>
+    </div>
+</div>

@@ -1,0 +1,2 @@
+cgicc is only capable of handling std::string::max_size() bytes of form
+data (1,073,741,820 bytes on most GNU/Linux systems)

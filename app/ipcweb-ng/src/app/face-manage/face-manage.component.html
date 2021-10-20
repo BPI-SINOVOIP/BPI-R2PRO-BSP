@@ -1,0 +1,40 @@
+<div class="continaer-fluid" id="face-container">
+    <div class="row no-gutters">
+      <div class="col-md-2 col-xl-2 sidebar left" id="left-bar">
+        <div class="accordion" id="menuAccordion">
+          <ng-container *ngFor="let menuGroup of menuGroups; let first = first;">
+            <div class="card">
+              <div class="card-header" id="menuGroup{{ menuGroup.name }}Header">
+                <a [routerLink]="[ '/face-manage', menuGroup.name ]"><a class="card-title {{ menuGroup.name | lowercase}}" data-toggle="collapse" href="#{{ menuGroup.name }}Group"
+                  aria-expanded="true" attr.aria-controls="{{ menuGroup.name }}Group"
+                  (click)="onMenuGroupClicked(menuGroup)">
+                  <span class="menu-icon {{ menuGroup.name | lowercase }}-icon"></span>
+                  {{ "FACE_MANAGE." + menuGroup.name + ".name" | translate }}
+                </a></a>
+                <a class="card-title {{ menuGroup.name | lowercase}} for-click" data-toggle="collapse" href="#{{ menuGroup.name }}Group"
+                  aria-expanded="true" attr.aria-controls="{{ menuGroup.name }}Group"
+                  (click)="onMenuGroupClicked(menuGroup)">
+                </a>
+              </div>
+              <div class="card-collapse collapse in" id="{{ menuGroup.name }}Group" role="tabpanel"
+                attr.aria-labelledby="menuGroup{{ menuGroup.name }}Header" data-parent="#menuAccordion"
+                attr.aria-expanded="true">
+                <div class="card-body">
+                  <div class="card-block">
+                    <ul class="list-group list-group-flush">
+                      <ng-container *ngFor="let item of menuGroup.items; let isFirst=first">
+                          <a class="menu-detail-item" [ngClass]="{'list-group-item': true, 'list-group-item-action': true, 'active': isSubMenuActive(item)}" (click)="onMenuItemClicked(item)" [routerLink]="[ '/face-manage', menuGroup.name ]" [queryParams]="{menu:item}">{{ "FACE_MANAGE." + menuGroup.name + ".items." + item | translate }}</a>
+                      </ng-container>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="col-md-9 col-xl-10">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>

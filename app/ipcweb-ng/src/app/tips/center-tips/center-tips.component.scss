@@ -1,0 +1,43 @@
+.modal.col-12{
+    display: none;
+    position: fixed;
+    z-index: 100;
+    padding-top: 15%;
+    padding-left: 35%;
+    padding-right: 35%;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0,0.5);
+}
+
+.modal-header{
+    padding: 1px;
+    background-color:  #e4e7ec;
+}
+
+.modal-footer{
+    padding: 1px;
+    background-color: white;
+    border-top: none;
+}
+
+.X {
+    background-color: transparent;
+}
+
+.detail-table {
+    max-height: 20rem;
+    overflow: auto;
+}
+
+td {
+    border: solid;
+    border-color: #e4e7ec;
+    border-width: 1px;
+    text-align: center;
+}
+
+.tb-item {
+    width: 10rem;
+}

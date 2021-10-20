@@ -1,0 +1,136 @@
+ul {
+    list-style-type: none;
+    width: 100%;
+    padding: 0px;
+}
+
+li {
+    margin-top: 1rem;
+}
+
+li.input-line {
+    display: inline;
+}
+
+li.blank {
+    height: 1rem;
+    margin: 0px;
+    padding: 0px;
+}
+
+.introduce {
+    min-width: 16rem;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    padding-left: 1rem;
+    line-height: 35px;
+}
+
+.form-valid {
+    margin-left: 1rem;
+}
+
+.modal.col-12{
+    display: none;
+    position: fixed;
+    z-index: 100;
+    padding-top: 20%;
+    padding-left: 35%;
+    padding-right: 35%;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0,0.5);
+}
+
+.modal-header{
+    padding: 1%;
+    background-color: #e4e7ec;
+}
+
+.modal-body {
+    text-align: center;
+    font-size: large;
+}
+
+.modal-footer{
+    padding: 1%;
+    min-height: 38px;
+    border-top: none;
+    background-color: #ffffff;
+}
+
+.ntp-services {
+    min-width: 14rem;
+}
+
+.calibration-interval {
+    min-width: 14rem;
+}
+
+.device-time {
+    min-width: 14rem;
+}
+
+.nowtime {
+    min-width: 14rem;
+}
+
+.radio-title {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.radio-space {
+    position: absolute;
+    right: 30px;
+    top: 7px;
+}
+
+.radio-space input[type="radio"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+.radio-space input[type="radio"]:after {
+    content:'';
+    background-image: url('/assets/images/icon_choice_01.png');
+    background-size:20px 20px;
+    width:20px;
+    height:20px;
+    position: absolute;
+    z-index: 100;
+}
+
+.radio-space input[type="radio"]:hover:after {
+    cursor: pointer;
+}
+
+.radio-space input[type="radio"]:checked:after {
+    background-image: url('/assets/images/icon_choice_02.png');
+}
+
+.radio-space-ie {
+    position: absolute;
+    right: 30px;
+    top: 7px;
+}
+
+.radio-space-ie input[type="radio"] {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+}
+
+.inline-part {
+    display: inline;
+}
+
+.custom-select {
+    width: auto;
+}
+
+.pdl-1 {
+    padding-left: 1rem;
+}

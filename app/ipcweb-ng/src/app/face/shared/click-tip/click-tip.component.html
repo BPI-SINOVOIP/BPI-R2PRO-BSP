@@ -1,0 +1,11 @@
+<div id="simpleModal" class="modal">
+    <div class="modal-header">
+        <span>{{ title | translate }}</span>
+        <button class='quit' (click)="onNo()" style="border: none;">X</button>
+    </div>
+    <div class="modal-body">
+        <button class="blue-btn" (click)="onModify()">{{ 'modify' | translate }}</button>
+        <button class="blue-btn" (click)="onDelete()">{{ 'delete' | translate }}</button>
+    </div>
+    <div class="modal-foot"></div>
+</div>

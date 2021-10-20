@@ -1,0 +1,60 @@
+:host::ng-deep.card {
+  margin-bottom: 0;
+  border: 1px #ccd6e6;
+  border-style: none none solid none;
+  border-spacing:10px 10px;
+}
+
+.card-header {
+  font-size: 1rem;
+  padding-top: 0.4rem;
+  padding-left: 0.5rem;
+  padding-bottom: 0.4rem;
+  padding-right: 0rem;
+}
+
+.card-body {
+  display: none;
+  padding: 0;
+  padding-left: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.form-control {
+  text-align:center;
+  height:25px;
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 0rem;
+}
+
+.custom-select {
+  padding: 0rem;
+  font-size: 0.8rem;
+  height:27px;
+}
+
+.show-card {
+  font-size: 1rem;
+  color: #353a40;
+  background-color: transparent;
+
+}
+
+.show-card:hover {
+  color: #007fe0;
+  text-decoration: none;
+}
+
+.mt-1.card-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.set-right {
+  position: absolute;
+  right: 23px;
+  border: none;
+  background-color: #f8f8f8;
+}

@@ -1,0 +1,119 @@
+a {
+  text-decoration: none;
+}
+
+.sidebar {
+  min-width: 180px;
+  background-color: #e4e7ec;
+}
+
+.card {
+  margin-bottom: 0;
+}
+
+.card-header {
+  background-color: #e4e7ec;
+}
+
+.card-body {
+  padding: 0;
+  padding-left: 0.25rem;
+}
+
+.menu-icon {
+  float: left;
+  width: 25px;
+  height: 25px;
+  background-size: 25px, 25px;
+  margin-top: 2px;
+  margin-right: 15px;
+}
+
+.card-title {
+  color: #353a40;
+}
+.card-title:hover {
+  color: #007fe0;
+  text-decoration: none;
+}
+
+.system .system-icon {
+  background: url("/assets/images/left_icon_a_01.png") no-repeat;
+}
+.system:hover .system-icon {
+  background: url("/assets/images/left_icon_a_02.png") no-repeat;
+}
+.network .network-icon {
+  background: url("/assets/images/left_icon_b_01.png") no-repeat;
+}
+.network:hover .network-icon {
+  background: url("/assets/images/left_icon_b_02.png") no-repeat;
+}
+.video .video-icon {
+  background: url("/assets/images/left_icon_c_01.png") no-repeat;
+}
+.video:hover .video-icon {
+  background: url("/assets/images/left_icon_c_02.png") no-repeat;
+}
+.audio .audio-icon {
+  background: url("/assets/images/left_icon_d_01.png") no-repeat;
+}
+.audio:hover .audio-icon {
+  background: url("/assets/images/left_icon_d_02.png") no-repeat;
+}
+.image .image-icon {
+  background: url("/assets/images/left_icon_e_01.png") no-repeat;
+}
+.image:hover .image-icon {
+  background: url("/assets/images/left_icon_e_02.png") no-repeat;
+}
+.event .event-icon {
+  background: url("/assets/images/left_icon_f_01.png") no-repeat;
+}
+.event:hover .event-icon {
+  background: url("/assets/images/left_icon_f_02.png") no-repeat;
+}
+.storage .storage-icon {
+  background: url("/assets/images/left_icon_g_01.png") no-repeat;
+}
+.storage:hover .storage-icon {
+  background: url("/assets/images/left_icon_g_02.png") no-repeat;
+}
+.intel .intel-icon {
+  background: url("/assets/images/left_icon_h_01.png") no-repeat;
+}
+.intel:hover .intel-icon {
+  background: url("/assets/images/left_icon_h_02.png") no-repeat;
+}
+.peripherals .peripherals-icon {
+  background: url("/assets/images/left_icon_f_01.png") no-repeat;
+}
+.peripherals:hover .peripherals-icon {
+  background: url("/assets/images/left_icon_f_02.png") no-repeat;
+}
+
+.menu-detail-item {
+  padding-left: 55px;
+  border: none;
+  color: #353a40;
+  background-color: #f8f8f8;
+}
+
+.menu-detail-item.active {
+  padding-left: 55px;
+  border: none;
+  color: #353a40;
+  background-color: #007fe0;
+}
+
+.menu-detail-item:hover {
+  color: #007fe0;
+  padding-left: 55px;
+  border: none;
+}
+
+.menu-detail-item.active:hover {
+  padding-left: 55px;
+  border: none;
+  color: #353a40;
+}

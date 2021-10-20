@@ -1,0 +1,108 @@
+<div class="contain-fluid">
+    <ul>
+        <form [formGroup]="NtpForm">
+            <li>
+                <div class="pdl-1" [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                    <input type="checkbox" id="dst" formControlName="iAutoDst">
+                    <label class="stand"></label>
+                    <label class="for-new-check" for="dst">{{ 'dstEnabled' | translate }}</label>
+                </div>
+            </li>
+            <li class="row">
+                <div class="col-md-3">
+                    <label class="introduce">{{ "NTP.timezone" | translate }}</label>
+                </div>
+                <div class="col-md-7">
+                    <select class="custom-select" formControlName="sTimeZone">
+                        <ng-container *ngFor="let item of timezoneList; let i = index">
+                            <option [value]="item.sTimeZone">{{ item.sTimeZone | translate }}</option>
+                        </ng-container>
+                    </select>
+                </div>
+            </li>
+            <li class="part-title row col">
+                <label class="radio-title" for="ntp">{{ "NTP.ntpCalibration" | translate }}</label>
+                <div [ngClass]="{'radio-space': isChrome, 'radio-space-ie': !isChrome}">
+                    <input class="radio-btn" type="radio" [value]=1 id="ntp" formControlName="iAutoMode">
+                </div>
+            </li> 
+            <li class="row">
+                <div class="col-md-3">
+                    <label class="introduce">{{ "NTP.ntpServices" | translate }}</label>
+                </div>
+                <div class="col-md-7">
+                    <input type="text" id="ntp-services" class="ntp-services radius-input-stand" formControlName="sNtpServers">
+                </div>
+            </li>
+            <li class="row">
+                <div class="col-md-3">
+                    <label class="introduce">{{ "NTP.calibrationInterval" | translate }}</label>
+                </div>
+                <div class="col-md-7">
+                    <span class="inline-part">
+                        <input type="text" id="calibration-interval" class="calibration-interval radius-input-stand" formControlName="iRefreshTime" AUTOCOMPLETE="OFF">
+                        <span class="ml-1 minute">{{ "NTP.minutes" | translate }}</span>
+                        <span class="alarm-tip ml-1" *ngIf="iRefreshTime.errors?.isNumberJudge">{{"formatError" | translate}}</span>
+                    </span>
+                </div>
+            </li>
+            <li class="pdl-1">
+                <label class="blue-btn" (click)="onShowTip()">{{ "NTP.test" | translate }}</label>
+            </li>
+            <li class="part-title row col">
+                <label class="radio-title" for="manual">{{ "NTP.manualCalibration" | translate }}</label>
+                <div [ngClass]="{'radio-space': isChrome, 'radio-space-ie': !isChrome}">
+                    <input type="radio" [value]=0 id="manual" formControlName="iAutoMode">
+                </div>
+            </li>
+        </form>
+        <form [formGroup]="TimeForm">
+            <li class="row">
+                <div class="col-md-3">
+                    <label class="introduce">{{ "NTP.deviceTime" | translate }}</label>
+                </div>
+                <div class="col-md-7">
+                    <input type="datetime-local" step=1 class="device-time radius-input-stand" formControlName="time">
+                </div>
+            </li>
+        </form>
+        <form [formGroup]="LocalForm">
+            <li class="row">
+                <div class="col-md-3">
+                    <label class="introduce">{{ "NTP.setTime" | translate }}</label>
+                </div>
+                <div class="col-md-7">
+                    <input type="datetime-local" step=1 class="nowtime radius-input-stand" formControlName="setTime">
+                    <label [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                        <input type="checkbox" formControlName="isLocalTime" class="islocaltime ml-1">
+                        <label class="stand">&nbsp;</label>
+                        {{ "NTP.syncLocalTime" | translate }}
+                    </label>
+                </div>
+                <div class="col-md-3"></div>
+                <div class="col-md-7">
+                    <label *ngIf="LocalForm.get('setTime').errors?.isStandardTime && !NtpForm.value.iAutoMode" class="alarm-tip">{{ 'timeFormatError' | translate}}</label>
+                </div>
+            </li>
+        </form>
+        <li class="pdl-1">
+            <button class="blue-btn" (click)="onSubmit()" [disabled]="NtpForm.invalid || (LocalForm.invalid && !NtpForm.value.iAutoMode)">{{ "save" | translate }}</button>
+            <label class="alarm-tip ml-1">{{'ntpAlterTip' | translate}}</label>
+        </li>
+    </ul>
+</div>
+<div class='row container' style="z-index: 2;" #modal>
+    <div id="simpleModal" class="modal col-12">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>{{ "tip" | translate}}</span>
+            </div>
+            <div class="modal-body">
+                <p>{{ testTip | translate}}</p>
+            </div>
+            <div class="modal-footer">
+                <button class='ml-2 quit blue-btn' (click)="closeModal()">{{ 'quit' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

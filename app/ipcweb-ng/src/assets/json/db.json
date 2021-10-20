@@ -1,0 +1,879 @@
+{
+  "device-info": [
+    {
+      "id": 0,
+      "name": "deviceName",
+      "value": "产品三部",
+      "ro": "false"
+    },
+    {
+      "id": 1,
+      "name": "telecontrolID",
+      "value": "89",
+      "ro": "false"
+    },
+    {
+      "id": 2,
+      "name": "model",
+      "ro": "true",
+      "value": "model1"
+    },
+    {
+      "id": 3,
+      "name": "serialNumber",
+      "ro": "true",
+      "value": "serialNumber1"
+    },
+    {
+      "id": 4,
+      "name": "firmwareVersion",
+      "ro": "true",
+      "value": "firmwareVersion1"
+    },
+    {
+      "id": 5,
+      "name": "encoderVersion",
+      "ro": "true",
+      "value": "encoderVersion1"
+    },
+    {
+      "id": 6,
+      "name": "webVersion",
+      "ro": "true",
+      "value": "webVersion1"
+    },
+    {
+      "id": 7,
+      "name": "pluginVersion",
+      "ro": "true",
+      "value": "pluginVersion1"
+    },
+    {
+      "id": 8,
+      "name": "channelsNumber",
+      "ro": "true",
+      "value": "1"
+    },
+    {
+      "id": 9,
+      "name": "hardDisksNumber",
+      "ro": "true",
+      "value": "0"
+    },
+    {
+      "id": 10,
+      "name": "alarmInputsNumber",
+      "ro": "true",
+      "value": "1"
+    },
+    {
+      "id": 11,
+      "name": "alarmOutputsNumber",
+      "ro": "true",
+      "value": "1"
+    },
+    {
+      "id": 12,
+      "name": "firmwareVersionInfo",
+      "ro": "true",
+      "value": "B-R-H3-0"
+    }
+  ],
+  "lan": {
+    "ipv4": {
+      "sV4Address": "172.16.21.35",
+      "sV4Gateway": "172.16.21.1",
+      "sV4Method": "manual",
+      "sV4Netmask": "255.255.255.0"
+    },
+    "link": {
+      "iDuplex": 1,
+      "iNicSpeed": 1000,
+      "iPower": 1,
+      "sAddress": "de:04:cd:7c:c7:31",
+      "sDNS1": "10.10.10.188",
+      "sDNS2": "58.22.96.66",
+      "sInterface": "eth0",
+      "sNicSpeed": "10baseT/Half",
+      "sNicSpeedSupport": "Auto 10baseT/Half 10baseT/Full 100baseT/Half 100baseT/Full 1000baseT/Full "
+    }
+  },
+  "wlan": {
+    "ipv4": {
+      "sV4Address": "172.16.21.196",
+      "sV4Gateway": "172.16.21.1",
+      "sV4Method": "manual",
+      "sV4Netmask": "255.255.255.0"
+    },
+    "link": {
+      "sAddress": "8c:f7:10:c4:e9:81",
+      "sDNS1": "114.114.114.114",
+      "sDNS2": "8.8.8.8",
+      "sInterface": "wlan0",
+      "sNicType": "auto"
+    }
+  },
+  "network-port": [
+    {
+      "id": 0,
+      "iPortNo": 80,
+      "sProtocol": "HTTP"
+    },
+    {
+      "id": 1,
+      "iPortNo": 443,
+      "sProtocol": "HTTPS"
+    },
+    {
+      "id": 2,
+      "iPortNo": 8080,
+      "sProtocol": "DEV_MANAGE"
+    },
+    {
+      "id": 3,
+      "iPortNo": 554,
+      "sProtocol": "RTSP"
+    },
+    {
+      "id": 4,
+      "iPortNo": 1935,
+      "sProtocol": "RTMP"
+    }
+  ],
+  "audio": [
+    {
+      "iBitRate": 32000,
+      "iSampleRate": 16000,
+      "iVolume": 82,
+      "sANS": "close",
+      "sEncodeType": "MP2",
+      "sInput": "lineIn",
+      "id": 0
+    }
+  ],
+  "video": [
+    {
+      "iGOP": 50,
+      "iMaxRate": 3072,
+      "iStreamSmooth": 15,
+      "sFrameRate": "30",
+      "sImageQuality": "higher",
+      "sOutputDataType": "H.265",
+      "sRCMode": "VBR",
+      "sRCQuality": "medium",
+      "sResolution": "1920*1080",
+      "sSVC": "open",
+      "sSmart": "open",
+      "sStreamType": "mainStream",
+      "sVideoType": "compositeStream",
+      "id": 0
+    },
+    {
+      "id": 1,
+      "iGOP": 30,
+      "iMaxRate": 512,
+      "iStreamSmooth": 50,
+      "sFrameRate": "15",
+      "sImageQuality": "lower",
+      "sOutputDataType": "H.265",
+      "sRCMode": "CBR",
+      "sRCQuality": "high",
+      "sResolution": "1280*960",
+      "sSVC": "close",
+      "sSmart": "close",
+      "sStreamType": "subStream",
+      "sVideoType": "compositeStream"
+    },
+    {
+      "id": 2,
+      "iGOP": 30,
+      "iMaxRate": 256,
+      "iStreamSmooth": 50,
+      "sFrameRate": "15",
+      "sImageQuality": "medium",
+      "sOutputDataType": "H.264",
+      "sRCMode": "CBR",
+      "sRCQuality": "high",
+      "sResolution": "1280*720",
+      "sSVC": "close",
+      "sSmart": "close",
+      "sStreamType": "thirdStream",
+      "sVideoType": "videoStream"
+    }
+  ],
+  "stream-url": [
+    {
+      "id": 0,
+      "sStreamProtocol": "RTMP",
+      "sURL": "rtmp://172.16.21.52:1935/live/mainstream"
+    },
+    {
+      "id": 1,
+      "sStreamProtocol": "RTMP",
+      "sURL": "rtmp://172.16.21.52:1935/live/substream"
+    },
+    {
+      "id": 2,
+      "sStreamProtocol": "RTSP",
+      "sURL": "rtsp://172.16.21.46:554/thirdstream"
+    }
+  ],
+  "image": [
+    {
+      "id": 0,
+      "imageAdjustment": {
+        "iBrightness": 10,
+        "iContrast": 30,
+        "iSaturation": 58,
+        "iSharpness": 80
+      },
+      "exposure": {
+        "sIrisType": "manual",
+        "iAutoIrisLevel": 76,
+        "sExposureTime": "1/250",
+        "iExposureGain": 0
+      },
+      "nightToDay": {
+        "sNightToDay": "manual",
+        "iNightToDayFilterLevel": 4,
+        "iNightToDayFilterTime": 69,
+        "sBeginTime": "07:00:00",
+        "sEndTime": "18:00:00",
+        "sIrcutFilterAction": "day",
+        "sOverexposeSuppressType": "auto",
+        "sOverexposeSuppress": "open",
+        "iDistanceLevel": 1
+      },
+      "BLC": {
+        "sWDR": "close",
+        "iWDRLevel": 0,
+        "sHLC": "close",
+        "iHLCLevel": 0,
+        "sBLCRegion": "close",
+        "iBLCRegionHeight": 92,
+        "iBLCRegionWidth": 120,
+        "iPositionX": 0,
+        "iPositionY": 0
+      },
+      "whiteBlance": {
+        "sWhiteBlanceStyle": "manualWhiteBalance",
+        "iWhiteBalanceBlue": 67,
+        "iWhiteBalanceRed": 88
+      },
+      "imageEnhancement": {
+        "sNoiseReduceMode": "advanced",
+        "iDenoiseLevel": 30,
+        "iSpatialDenoiseLevel": 0,
+        "iTemporalDenoiseLevel": 0,
+        "sDehaze": "open",
+        "iDehazeLevel": 0,
+        "sDIS": "open",
+        "sGrayScaleMode": "[16-235]"
+      },
+      "videoAdjustment": {
+        "sImageFlip": "leftRight",
+        "sSceneMode": "outdoor",
+        "sPowerLineFrequencyMode": "PAL(50HZ)"
+      }
+    }
+  ],
+  "scenario": {
+    "sScenario": "normal"
+  },
+  "osd": {
+    "attribute": {
+      "iBoundary": 0,
+      "sAlignment": "customize",
+      "sOSDAttribute": "transparent/flashing",
+      "sOSDFontSize": "16*16",
+      "sOSDFrontColor": "f887c2",
+      "sOSDFrontColorMode": "customize"
+    },
+    "channelNameOverlay": {
+      "iPositionX": 393.52317880794703,
+      "iPositionY": 198.65486725663712,
+      "sChannelName": "channel 2",
+      "iChannelNameOverlayEnabled": 1
+    },
+    "characterOverlay": [
+      {
+        "iPositionX": 432.4238410596027,
+        "iPositionY": 299.1858407079646,
+        "id": 0,
+        "sDisplayText": "test",
+        "sIsPersistentText": "",
+        "iTextOverlayEnabled": 1
+      },
+      {
+        "iPositionX": 312.3708609271523,
+        "iPositionY": 272.283185840708,
+        "id": 1,
+        "sDisplayText": "test",
+        "sIsPersistentText": "",
+        "iTextOverlayEnabled": 0
+      },
+      {
+        "iPositionX": 427.7615894039735,
+        "iPositionY": 251.04424778761063,
+        "id": 2,
+        "sDisplayText": "test",
+        "sIsPersistentText": "",
+        "iTextOverlayEnabled": 1
+      },
+      {
+        "iPositionX": 89.74834437086093,
+        "iPositionY": 96.7079646017699,
+        "id": 3,
+        "sDisplayText": "test",
+        "sIsPersistentText": "",
+        "iTextOverlayEnabled": 0
+      },
+      {
+        "iPositionX": 431.25827814569544,
+        "iPositionY": 365.7345132743363,
+        "id": 4,
+        "sDisplayText": "test",
+        "sIsPersistentText": "",
+        "iTextOverlayEnabled": 1
+      },
+      {
+        "iPositionX": 36.13245033112583,
+        "iPositionY": 16,
+        "id": 5,
+        "sDisplayText": "test",
+        "sIsPersistentText": "",
+        "iTextOverlayEnabled": 0
+      },
+      {
+        "iPositionX": 36.13245033112583,
+        "iPositionY": 16,
+        "id": 6,
+        "sDisplayText": "test",
+        "sIsPersistentText": "",
+        "iTextOverlayEnabled": 0
+      },
+      {
+        "iPositionX": 36.13245033112583,
+        "iPositionY": 16,
+        "id": 7,
+        "sDisplayText": "test",
+        "sIsPersistentText": "",
+        "iTextOverlayEnabled": 0
+      }
+    ],
+    "dateTimeOverlay": {
+      "iPositionX": 320.00000000000006,
+      "iPositionY": 92.46017699115043,
+      "sDateStyle": "MM-DD-YYYY",
+      "iDateTimeOverlayEnabled": 1,
+      "iDisplayWeekEnabled": 1,
+      "sTimeStyle": "24hour"
+    },
+    "normalizedScreenSize": {
+      "iNormalizedScreenHeight": 480,
+      "iNormalizedScreenWidth": 704
+    }
+  },
+  "privacy-mask": {
+    "privacyMask": [
+      {
+        "iMaskHeight": 100,
+        "iMaskWidth": 100,
+        "iPositionX": 0,
+        "iPositionY": 0,
+        "id": 0,
+        "iPrivacyMaskEnabled": 0
+      },
+      {
+        "iMaskHeight": 100,
+        "iMaskWidth": 100,
+        "iPositionX": 0,
+        "iPositionY": 0,
+        "id": 1,
+        "iPrivacyMaskEnabled": 0
+      },
+      {
+        "iMaskHeight": 100,
+        "iMaskWidth": 100,
+        "iPositionX": 0,
+        "iPositionY": 0,
+        "id": 2,
+        "iPrivacyMaskEnabled": 0
+      },
+      {
+        "iMaskHeight": 100,
+        "iMaskWidth": 100,
+        "iPositionX": 0,
+        "iPositionY": 0,
+        "id": 3,
+        "iPrivacyMaskEnabled": 0
+      }
+    ],
+    "normalizedScreenSize": {
+      "iNormalizedScreenHeight": 480,
+      "iNormalizedScreenWidth": 704
+    }
+  },
+  "PicForm": {
+    "imageOverlay": {
+      "iImageHeight": 100,
+      "iImageWidth": 100,
+      "iPositionX": 0,
+      "iPositionY": 0,
+      "iImageOverlayEnabled": 1,
+      "iTransparentColorEnabled": 1
+    },
+    "normalizedScreenSize": {
+      "iNormalizedScreenHeight": 480,
+      "iNormalizedScreenWidth": 704
+    }
+  },
+  "hdd-list": [
+    {
+      "iFormatProg": 0,
+      "iFormatStatus": 0,
+      "iFreeSize": 0,
+      "iMediaSize": 0,
+      "sStatus": "mounted",
+      "iTotalSize": 5,
+      "id": 1,
+      "sDev": "",
+      "sFormatErr": "",
+      "sMountPath": "/mnt/sdcard",
+      "sName": "SD Card",
+      "sType": ""
+    },
+    {
+      "iFormatProg": 0,
+      "iFormatStatus": 0,
+      "iFreeSize": 18.9878082275391,
+      "iMediaSize": 128,
+      "sStatus": "mounted",
+      "iTotalSize": 29.4765014648438,
+      "id": 2,
+      "sAttributes": "rw",
+      "sDev": "/dev/sda1",
+      "sFormatErr": "",
+      "sMountPath": "/media/usb0",
+      "sName": "U Disk",
+      "sType": "vfat"
+    },
+    {
+      "iFormatProg": 30,
+      "iFormatStatus": 1,
+      "iFreeSize": 12.6755342483521,
+      "iMediaSize": 8,
+      "sStatus": "mounted",
+      "iTotalSize": 12.6794242858887,
+      "id": 3,
+      "sAttributes": "rw",
+      "sDev": "/dev/mmcblk2p9",
+      "sFormatErr": "",
+      "sMountPath": "/userdata",
+      "sName": "Emmc",
+      "sType": "ext2"
+    }
+  ],
+  "quota-0": {
+    "iFreePictureQuota": 0.212043762207,
+    "iFreeVideoQuota": 0.2643957138062,
+    "iPictureQuotaRatio": 55,
+    "iTotalPictureVolume": 0.2120742797852,
+    "iTotalVideoVolume": 0.2644262313843,
+    "iVideoQuotaRatio": 45,
+    "id": 0
+  },
+  "quota-1": {
+    "iFreePictureQuota": 1.212325425235,
+    "iFreeVideoQuota": 1.26222224,
+    "iPictureQuotaRatio": 55,
+    "iTotalPictureVolume": 1.212222,
+    "iTotalVideoVolume": 1.264222,
+    "iVideoQuotaRatio": 45,
+    "id": 1
+  },
+  "quota-2": {
+    "iFreePictureQuota": 2.21222222,
+    "iFreeVideoQuota": 2.264222,
+    "iPictureQuotaRatio": 30,
+    "iTotalPictureVolume": 2.212222,
+    "iTotalVideoVolume": 2.262224,
+    "iVideoQuotaRatio": 50,
+    "id": 2
+  },
+  "wifi-enabled": {
+    "sName": "",
+    "sService": "",
+    "sPassword": "",
+    "iFavorite": "",
+    "iAutoconnect": 0
+  },
+  "wifi-list": [
+    {
+      "Favorite": 1,
+      "Strength": 68,
+      "sName": "zxmr-24",
+      "sSecurity": "psk",
+      "sService": "wifi_8cf710c4e981_7a786d722d3234_managed_psk1",
+      "sState": "ready",
+      "sType": "wifi"
+    },
+    {
+      "Favorite": 0,
+      "Strength": 58,
+      "sName": "zxmr-23",
+      "sSecurity": "psk",
+      "sService": "wifi_8cf710c4e981_7a786d722d3234_managed_psk2",
+      "sState": "ready",
+      "sType": "wifi"
+    },
+    {
+      "Favorite": 0,
+      "Strength": 70,
+      "sName": "zxmr-22",
+      "sSecurity": "psk",
+      "sService": "wifi_8cf710c4e981_7a786d722d3234_managed_psk3",
+      "sState": "ready",
+      "sType": "wifi"
+    },
+    {
+      "Favorite": 0,
+      "Strength": 3,
+      "sName": "zxmr-21",
+      "sSecurity": "psk",
+      "sService": "wifi_8cf710c4e981_7a786d722d3234_managed_psk4",
+      "sState": "ready",
+      "sType": "wifi"
+    },
+    {
+      "Favorite": 1,
+      "Strength": 68,
+      "sName": "zxmr-24",
+      "sSecurity": "psk",
+      "sService": "wifi_8cf710c4e981_7a786d722d3234_managed_psk1",
+      "sState": "ready",
+      "sType": "wifi"
+    },
+    {
+      "Favorite": 1,
+      "Strength": 63,
+      "sName": "zxmr-25",
+      "sSecurity": "psk",
+      "sService": "wifi_8cf710c4e981_7a786d722d3234_managed_psk1",
+      "sState": "ready",
+      "sType": "wifi"
+    },
+    {
+      "Favorite": 1,
+      "Strength": 80,
+      "sName": "zxmr-26",
+      "sSecurity": "psk",
+      "sService": "wifi_8cf710c4e981_7a786d722d3234_managed_psk1",
+      "sState": "ready",
+      "sType": "wifi"
+    },
+    {
+      "Favorite": 1,
+      "Strength": 20,
+      "sName": "zxmr-27",
+      "sSecurity": "psk",
+      "sService": "wifi_8cf710c4e981_7a786d722d3234_managed_psk1",
+      "sState": "ready",
+      "sType": "wifi"
+    },
+    {
+      "Favorite": 1,
+      "Strength": 64,
+      "sName": "zxmr-28",
+      "sSecurity": "psk",
+      "sService": "wifi_8cf710c4e981_7a786d722d3234_managed_psk1",
+      "sState": "ready",
+      "sType": "wifi"
+    }
+  ],
+  "scan": {},
+  "wifi-on": {},
+  "wifi-off": {},
+  "roi": {
+    "normalizedScreenSize": {
+      "iNormalizedScreenHeight": 480,
+      "iNormalizedScreenWidth": 704
+    },
+    "ROIRegionList": [
+      {
+        "sStreamType": "mainStream",
+        "iStreamEnabled": 1,
+        "iROIId": 1,
+        "iROIEnabled": 1,
+        "sName": "test",
+        "iQualityLevelOfROI": 1,
+        "iHeight": 100,
+        "iWidth": 100,
+        "iPositionX": 1,
+        "iPositionY": 1
+      },
+      {
+        "sStreamType": "mainStream",
+        "iStreamEnabled": 1,
+        "iROIId": 2,
+        "iROIEnabled": 1,
+        "sName": "test",
+        "iQualityLevelOfROI": 1,
+        "iHeight": 100,
+        "iWidth": 100,
+        "iPositionX": 1,
+        "iPositionY": 1
+      },
+      {
+        "sStreamType": "mainStream",
+        "iStreamEnabled": 1,
+        "iROIId": 3,
+        "iROIEnabled": 1,
+        "sName": "test",
+        "iQualityLevelOfROI": 1,
+        "iHeight": 100,
+        "iWidth": 100,
+        "iPositionX": 1,
+        "iPositionY": 1
+      },
+      {
+        "sStreamType": "mainStream",
+        "iStreamEnabled": 1,
+        "iROIId": 4,
+        "iROIEnabled": 1,
+        "sName": "test",
+        "iQualityLevelOfROI": 1,
+        "iHeight": 100,
+        "iWidth": 100,
+        "iPositionX": 1,
+        "iPositionY": 1
+      },
+      {
+        "sStreamType": "subStream",
+        "iStreamEnabled": 1,
+        "iROIId": 1,
+        "iROIEnabled": 1,
+        "sName": "test",
+        "iQualityLevelOfROI": 1,
+        "iHeight": 100,
+        "iWidth": 100,
+        "iPositionX": 1,
+        "iPositionY": 1
+      },
+      {
+        "sStreamType": "subStream",
+        "iStreamEnabled": 1,
+        "iROIId": 2,
+        "iROIEnabled": 1,
+        "sName": "test",
+        "iQualityLevelOfROI": 1,
+        "iHeight": 100,
+        "iWidth": 100,
+        "iPositionX": 1,
+        "iPositionY": 1
+      },
+      {
+        "sStreamType": "subStream",
+        "iStreamEnabled": 1,
+        "iROIId": 3,
+        "iROIEnabled": 1,
+        "sName": "test",
+        "iQualityLevelOfROI": 1,
+        "iHeight": 100,
+        "iWidth": 100,
+        "iPositionX": 1,
+        "iPositionY": 1
+      },
+      {
+        "sStreamType": "subStream",
+        "iStreamEnabled": 1,
+        "iROIId": 4,
+        "iROIEnabled": 1,
+        "sName": "test",
+        "iQualityLevelOfROI": 1,
+        "iHeight": 100,
+        "iWidth": 100,
+        "iPositionX": 1,
+        "iPositionY": 1
+      },
+      {
+        "sStreamType": "thirdStream",
+        "iStreamEnabled": 1,
+        "iROIId": 1,
+        "iROIEnabled": 1,
+        "sName": "test",
+        "iQualityLevelOfROI": 1,
+        "iHeight": 100,
+        "iWidth": 100,
+        "iPositionX": 1,
+        "iPositionY": 1
+      },
+      {
+        "sStreamType": "thirdStream",
+        "iStreamEnabled": 1,
+        "iROIId": 2,
+        "iROIEnabled": 1,
+        "sName": "test",
+        "iQualityLevelOfROI": 1,
+        "iHeight": 100,
+        "iWidth": 100,
+        "iPositionX": 1,
+        "iPositionY": 1
+      },
+      {
+        "sStreamType": "thirdStream",
+        "iStreamEnabled": 1,
+        "iROIId": 3,
+        "iROIEnabled": 1,
+        "sName": "test",
+        "iQualityLevelOfROI": 1,
+        "iHeight": 100,
+        "iWidth": 100,
+        "iPositionX": 1,
+        "iPositionY": 1
+      },
+      {
+        "sStreamType": "thirdStream",
+        "iStreamEnabled": 1,
+        "iROIId": 4,
+        "iROIEnabled": 1,
+        "sName": "test",
+        "iQualityLevelOfROI": 1,
+        "iHeight": 100,
+        "iWidth": 100,
+        "iPositionX": 1,
+        "iPositionY": 1
+      }
+    ]
+  },
+  "region-crop": {
+    "normalizedScreenSize": {
+      "iNormalizedScreenHeight": 1000,
+      "iNormalizedScreenWidth": 1000
+    },
+    "RegionClip": {
+      "iVideoResolutionWidth": 640,
+      "iVideoResolutionHeight": 480,
+      "iRegionClipEnabled": 0,
+      "iHeight": 92,
+      "iWidth": 120,
+      "iPositionX": 0,
+      "iPositionY": 0
+    }
+  },
+  "motion-detection": {
+    "iColumnGranularity": 22,
+    "iEndTriggerTime": 500,
+    "iHighlightEnabled": 0,
+    "iMotionDetectionEnabled": 0,
+    "iRowGranularity": 18,
+    "iSamplingInterval": 2,
+    "iSensitivityLevel": 0,
+    "iStartTriggerTime": 500,
+    "id": 0,
+    "sGridMap": "0000012345456000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "sRegionType": "grid"
+  },
+  "motion-linkage": {
+    "iNotificationCenterEnabled": 1,
+    "iNotificationEmailEnabled": 0,
+    "iNotificationFTPEnabled": 0,
+    "iNotificationIO1Enabled": 0,
+    "iNotificationRecord1Enabled": 0,
+    "iVideoInputChannelID": 0,
+    "id": 0,
+    "sEventType": "VMD"
+  },
+  "ntp-time": {
+    "time": "2020-03-20T11:20:18"
+  },
+  "network-ntp": {
+    "iAutoMode": 1,
+    "iRefreshTime": 60,
+    "id": 0,
+    "sNtpServers": "122.224.9.29 94.130.49.186",
+    "sTimeZone": "posix/Etc/GMT-8"
+  },
+  "ntp-zone": [
+    {
+      "iHavedst": 1,
+      "id": 0,
+      "sName": "(GMT-8:00)太平洋时间(美国和加拿大)",
+      "sTimeZone": "posix/Etc/GMT+8",
+      "sTimeZoneDst": "posix/America/Los_Angeles"
+    },
+    {
+      "iHavedst": 0,
+      "id": 1,
+      "sName": "(GMT+0:00)都柏林、爱丁堡、伦敦",
+      "sTimeZone": "posix/Etc/GMT-0",
+      "sTimeZoneDst": ""
+    },
+    {
+      "iHavedst": 0,
+      "id": 2,
+      "sName": "(GMT+8:00)北京、乌鲁木齐、新加坡、珀斯",
+      "sTimeZone": "posix/Etc/GMT-8",
+      "sTimeZoneDst": ""
+    }
+  ],
+  "member-list": [
+    {
+      "sTelephoneNumber": 0,
+      "id": 0,
+      "sAddress": "",
+      "sAge": "",
+      "sBirthday": "2000-1-1",
+      "sCertificateNumber": "",
+      "sCertificateType": "identityCard",
+      "sGender": "male",
+      "sHometown": "",
+      "sListType": "permanent",
+      "sName": "",
+      "sNation": "汉",
+      "sNote": "",
+      "sPicturePath": "",
+      "sRegistrationTime": "",
+      "sType": "whiteList"
+    },
+    {
+      "sTelephoneNumber": 0,
+      "id": 1,
+      "sAddress": "",
+      "sAge": "",
+      "sBirthday": "2000-1-1",
+      "sCertificateNumber": "",
+      "sCertificateType": "identityCard",
+      "sGender": "male",
+      "sHometown": "",
+      "sListType": "permanent",
+      "sName": "",
+      "sNation": "汉",
+      "sNote": "",
+      "sPicturePath": "",
+      "sRegistrationTime": "",
+      "sType": "whiteList"
+    }
+  ],
+  "default-para": [
+    "{\"dynamic\":{\"id\":{\"0\":{\"iShotInterval\":{\"for\":\"timing\",\"range\":{\"max\":604800000,\"min\":1000},\"type\":\"range\"},\"timeUnit\":{\"for\":\"timing\",\"options\":[\"seconds\",\"minutes\",\"hours\",\"days\"],\"type\":\"options\"}},\"1\":{\"iShotInterval\":{\"for\":\"timing\",\"range\":{\"max\":65535,\"min\":1000},\"type\":\"range\"},\"timeUnit\":{\"for\":\"timing\",\"options\":[\"seconds\",\"minutes\"],\"type\":\"options\"}}}},\"relation\":{\"iImageQuality\":{\"1\":\"low\",\"10\":\"high\",\"5\":\"middle\"}},\"static\":{\"iImageQuality\":{\"options\":[1,5,10],\"type\":\"options\"},\"iShotNumber\":{\"range\":{\"max\":120,\"min\":1},\"type\":\"range\"},\"sImageType\":{\"options\":[\"JPEG\"],\"type\":\"options\"},\"sResolution\":{\"refer\":[4,\"para\",\"dynamic\",\"sStreamType\",\"mainStream\",\"sResolution\"],\"type\":\"refer\"}}}",
+    "[{\"color\":\"#87CEEB\",\"name\":\"timing\"}]",
+    "[{\"color\":\"#87CEEB\",\"name\":\"timing\"},{\"color\":\"#74B558\",\"name\":\"motion-detect\"},{\"color\":\"#D71820\",\"name\":\"alarm\"},{\"color\":\"#E58705\",\"name\":\"motionOrAlarm\"},{\"color\":\"#B9E2FE\",\"name\":\"motionAndAlarm\"},{\"color\":\"#AA6FFF\",\"name\":\"event\"}]",
+    "{\"capability\":{\"SmartCover\":{\"sImageQuality\":[\"best\",\"good\",\"general\"],\"sTargetImageType\":[\"head\"]}},\"layout\":{\"enabled\":[\"iStreamOverlayEnabled\",\"iImageOverlayEnabled\"],\"infoEnabled\":[\"deviceNum\",\"positonInfo\"],\"snap\":[\"sTargetImageType\",\"iWidthRatio\",\"sImageQuality\"]}}",
+    "{\"disabled\":[{\"name\":\"sStreamType\",\"options\":{\"subStream\":{\"sOutputDataType\":\"H.264\",\"sSmart\":\"close\"},\"thirdStream\":{\"sSmart\":\"close\"}},\"type\":\"disabled/limit\"},{\"name\":\"sSmart\",\"options\":{\"open\":{\"iGOP\":null,\"iStreamSmooth\":null,\"sH264Profile\":null,\"sRCMode\":null,\"sRCQuality\":null,\"sSVC\":null}},\"type\":\"disabled\"},{\"name\":\"sRCMode\",\"options\":{\"CBR\":{\"sRCQuality\":null}},\"type\":\"disabled\"},{\"name\":\"sOutputDataType\",\"options\":{\"H.265\":{\"sH264Profile\":null}},\"type\":\"disabled\"},{\"name\":\"unspport\",\"options\":{\"iStreamSmooth\":null,\"sSVC\":null,\"sVideoType\":null},\"type\":\"disabled\"}],\"dynamic\":{\"sSmart\":{\"open\":{\"iMinRate\":{\"dynamicRange\":{\"max\":\"iMaxRate\",\"maxRate\":1,\"min\":\"iMaxRate\",\"minRate\":0.125},\"type\":\"dynamicRange\"}}},\"sStreamType\":{\"mainStream\":{\"iMaxRate\":{\"options\":[256,512,1024,2048,3072,4096,6144,8192,12288,16384],\"type\":\"options\"},\"sResolution\":{\"options\":[\"2688*1520\"],\"type\":\"options\"}},\"subStream\":{\"iMaxRate\":{\"options\":[256,512,1024,2048,3072,4096,6144,8192],\"type\":\"options\"},\"sResolution\":{\"options\":[\"640*480\",\"704*576\"],\"type\":\"options\"}},\"thirdStream\":{\"iMaxRate\":{\"options\":[256,512,1024,2048,3072,4096,6144,8192,12288,16384],\"type\":\"options\"},\"sResolution\":{\"options\":[\"640*480\",\"704*576\",\"1280*720\",\"1920*1080\"],\"type\":\"options\"}}}},\"layout\":{\"encoder\":[\"sStreamType\",\"sVideoType\",\"sResolution\",\"sRCMode\",\"sRCQuality\",\"sFrameRate\",\"sOutputDataType\",\"sSmart\",\"sH264Profile\",\"sSVC\",\"iMaxRate\",\"iMinRate\",\"iGOP\",\"iStreamSmooth\"]},\"static\":{\"iGOP\":{\"range\":{\"max\":400,\"min\":0},\"type\":\"range\"},\"iStreamSmooth\":{\"range\":{\"max\":100,\"min\":1,\"step\":1},\"type\":\"range\"},\"sFrameRate\":{\"dynamicRange\":{\"max\":\"sFrameRateIn\",\"maxRate\":1},\"options\":[\"1/16\",\"1/8\",\"1/4\",\"1/2\",\"1\",\"2\",\"4\",\"6\",\"8\",\"10\",\"12\",\"14\",\"16\",\"18\",\"20\",\"25\",\"30\"],\"type\":\"options/dynamicRange\"},\"sH264Profile\":{\"options\":[\"high\",\"main\",\"baseline\"],\"type\":\"options\"},\"sOutputDataType\":{\"options\":[\"H.264\",\"H.265\"],\"type\":\"options\"},\"sRCMode\":{\"options\":[\"CBR\",\"VBR\"],\"type\":\"options\"},\"sRCQuality\":{\"options\":[\"lowest\",\"lower\",\"low\",\"medium\",\"high\",\"higher\",\"highest\"],\"type\":\"options\"},\"sSVC\":{\"options\":[\"open\",\"close\"],\"type\":\"options\"},\"sSmart\":{\"options\":[\"open\",\"close\"],\"type\":\"options\"},\"sStreamType\":{\"options\":[\"mainStream\",\"subStream\",\"thirdStream\"],\"type\":\"options\"},\"sVideoType\":{\"options\":[\"videoStream\",\"compositeStream\"],\"type\":\"options\"}}}",
+    {
+      "id": 5,
+      "image_adjustment": "{\"layout\":{\"image_adjustment\":[\"iBrightness\",\"iContrast\",\"iSaturation\",\"iSharpness\"]},\"static\":{\"iBrightness\":{\"range\":{\"max\":100,\"min\":0,\"step\":1},\"type\":\"range\"},\"iContrast\":{\"range\":{\"max\":100,\"min\":0,\"step\":1},\"type\":\"range\"},\"iSaturation\":{\"range\":{\"max\":100,\"min\":0,\"step\":1},\"type\":\"range\"},\"iSharpness\":{\"range\":{\"max\":100,\"min\":0,\"step\":1},\"type\":\"range\"}}}",
+      "image_exposure": "{\"dynamic\":{\"sIrisType\":{\"auto\":{\"iAutoIrisLevel\":{\"range\":{\"max\":100,\"min\":0,\"step\":1},\"type\":\"range\"}}}},\"layout\":{\"image_exposure\":[\"sIrisType\",\"iAutoIrisLevel\",\"sExposureTime\",\"iExposureGain\"]},\"static\":{\"iExposureGain\":{\"range\":{\"max\":100,\"min\":0,\"step\":1},\"type\":\"range\"},\"sExposureTime\":{\"options\":[\"1\",\"1/3\",\"1/6\",\"1/12\",\"1/25\",\"1/50\",\"1/100\",\"1/150\",\"1/200\",\"1/250\",\"1/500\",\"1/750\",\"1/1000\",\"1/2000\",\"1/4000\",\"1/10000\",\"1/100000\"],\"type\":\"options\"},\"sIrisType\":{\"options\":[\"auto\",\"manual\"],\"type\":\"options\"}}}",
+      "image_night_to_day": "{\"dynamic\":{\"sNightToDay\":{\"alarmInputTrigger\":{\"sIrcutFilterAction\":{\"options\":[\"day\",\"night\"],\"type\":\"options\"}},\"auto\":{\"iNightToDayFilterLevel\":{\"options\":[0,1,2,3,4,5,6,7],\"type\":\"options\"},\"iNightToDayFilterTime\":{\"range\":{\"max\":120,\"min\":5,\"step\":1},\"type\":\"range\"}},\"manual\":{\"sBeginTime\":{\"input\":\"time\",\"type\":\"input\"},\"sEndTime\":{\"input\":\"time\",\"type\":\"input\"}}},\"sOverexposeSuppress\":{\"open\":{\"sOverexposeSuppressType\":{\"options\":[\"auto\",\"manual\"],\"type\":\"options\"}}},\"sOverexposeSuppressType\":{\"manual\":{\"iDistanceLevel\":{\"range\":{\"max\":100,\"min\":0,\"step\":1},\"type\":\"range\"}}}},\"layout\":{\"image_night_to_day\":[\"sNightToDay\",\"iNightToDayFilterLevel\",\"iNightToDayFilterTime\",\"sBeginTime\",\"sEndTime\",\"sIrcutFilterAction\",\"sOverexposeSuppress\",\"sOverexposeSuppressType\",\"iDistanceLevel\"]},\"static\":{\"sNightToDay\":{\"options\":[\"day\",\"night\",\"auto\",\"manual\",\"alarmInputTrigger\"],\"type\":\"options\"},\"sOverexposeSuppress\":{\"options\":[\"open\",\"close\"],\"type\":\"options\"}}}",
+      "image_blc": "{\"dynamic\":{\"sBLCRegion\":{\"close\":{\"sHDR\":{\"options\":[\"open\",\"close\"],\"type\":\"options\"},\"sWDR\":{\"options\":[\"open\",\"close\"],\"type\":\"options\"}}},\"sHDR\":{\"open\":{\"iHDRLevel\":{\"range\":{\"max\":100,\"min\":0,\"step\":1},\"type\":\"range\"}}},\"sHLC\":{\"open\":{\"iHLCLevel\":{\"range\":{\"max\":100,\"min\":0,\"step\":1},\"type\":\"range\"}}},\"sWDR\":{\"open\":{\"iWDRLevel\":{\"range\":{\"max\":100,\"min\":0,\"step\":1},\"type\":\"range\"}}}},\"layout\":{\"image_blc\":[\"sBLCRegion\",\"sWDR\",\"iWDRLevel\",\"sHDR\",\"iHDRLevel\",\"sHLC\",\"iHLCLevel\",\"iPositionX\",\"iPositionY\",\"iBLCRegionWidth\",\"iBLCRegionHeight\"]},\"static\":{\"sBLCRegion\":{\"options\":[\"close\",\"up\",\"down\",\"left\",\"right\",\"center\",\"customize\"],\"type\":\"options\"},\"sHLC\":{\"options\":[\"open\",\"close\"],\"type\":\"options\"}}}",
+      "image_white_blance": "{\"dynamic\":{\"sWhiteBlanceStyle\":{\"manualWhiteBalance\":{\"iWhiteBalanceBlue\":{\"range\":{\"max\":100,\"min\":0,\"step\":1},\"type\":\"range\"},\"iWhiteBalanceRed\":{\"range\":{\"max\":100,\"min\":0,\"step\":1},\"type\":\"range\"}}}},\"layout\":{\"image_white_blance\":[\"sWhiteBlanceStyle\",\"iWhiteBalanceRed\",\"iWhiteBalanceBlue\"]},\"static\":{\"sWhiteBlanceStyle\":{\"options\":[\"manualWhiteBalance\",\"autoWhiteBalance1\",\"autoWhiteBalance2\",\"lockingWhiteBalance\",\"fluorescentLamp\",\"incandescent\",\"warmLight\",\"naturalLight\"],\"type\":\"options\"}}}",
+      "image_enhancement": "{\"dynamic\":{\"sDehaze\":{\"open\":{\"iDehazeLevel\":{\"range\":{\"max\":100,\"min\":0,\"step\":1},\"type\":\"range\"}}},\"sNoiseReduceMode\":{\"advanced\":{\"iSpatialDenoiseLevel\":{\"range\":{\"max\":100,\"min\":0,\"step\":1},\"type\":\"range\"},\"iTemporalDenoiseLevel\":{\"range\":{\"max\":100,\"min\":0,\"step\":1},\"type\":\"range\"}},\"general\":{\"iDenoiseLevel\":{\"range\":{\"max\":100,\"min\":0,\"step\":1},\"type\":\"range\"}}}},\"layout\":{\"image_enhancement\":[\"sNoiseReduceMode\",\"iDenoiseLevel\",\"iSpatialDenoiseLevel\",\"iTemporalDenoiseLevel\",\"sDehaze\",\"iDehazeLevel\",\"sDIS\",\"sGrayScaleMode\",\"sFEC\"]},\"static\":{\"sDIS\":{\"options\":[\"open\",\"close\"],\"type\":\"options\"},\"sDehaze\":{\"options\":[\"open\",\"close\",\"auto\"],\"type\":\"options\"},\"sFEC\":{\"options\":[\"open\",\"close\"],\"type\":\"options\"},\"sGrayScaleMode\":{\"options\":[\"[0-255]\",\"[16-235]\"],\"type\":\"options\"},\"sNoiseReduceMode\":{\"options\":[\"close\",\"general\",\"advanced\"],\"type\":\"options\"}}}",
+      "image_video_adjustment": "{\"layout\":{\"image_video_adjustment\":[\"sImageFlip\",\"sSceneMode\",\"sPowerLineFrequencyMode\"]},\"static\":{\"sImageFlip\":{\"options\":[\"leftRight\",\"upDown\",\"center\",\"close\"],\"type\":\"options\"},\"sPowerLineFrequencyMode\":{\"options\":[\"PAL(50HZ)\",\"NTSC(60HZ)\"],\"type\":\"options\"},\"sSceneMode\":{\"options\":[\"indoor\",\"outdoor\"],\"type\":\"options\"}}}"
+    },
+    {
+      "id": 6,
+      "para": ""
+    }
+  ]
+}

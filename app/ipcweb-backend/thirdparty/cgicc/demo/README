@@ -1,0 +1,34 @@
+GNU cgicc Demo Programs
+=======================
+
+There are four demo applications in this directory:
+
+  'test.cgi', a demo of how to access various kinds of submitted form
+   information using cgicc.
+
+  'upload.cgi', a demo of how to use cgicc to process uploaded
+   files.
+
+  'cookie.cgi', a demo of cgicc's cookie handling ability.
+
+  'dns.cgi', a demo of a web dns gateway.
+
+To run the tests, first copy the 'test.cgi', 'upload.cgi',
+'cookie.cgi' and 'dns.cgi' applications to the cgi-bin directory (See
+note on libtool if this doesn't seem to work).  Ensure that the file
+permissions are at least readable and executable by all (-rwxr-xr-w).
+
+All of these applications are stand-alone; just point your browser at
+'test.cgi', 'upload.cgi', 'cookie.cgi', or 'dns.cgi'.
+
+A Note on libtool
+=================
+
+Since cgicc uses libtool to generate the libraries and link against
+them, depending on your configuration you may need to use libtool to
+copy the applications due to the way runtime search paths are
+embedded.  If you are unable to run the applications from the /cgi-bin
+directory, use libtool to re-copy them.  From the cgicc/demo
+directory, run
+  % sh ../libtool --mode=install cp *.cgi cgi-bin/
+replacing cgi-bin/ with your webservers cgi-bin directory.

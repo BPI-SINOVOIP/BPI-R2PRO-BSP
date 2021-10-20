@@ -1,0 +1,8 @@
+<div class="contain-fluid">
+    <ng-container *ngIf="selectedMenuItem === 'FacePara'">
+        <app-para-setting [options]="options"></app-para-setting>
+    </ng-container>
+    <ng-container *ngIf="selectedMenuItem === 'ROI'">
+        <app-face-roi></app-face-roi>
+    </ng-container>
+</div>

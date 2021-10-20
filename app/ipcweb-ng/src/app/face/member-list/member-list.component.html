@@ -1,0 +1,11 @@
+<div class="contain-fluid">
+    <ng-container *ngIf="selectedMenuItem === 'ListManagement'">
+        <app-list-management [options]="memberListOp"></app-list-management>
+    </ng-container>
+    <ng-container *ngIf="selectedMenuItem === 'AddOne'">
+        <app-add-one></app-add-one>
+    </ng-container>
+    <ng-container *ngIf="selectedMenuItem === 'BatchInput'">
+        <app-batch-input [options]="batchInputOp"></app-batch-input>
+    </ng-container>
+</div>

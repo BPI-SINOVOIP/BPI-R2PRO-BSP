@@ -1,0 +1,24 @@
+Special thanks to:
+==================
+
+Artyom , hor his help on Bugs correction.
+Christof Danzl, for his HTML generation classes and feedback.
+Gilbert Fine, for his multipart/form-data bug fix, FastCGI integration.
+Francois Degros, for his assignment operator fix.
+Peter Goedtkindt, for his XHTML suggestions and HTTPS bug fix.
+Quintin Connell, for his Windows project and workspace files.
+Nathan Barnett, for his multiple cookies bug fix.
+Alexander J. Oss and Edward Diener, for their Borland Win32 fixes.
+Steve McAndrewsmith, for his FastCGI integration help.
+Andreas Mueller, for his cookie parsing bug fix.
+Christian Weisgerber, for his Makefile bug fix.
+Carsten P. Gehrke, for his getDoubleValue bug fix.
+Bostjan Lah, for his readString bug report.
+Gilbert Fine and Jim Hull, for their form_urldecode bug fix.
+Vyacheslav Ignatyuk, for his extractBetween bug fix.
+Tomas Norambuena  for Darwin compatibility
+David Roberts  to add the XHTML support on cgicc
+Frédéric Sagnes to bugs and patch on charset suffix
+Chris Butler to bug on Missing includes in HTMLElement.cpp
+Tiziano Müller to bugs and patch on install and makefile
+Sebastien DIAZ to maintain in GNU

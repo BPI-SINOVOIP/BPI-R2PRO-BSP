@@ -1,0 +1,46 @@
+<div class="container row py-3">
+  <div class="col-lg-7 col-xl-7">
+    <app-player [option]="playerOption" #player></app-player>
+  </div>
+  <div class="col-lg-5 col-xl-5">
+    <div class="form-group" [formGroup]="scenarioForm">
+      <div class="mt-1 card-header">
+        <label class="show-card">{{ 'scenario' | translate }}</label>
+        <select class="custom-select col-md-4 set-right"  formControlName="sScenario" (ngModelChange)="onScenarioChange($event)">
+          <option *ngFor="let scenario of scenarioMenu" [value]="scenario">{{ scenario | translate }}</option>
+        </select>
+      </div>
+    </div>
+    <form class="form" [formGroup]="imageForm">
+      <div id=ispGrp role="tablist">
+        <div class="card" *ngFor="let cardTitle of cardList">
+          <div id="ispGrp1Header" class="card-header" (click)="onSelectCard(cardTitle)">
+            <label>{{ groupNameDict[cardTitle] | translate }}</label>
+          </div>
+          <div class="card-body card-block form-group" [id]="cardTitle" [formGroupName]="groupNameDict[cardTitle]">
+            <ng-container *ngIf="capDict[cardTitle][layoutKey]">
+              <ng-container *ngFor="let layoutItem of capDict[cardTitle][layoutKey][cardTitle]">
+                <div class="form-row my-1" *ngIf="checkType(capDict[cardTitle][pageLayoutKey][layoutItem], 'range')">
+                  <label class="col-3">{{ transferControlName(layoutItem) | translate }}</label>
+                  <input class="col-6 custom-range" [formControlName]="layoutItem" type="range" (ngModelChange)="onRangeChange($event, cardTitle, layoutItem)" (mouseup)="onSubmitPart(cardTitle, layoutItem, 'range')" [min]="getRange(capDict[cardTitle][pageLayoutKey][layoutItem], 'min')" [max]="getRange(capDict[cardTitle][pageLayoutKey][layoutItem], 'max')" [step]="getRange(capDict[cardTitle][pageLayoutKey][layoutItem], 'step')">
+                  <input class="col-2 form-control" [formControlName]="layoutItem" type="number" (ngModelChange)="onRangeChange($event, cardTitle, layoutItem)" (blur)="onSubmitPart(cardTitle, layoutItem, 'number')" [id]="layoutItem">
+                  <label class="alarm-tip pat1" *ngIf="imageForm.get(groupNameDict[cardTitle]).get(layoutItem).errors?.min || imageForm.get(groupNameDict[cardTitle]).get(layoutItem).errors?.max || imageForm.get(groupNameDict[cardTitle]).get(layoutItem).errors?.isNumberJudge">{{'ranges' | translate}}({{getRange(capDict[cardTitle][pageLayoutKey][layoutItem], 'min')}}~{{getRange(capDict[cardTitle][pageLayoutKey][layoutItem], 'max')}})</label>
+                </div>
+                <div class="form-row my-1" *ngIf="checkType(capDict[cardTitle][pageLayoutKey][layoutItem], 'options') && isItemEnable(layoutItem)">
+                  <label class="col-3 form-group-text mt-1">{{ transferControlName(layoutItem) | translate }}</label>
+                  <select class="custom-select col-md-8" [formControlName]="layoutItem" (ngModelChange)="updateDynamicCap(cardTitle, layoutItem, $event)" [id]="layoutItem">
+                    <option *ngFor="let opItem of htmlOptionFilter(layoutItem, capDict[cardTitle][pageLayoutKey][layoutItem]['options'])" [value]="opItem">{{ htmlOptionTransfer(layoutItem, opItem) | translate }}</option>
+                  </select>
+                </div>
+                <div class="form-row my-1" *ngIf="checkType(capDict[cardTitle][pageLayoutKey][layoutItem], 'input') && capDict[cardTitle][pageLayoutKey][layoutItem]['input']==='time'">
+                  <label class="col-3">{{ transferControlName(layoutItem) | translate }}</label>
+                  <input type="time" step=1 [formControlName]="layoutItem" (blur)="onSubmitPart(cardTitle, layoutItem, 'time')" [id]="layoutItem">
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,237 @@
+                       NEWS about GNU cgicc
+
+======================================================================
+        Please send bug reports, suggestions, and comments to
+        http://www.gnu.org/software/cgicc/#bug
+======================================================================
+	Major changes between versions 3.2.16 and 3.2.17
+        ----------------------------------------------
+
+* Correction of bugs
+
+	Major changes between versions 3.2.15 and 3.2.16
+        ----------------------------------------------
+
+* Correction of bugs
+
+	Major changes between versions 3.2.14 and 3.2.15
+        ----------------------------------------------
+
+* Correction of bugs
+	Major changes between versions 3.2.13 and 3.2.14
+        ----------------------------------------------
+
+* Correction of code warnings and bugs
+        Major changes between versions 3.2.12 and 3.2.13
+        ----------------------------------------------
+
+* Correction of code warnings   .
+
+	Major changes between versions 3.2.11 and 3.2.12
+        ----------------------------------------------
+
+* Correction of bugs   .
+
+        Major changes between versions 3.2.10 and 3.2.11
+        ----------------------------------------------
+
+* Correction of bugs   .
+
+        Major changes between versions 3.2.9 and 3.2.10
+        ----------------------------------------------
+
+* Correction of bugs   .
+
+        Major changes between versions 3.2.8 and 3.2.9
+        ----------------------------------------------
+
+* Correction of bugs   .
+        
+	Major changes between versions 3.2.7 and 3.2.8
+        ----------------------------------------------
+
+* Correction of bugs on compilation   .
+
+        Major changes between versions 3.2.6 and 3.2.7
+        ----------------------------------------------
+
+* Correction of bugs on compilation   .
+
+	Major changes between versions 3.2.5 and 3.2.6
+        ----------------------------------------------
+ 
+* Correction of bugs, see changelog file   .
+
+        Major changes between versions 3.2.4 and 3.2.5
+        ----------------------------------------------
+
+* Add the XHTML support from David Roberts work
+
+
+
+        Major changes between versions 3.2.3 and 3.2.4
+        ----------------------------------------------
+
+* Bug in extractBetween for 64-bit OS fixed
+
+* Parsing speed improved
+
+        Major changes between versions 3.2.2 and 3.2.3
+        ----------------------------------------------
+
+* Longstanding bug in form_urldecode fixed
+
+* Bug in FastCGI demo fixed
+
+* Documentation formatting problems fixed
+
+* Demonstration applications updated
+
+        Major changes between versions 3.2.1 and 3.2.2
+        ----------------------------------------------
+
+* Memory leak during restoration of CGI environments fixed
+
+* New getDoubleValue and getIntegerValue methods added to allow caller to 
+  determine if value was bounded
+
+* Bug in getDoubleValue fixed
+
+* Bug in parsing of cookie names fixed
+
+        Major changes between versions 3.2 and 3.2.1
+        ----------------------------------------------
+
+* Bug that caused multiple cookies to be output incorrectly fixed
+
+* Better support added for Borland C++ Builder and HP aCC
+
+* Bona fide support for FastCGI added
+
+* Documentation fixes
+
+        Major changes between versions 3.1.6 and 3.2
+        ----------------------------------------------
+
+* License changed to the Lesser GNU General Public License
+
+* HTTP header classes rewritten and refactored
+
+* HTML output now more XML-compliant
+
+* Documentation rewritten in Doxygen format
+
+* Added a demo on cookie usage
+
+
+        Major changes between versions 3.1.5 and 3.1.6
+        ----------------------------------------------
+
+* Longstanding bug in multipart form handling that caused content type
+  of uploaded file to be incorrectly reported fixed
+
+* Support for external reader functions (for FastCGI support) added
+
+
+        Major changes between versions 3.1.4 and 3.1.5
+        ----------------------------------------------
+
+* example/ directory completely reworked to be a real-world example
+  that uses autoconf/automake/libtool
+
+* New script 'cgicc-config' installed to help users of installed library
+
+* New configure option --enable-debug-logging
+
+* Documentation now released under the GNU Free Documentation License
+
+
+        Major changes between versions 3.1.3 and 3.1.4
+        ----------------------------------------------
+
+* Leading whitespace now correctly stripped from cookies during parsing
+
+* Demo now correct for HTTP servers not running on port 80
+
+
+        Major changes between versions 3.1.2 and 3.1.3
+        ----------------------------------------------
+
+* Incorrect #includes fixed
+
+* Other minor esthetic fixes
+
+
+        Major changes between versions 3.1.1 and 3.1.2
+        ----------------------------------------------
+
+* Fixed bug in multipart/form-data handling that caused the last form element
+  to be ignored
+
+* Fixed Win32 bug that caused indefinite hangs with MS IIS 4.0 (due to CR/LF
+  conversion on read)
+
+* Now distributed in bzip2 and rpm format, in addition to gzipped tar
+
+
+        Major changes between versions 3.1 and 3.1.1
+        --------------------------------------------
+
+* Added new method, usingHTTPS(), to CgiEnvironment
+
+* Added typedefs for standard template library iterators, to ease typing
+
+
+        Major changes between versions 3.0.2 and 3.1
+        --------------------------------------------
+
+* HTML generation classes reworked, thanks to Christof Danzl.
+
+* HTTPCookie reworked to comply with RFC 2109.
+
+* All add() methods relating to HTMLAttribute renamed to set().
+
+* New methods add() added to HTMLElement, to allow multiple embedded elements.
+
+* Visual C++ 6.0 project files added, in win/ subdirectory.
+
+* All .cc files renamed to .cpp, and .hh files to .h (for Win32 support).
+
+
+        Major changes between versions 3.0.1 and 3.0.2
+        ----------------------------------------------
+
+* Renamed the src/ directory to cgicc/.
+
+
+        Major changes between versions 3.0 and 3.0.1
+        --------------------------------------------
+
+* Various fixes for namespace support, submitted by Bob Kline.
+
+* Updated documentation regarding Cgicc mailing lists.
+
+
+        Major changes between versions 2.2.3 and 3.0
+        --------------------------------------------
+
+* Reworked to use the C++ standard template library. 
+  In most places, the STL class string is used where bare char* was
+  used before. The obsolete classes implementing linked lists are
+  gone, replaced by the STL classes vector and iterator. 
+
+* Include files are now installed in the package include directory 
+  cgicc/ under the include/ directory, instead of in the
+  include/ directory itself.
+
+* Documentation changed to info format, and expanded.
+
+* The test/ directory was renamed to demo/.
+
+* The demo programs are no longer installed.
+
+* The demo programs now contain internal stylesheet information, instead 
+  of linking to an external stylesheet.
+
+* Released as part of the GNU project under the GPL.
+

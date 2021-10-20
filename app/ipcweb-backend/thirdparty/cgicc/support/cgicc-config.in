@@ -1,0 +1,87 @@
+#! /bin/sh
+
+##
+##  $Id: cgicc-config.in,v 1.9 2007/07/02 18:48:19 sebdiaz Exp $
+##
+##  Copyright (C) 1996 - 2004 Stephen F. Booth <sbooth@gnu.org>
+##                2007 Sébastien DIAZ <sebastien.diaz@gmail.com>
+##  Part of the GNU cgicc library, http://www.cgicc.org
+##
+##  This program is free software; you can redistribute it and/or modify
+##  it under the terms of the GNU General Public License as published by
+##  the Free Software Foundation; either version 3 of the License, or
+##  (at your option) any later version.
+##
+##  This program is distributed in the hope that it will be useful,
+##  but WITHOUT ANY WARRANTY; without even the implied warranty of
+##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##  GNU General Public License for more details.
+##
+##  You should have received a copy of the GNU General Public License
+##  along with this program; if not, write to the Free Software
+##  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA 
+##
+
+prefix="@prefix@"
+exec_prefix="@exec_prefix@"
+includedir="@includedir@"
+libdir="@libdir@"
+cxxflags="@CXXFLAGS@"
+
+## Usage info
+usage()
+{
+    cat <<EOF
+Usage: cgicc-config [OPTIONS]
+Options:
+    --prefix       Display architecture-independent installation dir
+    --exec-prefix  Display architecture-dependent installation dir
+    --includedir   Display header file installation dir
+    --libdir       Display object-code installation dir
+    --cxxflags     Display C++ compiler flags
+    --host         Display host information
+    --version      Display version information
+    --help         Display this message
+EOF
+    exit $1
+}
+
+## If no arguments, print usage info
+if test $# -eq 0; then
+    usage 1 1>&2
+fi
+
+## Parse command line
+while test $# -gt 0; do
+    case "$1" in
+	-*=*)          optarg=`echo "$1" | sed 's/[-_a-zA-Z0-9]*=//'` ;;
+	*)             optarg= ;;
+    esac
+
+    case $1 in
+	## Architecture-independent dir
+        --prefix)      echo "$prefix" && exit 0 ;;
+
+	## Architecture-dependent dir
+	--exec-prefix) echo "$exec_prefix" && exit 0 ;;
+
+	## Object code dir
+	--libdir)      echo "$libdir" && exit 0 ;;
+
+	## Header file dir
+	--includedir)  echo "$includedir" && exit 0 ;;
+
+	## C++ compiler flags
+	--cxxflags)  echo "$cxxflags" && exit 0 ;;
+
+	## Host information
+	--host)        echo "@host@" && exit 0 ;;	    
+
+	## Version information
+	--version)     echo "@VERSION@" && exit 0 ;;
+
+	## Everything else
+	*)             usage 1 1>&2 ;;
+    esac
+    shift
+done

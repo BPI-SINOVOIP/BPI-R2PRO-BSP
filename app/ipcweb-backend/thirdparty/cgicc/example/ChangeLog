@@ -1,0 +1,68 @@
+2004-06-12  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc.m4: Fixed erroneous comment
+
+2002-12-04  Stephen F. Booth  <sbooth@gnu.org>
+
+	* example.cpp: Removed CGICC_USE_NAMESPACES macro
+
+2002-03-12  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc.m4: Use ' ' instead of ':' as path separator
+	* README: Removed reference to libtool
+
+2002-03-09  Stephen F. Booth  <sbooth@gnu.org>
+
+	* Makefile.am: Updated for automake-1.6
+
+2002-03-06  Stephen F. Booth  <sbooth@gnu.org>
+
+	* example.cpp: Fixed misspelling in #include
+
+2002-03-02  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc.m4: Don't check for HTTPHeaders.h
+	* cgicc.m4: Check for CgiInput.h
+	* example.cpp: Changed #include to HTTPHTMLHeader
+
+2001-09-03  Stephen F. Booth  <sbooth@gnu.org>
+
+	* configure.in: Renamed to configure.ac
+	* configure.ac: Reworked for autoconf 2.52/automake 1.5
+	* cgicc.m4: Check for HTTPCookie.h
+
+2001-07-04  Stephen F. Booth  <sbooth@gnu.org>
+
+	* example.cpp: Removed licensing terms
+
+2001-07-01  Stephen F. Booth  <sbooth@gnu.org>
+
+	* configure.in: Removed libtool
+	* Makefile.am: Removed libtool
+
+2000-11-15  Stephen F. Booth  <sbooth@gnu.org>
+
+	* Makefile.am: Added cgicc.m4 to EXTRA_DIST
+
+2000-11-14  Stephen F. Booth  <sbooth@gnu.org>
+
+	* cgicc.m4: New file
+	* acinclude.m4: Moved cgicc macros to cgicc.m4, include(cgicc.m4)
+	* cgicc.m4: Use cgicc_{libdir,includedir} instead of
+	CGICC_{LIBDIR,INCLUDEDIR}
+	* Makefile.am:  Use cgicc_{libdir,includedir} instead of
+	CGICC_{LIBDIR,INCLUDEDIR}
+	* configure.in: Check validity of --with-cgicc
+
+2000-11-13  Stephen F. Booth  <sbooth@gnu.org>
+
+	* AUTHORS: New file for cgicc-example package
+	* ChangeLog: New file for cgicc-example package
+	* Makefile.am: New file for cgicc-example package
+	* NEWS: New file for cgicc-example package
+	* README: Updated for cgicc-example package
+	* acinclude.m4: New file for cgicc-example package
+	* autogen: New file for cgicc-example package
+	* configure.in: New file for cgicc-example package
+	* example.cpp: New file for cgicc-example package
+

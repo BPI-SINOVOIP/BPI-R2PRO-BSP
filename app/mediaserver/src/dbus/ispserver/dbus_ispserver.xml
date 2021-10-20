@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<node>
+  <interface name="rockchip.ispserver.server">
+
+    <method name="GetDumpExposureInfo">
+      <arg name="result" type="s" direction="out"/>
+    </method>
+
+    <method name="SendTurnoffIspSignal">
+    </method>
+
+  </interface>
+</node>

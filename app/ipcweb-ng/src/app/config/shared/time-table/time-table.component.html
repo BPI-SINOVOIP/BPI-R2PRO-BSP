@@ -1,0 +1,140 @@
+<div class="fluid-container">
+    <div class="row">
+        <div class="col-12 gray-title-no-line-height" *ngIf="option['isEnabledTop']">
+            <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}" [formGroup]="AdvanceForm">
+                <input type="checkbox" id="enabled-coin" formControlName="iEnabled">
+                <label class="stand"></label>
+                <label for="enabled-coin">{{'enable' | translate}}</label>
+            </div>
+        </div>
+        <div class="menu col-md-10 col-xl-10 col-sm-10">
+            <div class="for-color-change ml-1">
+                <label class="delete-btn" *ngIf="isChrome" (click)="onDeleteOne()"></label>
+                <label class="ml-2" [ngClass]="{'blue-btn': !isChrome, 'func-label': isChrome}" (click)="onDeleteOne()">{{'delete' | translate}}</label>
+            </div>
+            <div class="for-color-change">
+                <label class="ml-2" [ngClass]="{'blue-btn': !isChrome, 'func-label': isChrome}" (click)="onDeleteAll()"><span *ngIf="isChrome" class="trash-can mr-2"></span>{{'deleteAll' | translate}}</label>
+            </div>
+            <div class="float-right">
+                <select *ngIf="option['isType']" class="mr-1" [(ngModel)]="selectedType">
+                    <ng-container *ngFor="let item of typeList">
+                        <option [value]="item.name">{{item.name | translate}}</option>
+                    </ng-container>
+                </select>
+                <button *ngIf="option['isAdvance']" class="blue-btn" disabled>{{'advancePara' | translate}}</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div #canvasbox class="container canvasbox col-md-10 col-xl-10 col-sm-10" (window:resize)="onResize($event)" >
+            <canvas #canvasbg id="canvasbg" class="canvasbg">Unsupport webgl</canvas>
+            <canvas #canvasdraw id="canvasdraw" class="canvasdraw">Unsupport webgl</canvas>
+            <button class="blue-btn" id="self-save" *ngIf="option.isInit" (click)="onSelfSave()">{{ 'save' | translate}}</button>
+        </div>
+        <div *ngIf="option.isInit" class="no-right col-md-2 col-xl-2 col-sm-2">
+            <ng-container *ngFor="let item of typeList">
+                <div class="detail-menu">
+                    <span class="icon" [style.background-color]="item.color"></span>
+                    <span class="icon-txt">{{item.name | translate}}</span>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div id="simpleModal" class="modal">
+        <div class="modal-header"></div>
+        <div class="modal-body">
+            <button class='quit' (click)="onNo('.modal')">X</button>
+            <div class="line-input" [formGroup]="ChangeForm">
+                <input type="text" formControlName="hour0">
+                <label>:</label>
+                <input type="text" formControlName="minute0">
+                <label>~</label>
+                <input type="text" formControlName="hour">
+                <label>:</label>
+                <input type="text" formControlName="minute">
+            </div>
+            <div *ngIf="ChangeForm.invalid">
+                <label class="alarm-tip">{{'timeFormatError' | translate}}</label>
+            </div>
+            <div class="line-input">
+                <button class="blue-btn" (click)="onSave()" [disabled]="ChangeForm.invalid">{{ 'modify' | translate }}</button>
+                <button class="red-btn" (click)="onDelete()">{{ 'delete' | translate }}</button>
+            </div>
+        </div>
+        <div class="modal-foot"></div>
+    </div>
+    <div class="modify-table" #modify>
+        <div class="header">
+            <label class="left">{{'copySchedule'| translate}}</label>
+            <label>&nbsp;</label>
+            <label class="right" (click)="selectAll()">{{'selectAll' | translate}}/{{'unselectAll' | translate}}</label>
+        </div>
+        <div class="body" [formGroup]="WeekForm">
+            <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                <input type="checkbox" id="monday" formControlName="monday">
+                <label class="stand"></label>
+                <label for="monday">{{'monday' | translate}}</label>
+            </div>
+            <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                <input type="checkbox" id="tuesday" formControlName="tuesday">
+                <label class="stand"></label>
+                <label for="tuesday">{{'tuesday' | translate}}</label>
+            </div>
+            <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                <input type="checkbox" id="wednesday" formControlName="wednesday">
+                <label class="stand"></label>
+                <label for="wednesday">{{'wednesday' | translate}}</label>
+            </div>
+            <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                <input type="checkbox" id="thursday" formControlName="thursday">
+                <label class="stand"></label>
+                <label for="thursday">{{'thursday' | translate}}</label>
+            </div>
+            <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                <input type="checkbox" id="friday" formControlName="friday">
+                <label class="stand"></label>
+                <label for="friday">{{'friday' | translate}}</label>
+            </div>
+            <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                <input type="checkbox" id="saturday" formControlName="saturday">
+                <label class="stand"></label>
+                <label for="saturday">{{'saturday' | translate}}</label>
+            </div>
+            <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                <input type="checkbox" id="sunday" formControlName="sunday">
+                <label class="stand"></label>
+                <label for="sunday">{{'sunday' | translate}}</label>
+            </div>
+            <div>
+                <button class="blue-btn" (click)="onConfirm()">{{ 'yes' | translate }}</button>
+            </div>
+            <div>
+                <button class="red-btn" (click)="onNo('.modify-table')">{{ 'no' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="advance-black" #advance>
+    <div class="advance-table">
+        <div class="header">
+            <label class="left">{{'advancePara' | translate}}</label>
+            <label>&nbsp;</label>
+        </div>
+        <div class="body" [formGroup]="WeekForm">
+            <ng-container *ngFor="let items of advancePara">
+                <div class="mt-1"><label class="select-label">{{items.name | translate}}</label></div>
+                <div class="mt-1">
+                    <select class="radius-select-stand">
+                        <ng-container *ngFor="let op of items.options">
+                            <option [value]="op.toString()">{{op.toString() | translate}}</option>
+                        </ng-container>
+                    </select>
+                </div>
+            </ng-container>
+        </div>
+        <div class="foot">
+            <button class="blue-btn mt-1" (click)="onConfirm()">{{ 'yes' | translate }}</button>
+            <label>&nbsp;</label>
+        </div>
+    </div>
+</div>

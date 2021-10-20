@@ -1,0 +1,22 @@
+<DeviceInfo xmlns="http://www.hikvision.com/ver20/XMLSchema" version="2.0">
+<deviceName>IP CAMERA</deviceName>
+<deviceID>720a0000-9664-11b4-8325-bcbac271eaf8</deviceID>
+<deviceDescription>IPCamera</deviceDescription>
+<deviceLocation>hangzhou</deviceLocation>
+<systemContact>Hikvision.China</systemContact>
+<model>DS-2CD7T47DWD-IZSW</model>
+<serialNumber>DS-2CD7T47DWD-IZSW20190805AACHD46944751</serialNumber>
+<macAddress>bc:ba:c2:71:ea:f8</macAddress>
+<firmwareVersion>V5.5.91</firmwareVersion>
+<firmwareReleasedDate>build 190218</firmwareReleasedDate>
+<encoderVersion>V7.3</encoderVersion>
+<encoderReleasedDate>build 190107</encoderReleasedDate>
+<bootVersion>V1.3.4</bootVersion>
+<bootReleasedDate>100316</bootReleasedDate>
+<hardwareVersion>0x0</hardwareVersion>
+<deviceType>IPCamera</deviceType>
+<telecontrolID>88</telecontrolID>
+<supportBeep>false</supportBeep>
+<supportVideoLoss>false</supportVideoLoss>
+<firmwareVersionInfo>B-R-H3-0</firmwareVersionInfo>
+</DeviceInfo>

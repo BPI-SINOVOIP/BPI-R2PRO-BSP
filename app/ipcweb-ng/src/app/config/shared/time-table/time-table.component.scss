@@ -1,0 +1,283 @@
+.row {
+    margin-left: 0px;
+}
+
+.container.canvasbox {
+    position: relative;
+    top: 0px;
+    right: 0px;
+    margin: 0px;
+    padding-right: 0px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+
+canvas.canvasbg {
+    border: 1px solid #f8f8f8;
+    background-color: #f8f8f8;
+}
+
+canvas.canvasdraw {
+    border: none;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    position: absolute;
+    z-index: 2;
+}
+
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 4;
+    height: 150px;
+    width: 200px;
+    overflow: hidden;
+    left: 100px;
+    top: 100px;
+}
+
+.modal-header{
+    display: none;
+}
+
+.modal-foot {
+    display: none;
+}
+
+.modal-body {
+    background-color: rgb(255, 255, 255);
+    padding: 5px;
+    border: none;
+    border-width: 1px;
+}
+
+.modal-body .line-input{
+    display: inline;
+}
+
+.modal-body .line-input input{
+    width: 2rem;
+}
+
+.modal-body .line-input label{
+    width: 0.9rem;
+    text-align: center;
+}
+
+.quit {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border: none;
+    background-color: transparent;
+}
+
+.modify-table {
+    display: none;
+    position: fixed;
+    z-index: 4;
+    width: 20rem;
+    left: 100px;
+    top: 100px;
+    background-color: rgb(255, 255, 255);
+    border: solid;
+    border-width: 1px;
+    border-color: #dedede;
+}
+.modify-table .header {
+    border-bottom: solid;
+    border-color: #dedede;
+    border-width: 1px;
+    background-color: #f8f8f8;
+}
+.modify-table .header .left {
+    position: absolute;
+    top: 1px;
+    left: 3px;
+}
+.modify-table .header .right {
+    position: absolute;
+    top: 1px;
+    right: 3px;
+}
+.modify-table .header .right:hover {
+    color: #007fe0;
+    position: absolute;
+    top: 1px;
+    right: 3px;
+}
+.modify-table .body {
+    padding-left: 2px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.for-color-change {
+    display: inline;
+    position: relative;
+}
+
+.for-color-change .delete-btn::before{
+    content: "\2716";
+}
+
+
+.for-color-change .func-label {
+    position: relative;
+    min-width: 100px;
+}
+
+.for-color-change:hover .delete-btn {
+    outline-color: rgb(200, 10, 10);
+}
+
+.for-color-change:hover .func-label {
+    color: #007fe0;
+}
+
+.for-color-change .trash-can {
+    float: left;
+    position: relative;
+    top: 6px;
+    width: 16px;
+    height: 17px;
+    border: 2px solid #C0C2BE;
+    background: -webkit-linear-gradient(left, transparent 20%, #C0C2BE 20%, #C0C2BE 40%, transparent 40%, transparent 60%, #C0C2BE 60%, #C0C2BE 80%, transparent 80%);
+}
+
+.for-color-change:hover .trash-can {
+    border-color: #e4e7ec;
+    background: -webkit-linear-gradient(left, transparent 20%, #e4e7ec 20%, #e4e7ec 40%, transparent 40%, transparent 60%, #e4e7ec 60%, #e4e7ec 80%, transparent 80%);
+}
+
+.for-color-change .trash-can::before {
+    content: '';
+    position: relative;
+    top: -6px;
+    left: -4px;
+    float: left;
+    width: 20px;
+    height: 4px;
+    border: 2px solid #C0C2BE;
+    border-bottom-width: 0;
+}
+
+.for-color-change:hover .trash-can::before {
+    border-color: #e4e7ec;
+}
+
+.for-color-change .trash-can::after {
+    content: '';
+    position: relative;
+    top: -14px;
+    left: 1px;
+    float: left;
+    width: 10px;
+    height: 2px;
+    background: #C0C2BE;
+}
+
+.for-color-change:hover .trash-can::after {
+    background: #e4e7ec;
+}
+
+.menu {
+    position: relative;
+    padding: 0px;
+}
+
+.grid-menu {
+    display: grid;
+    grid-template-columns: 1rem 1rem 1fr;
+}
+
+.grid-menu div span {
+    // width: 1rem;
+    // height: 1rem;
+    float: left;
+    width: 1rem;
+    height: 1rem;
+    line-height: 2rem;
+}
+
+.no-right {
+    margin-right: 0px;
+    padding-right: 0px;
+}
+
+.detail-menu {
+    height: 1rem;
+    margin-bottom: 1rem;
+}
+
+.detail-menu .icon {
+    float: left;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 10px;
+    margin-top: 2px;
+}
+
+.advance-black {
+    display: none;
+    position: fixed;
+    z-index: 6;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0,0.5);
+}
+
+.advance-table {
+    position: fixed;
+    z-index: 6;
+    width: 26rem;
+    left: calc(50% - 13rem);
+    top: 20%;
+    background-color: rgb(255, 255, 255);
+    border: solid;
+    border-width: 1px;
+    border-color: #dedede;
+}
+.advance-table .header {
+    border-bottom: solid;
+    border-color: #dedede;
+    border-width: 1px;
+    background-color: #f8f8f8;
+}
+.advance-table .header .left {
+    position: absolute;
+    top: 1px;
+    left: 3px;
+}
+.advance-table .header .right {
+    position: absolute;
+    top: 1px;
+    right: 3px;
+}
+.advance-table .header .right:hover {
+    color: #007fe0;
+    position: absolute;
+    top: 1px;
+    right: 3px;
+}
+.advance-table .body {
+    padding-left: 2px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+.advance-table .foot {
+    border-bottom: solid;
+    border-color: #dedede;
+    border-width: 1px;
+    background-color:  rgb(255, 255, 255);
+}
+.advance-table .foot label {
+    margin: 0px;
+    padding: 0px;
+}
+.radius-select-stand {
+    width: 80%;
+}

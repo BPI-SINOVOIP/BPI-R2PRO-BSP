@@ -1,0 +1,86 @@
+/* $Id: cgicc-doc.css,v 1.5 2004/06/22 01:34:56 sbooth Exp $ */
+
+body { 
+	color: black; 
+	background: white; 
+}
+
+a	{ text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+div.unix { 
+	width: 100%; 
+	border: none; 
+	color: #006600; 
+	background-color: #eeeeee;
+}
+
+span.red 	{ color: red; }
+span.big	{ font-size: large; }
+span.white	{ color: white; }
+
+div.title {
+	width: 75%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	border-top: solid thin red;
+	border-bottom: solid thin red;
+}
+
+div.center {
+	text-align: center;
+}
+
+div.notice { 
+	border: solid thin; 
+	margin: 1em 0; 
+	padding: 1em;
+	background-color: #ddd;
+}
+
+div.header { 
+	width: 100%;
+	border: solid thin;
+	background-color: #ddd;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	font-size: larger;
+}
+
+div.footer {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: smaller;
+	font-style: italic;
+}
+
+div.nav {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	border: solid thin; 
+	padding: 0.25em;
+	font-size: smaller;
+	background: #aaffaa;
+	text-align: center;
+}
+
+div.subsection {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.nav > a:hover { background-color: #aaffaa; }
+
+img {
+	border: none;
+}
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+}

@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-md bg-dark navbar-dark" *ngIf="isLoggedIn$ | async as isLoggedIn" id="head-nav">
+  <!-- sticky-top -->
+  <a class="navbar-brand" href="/" (click)="onHeadChange('preview')">{{ 'NAV.Brand' | translate }} </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <ng-container *ngFor="let hd of headerNav">
+        <li class="nav-item">
+          <a class="nav-link cnt" routerLink="{{'/' + hd}}" (click)="onHeadChange(hd)">{{ 'NAV.' + hd | translate }}</a>
+        </li>
+      </ng-container>
+    </ul>
+    <hr>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item mts">
+        <span class="nav-link" (dblclick)="onSwitchLanguage()" title="{{ switchTip[currentLang] | translate}}">{{ currentLang | translate}}</span>
+      </li>
+      <li class="nav-item">
+          <span class="text-light nav-link"><i class="user-icon"></i>{{userName}}</span>
+      </li>
+      <li class="nav-item mts">
+          <a class="nav-link" (click)="onLogout()" *ngIf="isLoggedIn"><i class="exit-icon"></i>{{ 'NAV.Logout' | translate }}</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+

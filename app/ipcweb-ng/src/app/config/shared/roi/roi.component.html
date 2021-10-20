@@ -1,0 +1,40 @@
+<div class="container row py-3" style="min-height: 100%;">
+  <div class="col-lg-8 col-xl-8 col-md-8">
+    <app-player [option]="playerOption" #player></app-player>
+  </div>
+  <div class="col-lg-4 col-xl-4 col-md-4">
+    <form class="form" [formGroup]="RoiForm" (ngSubmit)="onSubmit()">
+      <p class="gray-title my-3"><span>{{ 'streamType' | translate }}</span></p>
+      <select class="custom-select" formControlName="sStreamType" (ngModelChange)="onStreamChange($event)">
+        <ng-container *ngFor="let key of objectKeys(codeSet)">
+          <option [value]="key" *ngIf="codeSet[key]">{{ key | translate }}</option>
+        </ng-container>
+      </select>
+      <div class="relative-space">
+        <p class="gray-title my-3"><span>{{ 'persistentArea' | translate }}</span></p>
+        <div class="right" [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+          <input type="checkbox" id="iROIEnabled" formControlName="iROIEnabled">
+          <label class="stand"></label>
+          <label class="for-new-check" for="iROIEnabled">{{ 'enable' | translate }}</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-group-label">{{ 'areaID' | translate }}</label>
+        <select class="custom-select" formControlName="iROIId" (ngModelChange)="onRegionChange($event)">
+          <ng-container *ngFor="let key of objectKeys(regionSet)">
+            <option [value]="key">{{ key }}</option>
+          </ng-container>
+        </select>
+        <label class="form-group-label">{{ 'areaLevel' | translate }}</label>
+        <select class="custom-select" formControlName="iQualityLevelOfROI">
+          <ng-container *ngFor="let item of levelList">
+            <option [value]="item">{{ item }}</option>
+          </ng-container>
+        </select>
+        <label class="form-group-label">{{ 'areaName' | translate }}</label>
+        <input class="form-control" type="text" formControlName="sName">
+        <button class="blue-btn mt-1" type="submit">{{ 'save' | translate }}</button>
+      </div>
+    </form>
+  </div>
+</div>

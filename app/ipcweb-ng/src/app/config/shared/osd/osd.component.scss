@@ -1,0 +1,81 @@
+:host::ng-deep.col-4 {
+    font-size:0.75rem; 
+    color:black;
+}
+
+.custom-select {
+    color:black;
+}
+
+li {
+    font-size: 5px;
+}
+
+.check-label {
+    margin-left: 3px;
+    margin-top: 1px;
+}
+
+.char-content {
+    width: 15rem;
+    margin-left: 1rem;
+}
+
+.grid-pad {
+    display: grid;
+    grid-template-columns: 1fr 2fr 0.5rem 1fr 2fr;
+    padding: 0px;
+}
+
+.grid-pad .pad-titie label {
+    line-height: 35px;
+    margin-bottom: 0px;
+    padding-left: 2px;
+}
+
+.color-input {
+    width: 100%;
+    height: 30px;
+}
+
+.grid-check {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.grid-right {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+}
+
+.grid-right .content {
+    max-width: 80%;
+    position: relative;
+}
+
+.grid-char {
+    display: grid;
+    grid-template-columns: 2rem 2rem 1fr;
+    padding-left: 1rem;
+}
+
+.grid-char .content{
+    max-width: 90%;
+}
+
+.grid-char .checkbox-space{
+    padding-top: 5px;
+}
+
+.grid-char .title label {
+    line-height: 35px;
+    margin: 0px;
+}
+
+.forbtn {
+    padding-left: 1rem;
+}
+
+.ie-line {
+    line-height: 2rem;
+}

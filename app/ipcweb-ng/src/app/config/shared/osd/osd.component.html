@@ -1,0 +1,255 @@
+<div class="container row py-1 pl-1">
+    <div class="col-md-7">
+        <app-player [option]="playerOption" #player></app-player>
+        <div class="col grid-pad" [formGroup]="OsdForm.get('attribute')" *ngIf="!isIe">
+            <div class="pad-titie mt-2">
+                <label For="sOSDAttribute">
+                    OSD {{ 'attribute' | translate }}
+                </label>
+            </div>
+            <div class="pad-content mt-2">
+                <select class="custom-select attribute-disabled" formControlName="sOSDAttribute">
+                    <option *ngFor="let osdAttribute of osdAttributes" [value]="osdAttribute">
+                        {{ osdAttribute | translate }}
+                    </option>
+                </select>
+            </div>
+            <div class="gap"></div>
+            <div class="pad-titie mt-2">
+                <label FOr="osdFont">
+                    OSD {{ 'font' | translate }}
+                </label>
+            </div>
+            <div class="pad-content mt-2">
+                <select class="custom-select" formControlName="sOSDFontSize">
+                    <option *ngFor="let osdFont of osdFonts" [value]="osdFont">
+                        {{ osdFont | translate }}
+                    </option>
+                </select>
+            </div>
+            <div class="pad-titie mt-2">
+                <label For="osdColor">
+                    OSD {{ 'color' | translate }}
+                </label>
+            </div>
+            <div class="pad-content mt-2">
+                <select class="custom-select" formControlName="sOSDFrontColorMode">
+                    <option *ngFor="let osdColor of osdColors" [value]="osdColor">
+                        {{ osdColor | translate }}
+                    </option>
+                </select>
+            </div>
+            <div class="gap"></div>
+            <div class="pad-titie mt-2">
+                <label For="osdAligment">
+                    OSD {{ 'aligment' | translate }}
+                </label>
+            </div>
+            <div class="pad-content mt-2">
+                <select class="custom-select" formControlName="sAlignment">
+                    <option *ngFor="let osdAligment of osdAligments" [value]="osdAligment">
+                        {{ osdAligment | translate }}
+                    </option>
+                </select>
+            </div>
+            <div class="pad-titie mt-2">
+                <ng-container *ngIf="isCustomizeColor">
+                    <label>{{ 'customize' | translate }} {{ 'color' | translate }}</label>
+                </ng-container>
+            </div>
+            <div class="pad-content mt-2">
+                <ng-container *ngIf="isCustomizeColor">
+                    <input class="mr-1 color-input" type='color' formControlName="sOSDFrontColor">
+                </ng-container>
+            </div>
+            <div class="gap"></div>
+            <div class="pad-titie mt-2">
+                <ng-container *ngIf="isUniversalAligment">
+                    <label For="minEdgeSizes">
+                        OSD {{ 'boundary' | translate }}
+                    </label>
+                </ng-container>
+            </div>
+            <div class="pad-content mt-2">
+                <ng-container *ngIf="isUniversalAligment">
+                    <select class="custom-select" formControlName="iBoundary">
+                        <option *ngFor="let edgeSize of minEdgeSizes" [value]="boundaryChangeDict[edgeSize]">
+                            {{ edgeSize | translate }}
+                        </option>
+                    </select>
+                </ng-container>
+            </div>
+        </div>
+        <div class="row" [formGroup]="OsdForm.get('attribute')" *ngIf="isIe">
+            <div class="pad-titie mt-2 col-2">
+                <label For="sOSDAttribute">
+                    OSD {{ 'attribute' | translate }}
+                </label>
+            </div>
+            <div class="pad-content mt-2 col-4">
+                <select class="custom-select attribute-disabled" formControlName="sOSDAttribute">
+                    <option *ngFor="let osdAttribute of osdAttributes" [value]="osdAttribute">
+                        {{ osdAttribute | translate }}
+                    </option>
+                </select>
+            </div>
+            <div class="gap"></div>
+            <div class="pad-titie mt-2 col-2">
+                <label FOr="osdFont">
+                    OSD {{ 'font' | translate }}
+                </label>
+            </div>
+            <div class="pad-content mt-2 col-4">
+                <select class="custom-select" formControlName="sOSDFontSize">
+                    <option *ngFor="let osdFont of osdFonts" [value]="osdFont">
+                        {{ osdFont | translate }}
+                    </option>
+                </select>
+            </div>
+            <div class="pad-titie mt-2 col-2">
+                <label For="osdColor">
+                    OSD {{ 'color' | translate }}
+                </label>
+            </div>
+            <div class="pad-content mt-2 col-4">
+                <select class="custom-select" formControlName="sOSDFrontColorMode">
+                    <option *ngFor="let osdColor of osdColors" [value]="osdColor">
+                        {{ osdColor | translate }}
+                    </option>
+                </select>
+            </div>
+            <div class="gap"></div>
+            <div class="pad-titie mt-2 col-2">
+                <label For="osdAligment">
+                    OSD {{ 'aligment' | translate }}
+                </label>
+            </div>
+            <div class="pad-content mt-2 col-4">
+                <select class="custom-select" formControlName="sAlignment">
+                    <option *ngFor="let osdAligment of osdAligments" [value]="osdAligment">
+                        {{ osdAligment | translate }}
+                    </option>
+                </select>
+            </div>
+            <div class="pad-titie mt-2 col-2">
+                <ng-container *ngIf="isCustomizeColor">
+                    <label>{{ 'customize' | translate }} {{ 'color' | translate }}</label>
+                </ng-container>
+            </div>
+            <div class="pad-content mt-2 col-4">
+                <ng-container *ngIf="isCustomizeColor">
+                    <input class="mr-1 color-input" type='color' formControlName="sOSDFrontColor">
+                </ng-container>
+            </div>
+            <div class="gap"></div>
+            <div class="pad-titie mt-2 col-2">
+                <ng-container *ngIf="isUniversalAligment">
+                    <label For="minEdgeSizes">
+                        OSD {{ 'boundary' | translate }}
+                    </label>
+                </ng-container>
+            </div>
+            <div class="pad-content mt-2 col-4">
+                <ng-container *ngIf="isUniversalAligment">
+                    <select class="custom-select" formControlName="iBoundary">
+                        <option *ngFor="let edgeSize of minEdgeSizes" [value]="boundaryChangeDict[edgeSize]">
+                            {{ edgeSize | translate }}
+                        </option>
+                    </select>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="grid-check">
+            <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}" [formGroup]="OsdForm.get('channelNameOverlay')">
+                <input type="checkbox" id="iChannelNameOverlayEnabled" formControlName="iChannelNameOverlayEnabled">
+                <label class="stand"></label>
+                <label class="check-label" for="iChannelNameOverlayEnabled">{{ 'channelNameOverlayEnabled' | translate }}</label>
+            </div>
+            <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}" [formGroup]="OsdForm.get('dateTimeOverlay')">
+                <input type="checkbox" id="iDateTimeOverlayEnabled" formControlName="iDateTimeOverlayEnabled">
+                <label class="stand"></label>
+                <label class="check-label" for="iDateTimeOverlayEnabled">{{ 'dateTimeOverlayEnabled' | translate }}</label>
+            </div>
+            <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}" [formGroup]="OsdForm.get('dateTimeOverlay')">
+                <input type="checkbox" class="displayweek" id="iDisplayWeekEnabled" formControlName="iDisplayWeekEnabled">
+                <label class="stand"></label>
+                <label class="check-label" for="iDisplayWeekEnabled">{{ 'displayWeek' | translate }}</label>
+            </div>
+        </div>
+        <div class="grid-right">
+            <div class="pad-title">
+                <label class="pt-2" name="channel-name">{{ 'channelName' | translate }}</label>
+            </div>
+            <div class="content" [formGroup]="OsdForm.get('channelNameOverlay')">
+                <input type="text" class="form-control channel-name pl-2" formControlName="sChannelName">
+                <label class="alarm-tip" *ngIf="OsdForm.value.channelNameOverlay.sChannelName.length > maxCharLen">{{'charOverScreen' | translate}}</label>
+            </div>
+            <div class="pad-title">
+                <label class="pt-2" name="date-style">{{ 'dateStyle' | translate }}</label>
+            </div>
+            <div class="content" [formGroup]="OsdForm.get('dateTimeOverlay')">
+                <select class="custom-select" formControlName="sDateStyle">
+                    <option *ngFor="let dateFormat of dateFormats" [value]="dateFormat">
+                        {{ dateFormat | translate }}
+                    </option>
+                </select>
+            </div>
+            <div class="pad-title">
+                <label class="pt-2" name="time-style">{{ 'timeStyle' | translate }}</label>
+            </div>
+            <div class="content" [formGroup]="OsdForm.get('dateTimeOverlay')">
+                <select class="custom-select" formControlName="sTimeStyle">
+                    <option *ngFor="let timeFormat of timeFormats" [value]="timeFormat">
+                        {{ timeFormat | translate }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <p class="gray-title"><span>{{'characterOverlay'| translate}}</span></p>
+        <div [formGroup]="OsdForm" *ngIf="!isIe">
+            <div formArrayName="characterOverlay">
+                <div *ngFor="let form of characterOverlay.controls; let i = index" class="grid-char">
+                    <ng-container *ngIf="i <= 1">
+                        <div class="mt-1" [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}" [formGroupName]="i">
+                            <input type="checkbox" [id]="i" formControlName="iTextOverlayEnabled">
+                        </div>
+                        <div class="title mt-1">
+                            <label name="id-num" [for]="i" class="ml-2">{{ i + 1 }}</label>
+                        </div>
+                        <div class="content mt-1" [formGroupName]="i">
+                            <input type="text" class="form-control" formControlName="sDisplayText">
+                            <label class="alarm-tip" *ngIf="OsdForm.value.characterOverlay[i].sDisplayText.length > maxCharLen">{{'charOverScreen' | translate}}</label>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <div [formGroup]="OsdForm" *ngIf="isIe">
+            <div formArrayName="characterOverlay">
+                <div *ngFor="let form of characterOverlay.controls; let i = index" class="row">
+                    <ng-container *ngIf="i <= 1">
+                        <div class="mt-2 col-1 checkbox-space-ie" [formGroupName]="i">
+                            <input type="checkbox" [id]="i" formControlName="iTextOverlayEnabled">
+                        </div>
+                        <div class="title mt-1 col-1">
+                            <label name="id-num" [for]="i" class="ml-2 ie-line">{{ i + 1 }}</label>
+                        </div>
+                        <div class="content mt-1 col-9" [formGroupName]="i">
+                            <input type="text" class="radius-input-stand ie-line" formControlName="sDisplayText">
+                            <label class="alarm-tip" *ngIf="OsdForm.value.characterOverlay[i].sDisplayText.length > maxCharLen">{{'charOverScreen' | translate}}</label>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <div class='forbtn'>
+            <button class="blue-btn mt-2" (click)="onSubmit()">{{ 'save' | translate }}</button>
+        </div>
+    </div>
+</div>
+
+
+
+

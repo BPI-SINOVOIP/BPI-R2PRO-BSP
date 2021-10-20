@@ -1,0 +1,110 @@
+<div class="container-fluid py-3">
+    <div class="col-md-10 col-lx-10" [formGroup]="ParaForm">
+        <div class="no-float">
+            <label class="introduce">{{'FACEPARA.FaceMinPixel' | translate}}</label>
+            <input type="range" class="custom-range" formControlName="iFaceMinPixel" [min]="limitDict.iFaceMinPixel[0]" [max]="limitDict.iFaceMinPixel[1]" step=1>
+            <input type="number" class="content" formControlName="iFaceMinPixel" [min]="limitDict.iFaceMinPixel[0]" [max]="limitDict.iFaceMinPixel[1]"> 
+            <ng-container *ngIf="limitDict.iFaceMinPixel[2]">
+                <label class="alarm">{{'outOfRange' | translate}}(0~960)</label>
+            </ng-container>
+        </div>
+        <div class="no-float" *ngIf="options.isIPC">
+            <label class="introduce">{{'FACEPARA.DetectHeight' | translate}}</label>
+            <input type="range" class="custom-range" formControlName="iDetectHeight" [min]="limitDict.iDetectHeight[0]" [max]="limitDict.iDetectHeight[1]" step=1>
+            <input type="number" class="content" formControlName="iDetectHeight" [min]="limitDict.iDetectHeight[0]" [max]="limitDict.iDetectHeight[1]">
+            <ng-container *ngIf="limitDict.iDetectHeight[2]">
+                <label class="alarm">{{'outOfRange' | translate}}(0~1280)</label>
+            </ng-container>
+        </div>
+        <div class="no-float" *ngIf="options.isIPC">
+            <label class="introduce">{{'FACEPARA.DetectWidth' | translate}}</label>
+            <input type="range" class="custom-range" formControlName="iDetectWidth" [min]="limitDict.iDetectWidth[0]" [max]="limitDict.iDetectWidth[1]" step=1>
+            <input type="number" class="content" formControlName="iDetectWidth" [min]="limitDict.iDetectWidth[0]" [max]="limitDict.iDetectWidth[1]">
+            <ng-container *ngIf="limitDict.iDetectWidth[2]">
+                <label class="alarm">{{'outOfRange' | translate}}(0~960)</label>
+            </ng-container>
+        </div>
+        <div class="no-float" *ngIf="options.isIPC">
+            <label class="introduce">{{'FACEPARA.LeftCornerX' | translate}}</label>
+            <input type="range" class="custom-range" formControlName="iLeftCornerX" [min]="limitDict.iLeftCornerX[0]" [max]="limitDict.iLeftCornerX[1]" step=1>
+            <input type="number" class="content" formControlName="iLeftCornerX" [min]="limitDict.iLeftCornerX[0]" [max]="limitDict.iLeftCornerX[1]">
+            <ng-container *ngIf="limitDict.iLeftCornerX[2]">
+                <label class="alarm">{{'outOfRange' | translate}}(0~960)</label>
+            </ng-container>
+        </div>
+        <div class="no-float" *ngIf="options.isIPC">
+            <label class="introduce">{{'FACEPARA.LeftCornerY' | translate}}</label>
+            <input type="range" class="custom-range" formControlName="iLeftCornerY" [min]="limitDict.iLeftCornerY[0]" [max]="limitDict.iLeftCornerY[1]" step=1>
+            <input type="number" class="content" formControlName="iLeftCornerY" [min]="limitDict.iLeftCornerY[0]" [max]="limitDict.iLeftCornerY[1]">
+            <ng-container *ngIf="limitDict.iLeftCornerY[2]">
+                <label class="alarm">{{'outOfRange' | translate}}(0~1280)</label>
+            </ng-container>
+        </div>
+        <div class="no-float">
+            <label class="introduce">{{'FACEPARA.FaceDetectionThreshold' | translate}}</label>
+            <input type="range" class="custom-range" formControlName="iFaceDetectionThreshold" [min]="limitDict.iFaceDetectionThreshold[0]" [max]="limitDict.iFaceDetectionThreshold[1]" step=1>
+            <input type="number" class="content" formControlName="iFaceDetectionThreshold" [min]="limitDict.iFaceDetectionThreshold[0]" [max]="limitDict.iFaceDetectionThreshold[1]">
+            <ng-container *ngIf="limitDict.iFaceDetectionThreshold[2]">
+                <label class="alarm">{{'outOfRange' | translate}}(0~100)</label>
+            </ng-container>
+        </div>
+        <div class="no-float">
+            <label class="introduce">{{'FACEPARA.FaceRecognitionThreshold' | translate}}</label>
+            <input type="range" class="custom-range" formControlName="iFaceRecognitionThreshold" [min]="limitDict.iFaceRecognitionThreshold[0]" [max]="limitDict.iFaceRecognitionThreshold[1]" step=1>
+            <input type="number" class="content" formControlName="iFaceRecognitionThreshold" [min]="limitDict.iFaceRecognitionThreshold[0]" [max]="limitDict.iFaceRecognitionThreshold[1]">
+            <ng-container *ngIf="limitDict.iFaceRecognitionThreshold[2]">
+                <label class="alarm">{{'outOfRange' | translate}}(0~100)</label>
+            </ng-container>
+        </div>
+        <div class="no-float">
+            <label class="introduce">{{'FACEPARA.LiveDetectThreshold' | translate}}</label>
+            <input type="range" class="custom-range" formControlName="iLiveDetectThreshold" [min]="limitDict.iLiveDetectThreshold[0]" [max]="limitDict.iLiveDetectThreshold[1]" step=1>
+            <input type="number" class="content" formControlName="iLiveDetectThreshold" [min]="limitDict.iLiveDetectThreshold[0]" [max]="limitDict.iLiveDetectThreshold[1]">
+            <ng-container *ngIf="limitDict.iLiveDetectThreshold[2]">
+                <label class="alarm">{{'outOfRange' | translate}}(0~100)</label>
+            </ng-container>
+        </div>
+        <div class="no-float">
+            <label class="introduce">{{'FACEPARA.PromptVolume' | translate}}</label>
+            <input type="range" class="custom-range" formControlName="iPromptVolume" [min]="limitDict.iPromptVolume[0]" [max]="limitDict.iPromptVolume[1]" step=1>
+            <input type="number" class="content" formControlName="iPromptVolume" [min]="limitDict.iPromptVolume[0]" [max]="limitDict.iPromptVolume[1]">
+            <ng-container *ngIf="limitDict.iPromptVolume[2]">
+                <label class="alarm">{{'outOfRange' | translate}}(0~100)</label>
+            </ng-container>
+        </div>
+        <div class="no-float" *ngIf="options.isIPC">
+            <label class="introduce">{{'FACEPARA.LiveDetect' | translate}}</label>
+            <select formControlName="sLiveDetect" class="content">
+                <ng-container *ngFor="let item of detectType">
+                    <option [value]="item">{{ item | translate }}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="no-float" *ngIf="!options.isIPC">
+            <label class="introduce">{{'FACEPARA.LiveDetect' | translate}}</label>
+            <select formControlName="sLiveDetect" class="content">
+                <ng-container *ngFor="let item of detectType4Gate">
+                    <option [value]="item">{{ item | translate }}</option>
+                </ng-container>
+            </select>
+        </div>
+        <ng-container *ngIf="ParaForm.value.sLiveDetect==='schedule'">
+            <div class="no-float">
+                <label class="introduce">{{'FACEPARA.LiveDetectBeginTime' | translate}}</label>
+                <input type="time" class="content" formControlName="sLiveDetectBeginTime">
+            </div>
+            <div class="no-float" *ngIf="sLiveDetectBeginTime.invalid && (sLiveDetectBeginTime.touched || sLiveDetectBeginTime.dirty)">
+                <label class='alarm-tip'>{{'FACEPARA.LiveDetectBeginTime' | translate}}{{'isRequired' | translate }}</label>
+            </div>
+            <div class="no-float">
+                <label class="introduce">{{'FACEPARA.LiveDetectEndTime' | translate}}</label>
+                <input type="time" class="content" formControlName="sLiveDetectEndTime">
+            </div>
+            <div class="no-float" *ngIf="sLiveDetectEndTime.invalid && (sLiveDetectEndTime.touched || sLiveDetectEndTime.dirty)">
+                <label class='alarm-tip'>{{'FACEPARA.LiveDetectEndTime' | translate}}{{'isRequired' | translate }}</label>
+            </div>
+        </ng-container>
+        <div class="no-float">
+            <button class="blue-btn" (click)="onSubmit()" [disabled]="ParaForm.invalid">{{ 'save' | translate }}</button>
+        </div>
+</div>

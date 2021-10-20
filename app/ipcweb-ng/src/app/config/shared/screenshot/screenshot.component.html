@@ -1,0 +1,286 @@
+<div class="container-fluid whole row">
+    <p class="gray-title"><span>{{'timing' | translate}}</span></p>
+    <div class="col-md-11" [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome, 'ml-2': !isChrome}" [formGroup]="TimingForm">
+        <input type="checkbox" formControlName="iEnabled">
+        <label class="stand"></label>
+        <label class="for-new-check">{{'SCREENSHOT.screenshotByTimingEnabled' | translate}}</label>
+    </div>
+    <div class="grid-table col-md-10" [formGroup]="TimingForm" *ngIf="isChrome">
+        <div class="grid-title">
+            <label class="pat1">{{'imageType' | translate}}</label>
+        </div>
+        <div class="grid-select1">
+            <select class="custom-select" formControlName="sImageType">
+                <ng-container *ngFor="let item of imageType">
+                    <option [value]="item">{{ item | translate}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="gap"></div>
+        <div class="grid-select2"></div>
+        <div class="tip"></div>
+        <div class="grid-title">
+            <label class="pat1">{{'resolution' | translate}}</label>
+        </div>
+        <div class="grid-select1">
+            <select class="custom-select" formControlName="sResolution">
+                <ng-container *ngFor="let item of resolutionList">
+                    <option [value]="item">{{ item | translate}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="gap"></div>
+        <div class="grid-select2"></div>
+        <div class="tip"></div>
+        <div class="grid-title">
+            <label class="pat1">{{'imageQuality' | translate}}</label>
+        </div>
+        <div class="grid-select1">
+            <select class="custom-select" formControlName="iImageQuality">
+                <ng-container *ngFor="let key of qualityOptions">
+                    <option [value]="key">{{ number2quality[key.toString()] | translate}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="gap"></div>
+        <div class="grid-select2"></div>
+        <div class="tip"></div>
+        <div class="grid-title">
+            <label class="pat1">{{'SCREENSHOT.shotInterval' | translate}}</label>
+        </div>
+        <div class="grid-select1">
+            <input class="radius-input-stand" type="text" formControlName="iShotInterval">
+        </div>
+        <div class="gap"></div>
+        <div class="grid-select2">
+            <select class="custom-select" [(ngModel)]="timingPara.timingTimeType" [ngModelOptions]="{standalone: true}" (ngModelChange)="onTimingChange($event)">
+                <ng-container *ngFor="let item of timingUnit">
+                    <option [value]="item">{{ item | translate}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="tip ml-2">
+            <ng-container *ngIf="iShotIntervalTiming.invalid && (iShotIntervalTiming.touched || iShotIntervalTiming.dirty)">
+                <label class="alarm-tip pat1" *ngIf="iShotIntervalTiming.errors?.required">{{'SCREENSHOT.shotInterval' | translate}}{{'isRequired' | translate}}</label>
+                <label class="alarm-tip pat1" *ngIf="iShotIntervalTiming.errors?.min || iShotIntervalTiming.errors?.max">{{'ranges' | translate}}({{limitRange.timing.min}}~{{limitRange.timing.max}})</label>
+                <label class="alarm-tip pat1" *ngIf="iShotIntervalTiming.errors?.isNumberJudge">{{'SCREENSHOT.shotInterval' | translate}}{{'shouldBeInteger' | translate}}</label>
+            </ng-container>
+        </div>
+    </div>
+    <div class="row" [formGroup]="TimingForm" *ngIf="!isChrome">
+        <div class="grid-title col-2 ml-2">
+            <label class="pat1">{{'imageType' | translate}}</label>
+        </div>
+        <div class="grid-select1 col-4">
+            <select class="custom-select" formControlName="sImageType">
+                <ng-container *ngFor="let item of imageType">
+                    <option [value]="item">{{ item | translate}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="grid-select2 col-2"></div>
+        <div class="tip col-3"></div>
+        <div class="grid-title col-2 ml-2">
+            <label class="pat1">{{'resolution' | translate}}</label>
+        </div>
+        <div class="grid-select1 col-4">
+            <select class="custom-select" formControlName="sResolution">
+                <ng-container *ngFor="let item of resolutionList">
+                    <option [value]="item">{{ item | translate}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="grid-select2 col-2"></div>
+        <div class="tip col-3"></div>
+        <div class="grid-title col-2 ml-2">
+            <label class="pat1">{{'imageQuality' | translate}}</label>
+        </div>
+        <div class="grid-select1 col-4">
+            <select class="custom-select" formControlName="iImageQuality">
+                <ng-container *ngFor="let key of qualityOptions">
+                    <option [value]="key">{{ number2quality[key.toString()] | translate}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="grid-select2 col-2"></div>
+        <div class="tip col-3"></div>
+        <div class="grid-title col-2 ml-2">
+            <label class="pat1">{{'SCREENSHOT.shotInterval' | translate}}</label>
+        </div>
+        <div class="grid-select1 col-4">
+            <input class="radius-input-stand" type="text" formControlName="iShotInterval">
+        </div>
+        <div class="grid-select2 col-2">
+            <select class="custom-select" [(ngModel)]="timingPara.timingTimeType" [ngModelOptions]="{standalone: true}" (ngModelChange)="onTimingChange($event)">
+                <ng-container *ngFor="let item of timingUnit">
+                    <option [value]="item">{{ item | translate}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="tip ml-2 col-3">
+            <ng-container *ngIf="iShotIntervalTiming.invalid && (iShotIntervalTiming.touched || iShotIntervalTiming.dirty)">
+                <label class="alarm-tip pat1" *ngIf="iShotIntervalTiming.errors?.required">{{'SCREENSHOT.shotInterval' | translate}}{{'isRequired' | translate}}</label>
+                <label class="alarm-tip pat1" *ngIf="iShotIntervalTiming.errors?.min || iShotIntervalTiming.errors?.max">{{'ranges' | translate}}({{limitRange.timing.min}}~{{limitRange.timing.max}})</label>
+                <label class="alarm-tip pat1" *ngIf="iShotIntervalTiming.errors?.isNumberJudge">{{'SCREENSHOT.shotInterval' | translate}}{{'shouldBeInteger' | translate}}</label>
+            </ng-container>
+        </div>
+    </div>
+    <p class="gray-title mt-2"><span>{{'eventTrigger' | translate}}</span></p>
+    <div class="col-md-11" [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome, 'ml-2': !isChrome}" [formGroup]="EventForm">
+        <input type="checkbox" formControlName="iEnabled">
+        <label class="stand"></label>
+        <label class="for-new-check">{{'SCREENSHOT.screenshotByEventEnabled' | translate}}</label>
+    </div>
+    <div class="grid-table col-md-10" [formGroup]="EventForm" *ngIf="isChrome">
+        <div class="grid-title">
+            <label class="pat1">{{'imageType' | translate}}</label>
+        </div>
+        <div class="grid-select1">
+            <select class="custom-select" formControlName="sImageType">
+                <ng-container *ngFor="let item of imageType">
+                    <option [value]="item">{{ item | translate}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="gap"></div>
+        <div class="grid-select2"></div>
+        <div class="tip"></div>
+        <div class="grid-title">
+            <label class="pat1">{{'resolution' | translate}}</label>
+        </div>
+        <div class="grid-select1">
+            <select class="custom-select" formControlName="sResolution">
+                <ng-container *ngFor="let item of resolutionList">
+                    <option [value]="item">{{ item | translate}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="gap"></div>
+        <div class="grid-select2"></div>
+        <div class="tip"></div>
+        <div class="grid-title">
+            <label class="pat1">{{'imageQuality' | translate}}</label>
+        </div>
+        <div class="grid-select1">
+            <select class="custom-select" formControlName="iImageQuality">
+                <ng-container *ngFor="let key of qualityOptions">
+                    <option [value]="key">{{ number2quality[key.toString()] | translate}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="gap"></div>
+        <div class="grid-select2"></div>
+        <div class="tip"></div>
+        <div class="grid-title">
+            <label class="pat1">{{'SCREENSHOT.shotInterval' | translate}}</label>
+        </div>
+        <div class="grid-select1">
+            <input class="radius-input-stand" type="text" formControlName="iShotInterval">
+        </div>
+        <div class="gap"></div>
+        <div class="grid-select2">
+            <select class="custom-select" [(ngModel)]="eventPara.timingTimeType" [ngModelOptions]="{standalone: true}" (ngModelChange)="onEventChange($event)">
+                <ng-container *ngFor="let item of eventUnit">
+                    <option [value]="item">{{ item | translate}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="tip ml-2">
+            <ng-container *ngIf="iShotIntervalEvent.invalid && (iShotIntervalEvent.touched || iShotIntervalEvent.dirty)">
+                <label class="alarm-tip pat1" *ngIf="iShotIntervalEvent.errors?.required">{{'SCREENSHOT.shotInterval' | translate}}{{'isRequired' | translate}}</label>
+                <label class="alarm-tip pat1" *ngIf="iShotIntervalEvent.errors?.min || iShotIntervalEvent.errors?.max">{{'ranges' | translate}}({{limitRange.event.min}}~{{limitRange.event.max}})</label>
+                <label class="alarm-tip pat1" *ngIf="iShotIntervalEvent.errors?.isNumberJudge">{{'SCREENSHOT.shotInterval' | translate}}{{'shouldBeInteger' | translate}}</label>
+            </ng-container>
+        </div>
+        <div class="grid-title">
+            <label class="pat1">{{'SCREENSHOT.screenshotNum' | translate}}</label>
+        </div>
+        <div class="grid-select1">
+            <input class="radius-input-stand" type="text" formControlName="iShotNumber">
+        </div>
+        <div class="gap"></div>
+        <div class="grid-select2"></div>
+        <div class="tip ml-2">
+            <ng-container *ngIf="iShotNumber.invalid && (iShotNumber.touched || iShotNumber.dirty)">
+                <label class="alarm-tip pat1" *ngIf="iShotNumber.errors?.required">{{'SCREENSHOT.screenshotNum' | translate}}{{'isRequired' | translate}}</label>
+                <label class="alarm-tip pat1" *ngIf="iShotNumber.errors?.min || iShotNumber.errors?.max">{{'ranges' | translate}}({{limitRange.shot.min}}~{{limitRange.shot.max}})</label>
+                <label class="alarm-tip pat1" *ngIf="iShotNumber.errors?.isNumberJudge">{{'SCREENSHOT.screenshotNum' | translate}}{{'shouldBeInteger' | translate}}</label>
+            </ng-container>
+        </div>
+    </div>
+    <div class="row" [formGroup]="EventForm" *ngIf="!isChrome">
+        <div class="grid-title col-2 ml-2">
+            <label class="pat1">{{'imageType' | translate}}</label>
+        </div>
+        <div class="grid-select1 col-4">
+            <select class="custom-select" formControlName="sImageType">
+                <ng-container *ngFor="let item of imageType">
+                    <option [value]="item">{{ item | translate}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="grid-select2 col-2"></div>
+        <div class="tip col-3"></div>
+        <div class="grid-title col-2 ml-2">
+            <label class="pat1">{{'resolution' | translate}}</label>
+        </div>
+        <div class="grid-select1 col-4">
+            <select class="custom-select" formControlName="sResolution">
+                <ng-container *ngFor="let item of resolutionList">
+                    <option [value]="item">{{ item | translate}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="grid-select2 col-2"></div>
+        <div class="tip col-3"></div>
+        <div class="grid-title col-2 ml-2">
+            <label class="pat1">{{'imageQuality' | translate}}</label>
+        </div>
+        <div class="grid-select1 col-4">
+            <select class="custom-select" formControlName="iImageQuality">
+                <ng-container *ngFor="let key of qualityOptions">
+                    <option [value]="key">{{ number2quality[key.toString()] | translate}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="grid-select2 col-2"></div>
+        <div class="tip col-3"></div>
+        <div class="grid-title col-2 ml-2">
+            <label class="pat1">{{'SCREENSHOT.shotInterval' | translate}}</label>
+        </div>
+        <div class="grid-select1 col-4">
+            <input class="radius-input-stand" type="text" formControlName="iShotInterval">
+        </div>
+        <div class="grid-select2 col-2">
+            <select class="custom-select" [(ngModel)]="eventPara.timingTimeType" [ngModelOptions]="{standalone: true}" (ngModelChange)="onEventChange($event)">
+                <ng-container *ngFor="let item of eventUnit">
+                    <option [value]="item">{{ item | translate}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="tip ml-2 col-3">
+            <ng-container *ngIf="iShotIntervalEvent.invalid && (iShotIntervalEvent.touched || iShotIntervalEvent.dirty)">
+                <label class="alarm-tip pat1" *ngIf="iShotIntervalEvent.errors?.required">{{'SCREENSHOT.shotInterval' | translate}}{{'isRequired' | translate}}</label>
+                <label class="alarm-tip pat1" *ngIf="iShotIntervalEvent.errors?.min || iShotIntervalEvent.errors?.max">{{'ranges' | translate}}({{limitRange.event.min}}~{{limitRange.event.max}})</label>
+                <label class="alarm-tip pat1" *ngIf="iShotIntervalEvent.errors?.isNumberJudge">{{'SCREENSHOT.shotInterval' | translate}}{{'shouldBeInteger' | translate}}</label>
+            </ng-container>
+        </div>
+        <div class="grid-title col-2 ml-2">
+            <label class="pat1">{{'SCREENSHOT.screenshotNum' | translate}}</label>
+        </div>
+        <div class="grid-select1 col-4">
+            <input class="radius-input-stand" type="text" formControlName="iShotNumber">
+        </div>
+        <div class="grid-select2 col-2"></div>
+        <div class="tip ml-2 col-3">
+            <ng-container *ngIf="iShotNumber.invalid && (iShotNumber.touched || iShotNumber.dirty)">
+                <label class="alarm-tip pat1" *ngIf="iShotNumber.errors?.required">{{'SCREENSHOT.screenshotNum' | translate}}{{'isRequired' | translate}}</label>
+                <label class="alarm-tip pat1" *ngIf="iShotNumber.errors?.min || iShotNumber.errors?.max">{{'ranges' | translate}}({{limitRange.shot.min}}~{{limitRange.shot.max}})</label>
+                <label class="alarm-tip pat1" *ngIf="iShotNumber.errors?.isNumberJudge">{{'SCREENSHOT.screenshotNum' | translate}}{{'shouldBeInteger' | translate}}</label>
+            </ng-container>
+        </div>
+    </div>
+    <div class="col-md-10 no-left">
+        <button class="blue-btn" (click)="onSubmit()" [disabled]="TimingForm.invalid || EventForm.invalid">{{'save' | translate}}</button>
+    </div>
+</div>

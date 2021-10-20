@@ -1,0 +1,42 @@
+ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.contain-fluid {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.nav.nav-tabs.nav-underline {
+    height: 3rem;
+    width: 20rem;
+}
+
+a {
+    height: 3rem;
+    width: 10rem;
+}
+
+li.nav-item {
+    height: 3rem;
+    width: 10rem;
+}
+
+.container-fluid {
+    position: relative;
+}
+
+.table-container {
+    padding-left: 0px;
+}
+
+.introduce {
+    min-width: 8rem;
+}
+
+.content {
+    padding-left: 0.5rem;
+    min-width: 12rem;
+}

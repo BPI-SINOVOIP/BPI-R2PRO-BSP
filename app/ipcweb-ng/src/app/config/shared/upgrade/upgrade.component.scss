@@ -1,0 +1,33 @@
+li {
+    list-style-type:none;
+    width: 100%;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+.blue-btn.right {
+    position: absolute;
+    right:10px;
+}
+
+label.title {
+    margin: 5px;
+    margin-left: 22px;
+    color: #2e405c;
+}
+
+label.introduce {
+    margin-top: 2px;
+    margin-left: 1rem;
+    margin-right: 5px;
+    min-width: 6rem;
+}
+
+.download-frame {
+    display: none;
+}

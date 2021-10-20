@@ -1,0 +1,33 @@
+<div class=container>
+  <ul class="nav nav-tabs nav-underline nav-justified" role="tablist">
+    <ng-container *ngFor="let submenu of subMenuItems; first as isFirst;">
+      <li class="nav-item">
+        <a id="{{ submenu }}Tab" [ngClass]="{ 'nav-link': true, 'active': isFirst }" data-toggle="tab"
+          href="#{{ submenu }}" role="tab" [attr.aria-controls]="'#' + submenu"
+          [attr.aria-expanded]="isFirst" (click)="onClickTab(submenu)">{{ submenu | translate }}</a>
+      </li>
+    </ng-container>
+  </ul>
+  <div class="tab-content py-1 pl-1" *ngIf="selectedMenuItem === 'PlanSettings'">
+    <div class="tab-pane active" id="VideoPlan" role="tabpanel" aria-expanded="true" aria-labelledby="VideoPlanTab">
+      <app-time-table [option]="tabOption4Video" #video></app-time-table>
+    </div>
+    <div class="tab-pane" id="ScreenshotPlan" role="tabpanel" aria-expanded="false" aria-labelledby="ScreenshotPlanTab">
+      <app-time-table [option]="tabOption4Screenshot" #snap></app-time-table>
+    </div>
+    <div class="tab-pane" id="ScreenshotPara" role="tabpanel" aria-expanded="false" aria-labelledby="ScreenshotParaTab">
+      <app-screenshot></app-screenshot>
+    </div>
+  </div>
+  <div class="tab-content py-1 pl-1" *ngIf="selectedMenuItem === 'StorageManage'">
+    <div class="tab-pane active" id="HardDiskManagement" role="tabpanel" aria-expanded="true" aria-labelledby="HardDiskManagementTab">
+      <app-hard-disk-management></app-hard-disk-management>
+    </div>
+    <div class="tab-pane" id="NAS" role="tabpanel" aria-expanded="false" aria-labelledby="NASTab">
+      <!-- <app-nas></app-nas> -->
+    </div>
+    <div class="tab-pane" id="CloudStorage" role="tabpanel" aria-expanded="false" aria-labelledby="CloudStorageTab">
+      <!-- <app-cloud-storage></app-cloud-storage> -->
+    </div>
+  </div>
+</div>

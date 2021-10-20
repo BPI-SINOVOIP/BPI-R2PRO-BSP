@@ -1,0 +1,67 @@
+<div class="container">
+  <form class="form mt-3" [formGroup]="videoEncoderInterfaceForm">
+    <div class="form-group" [ngClass]="{'average-grid': !isIE, 'grid-list-ie row': isIE}">
+      <ng-container *ngFor="let menuKey of layoutArray">
+        <div *ngIf="checkTypeFunc(encoderMenuGroups[menuKey], 'options') && !specialCheck(menuKey)" [ngClass]="{'row': !isIE, 'col-md-6': isIE, 'mt-2': isIE}">
+          <label class="form-group-text col-md-4">{{ formatNameFunc(menuKey) | translate }}</label>
+          <select class="custom-select col-md-5 disabled-mark" [formControlName]="menuKey" (ngModelChange)="onDynamicChange($event, menuKey)" [id]="menuKey">
+            <option *ngFor="let item of encoderMenuGroups[menuKey]['options']" [value]="item">{{ item.toString() | translate }}</option>
+          </select>
+        </div>
+        <div *ngIf="checkTypeFunc(encoderMenuGroups[menuKey], 'number') && !specialCheck(menuKey)" [ngClass]="{'row': !isIE, 'col-md-6': isIE,'mt-2': isIE}">
+          <label class="form-group-text col-md-4">{{ formatNameFunc(menuKey) | translate }}</label>
+          <div [ngClass]="{'no-padding': !isIE, 'inline-block': isIE, 'col-md-5': true}">
+            <input type="text" class="form-control input-gap" [formControlName]="menuKey" [id]="menuKey">
+            <span class="alarm-tip" *ngIf="this.videoEncoderInterfaceForm.get(menuKey).errors?.min || this.videoEncoderInterfaceForm.get(menuKey).errors?.max || this.videoEncoderInterfaceForm.get(menuKey).errors?.isNumberJudge">{{'ranges' | translate}}({{getNormalRange(encoderMenuGroups[menuKey], 'min')}}~{{getNormalRange(encoderMenuGroups[menuKey], 'max')}})</span>
+          </div>
+        </div>
+        <div *ngIf="checkTypeFunc(encoderMenuGroups[menuKey], 'range') && !specialCheck(menuKey)" [ngClass]="{'row': !isIE, 'col-md-6': isIE,'mt-2': isIE}">
+          <label class="form-group-text col-md-4 float-left">{{ formatNameFunc(menuKey) | translate }}</label>
+          <input type="range" class="col-md-5 custom-range float-left" [min]="getNormalRange(encoderMenuGroups[menuKey], 'min')" [max]="getNormalRange(encoderMenuGroups[menuKey], 'max')" [step]="getNormalRange(encoderMenuGroups[menuKey], 'step')" (ngModelChange)="rangeAndNumber('iStreamSmooth', $event)" [formControlName]="menuKey">
+          <input class="float-left" type="number" [formControlName]="menuKey" (ngModelChange)="rangeAndNumber(menuKey, $event)" [id]="menuKey">
+        </div>
+        <div *ngIf="checkTypeFunc(encoderMenuGroups[menuKey], 'options') && specialCheck(menuKey)" [ngClass]="{'row': !isIE, 'col-md-6': isIE,'mt-2': isIE}">
+          <label class="form-group-text col-md-4">{{ formatNameFunc(menuKey) | translate }}</label>
+          <select class="custom-select col-md-5" [formControlName]="menuKey" (ngModelChange)="bitRangeCheck()" [id]="menuKey">
+            <option *ngFor="let item of encoderMenuGroups[menuKey]['options']" [value]="item">{{ item.toString() | translate }}</option>
+          </select>
+          <span class="col-md-2 mt-2">Kbps</span>
+        </div>
+        <div *ngIf="checkTypeFunc(encoderMenuGroups[menuKey], 'options/dynamicRange') && !specialCheck(menuKey)" [ngClass]="{'row': !isIE, 'col-md-6': isIE,'mt-2': isIE}">
+          <label class="form-group-text col-md-4">{{ formatNameFunc(menuKey) | translate }}</label>
+          <select class="custom-select col-md-5" [formControlName]="menuKey" [id]="menuKey">
+            <ng-container *ngFor="let item of checkDynamicOption(encoderMenuGroups[menuKey])">
+              <option *ngIf="checkFrameRate4bug(item)" [value]="item">{{ item.toString() | translate }}</option>
+            </ng-container>
+          </select>
+        </div>
+        <div *ngIf="checkTypeFunc(encoderMenuGroups[menuKey], 'dynamicRange') && !specialCheck(menuKey)" [ngClass]="{'row': !isIE, 'col-md-6': isIE,'mt-2': isIE}">
+          <label class="form-group-text col-md-4">{{ formatNameFunc(menuKey) | translate }}</label>
+          <div [ngClass]="{'no-padding': !isIE, 'inline-block': isIE, 'col-md-5': true}">
+            <input type="text" class="form-control input-gap" [formControlName]="menuKey" (ngModelChange)="bitRangeCheck()" [id]="menuKey">
+            <span class="alarm-tip" *ngIf="iMinRateLimit.over || this.videoEncoderInterfaceForm.get(menuKey).errors?.isNumberJudge">{{'ranges' | translate}}({{getDynamicRangeM(encoderMenuGroups[menuKey], 'min')}}~{{getDynamicRangeM(encoderMenuGroups[menuKey], 'max')}})</span>
+          </div>
+          <span class="col-md-2 mt-2">Kbps</span>
+        </div>
+      </ng-container>
+      <!-- <div [ngClass]="{'row': !isIE, 'col-md-6': isIE,'mt-2': isIE}" *ngIf="videoEncoderInterfaceForm.value.sSmart==='open' && iMinRateLimit.isTarget">
+        <label class="form-group-text col-md-4">
+          {{ 'targetRate' | translate }}
+          <span [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome, 'ml-2': true}">
+            <input type="checkbox" id="auto-target" class="mt-2" [(ngModel)]="iMinRateLimit.auto" [ngModelOptions]="{standalone: true}" (ngModelChange)="onAutoChange()">
+            <label class="stand"></label>
+            <label class="for-new-check" for="auto-target">{{ 'auto' | translate }}</label>
+          </span>
+        </label>
+        <div [ngClass]="{'no-padding': !isIE, 'inline-block': isIE, 'col-md-5': true}">
+          <input type="number" class="form-control input-gap" formControlName="iTargetRate" (ngModelChange)="bitRangeCheck()">
+          <span class="alarm-tip" *ngIf="iMinRateLimit.autoOver">{{ iMinRateLimit.tip | translate}}</span>
+        </div>
+        <span class="col-md-2 mt-2">Kbps</span>
+      </div> -->
+    </div>
+    <div [ngClass]="{'col-md-6': isIE,'mt-1': isIE}">
+      <button class="blue-btn" (click)="onSubmit()" [disabled]="videoEncoderInterfaceForm.invalid || iMinRateLimit.over || iMinRateLimit.autoOver">{{ 'save' | translate }}</button>
+    </div>
+  </form>
+</div>

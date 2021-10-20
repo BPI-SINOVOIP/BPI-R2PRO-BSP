@@ -1,0 +1,192 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ipcweb-ng": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "customWebpackConfig": {
+              "path": "./extra-webpack.config.js"
+            },
+            "outputPath": "dist/ipcweb-ng",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "src/favicon.ico",
+              {
+                "glob":"**/*",
+                "input":"./src/assets/",
+                "output":"/assets/"
+              },
+              {
+                "glob":"**/*",
+                "input":"./node_modules/video.js/dist/font/",
+                "output":"/assets/fonts/"
+              },
+              {
+                "glob":"video-js.swf",
+                "input":"./node_modules/videojs-swf/dist/",
+                "output":"/assets/"
+              },
+              {
+                "glob":"wasmdecoder.wasm",
+                "input":"./src/app/shared/player/wasm/",
+                "output":"/"
+              }
+            ],
+            "styles": [
+              "node_modules/video.js/dist/video-js.css",
+              "src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/videojs-vtt.js/dist/vtt.js",
+              "node_modules/video.js/dist/video.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/app/auth/auth.service.ts",
+                  "with": "src/app/auth/auth.service.prod.ts"
+                },
+                {
+                  "replace": "src/app/logger.ts",
+                  "with": "src/app/logger.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "customWebpackConfig": {
+            "path": "./extra-webpack.config.js"
+          },
+          "options": {
+            "browserTarget": "ipcweb-ng:build",
+            "host": "0.0.0.0"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ipcweb-ng:build:production",
+              "host": "0.0.0.0"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ipcweb-ng:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/custom-webpack:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              {
+                "glob":"**/*",
+                "input":"./node_modules/video.js/dist/font/",
+                "output":"/assets/fonts/"
+              },
+              {
+                "glob":"video-js.swf",
+                "input":"./node_modules/videojs-swf/dist/",
+                "output":"/assets/"
+              },
+              {
+                "glob":"wasmdecoder.wasm",
+                "input":"./src/app/shared/player/wasm/",
+                "output":"/"
+              }
+            ],
+            "styles": [
+              "src/styles.scss",
+              "node_modules/bootstrap/scss/bootstrap.scss",
+              "node_modules/video.js/dist/video-js.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/videojs-vtt.js/dist/vtt.js",
+              "node_modules/video.js/dist/video.js"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "ipcweb-ng:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ipcweb-ng:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "ipcweb-ng"
+}

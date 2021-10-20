@@ -1,0 +1,167 @@
+<div class="container-fluid row" (window:resize)="onResize($event)">
+    <div class="col-md-9 col-xl-10 member-list" id="main-table">
+        <div class='table-part' id='table-part'>
+            <table class="member-table" id="member-table">
+                <thead>
+                    <td><label class="size1">{{ 'MNG.id' | translate }}</label></td>
+                    <td *ngIf="modifyOp"><label class="size1">{{ 'MNG.edit' | translate }}</label></td>
+                    <td><label class="size2">{{ 'MNG.name' | translate }}</label></td>
+                    <td><label class="size2">{{ 'MNG.registrationAvatar' | translate }}</label></td>
+                    <td><label class="size2">{{ 'MNG.feature' | translate }}</label></td>
+                    <td><label class="size1">{{ 'MNG.type' | translate }}</label></td>
+                    <td><label class="size2">{{ 'MNG.AccessCardNumber' | translate }}</label></td>
+                    <td><label class="size1">{{ 'MNG.gender' | translate }}</label></td>
+                    <td><label class="size2">{{ 'MNG.registrationTime' | translate }}</label></td>
+                    <td><label class="size2">{{ 'MNG.birthday' | translate }}</label></td>
+                    <td><label class="size1">{{ 'MNG.typeOfCertification' | translate }}</label></td>
+                    <td><label class="size2">{{ 'MNG.CertificationId' | translate }}</label></td>
+                    <td><label class="size2">{{ 'MNG.phoneNumber' | translate }}</label></td>
+                    <td><label class="size1">{{ 'MNG.nation' | translate }}</label></td>
+                    <td><label class="size2">{{ 'MNG.hometown' | translate }}</label></td>
+                    <td><label class="size3">{{ 'MNG.address' | translate }}</label></td>
+                    <td><label class="size2">{{ 'MNG.remark' | translate }}</label></td>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of memberList;let i = index">
+                        <tr [ngClass]="{'table-primary': isItemSelected(item.id)}" (dblclick)="onDblClick(item.id, $event, i)">
+                            <td><label class="size1">{{ item.id.toString() }}</label></td>
+                            <td class="center-align" *ngIf="modifyOp">
+                                <button class="blue-btn" (click)="onModify(item.id, i)">{{'modify' | translate}}</button>
+                                <button class="blue-btn" (click)="onDelete(item.id)">{{'delete' | translate}}</button>
+                            </td>
+                            <td><label class="size2">{{ item.sName }}</label></td>
+                            <td><img [src]="item.sPicturePath" alt="{{ 'MNG.none' | translate}}" class="size2"></td>
+                            <td><label class="size2">{{ number2feature[item.iLoadCompleted] | translate }}</label></td>
+                            <td><label class="size1">{{ item.sType | translate }}</label></td>
+                            <td><label class="size2">{{ item.iAccessCardNumber }}</label></td>
+                            <td><label class="size1">{{ item.sGender | translate }}</label></td>
+                            <td><label class="size2">{{ item.sRegistrationTime | translate }}</label></td>
+                            <td><label class="size2">{{ item.sBirthday | translate }}</label></td>
+                            <td><label class="size1">{{ item.sCertificateType | translate }}</label></td>
+                            <td><label class="size2">{{ item.sCertificateNumber | translate }}</label></td>
+                            <td><label class="size2">{{ item.sTelephoneNumber.toString() }}</label></td>
+                            <td><label class="size1">{{ item.sNation | translate }}</label></td>
+                            <td><label class="size2">{{ item.sHometown | translate }}</label></td>
+                            <td><label class="size3">{{ item.sAddress | translate }}</label></td>
+                            <td><label class="size2">{{ item.sNote | translate }}</label></td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <div class='page-foot' id="page-foot">
+            <div class='foot-part'>
+                <label class='foot-part-son' [innerHTML]="innerNumber"></label>
+                <button class='foot-part-son page-btn' (click)="pageDoubleUp()"><<</button>
+                <button class='foot-part-son page-btn' (click)="pageUp()"><</button>
+                <label class='foot-part-son' [innerHTML]="innerPage"></label>
+                <button class='foot-part-son page-btn' (click)="pageDown()">></button>
+                <button class='foot-part-son page-btn' (click)="pageDoubleDown()">>></button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-xl-2 sidebar right" id="right-bar">
+        <h5 class="sidebar-title mt-2">{{ 'MNG.memberManager' | translate }}</h5>
+        <div *ngIf="modifyOp" class="box">
+            <label class="label4btn introduce">{{'switchMode' | translate}}</label>
+            <button class="blue-btn" (click)="onDeleteChecked()">{{modeBtnName | translate}}</button>
+        </div>
+        <br>
+        <ng-container *ngIf="isDeleteChecked">
+            <div class="mt-1 lay-center">
+                <button class="blue-btn" (click)="onSelectAll()">{{ 'MNG.selectAll' | translate }}</button>
+            </div>
+            <div class="mt-1 lay-center">
+                <button class="blue-btn" (click)="onUnselectAll()">{{ 'MNG.unselectAll' | translate }}</button>
+            </div>
+            <div class="mt-1 lay-center">
+                <button class="red-btn" (click)="onDeleteComfirm()">{{ 'MNG.confirmDelete' | translate }}</button>
+            </div>
+            <div class="mt-1 lay-center">
+                <button class="red-btn" (click)="onDeleteTTL()">{{ 'reset' | translate }}</button>
+            </div>
+            <div class="mt-1 lay-center">
+                <span class="alarm-tip">{{'MNG.dblClickTip' | translate}}</span>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="!isDeleteChecked">
+            <div class="box">
+                <label class="introduce">{{ 'MNG.searchCondition' | translate }}</label>
+                <select [(ngModel)]="selectedOption" class="ml-1">
+                    <ng-container *ngFor="let item of searchOption">
+                        <option [value]="item">{{ item | translate }}</option>
+                    </ng-container>
+                </select>
+            </div>
+            <ng-container *ngIf="selectedOption === 'MNG.searchByCondition'" [formGroup]="conditionForm">
+                <div class="box">
+                    <div>
+                        <span>{{ 'MNG.startTime' | translate }}</span>
+                        <input type="datetime-local" step=1 class="time-input" formControlName="beginTime">
+                        <label *ngIf="beginTime.errors?.isStandardTime" class="alarm-tip">{{'MNG.startTime' | translate}}{{'isWrong' | translate}}</label>
+                    </div>
+                    <div>
+                        <span>{{ 'MNG.endTime' | translate }}</span>
+                        <input type="datetime-local" step=1 class="time-input" formControlName="endTime">
+                        <label *ngIf="endTime.errors?.isStandardTime" class="alarm-tip">{{'MNG.endTime' | translate}}{{'isWrong' | translate}}</label>
+                    </div>
+                    <div *ngIf="conditionForm.errors?.timeOrder && (conditionForm.touched || conditionForm.dirty)">
+                        <label class="alarm-tip">{{ 'timeOrder' | translate}}</label>
+                    </div>
+                </div>
+                <div class="box">
+                    <label class="introduce">{{ 'type' | translate }}</label>
+                    <select formControlName="type" class="ml-1">
+                        <ng-container *ngFor="let item of conditionType">
+                            <option [value]="item">{{ item | translate }}</option>
+                        </ng-container>
+                    </select>
+                </div>
+                <div class="box">
+                    <label class="introduce">{{ 'gender' | translate }}</label>
+                    <select formControlName="gender" class="ml-1">
+                        <ng-container *ngFor="let item of genderType">
+                            <option [value]="item">{{ item | translate }}</option>
+                        </ng-container>
+                    </select>
+                </div>
+                <div class="box">
+                    <p>{{ 'age' | translate }}</p>
+                    <div>
+                        <input type="number" style="width: 4rem;" formControlName="minAge" min=0>
+                        <span class="ml-1 mr-1">-</span>
+                        <input type="number" style="width: 4rem;" formControlName="maxAge">
+                    </div>
+                    <label *ngIf="minAge.invalid && (minAge.touched || minAge.dirty)" class="alarm-tip">{{'minAge' | translate}}{{ 'isWrong' | translate}}</label>
+                    <label *ngIf="maxAge.invalid && (maxAge.touched || maxAge.dirty)" class="alarm-tip">{{'maxAge' | translate}}{{ 'isWrong' | translate}}</label>
+                    <label *ngIf="conditionForm.errors?.ageOrder && (conditionForm.touched || conditionForm.dirty)" class="alarm-tip">{{ 'ageOrder' | translate}}</label>
+                </div>
+                <div class="box">
+                    <div>
+                        <label class="introduce">{{ 'cardNumber' | translate }}</label>
+                        <input class="content" type="text" formControlName="accessCardNumber">
+                    </div>
+                    <label *ngIf="accessCardNumber.invalid && (accessCardNumber.touched || accessCardNumber.dirty)" class="alarm-tip">{{'cardNumber' | translate}}{{ 'isWrong' | translate}}</label>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="selectedOption === 'MNG.searchByName'" [formGroup]="NameForm">
+                <div class="box">
+                    <label class="mr-1">{{'name' | translate}}</label>
+                    <input class="" type="text" style="width: 7rem;" formControlName="name">
+                    <label *ngIf="name.invalid && (name.touched || name.dirty)" class="alarm-tip">{{ 'name' | translate }}{{ 'isWrong' | translate }}</label>
+                </div>
+            </ng-container>
+            <div class="lay-center" *ngIf="selectedOption === 'MNG.searchByCondition'">
+                <button class="blue-btn mt-1" (click)="onSearch(1)" [disabled]="conditionForm.invalid">{{ 'search' | translate }}</button>
+            </div>
+            <div class="lay-center" *ngIf="selectedOption === 'MNG.searchByName'">
+                <button class="blue-btn mt-1" (click)="onSearch(1)" [disabled]="NameForm.invalid">{{ 'search' | translate }}</button>
+            </div>
+            <div class="lay-center">
+                <button class="blue-btn mt-1" (click)="downloadJson()" [disabled]="ttlNumber<=0">{{ 'outputExcel' | translate }}</button>
+            </div>
+        </ng-container>
+    </div>
+</div>
+<app-add-member #add></app-add-member>
+<app-click-tip #click></app-click-tip>

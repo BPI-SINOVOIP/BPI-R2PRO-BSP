@@ -1,0 +1,472 @@
+/* ptz style */
+.ptz .ptz-name {
+  height: 35px;
+  line-height: 35px;
+  font-size: 16px;
+  font-weight: bold;
+  border-bottom: 1px solid #E2E2E2;
+}
+.ptz .ptz-ctrl {
+  display: block;
+  height: 130px;
+}
+.ptz .ptz-ctrl-l {
+  float: left;
+  margin-top: 10px;
+  width: 115px;
+}
+.ptz .ptz-ctrl-r {
+  float: left;
+  margin-top: 10px;
+  text-align: right;
+  width: 75px;
+}
+.ptz-ctrl-l .direction {
+  float: left;
+  width: 32px;
+  height: 32px;
+  margin: 0 4px 4px 0;
+  cursor: pointer;
+  background-image: url(../../assets/images/ptz-icons.png);
+  background-color: #FFFFFF;
+  background-position: 0 -90px;
+}
+
+.ptz-ctrl-l .direction .left-up {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px 1px;
+  background: url(../../assets/images/yt_icon_a_01.png) no-repeat;
+  background-position: 5px, 5px;
+}
+
+.ptz-ctrl-l .direction .left-up:hover {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px 1px;
+  background: url(../../assets/images/yt_icon_a_02.png) no-repeat;
+  background-position: 5px, 5px;
+}
+
+.ptz-ctrl-l .direction .up {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px 1px;
+  background: url(../../assets/images/yt_icon_b_01.png) no-repeat;
+  background-position: 5px, 5px;
+}
+
+.ptz-ctrl-l .direction .up:hover {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px 1px;
+  background: url(../../assets/images/yt_icon_b_02.png) no-repeat;
+  background-position: 5px, 5px;
+}
+
+.ptz-ctrl-l .direction .right-up {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px 1px;
+  background: url(../../assets/images/yt_icon_c_01.png) no-repeat;
+  background-position: 5px, 5px;
+}
+
+.ptz-ctrl-l .direction .right-up:hover {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px 1px;
+  background: url(../../assets/images/yt_icon_c_02.png) no-repeat;
+  background-position: 5px, 5px;
+}
+
+.ptz-ctrl-l .direction .left {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px 1px;
+  background: url(../../assets/images/yt_icon_d_01.png) no-repeat;
+  background-position: 5px, 5px;
+}
+
+.ptz-ctrl-l .direction .left:hover {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px 1px;
+  background: url(../../assets/images/yt_icon_d_02.png) no-repeat;
+  background-position: 5px, 5px;
+}
+
+
+.ptz-ctrl-l .direction .auto {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px 1px;
+  background: url(../../assets/images/yt_icon_e_01.png) no-repeat;
+  background-position: 5px, 5px;
+}
+
+.ptz-ctrl-l .direction .auto:hover {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px 1px;
+  background: url(../../assets/images/yt_icon_e_02.png) no-repeat;
+  background-position: 5px, 5px;
+}
+
+.ptz-ctrl-l .direction .right {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px 1px;
+  background: url(../../assets/images/yt_icon_f_01.png) no-repeat;
+  background-position: 5px, 5px;
+}
+
+.ptz-ctrl-l .direction .right:hover {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px 1px;
+  background: url(../../assets/images/yt_icon_f_02.png) no-repeat;
+  background-position: 5px, 5px;
+}
+
+.ptz-ctrl-l .direction .left-down {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px 1px;
+  background: url(../../assets/images/yt_icon_g_01.png) no-repeat;
+  background-position: 5px, 5px;
+}
+
+.ptz-ctrl-l .direction .left-down:hover {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px 1px;
+  background: url(../../assets/images/yt_icon_g_02.png) no-repeat;
+  background-position: 5px, 5px;
+}
+
+.ptz-ctrl-l .direction .down {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px 1px;
+  background: url(../../assets/images/yt_icon_h_01.png) no-repeat;
+  background-position: 5px, 5px;
+}
+
+.ptz-ctrl-l .direction .down:hover {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px 1px;
+  background: url(../../assets/images/yt_icon_h_02.png) no-repeat;
+  background-position: 5px, 5px;
+}
+
+.ptz-ctrl-l .direction .right-down {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px 1px;
+  background: url(../../assets/images/yt_icon_i_01.png) no-repeat;
+  background-position: 5px, 5px;
+}
+
+.ptz-ctrl-l .direction .right-down:hover {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px 1px;
+  background: url(../../assets/images/yt_icon_i_02.png) no-repeat;
+  background-position: 5px, 5px;
+}
+
+.ptz-ctrl-r .operation {
+  float: left;
+  width: 75px;
+  height: 32px;
+  margin-bottom: 4px;
+  padding: 0px 0px;
+  cursor: pointer;
+  background-image: url(../../assets/images/ptz-icons.png);
+  background-color: #FFFFFF;
+  background-position: -32px -90px;
+}
+
+.ptz-ctrl-r i {
+  float: left;
+  width: 36px;
+  height: 30px;
+  margin: 1px 0 1px 1px;
+  padding: 0px 0px;
+}
+
+.ptz-ctrl-r .operation .zoomout {
+  width: 36px;
+  height: 30px;
+  margin: 1px 0 1px 1px;
+  padding: 0px 0px;
+  background: url(../../assets/images/yt_icon_j_01.png) no-repeat;
+  background-position: 11px, 5px;
+}
+
+.ptz-ctrl-r .operation .zoomout:hover {
+  width: 36px;
+  height: 30px;
+  margin: 1px 0 1px 1px;
+  padding: 0px 0px;
+  background: url(../../assets/images/yt_icon_j_02.png) no-repeat;
+  background-position: 11px, 5px;
+}
+
+.ptz-ctrl-r .operation .zoomin {
+  width: 36px;
+  height: 30px;
+  margin: 1px 0 1px 1px;
+  padding: 0px 0px;
+  background: url(../../assets/images/yt_icon_k_01.png) no-repeat;
+  background-position: 11px, 5px;
+}
+
+.ptz-ctrl-r .operation .zoomin:hover {
+  width: 36px;
+  height: 30px;
+  margin: 1px 0 1px 1px;
+  padding: 0px 0px;
+  background: url(../../assets/images/yt_icon_k_02.png) no-repeat;
+  background-position: 11px, 5px;
+}
+
+.ptz-ctrl-r .operation .focusout {
+  width: 36px;
+  height: 30px;
+  margin: 1px 0 1px 1px;
+  padding: 0px 0px;
+  background: url(../../assets/images/yt_icon_l_01.png) no-repeat;
+  background-position: 11px, 5px;
+}
+
+.ptz-ctrl-r .operation .focusout:hover {
+  width: 36px;
+  height: 30px;
+  margin: 1px 0 1px 1px;
+  padding: 0px 0px;
+  background: url(../../assets/images/yt_icon_l_02.png) no-repeat;
+  background-position: 11px, 5px;
+}
+
+.ptz-ctrl-r .operation .focusin {
+  width: 36px;
+  height: 30px;
+  margin: 1px 0 1px 1px;
+  padding: 0px 0px;
+  background: url(../../assets/images/yt_icon_m_01.png) no-repeat;
+  background-position: 11px, 5px;
+}
+
+.ptz-ctrl-r .operation .focusin:hover {
+  width: 36px;
+  height: 30px;
+  margin: 1px 0 1px 1px;
+  padding: 0px 0px;
+  background: url(../../assets/images/yt_icon_m_02.png) no-repeat;
+  background-position: 11px, 5px;
+}
+
+.ptz-ctrl-r .operation .irisout {
+  width: 36px;
+  height: 30px;
+  margin: 1px 0 1px 1px;
+  padding: 0px 0px;
+  background: url(../../assets/images/yt_icon_n_01.png) no-repeat;
+  background-position: 11px, 5px;
+}
+
+.ptz-ctrl-r .operation .irisout:hover {
+  width: 36px;
+  height: 30px;
+  margin: 1px 0 1px 1px;
+  padding: 0px 0px;
+  background: url(../../assets/images/yt_icon_n_02.png) no-repeat;
+  background-position: 11px, 5px;
+}
+
+.ptz-ctrl-r .operation .irisin {
+  width: 36px;
+  height: 30px;
+  margin: 1px 0 1px 1px;
+  padding: 0px 0px;
+  background: url(../../assets/images/yt_icon_o_01.png) no-repeat;
+  background-position: 11px, 5px;
+}
+
+.ptz-ctrl-r .operation .irisin:hover {
+  width: 36px;
+  height: 30px;
+  margin: 1px 0 1px 1px;
+  padding: 0px 0px;
+  background: url(../../assets/images/yt_icon_o_02.png) no-repeat;
+  background-position: 11px, 5px;
+}
+
+.ptz-slider {
+  width: 190px;
+}
+
+.ptz-ctrl-bottom {
+  width: 190px;
+  height: 59px;
+  margin: 10px 0 10px 0;
+  background-image: url(../../assets/images/ptz-icons.png);
+  background-position: 0 -212px;
+}
+
+.ptz-ctrl-bottom i {
+  float: left;
+  width: 37px;
+  height: 28px;
+  margin: 1px 0 1px 1px;
+  cursor: pointer;
+}
+
+.ptz-ctrl-bottom i:hover {
+  float: left;
+  width: 37px;
+  height: 28px;
+  margin: 1px 0 1px 1px;
+  cursor: pointer;
+}
+
+.ptz-ctrl-bottom i.icon-ptz-light {
+  background: url(../../assets/images/yt_icon_p_01.png) no-repeat;
+  background-position: 8px 4px;
+}
+
+.ptz-ctrl-bottom i.icon-ptz-light:hover {
+  background: url(../../assets/images/yt_icon_p_02.png) no-repeat;
+  background-position: 8px 4px;
+}
+
+.ptz-ctrl-bottom i.icon-ptz-wiper {
+  background: url(../../assets/images/yt_icon_q_01.png) no-repeat;
+  background-position: 8px 4px;
+}
+
+.ptz-ctrl-bottom i.icon-ptz-wiper:hover {
+  background: url(../../assets/images/yt_icon_q_02.png) no-repeat;
+  background-position: 8px 4px;
+}
+
+.ptz-ctrl-bottom i.icon-ptz-auxfocus {
+  background: url(../../assets/images/yt_icon_r_01.png) no-repeat;
+  background-position: 8px 4px;
+}
+
+.ptz-ctrl-bottom i.icon-ptz-auxfocus:hover {
+  background: url(../../assets/images/yt_icon_r_02.png) no-repeat;
+  background-position: 8px 4px;
+}
+
+.ptz-ctrl-bottom i.icon-ptz-lensinit {
+  background: url(../../assets/images/yt_icon_s_01.png) no-repeat;
+  background-position: 8px 4px;
+}
+
+.ptz-ctrl-bottom i.icon-ptz-lensinit:hover {
+  background: url(../../assets/images/yt_icon_s_02.png) no-repeat;
+  background-position: 8px 4px;
+}
+
+.ptz-ctrl-bottom i.icon-ptz-manualtrack {
+  background: url(../../assets/images/yt_icon_t_01.png) no-repeat;
+  background-position: 8px 4px;
+}
+
+.ptz-ctrl-bottom i.icon-ptz-manualtrack:hover {
+  background: url(../../assets/images/yt_icon_t_02.png) no-repeat;
+  background-position: 8px 4px;
+}
+
+.ptz-ctrl-bottom i.icon-ptz-zoom3d-disabled {
+  background: url(../../assets/images/yt_icon_u_01.png) no-repeat;
+  background-position: 8px 4px;
+}
+
+.ptz-ctrl-bottom i.icon-ptz-zoom3d-disabled:hover {
+  background: url(../../assets/images/yt_icon_u_02.png) no-repeat;
+  background-position: 8px 4px;
+}
+
+.ptz .line {
+  height: 30px;
+  line-height: 30px;
+  cursor: pointer;
+  padding-left: 10px;
+}
+.ptz .line-select {
+  height: 30px;
+  line-height: 30px;
+  cursor: pointer;
+  padding-left: 10px;
+  background-color: #EEEEEE;
+}
+.ptz .line-normal {
+  height: 30px;
+  line-height: 30px;
+  cursor: pointer;
+  padding-left: 10px;
+  background-color: #ffffff;
+  white-space: nowrap;
+}
+.ptz .line-normal .line-name {
+  width: 160px;
+}
+.ptz .line-name {
+  display: inline-block;
+  width: 53px;
+  vertical-align: super;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.ptz .preset-index {
+  display: inline-block;
+  width: 23px;
+  vertical-align: super;
+  color: #000000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ptz .preset-name {
+  display: inline-block;
+  width: 68px;
+  vertical-align: super;
+  color: #000000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ptz .preset-name-disabled {
+  display: inline-block;
+  width: 68px;
+  vertical-align: super;
+  color: gray;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

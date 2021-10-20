@@ -1,0 +1,26 @@
+{
+    "genderType": [
+        "male",
+        "female",
+        "all"
+    ],
+
+    "searchOption": [
+        "MNG.searchByCondition",
+        "MNG.searchByName"
+    ],
+
+    "conditionType": [
+        "whiteList",
+        "blackList"
+    ],
+
+    "certiType": [
+        "identityCard"
+    ],
+  
+    "listType": [
+        "permanent"
+    ]
+
+}

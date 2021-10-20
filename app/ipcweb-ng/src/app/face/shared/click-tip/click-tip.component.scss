@@ -1,0 +1,36 @@
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    height: 150px;
+    width: 200px;
+    overflow: hidden;
+}
+
+.modal-header{
+    padding: 1%;
+    background-color:rgb(248, 170, 0);
+    border: solid;
+    border-color: rgb(100, 100, 255);
+    border-width: 1px;
+}
+
+.modal-body {
+    background-color: rgb(255, 255, 255);
+    border-left: solid;
+    border-right: solid;
+    border-bottom: solid;
+    border-color: rgb(100, 100, 255);
+    border-width: 1px;
+}
+
+.modal-foot {
+    height: 0px;
+}
+
+.quit {
+    position: relative;
+    top: 0px;
+    right: 0px;
+    background-color: transparent;
+}

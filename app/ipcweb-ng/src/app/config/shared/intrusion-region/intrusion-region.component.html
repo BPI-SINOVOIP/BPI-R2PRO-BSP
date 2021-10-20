@@ -1,0 +1,78 @@
+<div class="container-fluid row">
+    <!-- <p class="header">
+        <span>{{ 'Motion.modeSetting' | translate }}</span>
+        <select class="mode-select" disabled>
+            <option>{{ 'Motion.normalMode' | translate }}</option>
+        </select>
+    </p> -->
+    <div class="player col-lx-7 col-md-6 mt-1">
+        <app-player [option]="playerOption" #player></app-player>
+    </div>
+    <br>
+    <div class="setting col-lx-5 col-md-6 mt-1" [formGroup]="RegionForm">
+        <p class="gray-title"><span>{{'paraSetting' | translate}}</span></p>
+        <ul>
+            <li>
+                <label class="introduce">{{ 'sensitive' | translate }}</label>
+                <input class="custom-range" type="range" min=0 max=100 step=1 name="sensitive" id="sensitive" formControlName="iSensitivityLevel" (ngModelChange)="onContentChange($event, 'iSensitivityLevel')">
+                <input class="sensitive-input" type="text" formControlName="iSensitivityLevel" (ngModelChange)="onContentChange($event, 'iSensitivityLevel')">
+            </li>
+            <ng-container *ngIf="iSensitivityLevel.touched || iSensitivityLevel.dirty">
+                <li *ngIf="iSensitivityLevel.invalid && iSensitivityLevel.errors.required">
+                    <label class="alarm-tip">{{ 'sensitive' | translate }}{{ 'isRequired' | translate }}</label>
+                </li>
+                <li *ngIf="iSensitivityLevel.invalid && iSensitivityLevel.errors.min">
+                    <label class="alarm-tip">{{ 'sensitive' | translate }}{{ 'shouldNotSmallerThan' | translate }}0</label>
+                </li>
+                <li *ngIf="iSensitivityLevel.invalid && iSensitivityLevel.errors.max">
+                    <label class="alarm-tip">{{ 'sensitive' | translate }}{{ 'shouldNotBiggerThan' | translate }}100</label>
+                </li>
+                <li *ngIf="iSensitivityLevel.invalid && iSensitivityLevel.errors?.isNumberJudge">
+                    <label class="alarm-tip">{{ 'sensitive' | translate }}{{ 'beNumber' | translate }}</label>
+                </li>
+            </ng-container>
+            <br>
+            <li class="mt-3">
+                <label class="introduce">{{ 'proportion' | translate }}</label>
+                <input class="custom-range" type="range" min=0 max=100 step=1 name="sensitive" id="sensitive" formControlName="iProportion" (ngModelChange)="onContentChange($event, 'iProportion')">
+                <input class="sensitive-input" type="text" formControlName="iProportion" (ngModelChange)="onContentChange($event, 'iProportion')">
+                <label class="sensitive ml-1">%</label>
+            </li>
+            <ng-container *ngIf="iProportion.touched || iProportion.dirty">
+                <li *ngIf="iProportion.invalid && iProportion.errors.required">
+                    <label class="alarm-tip">{{ 'proportion' | translate }}{{ 'isRequired' | translate }}</label>
+                </li>
+                <li *ngIf="iProportion.invalid && iProportion.errors.min">
+                    <label class="alarm-tip">{{ 'proportion' | translate }}{{ 'shouldNotSmallerThan' | translate }}0</label>
+                </li>
+                <li *ngIf="iProportion.invalid && iProportion.errors.max">
+                    <label class="alarm-tip">{{ 'proportion' | translate }}{{ 'shouldNotBiggerThan' | translate }}100</label>
+                </li>
+                <li *ngIf="iProportion.invalid && iProportion.errors?.isNumberJudge">
+                    <label class="alarm-tip">{{ 'proportion' | translate }}{{ 'beNumber' | translate }}</label>
+                </li>
+            </ng-container>
+            <br>
+            <li class="mt-3">
+                <label class="introduce">{{ 'Intrusion.timeThreshold' | translate }}</label>
+                <input class="input-number ml-1" type="text" formControlName="iTimeThreshold" (ngModelChange)="onContentChange($event, 'iTimeThreshold')">
+                <label class="sensitive ml-1">s</label>
+            </li>
+            <ng-container *ngIf="(iTimeThreshold.touched || iTimeThreshold.dirty)">
+                <li *ngIf="iTimeThreshold.invalid && iTimeThreshold.errors.required">
+                    <label class="alarm-tip">{{ 'Intrusion.timeThreshold' | translate }}{{ 'isRequired' | translate }}</label>
+                </li>
+                <li *ngIf="iTimeThreshold.invalid && iTimeThreshold.errors.min">
+                    <label class="alarm-tip">{{ 'Intrusion.timeThreshold' | translate }}{{ 'shouldNotSmallerThan' | translate }}0</label>
+                </li>
+                <li *ngIf="iTimeThreshold.invalid && iTimeThreshold.errors?.isNumberJudge">
+                    <label class="alarm-tip">{{ 'Intrusion.timeThreshold' | translate }}{{ 'beNumber' | translate }}</label>
+                </li>
+            </ng-container>
+            <br>
+            <li class="mt-3">
+                <button class="blue-btn" (click)="onSubmit()" [disabled]="RegionForm.invalid">{{'save' | translate}}</button>
+            </li>
+        </ul>
+    </div>
+</div>

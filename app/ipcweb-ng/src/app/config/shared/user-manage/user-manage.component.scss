@@ -1,0 +1,157 @@
+.container-fluid {
+    height: 100%;
+}
+
+.table-part {
+    // width: 80%;
+    width: 40rem;
+    height: 30rem;
+    border: solid;
+    border-color: #dedede;
+    border-width: 1px;
+}
+
+.gray-title {
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    border-bottom: solid;
+    border-color: #dedede;
+    border-width: 1px;
+    // text-align: right;
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+}
+
+td {
+    border: solid;
+    border-color: #dedede;
+    border-width: 1px;
+}
+
+.ty1 {
+    width: calc(6rem - 12px);
+    line-height: 2rem;
+    margin: 0px;
+    text-align: center;
+}
+
+.ty2 {
+    width: 17rem;
+    line-height: 2rem;
+    margin: 0px;
+    text-align: center;
+}
+
+.ty3 {
+    width: 17rem;
+    line-height: 2rem;
+    margin: 0px;
+    text-align: center;
+}
+
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 10;
+    padding-top: 5%;
+    padding-left: 30%;
+    padding-right: 30%;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0,0.5);
+}
+
+.modal-header{
+    padding: 1%;
+    background-color: rgb(248, 170, 0);
+}
+
+.modal-body {
+    background-color: rgb(255, 255, 255);
+}
+
+.quit {
+    position: relative;
+    top: 0px;
+    right: 0px;
+    background-color: transparent;
+}
+
+.modal-grid {
+    display: grid;
+    grid-template-columns: 10rem 1fr 1fr;
+}
+
+.be-selected {
+    background-color: #007fe0;
+    color: #ffffff;
+}
+
+.be-gray {
+    background-color: #fafafa;
+}
+
+.no-float .introduce {
+    min-width: 7rem;
+}
+
+.alarm-tip {
+    margin-left: 3px;
+}
+
+.float-right button {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.grid-sample {
+    display: grid;
+    grid-template-columns: 3rem 1fr 1fr;
+    text-align: center;
+}
+
+.grid-sample div label {
+    line-height: 2rem;
+    margin: 0px;
+}
+
+.ty1-chrome {
+    border-top: none;
+    border-left: none;
+    border-right: solid;
+    border-bottom: solid;
+    border-color: #dedede;
+    border-width: 1px;
+}
+
+.ty2-chrome {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid;
+    border-color: #dedede;
+    border-width: 1px;
+}
+
+.ty3-chrome {
+    border-top: none;
+    border-right: none;
+    border-left: solid;
+    border-bottom: solid;
+    border-color: #dedede;
+    border-width: 1px;
+}
+
+
+.modal-grid div input {
+    width: 80%;
+}
+
+.modal-grid div label {
+    line-height: 2rem;
+}

@@ -1,0 +1,348 @@
+<?xml version="1.0" ?>
+<node>
+  <interface name="rockchip.mediaserver.control.encoder">
+
+    <method name="SetGOP">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetMaxRate">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetBitRate">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="s" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetStreamSmooth">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetResolution">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="s" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetFrameRate">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="s" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetRCQuality">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="s" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetOutputDataType">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="s" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetRCMode">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="s" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetH264Profile">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="s" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetSmart">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="s" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetSVC">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="s" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetVideoType">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="s" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetForceIdrFrame">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetFullRange">
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="StopFlow">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="RestartFlow">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+  </interface>
+
+  <interface name="rockchip.mediaserver.control.advancedencoder">
+
+    <method name="SSetQp">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="ai" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SSetSplit">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="ai" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+  </interface>
+
+  <interface name="rockchip.mediaserver.control.camera">
+
+    <method name="StartCamera">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="StopCamera">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+  </interface>
+
+  <interface name="rockchip.mediaserver.control.audio">
+
+    <method name="SetSampleRate">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetVolume">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetBitRate">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetInput">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="s" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetEncodeType">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="s" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetANS">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="s" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+  </interface>
+
+  <interface name="rockchip.mediaserver.control.feature">
+
+    <method name="TakePicture">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="count" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="StartRecord">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="StopRecord">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="GetRecordStatus">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SyncSchedules">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetOsd">
+      <arg name="db_region_id" type="i" direction="in"/>
+      <arg name="db_region_data" type="a{ss}" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetRoi">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="roi_data" type="s" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetMoveDetect">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="a{ss}" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetRegionInvade">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="a{ss}" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetRockxStatus">
+      <arg name="model_status" type="s" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetFaceDetectEn">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="enable" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetFaceRegEn">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="enable" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetFaceCaptureEn">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="enable" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetDrawFaceEn">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="enable" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+  </interface>
+
+  <interface name="rockchip.mediaserver.control.facerecognize">
+
+    <method name="SetImageToRegn">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="path" type="s" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="DeleteFaceInfo">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="faceId" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="ClearFaceDB">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="faceId" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetPromptVolume">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetLiveDetectThreshold">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetFaceDetectionThreshold">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetFaceRecognitionThreshold">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetFaceMinPixel">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetLeftCornerX">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetLeftCornerY">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetDetectWidth">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetDetectHeight">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="i" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetLiveDetectEn">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="s" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetLiveDetectBeginTime">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="s" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+
+    <method name="SetLiveDetectEndTime">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="param" type="s" direction="in"/>
+      <arg name="result" type="i" direction="out"/>
+    </method>
+  </interface>
+
+</node>

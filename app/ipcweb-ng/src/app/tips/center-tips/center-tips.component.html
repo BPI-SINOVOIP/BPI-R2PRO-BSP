@@ -1,0 +1,47 @@
+<div class='row container' style="z-index: 2;" #modal>
+    <div id="simpleModal" class="modal col-12">
+        <div class="modal-content">
+            <div class="modal-header">
+                <label>{{'tip' | translate}}</label>
+                <button class='ml-2 X' (click)="onNo()" style="border: none;">X</button>
+            </div>
+            <div class="modal-body">
+                <p>{{ centerTip | translate}}</p>
+                <ng-container *ngFor="let oneTip of tipsList">
+                    <span>{{ oneTip | translate}}</span>
+                </ng-container>
+                <span *ngIf="isClickTip" class="alarm-tip ml-1" (click)="onDetail()">{{ 'clickForDetail' | translate}}</span>
+                <div class='row' *ngIf="processObj.isShow">
+                    <div class="process-func col-8 ml-2">
+                        <label class="process-left mt-2">&nbsp;</label>
+                        <label class="process-right mt-2">&nbsp;</label>
+                    </div>
+                    <div class="col-2">
+                        <label>{{processObj.now}}/{{processObj.ttl}}</label>
+                    </div>
+                </div>
+                <div id="failDetail" class="detail-table" *ngIf="tableObj.isShowTable">
+                    <table class="ctip-table">
+                        <thead>
+                            <ng-container *ngFor="let key of objectKey(tableObj.table[0])">
+                                <td><label class="tb-item">{{ key | translate}}</label></td>
+                            </ng-container>
+                        </thead>
+                        <tbody *ngFor="let item of tableObj.table">
+                            <tr>
+                                <ng-container *ngFor="let key of objectKey(item)">
+                                    <td><label class="tb-item">{{ item[key] | translate }}</label></td>
+                                </ng-container>
+                            </tr> 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <h4></h4>
+                <button class='red-btn' (click)="onYes()">{{ tipYes | translate}}</button>
+                <button class='blue-btn mr-2' (click)="onNo()">{{ tipNo | translate}}</button>
+            </div>
+        </div>
+    </div>
+  </div>

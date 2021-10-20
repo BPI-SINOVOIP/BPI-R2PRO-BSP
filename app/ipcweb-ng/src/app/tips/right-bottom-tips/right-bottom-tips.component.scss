@@ -1,0 +1,58 @@
+.modal-content{
+    display: none;
+    position: fixed;
+    z-index: 2;
+    right: 0px;
+    bottom: 0px;
+    min-height: 173px;
+    max-height: 173px;
+    min-width: 173px;
+    max-width: 173px;
+    border: none;
+}
+
+.modal-header{
+    height: 28px;
+    background-color: rgb(248, 170, 0);
+}
+
+.title {
+    padding: 0px;
+    margin: 0px;
+    position: absolute;
+    top: 3px;
+    left: 5px;
+}
+
+.btn {
+    position: absolute;
+    padding: 0px;
+    margin: 0px;
+    top: 2px;
+    right: 2px;
+    border: none;
+    background-color: transparent;
+}
+
+.modal-body {
+    height: 107px;
+    padding-top: 40px;
+    align-self: center;
+}
+
+.tip {
+    // margin-left: 40px;
+    align-self: center;
+}
+
+.modal-footer{
+    margin-bottom: 0px;
+    background-color: rgb(248, 170, 0);
+}
+
+button {
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    background-color: rgb(248, 170, 0);
+}

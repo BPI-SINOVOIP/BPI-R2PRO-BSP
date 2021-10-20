@@ -1,0 +1,64 @@
+ul {
+    margin-left: 0px;
+    padding-left: 5px;
+    list-style: none;
+}
+
+li {
+    margin-top: 1px;
+    text-align: center;
+}
+
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 2;
+    padding-top: 10%;
+    padding-left: 40%;
+    padding-right: 40%;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0,0.5);
+}
+
+.modal-header{
+    padding: 1%;
+    background-color: rgb(248, 170, 0);
+}
+
+.modal-body {
+    background-color: rgb(255, 255, 255);
+}
+
+.quit {
+    position: relative;
+    top: 0px;
+    right: 0px;
+    background-color: transparent;
+}
+
+.modal-li {
+    padding-top: 5px;
+    text-align: left;
+}
+
+.modal-title {
+    width: 40%;
+}
+
+.modal-content {
+    width: 50%;
+}
+
+.modal-btn {
+    margin-right: 1rem;
+}
+
+.batch-input-files {
+    width: 95%;
+}
+
+.input-file-tip {
+    text-align: left;
+}

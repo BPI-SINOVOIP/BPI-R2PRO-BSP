@@ -1,0 +1,61 @@
+.card {
+  width : 500px;
+  position: absolute;
+  right: 5%;
+  top: 15%;
+  margin: 2em auto;
+  padding: 1rem;
+  border: solid;
+  border-color: #e4e7ec;
+  border-width: 1px;
+}
+
+.card-block {
+  padding: 1rem;
+}
+
+.right {
+  text-align: right;
+}
+
+.form {
+  form-actions {
+    padding: 20px 0;
+    margin-top: 20px;
+    border-top {
+      width: 1px;
+      color: rgb(211, 220, 233);
+    }
+  }
+}
+
+.introduce {
+  line-height: 2rem;
+  margin-bottom: 0px;
+}
+
+.container {
+  width:100%;
+  height: 100%;
+  margin: 0px;
+	background:-moz-linear-gradient(top,#00BFFF,#ffffff);/*火狐*/
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#00BFFF), to(#ffffff));/*谷歌*/
+	background-image: -webkit-gradient(linear,left bottom,left top,color-start(0, #00BFFF),color-stop(1, #ffffff));/* Safari & Chrome*/
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#00BFFF', endColorstr='#ffffff'); /*IE6 & IE7*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#00BFFF', endColorstr='#ffffff')"; /* IE8 */
+}
+
+.card-header {
+  padding: 0px;
+  margin: 12px;
+  min-height: 68px;
+  background: url('src/assets/images/m-logo.png') no-repeat;
+  background-position: right;
+  background-color: #e4e7ec;
+}
+
+.login-h4 {
+  line-height: 68px;
+  margin: 0px;
+}
+

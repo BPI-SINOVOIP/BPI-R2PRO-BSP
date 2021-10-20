@@ -1,0 +1,88 @@
+<div class="container-fulid">
+  <form class="form" [formGroup]="networkInterfaceForm">
+    <div class="form-group average-grid" *ngIf="iface === 'lan'">
+      <div formGroupName="link">
+        <label class="form-group-text col-md-4">{{ 'NICTYPE' | translate }}</label>
+        <select class="custom-select col-md-6" formControlName="sNicSpeed">
+          <option *ngFor="let item of nicSpeeds" [value]="item">{{ item || 'Select' | translate }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="average-grid" formGroupName="ipv4">
+      <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+        <input type="checkbox" formControlName="sV4Method">
+        <label class="stand"></label>
+        <label class="for-new-check">{{ 'DHCP' | translate }}</label>
+      </div>
+    </div>
+    <div class="average-grid">
+      <div class="cell-div" formGroupName="ipv4">
+        <label class="form-group-text col-md-4">{{ 'IPV4IP' | translate }}</label>
+        <input type="text" class="radius-input-stand col-md-6" formControlName="sV4Address">
+        <div class="row no-padding" *ngIf="sV4Address.errors?.isIp">
+          <div class="col-md-4">
+            <span>&nbsp;</span>
+          </div>
+          <div class="col-md-6">
+            <span class="alarm-tip">{{'formatError' | translate}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="cell-div" formGroupName="link">
+        <label class="form-group-text col-md-4">{{ 'MAC' | translate }}</label>
+        <input type="text" readonly class="radius-input-stand col-md-6" formControlName="sAddress">
+      </div>
+      <div class="cell-div" formGroupName="ipv4">
+        <label class="form-group-text col-md-4">{{ 'IPV4MASK' | translate }}</label>
+        <input type="text" class="radius-input-stand col-md-6" formControlName="sV4Netmask">
+        <div class="row no-padding" *ngIf="sV4Netmask.errors?.isIpv4">
+          <div class="col-md-4">
+            <span>&nbsp;</span>
+          </div>
+          <div class="col-md-6">
+            <span class="alarm-tip">{{'formatError' | translate}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="cell-div" formGroupName="link">
+        <label class="form-group-text col-md-4">{{ 'DNS1' | translate }}</label>
+        <input type="text" class="radius-input-stand col-md-6" formControlName="sDNS1">
+        <div class="row no-padding" *ngIf="sDNS1.errors?.isIp">
+          <div class="col-md-4">
+            <span>&nbsp;</span>
+          </div>
+          <div class="col-md-6">
+            <span class="alarm-tip">{{'formatError' | translate}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="cell-div" formGroupName="ipv4">
+        <label class="form-group-text col-md-4">{{ 'IPV4GW' | translate }}</label>
+        <input type="text" class="radius-input-stand col-md-6" formControlName="sV4Gateway">
+        <div class="row no-padding" *ngIf="sV4Gateway.errors?.isIp">
+          <div class="col-md-4">
+            <span>&nbsp;</span>
+          </div>
+          <div class="col-md-6">
+            <span class="alarm-tip">{{'formatError' | translate}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="cell-div" formGroupName="link">
+        <label class="form-group-text col-md-4">{{ 'DNS2' | translate }}</label>
+        <input type="text" class="radius-input-stand col-md-6" formControlName="sDNS2">
+        <div class="row no-padding" *ngIf="sDNS2.errors?.isIp">
+          <div class="col-md-4">
+            <span>&nbsp;</span>
+          </div>
+          <div class="col-md-6">
+            <span class="alarm-tip">{{'formatError' | translate}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="cell-div">
+        <button class="blue-btn" (click)="onSubmit()" [disabled]="networkInterfaceForm.invalid">{{ 'save' | translate }}</button>
+      </div>
+    </div>
+  </form>
+</div>

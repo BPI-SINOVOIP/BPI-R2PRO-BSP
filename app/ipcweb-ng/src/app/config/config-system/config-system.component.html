@@ -1,0 +1,41 @@
+<div class=container>
+  <ul class="nav nav-tabs nav-underline nav-justified" role="tablist">
+    <ng-container *ngFor="let submenu of subMenuItems; first as isFirst;">
+      <li class="nav-item">
+        <a id="{{ submenu }}Tab" [ngClass]="{ 'nav-link': true, 'active': isFirst }" data-toggle="tab"
+          href="#{{ submenu }}" role="tab" [attr.aria-controls]="'#' + submenu"
+          [attr.aria-expanded]="isFirst" (click)="setActiveTab(submenu)">{{ submenu | translate }}</a>
+      </li>
+    </ng-container>
+  </ul>
+  <div class="tab-content py-1 pl-1" *ngIf="selectedMenuItem === 'Settings'">
+    <div class="tab-pane active" id="basic" role="tabpanel" aria-expanded="true" aria-labelledby="basicTab">
+      <app-info></app-info>
+    </div>
+    <div class="tab-pane" id="time" role="tabpanel" aria-expanded="false" aria-labelledby="timeTab">
+      <app-ntp></app-ntp>
+    </div>
+  </div>
+  <div class="tab-content py-1 pl-1" *ngIf="selectedMenuItem === 'Maintain'">
+    <div class="tab-pane active" id="upgrade" role="tabpanel" aria-expanded="true" aria-labelledby="upgradeTab">
+      <app-upgrade></app-upgrade>
+    </div>
+    <div class="tab-pane" id="log" role="tabpanel" aria-expanded="false" aria-labelledby="logTab">
+    </div>
+  </div>
+  <div class="tab-content py-1 pl-1" *ngIf="selectedMenuItem === 'Security'">
+    <div class="tab-pane" id="authentication" role="tabpanel" aria-expanded="true" aria-labelledby="authenticationTab">
+      authentication
+    </div>
+    <div class="tab-pane" id="ipAddrFilter" role="tabpanel" aria-expanded="false" aria-labelledby="ipAddrFilterTab">
+      ipAddrFilter
+    </div>
+    <div class="tab-pane" id="securityService" role="tabpanel" aria-expanded="false" aria-labelledby="securityServiceTab">
+      securityService
+    </div>
+  </div>
+  <div class="tab-content py-1 pl-1" *ngIf="selectedMenuItem === 'User'">
+    <app-user-manage></app-user-manage>
+  </div>
+
+</div>

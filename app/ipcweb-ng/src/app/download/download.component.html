@@ -1,0 +1,19 @@
+<div class="contain-fluid">
+    <ul class="nav nav-tabs nav-underline nav-justified" role="tablist">
+      <ng-container *ngFor="let submenu of subMenuItems; first as isFirst;">
+        <li class="nav-item">
+          <a id="{{ submenu }}Tab" [ngClass]="{ 'nav-link': true, 'active': isFirst }" data-toggle="tab"
+            href="#{{ submenu }}" role="tab" [attr.aria-controls]="'#' + submenu"
+            [attr.aria-expanded]="isFirst" (click)="setActiveTab(submenu)">{{ submenu | translate }}</a>
+        </li>
+      </ng-container>
+    </ul>
+    <div class="tab-content py-1 pl-1" *ngIf="true">
+      <div class="tab-pane active" id="videoRecord" role="tabpanel" aria-expanded="true" aria-labelledby="videoRecordTab">
+        <app-download-contain [pageType]="video"></app-download-contain>
+      </div>
+      <div class="tab-pane" id="pictureRecord" role="tabpanel" aria-expanded="false" aria-labelledby="pictureRecordTab">
+        <app-download-contain [pageType]="picture"></app-download-contain>
+      </div>
+    </div>
+</div>

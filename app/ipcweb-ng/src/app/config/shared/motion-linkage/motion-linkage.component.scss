@@ -1,0 +1,39 @@
+.ul {
+    list-style: none;
+}
+
+.container.row {
+    overflow-x: hidden;
+}
+
+table {
+    border: solid;
+    border-color: rgba(29, 81, 85, 0.356);
+    border-width: 1px;
+}
+
+td {
+    min-width: 10rem;
+}
+
+th {
+    border-bottom: solid;
+    border-color: rgba(29, 81, 85, 0.356);
+    border-width: 1px;
+}
+
+.one {
+    border-right: solid;
+    border-color: rgba(29, 81, 85, 0.356);
+    border-width: 1px;
+}
+
+.two {
+    border-right: solid;
+    border-color: rgba(29, 81, 85, 0.356);
+    border-width: 1px;
+}
+
+tfoot td label{
+    min-height: 12rem;
+}

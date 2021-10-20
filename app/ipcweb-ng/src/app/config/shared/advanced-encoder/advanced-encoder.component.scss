@@ -1,0 +1,18 @@
+.container-fluid {
+    padding: 0px;
+}
+
+.gird-body {
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 6rem 1fr);
+}
+
+.gray-title {
+    margin-top: 1rem;
+}
+
+.radius-input-stand-introduce {
+    min-width: 5rem;
+}

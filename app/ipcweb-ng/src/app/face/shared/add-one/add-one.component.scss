@@ -1,0 +1,53 @@
+.card {
+    width : 550px;
+    margin: 2em auto;
+    padding: 1rem;
+    border: solid;
+    border-color: #e4e7ec;
+    border-width: 1px;
+    background-color:#F1FAFA;
+  }
+
+.card-header {
+    padding: 0px;
+    text-align: center;
+    background-color:rgb(248, 170, 0);
+}
+
+.card-block {
+    padding: 1rem;
+}
+
+.pic-preview {
+    width: 200px;
+    height: 200px;
+    background-color: transparent;
+    display: block;
+    border: solid;
+    border-color: #e4e7ec;
+    background-color:#FFFFFF;
+    border-width: 1px;
+}
+
+.introduce-left {
+    width: 90px;
+    text-align: left;
+    padding-right: 4px;
+    height: 1.5rem;
+}
+
+.introduce {
+    width: 90px;
+    text-align: right;
+    padding-right: 4px;
+    height: 1.5rem;
+}
+
+.content {
+    width: 130px;
+    height: 1.5rem;
+}
+
+.ie-img {
+    width: 200px;
+}

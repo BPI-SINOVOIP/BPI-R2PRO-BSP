@@ -1,0 +1,101 @@
+<div class="fluid-contain" [formGroup]="FtpForm">
+    <div>
+        <label class="introduce">{{'serverAddress' | translate}}</label>
+        <input class="content radius-input-stand" type="text" formControlName="sIpAddress">
+        <label class="alarm-tip content" *ngIf="sIpAddress.errors?.isIp">{{'formatError' | translate}}</label>
+    </div>
+    <div class="mt-1">
+        <label class="introduce">{{'port' | translate}}</label>
+        <input class="content radius-input-stand" type="text" formControlName="iPortNo">
+        <label class="alarm-tip content" *ngIf="iPortNo.errors?.isNumberJudge">{{'port' | translate}}{{'beNumber' | translate}}</label>
+    </div>
+    <div class="mt-1">
+        <label class="introduce">{{'userName' | translate}}</label>
+        <input class="content radius-input-stand" type="text" formControlName="sUserName">
+        <div class="content" [ngClass]="{'checkbox-space': !isIe, 'checkbox-space-ie': isIe}">
+            <input type="checkbox" formControlName="iAnonymous">
+            <label class="stand"></label>
+            <label class="for-new-check">{{'anonymous' | translate}}</label>
+        </div>
+        <label class="alarm-tip content" *ngIf="sUserName.errors?.required">{{'userName' | translate}}{{'isRequired' | translate}}</label>
+    </div>
+    <div class="mt-1">
+        <label class="introduce">{{'password' | translate}}</label>
+        <input class="content radius-input-stand" type="password" formControlName="sPassword" (click)="onPW('sPassword')" (blur)="onPWBlur()">
+        <label class="alarm-tip content" *ngIf="sPassword.errors?.required && status.pwTip">{{'password' | translate}}{{'isRequired' | translate}}</label>
+    </div>
+    <div class="mt-1">
+        <label class="introduce">{{'passwordConfirm' | translate}}</label>
+        <input class="content radius-input-stand" type="password" formControlName="sPasswordConfirm" (click)="onPW('sPasswordConfirm')" (blur)="onPWBlur()">
+        <label class="alarm-tip content" *ngIf="FtpForm.errors?.pwWrong && sPasswordConfirm.enabled">{{'passwordsNotEqual' | translate}}</label>
+    </div>
+    <div class="mt-1">
+        <label class="introduce">{{'pathDepth' | translate}}</label>
+        <select class="content radius-select-stand" formControlName="iPathDepth">
+            <ng-container *ngFor="let item of pathDepthOption;let i=index">
+                <option [value]="i">{{item | translate}}</option>
+            </ng-container>
+        </select>
+    </div>
+    <div *ngIf="FtpForm.value.iPathDepth > 0">
+        <div class="float-left mt-1">
+            <label class="introduce">{{'topDirAddress' | translate}}</label>
+            <select class="content radius-select-stand" formControlName="sTopDirNameRule">
+                <ng-container *ngFor="let item of topDirRuleOption">
+                    <option [value]="item">{{item | translate}}</option>
+                </ng-container>
+            </select>
+            <input *ngIf="FtpForm.value.sTopDirNameRule == 'customize'" class="content radius-input-stand" type="text" formControlName="sTopDirName">
+        </div>
+        <label class="alarm-tip content float-left" *ngIf="sTopDirName.errors?.isPString32">{{'beString32' | translate}}</label>
+    </div>
+    <div class="clear" *ngIf="FtpForm.value.iPathDepth > 1">
+        <div class="float-left mt-1">
+            <label class="introduce">{{'subDirAddress' | translate}}</label>
+            <select class="content radius-select-stand" formControlName="sSubDirNameRule">
+                <ng-container *ngFor="let item of subDirRuleOption">
+                    <option [value]="item">{{item | translate}}</option>
+                </ng-container>
+            </select>
+            <input *ngIf="FtpForm.value.sSubDirNameRule == 'customize'" class="content radius-input-stand" type="text" formControlName="sSubDirName">
+        </div>
+        <label class="alarm-tip content float-left" *ngIf="sSubDirName.errors?.isPString32">{{'beString32' | translate}}</label>
+    </div>
+    <div class="clear">
+        <label class="introduce mt-1">{{'picStorageInterval' | translate}}</label>
+        <select class="content radius-select-stand mt-1" formControlName="iPicArchivingInterval">
+            <ng-container *ngFor="let item of picIntervalOption;let i=index">
+                <option [value]="i">{{item.toString() | translate}}</option>
+            </ng-container>
+        </select>
+        <label *ngIf="FtpForm.value.iPicArchivingInterval > 0" class="content mt-1">{{'days' | translate}}</label>
+    </div>
+    <div>
+        <div class="float-left mt-1">
+            <label class="introduce">{{'picName' | translate}}</label>
+            <select class="content radius-select-stand" formControlName="sPicNameRuleType">
+                <ng-container *ngFor="let item of picNameRuleOption">
+                    <option [value]="item">{{item | translate}}</option>
+                </ng-container>
+            </select>
+            <input *ngIf="FtpForm.value.sPicNameRuleType == 'customize'" class="content radius-input-stand" type="text" formControlName="sPicNamePrefix">
+        </div>
+        <label class="alarm-tip content float-left" *ngIf="sPicNamePrefix.errors?.isPString32">{{'beString32' | translate}}</label>
+    </div>
+    <div class="clear">
+        <label class="introduce mt-1"></label>
+        <div class="content mt-1" [ngClass]="{'checkbox-space': !isIe, 'checkbox-space-ie': isIe}">
+            <input type="checkbox" formControlName="iEnabled">
+            <label class="stand"></label>
+            <label class="for-new-check">{{'uploadPic' | translate}}</label>
+        </div>
+    </div>
+    <div class="mt-1">
+        <label class="introduce"></label>
+        <button class="blue-btn" (click)="onTest()">{{'test' | translate}}</button>
+    </div>
+    <div class="mt-1">
+        <label class="introduce"></label>
+        <button class="blue-btn" (click)="onSubmit()" [disabled]="FtpForm.invalid">{{'save' | translate}}</button>
+    </div>
+</div>

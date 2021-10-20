@@ -1,0 +1,20 @@
+README for using GNU cgicc on Windows
+=====================================
+
+The win/ subdirectory contains Microsoft Visual C++ 6.0 workspace and
+project files for the cgicc library and test and example applications.
+
+
+A note about C4251
+==================
+
+Please note that when compiling the sample applications, you will
+receive several warnings (C4251: 'identifier' : class 'type' needs to
+have dll-interface to be used by clients of class 'type2').  This
+occurs because cgicc's classes and functions are exported using the
+__declspec method.  Several of cgicc's functions return the Standard
+Template Library class 'string', which is exported in a .DEF file.  At
+compile time, the compiler cannot know whether the STL class string is
+exported, since cgicc does not import the .DEF file.
+These warnings may be safely ignored.
+

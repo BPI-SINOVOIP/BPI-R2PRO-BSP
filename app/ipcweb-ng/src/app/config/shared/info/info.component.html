@@ -1,0 +1,34 @@
+<div class="container">
+  <form class="form" [formGroup]="infoForm">
+    <ng-container *ngIf="isIE">
+      <div formArrayName="infos">
+        <div *ngFor="let info of infos.controls; let i = index" class="grid-list-ie">
+          <ng-container [formGroupName]="i">
+            <label class="introduce">{{ info.get("name").value | translate }}</label>
+            <input class="radius-input-stand content" type="text" formControlName="value" [id]="i">
+          </ng-container>
+        </div>
+      </div>
+      <button class="blue-btn lay4ie" (click)="onSubmit()">
+        {{ "save" | translate }}
+      </button>
+    </ng-container>
+    <ng-container *ngIf="!isIE">
+      <div formArrayName="infos" class="info-detail">
+        <div *ngFor="let info of infos.controls; let i = index">
+          <div [formGroupName]="i">
+            <div class="form-group">
+              <div class="row">
+                <label class="form-group-text col-md-3">{{ info.get("name").value | translate }}</label>
+                <input class="col-md-7 form-control" type="text" formControlName="value" [id]="i">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="blue-btn" (click)="onSubmit()">
+        {{ "save" | translate }}
+      </button>
+    </ng-container>
+  </form>
+</div>

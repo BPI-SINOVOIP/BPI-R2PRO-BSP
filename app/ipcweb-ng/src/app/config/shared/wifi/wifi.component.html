@@ -1,0 +1,156 @@
+<div class="container">
+  <div class="wifi-enable col-md-12 mb-2 no-left" [formGroup]="EnabledForm">
+    <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+      <input type="checkbox" formControlName="iPower" (ngModelChange)="onPowerSwitch($event)" (click)="onPowerClick()">
+      <label class="stand"></label>
+      <label class="for-new-check">{{ 'enable' | translate }}</label>
+    </div>
+  </div>
+  <div class="relative-space">
+    <p class="gray-title"><span class="mt-0">{{ 'WIFI.TABLE' | translate }}</span></p>
+    <div class="right">
+      <button class="blue-btn" (click)="onScan()">{{ 'scan' | translate}}</button>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-sm table-bordered text-nowrap">
+      <thead>
+        <tr>
+          <th style="text-align: center;">{{ 'WIFI.ID' | translate }}</th>
+          <th style="text-align: center;">{{ 'WIFI.NAME' | translate }}</th>
+          <th style="text-align: center;">{{ 'WIFI.Strength' | translate }}</th>
+          <th style="text-align: center;">{{ 'WIFI.SECURITY' | translate }}</th>
+          <th style="text-align: center;">{{ 'WIFI.State' | translate }}</th>
+          <th style="text-align: center;">{{ 'WIFI.FAVORITE' | translate }}</th>
+          <th style="text-align: center;">{{ 'WIFI.TYPE' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let wifi of wifiList; let i = index;" [ngClass]="getCntStatus(wifi, i)" (click)="onSelectedWifi(wifi)">
+          <td class="text-truncate" style="text-align: center;">{{ i + 1 }}</td>
+          <td class="text-truncate" style="text-align: center;">{{ wifi.sName }}</td>
+          <td class="text-truncate" style="text-align: center;">{{ wifi.Strength }}</td>
+          <td class="text-truncate" style="text-align: center;">{{ wifi.sSecurity }}</td>
+          <td class="text-truncate" style="text-align: center;">
+            <span [ngClass]="{ 'badge': true, 'badge-pill': true, 'badge-primary': true, 'badge-success': (wifi.sState === 'online') ? true : false}">
+              {{ wifi.sState | translate }}
+            </span>
+          </td>
+          <td class="text-truncate" style="text-align: center;">{{ wifi.Favorite }}</td>
+          <td class="text-truncate" style="text-align: center;">{{ wifi.sType }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row mt-1 ml-0 mr-0">
+    <div class="form-setting col-md-6 col-xs-12 mt-1 ml-0" [formGroup]="WifiSettingForm">
+      <div class="form-wifi-title col-md-12 table-head gray-title">
+        <span>{{ 'WIFI.SETTING' | translate}}</span>
+      </div>
+      <div class='row mt-1'>
+        <div class="title-wifi col">
+          <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+            <input type="checkbox" id="isAutoConnectWifi" formControlName="iAutoconnect">
+            <label class="stand"></label>
+            <label for="isAutoConnectWifi" class="for-new-check">{{'WIFI.AUTOCONNECT' | translate}}</label>
+          </div>
+        </div>
+      </div>
+      <div class='row mt-1'>
+        <div class="title-wifi col-4">
+          <span class="float-bottom">{{'WIFI.NAME' | translate}}</span>
+        </div>
+        <div class="content-wifi col-8">
+          <input class="radius-input-stand" type="text" readonly formControlName="sName">
+        </div>
+      </div>
+      <div class='row mt-1'>
+        <div class="title-wifi col-4">
+          <span class="float-bottom">{{'WIFI.PASSWORD' | translate}}</span>
+        </div>
+        <div class="content-wifi col-8">
+          <input class="radius-input-stand" type="password" formControlName="sPassword">
+          <label class="alarm-tip" *ngIf="WifiSettingForm.value.sState==='ready'">{{'WIFI.readyAlarm' | translate}}</label>
+        </div>
+      </div>
+      <div class='row mt-1'>
+        <div class="col">
+          <button class="blue-btn ml=0" (click)="onSubmit()" [disabled]="WifiSettingForm.invalid">
+            {{ 'connect' | translate }}
+          </button>
+          <button class="red-btn ml-1" (click)="onShowCenterTip(true)" [disabled]="WifiSettingForm.invalid">
+            {{ 'WIFI.deleteThis' | translate }}
+          </button>
+          <!-- <button class="btn btn-primary ml-1 table-head" (click)="onShowCenterTip(false)">
+            {{ 'deleteAll' | translate }}
+          </button> -->
+        </div>
+      </div>
+    </div>
+    <!-- <div class="form-wps col-md-6 col-xs-12 mt-1 ml-0">
+      <div class="form-wps-title col-md-12 table-head gray-title">
+        <span>{{ 'WIFI.WPSMODE' | translate}}</span>
+      </div>
+      <div class='row mt-1'>
+        <div class="title-wps col">
+          <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+            <input type="checkbox" id="isWPSEnabled">
+            <label class="stand"></label>
+            <label for="isWPSEnabled" class="for-new-check">{{'WIFI.ENABLEWPS' | translate}}</label>
+          </div>
+        </div>
+      </div>
+      <div class='row mt-1'>
+        <div class="title-wps col-4">
+          <label>{{'WIFI.PINCODE' | translate}}</label>
+        </div>
+        <div class="content-wps col-5">
+          <input type="text">
+        </div>
+        <div>
+          <button class="blue-btn ml=0">
+            {{ 'WIFI.GENERATE' | translate }}
+          </button>
+        </div>
+      </div>
+      <div class='row mt-1'>
+        <div class="col-4  ml-0 pt-1">
+          <input type="radio" name="connection-method" id="PBCCONNECT">
+          <label for="PBCCONNECT">{{ 'WIFI.PBCCONNECT' | translate }}</label>
+        </div>
+        <div class="col-7 pt-1">
+          <button class="blue-btn ml=0">
+            {{ 'WIFI.CONNECT' | translate }}
+          </button>
+        </div>
+      </div>
+      <div class='row mt-1'>
+        <div class="col-4  ml-0  pt-1">
+          <input type="radio" name="connection-method" id="USEROUTERPIN">
+          <label for="USEROUTERPIN">{{ 'WIFI.USEROUTERPIN' | translate }}</label>
+        </div>
+        <div class="col-7 pt-1">
+          <button class="blue-btn ml=0">
+            {{ 'WIFI.CONNECT' | translate }}
+          </button>
+        </div>
+      </div>
+      <div class='row mt-1'>
+        <div class="title-wps col-4">
+          <label>{{'WIFI.NAME' | translate}}</label>
+        </div>
+        <div class="content-wps col-8">
+          <input type="text">
+        </div>
+      </div>
+      <div class='row mt-1'>
+        <div class="title-wps col-4">
+          <label>{{ 'WIFI.ROUTERPIN' | translate }}</label>
+        </div>
+        <div class="content-wps col-8">
+          <input type="text">
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>

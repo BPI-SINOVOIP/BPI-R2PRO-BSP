@@ -1,0 +1,135 @@
+<div id="simpleModal" class="modal" [formGroup]="AddForm">
+    <div class="modal-header">
+        <span>{{ title | translate }}</span>
+        <button class='quit' (click)="onNo()" style="border: none;">X</button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class=" col-6 body-left">
+                <canvas class="pic-preview" width="200" height="200" #pic>Unsupport webgl</canvas>
+                <ul>
+                    <li class="img-li" #img>
+                        <div class="changeInputFile" *ngIf="!isIe">
+                            <input type="file" accept="image/*" id="upload-avator" (change)="onFileChange($event.target.files)" class="put-img">
+                            <button class="blue-btn" (click)="onFileClick('upload-avator')">{{'selectFile' | translate}}</button>
+                        </div>
+                        <div *ngIf="isIe">
+                            <input type="file" accept="image/*" id="upload-avator" (change)="onFileChange($event.target.files)" class="put-img">
+                        </div>
+                        <div>
+                            <label class="input-file-alter" [ngClass]="{'alarm-red':!needInit && !picFile}">{{beforeTip | translate}}{{ fileName | translate }}</label>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="mt-1 mr-1">{{ 'MNG.listType' | translate}}</span>
+                        <select class="disabled-item mt-1" formControlName="sListType">
+                            <ng-container *ngFor="let item of listType">
+                                <option [value]="item">{{ item | translate }}</option>
+                            </ng-container>
+                        </select>
+                    </li>
+                    <br>
+                    <li>
+                        <span class="mt-1 introduce">{{ 'MNG.AccessCardNumber' | translate }}</span>
+                        <input type="text" class="mt-1 content" formControlName="iAccessCardNumber" id="iAccessCardNumber">
+                    </li>
+                    <br>
+                    <li>
+                        <label *ngIf="iAccessCardNumber.errors?.isNumberJudge && (iAccessCardNumber.touched || iAccessCardNumber.dirty)" class="alarm-tip">{{'MNG.AccessCardNumber' | translate}}{{'beNumber' | translate}}</label>
+                    </li>
+                    <br>
+                    <li>
+                        <button class="blue-btn" (click)="onSubmit()" [disabled]="AddForm.invalid || (!needInit && !picFile) || isImgError">{{ 'save' | translate }}</button>
+                        <button class="blue-btn" (click)="onNo()">{{ 'cancel' | translate }}</button>
+                        <div *ngIf="isImgError">
+                            <label class="alarm-tip">{{'imgError' | translate}}</label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6 body-right">
+                <ul [formGroup]="AddForm">
+                    <li>
+                        <label class="introduce">{{ 'MNG.type' | translate }}</label>
+                        <select class="content" formControlName="sType">
+                            <ng-container *ngFor="let item of conditionType">
+                                <option [value]="item">{{ item | translate }}</option>
+                            </ng-container>
+                        </select>
+                    </li>
+                    <br>
+                    <li>
+                        <label class="introduce">{{ 'MNG.name' | translate }}</label>
+                        <input type='text' class="content" formControlName="sName">
+                    </li>
+                    <br>
+                    <li>
+                        <label class="introduce">{{ 'MNG.gender' | translate }}</label>
+                        <select class="content" formControlName="sGender">
+                            <ng-container *ngFor="let item of genderType">
+                                <option [value]="item">{{ item | translate }}</option>
+                            </ng-container>
+                        </select>
+                    </li>
+                    <br>
+                    <li>
+                        <label class="introduce">{{ 'MNG.nation' | translate }}</label>
+                        <select class="content" formControlName="sNation">
+                            <ng-container *ngFor="let item of nationList">
+                                <option [value]="item">{{ item }}</option>
+                            </ng-container>
+                        </select>
+                    </li>
+                    <br>
+                    <li>
+                        <label class="introduce">{{ 'MNG.typeOfCertification' | translate }}</label>
+                        <select class="content disabled-item" formControlName="sCertificateType">
+                            <ng-container *ngFor="let item of certiType">
+                                <option [value]="item">{{ item | translate }}</option>
+                            </ng-container>
+                        </select>
+                    </li>
+                    <br>
+                    <li>
+                        <label class="introduce">{{ 'MNG.CertificationId' | translate }}</label>
+                        <input type='text' class="content" formControlName="sCertificateNumber">
+                    </li>
+                    <br>
+                    <li>
+                        <label class="introduce">{{ 'MNG.birthday' | translate }}</label>
+                        <input type="date" class="content" formControlName="sBirthday">
+                    </li>
+                    <ng-container *ngIf="AddForm.get('sBirthday').dirty || AddForm.get('sBirthday').touched">
+                        <ng-container *ngIf="AddForm.get('sBirthday').hasError('required')">
+                            <br>
+                            <li>
+                                <label class="introduce">{{ 'tip' | translate}}: </label>
+                                <label class="alarm-tip">{{'birthday' | translate}}{{'isWrong' | translate}}</label>
+                            </li>
+                        </ng-container>
+                    </ng-container>
+                    <br>
+                    <li>
+                        <label class="introduce">{{ 'MNG.phoneNumber' | translate }}</label>
+                        <input type='text' class="content" formControlName="sTelephoneNumber">
+                    </li>
+                    <br>
+                    <li>
+                        <label class="introduce">{{ 'MNG.hometown' | translate }}</label>
+                        <input type='text' class="content" formControlName="sHometown">
+                    </li>
+                    <br>
+                    <li>
+                        <label class="introduce">{{ 'MNG.address' | translate }}</label>
+                        <input type='text' class="content" formControlName="sAddress">
+                    </li>
+                    <br>
+                    <li>
+                        <label class="introduce">{{ 'MNG.remark' | translate }}</label>
+                        <input type='text' class="content" formControlName="sNote">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

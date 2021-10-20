@@ -1,0 +1,96 @@
+<div class="row container">
+    <ul class="col-12">
+        <li class="part-title">
+            <label class="title">{{ 'UPGRADE.restart' | translate }}</label>
+        </li>
+        <li class="part-content row col">
+            <label class="introduce">{{ 'UPGRADE.restartDevice' | translate }}</label>
+            <label class="blue-btn right" id="restart" (click)="onShowTip('restart')">{{ 'UPGRADE.restart' | translate }}</label>
+        </li>
+        <li class="part-title">
+            <label class="title">{{ 'UPGRADE.restoreDefault' | translate }}</label>
+        </li>
+        <li class="part-content row col">
+            <label class="introduce">{{ 'UPGRADE.setPartParameterDefault' | translate }}</label>
+            <label class="blue-btn right" id="restore-simple" (click)="onShowTip('factoryReset')">{{ 'UPGRADE.restoreSimple' | translate }}</label>
+        </li>
+        <li class="part-title">
+            <label class="title">{{ 'UPGRADE.outputInfo' | translate }}</label>
+        </li>
+        <li class="output-function row col">
+            <label class="introduce">{{ 'UPGRADE.deviceInfo' | translate }}</label>
+            <label class="blue-btn right" id="device-info" (click)="onDownload('deviceInfo')">{{ 'output' | translate }}</label>
+        </li>
+        <li class="part-content row col">
+            <label class="introduce">{{ 'UPGRADE.diagnosticInfoIntroduce' | translate }}</label>
+            <label class="blue-btn right" id="diagnostic-info" (click)="onDownload('diagnosticInfo')">{{ 'output' | translate }}</label>
+        </li>
+        <li class="part-title">
+            <label class="title">{{ 'UPGRADE.inputInfo' | translate }}</label>
+        </li>
+        <li class="part-content row col">
+            <label class="introduce">{{ 'UPGRADE.deviceInfo' | translate }}</label>
+            <div class="changeInputFile" *ngIf="!isIe">
+                <input class="fileSelector" type="file" (change)="onInfoFileChange($event.target.files)" id="uploadFile">
+                <label class="blue-btn" (click)="onFileClick('uploadFile')">{{'selectFile' | translate}}</label>
+                <label class="input-file">{{ uploadFileName | translate }}</label>
+            </div>
+            <div *ngIf="isIe">
+                <input class="fileSelector" type="file" (change)="onInfoFileChange($event.target.files)" id="uploadFile">
+            </div>
+            <ng-container *ngIf="infoOverSize">
+                <label class="alarm-tip ml-1 mt-1">{{ "UPGRADE.oversize" | translate }}</label>
+            </ng-container>
+            <ng-container *ngIf="infoTypeError">
+                <label class="alarm-tip ml-1 mt-1">{{ "UPGRADE.typeNeedDb" | translate }}</label>
+            </ng-container>
+            <button class="blue-btn right" id="input-device-info" (click)="onInput()" [disabled]="!InfoFile.file">{{ 'UPGRADE.input' | translate }}</button>
+        </li>
+        <li class="part-content row col">
+            <label class="introduce">{{ 'UPGRADE.status' | translate }}</label>
+            <div class='process-func col-6'>
+                <label class="process-left mt-2 for-upload">&nbsp;</label>
+                <label class="process-right mt-2 for-upload">&nbsp;</label>
+            </div>
+        </li>
+        <li class="part-title">
+            <label class="title">{{ 'UPGRADE.upgrade' | translate }}</label>
+        </li>
+        <li class="part-content row col">
+            <label class="introduce">{{ 'UPGRADE.upgradeFile' | translate }}</label>
+            <div class="changeInputFile" *ngIf="!isIe">
+                <input class="fileSelector" type="file" (change)="onUpgradeFileChange($event.target.files)" id="upgradeFile">
+                <label class="blue-btn" (click)="onFileClick('upgradeFile')">{{'selectFile' | translate}}</label>
+                <label class="input-file">{{ upgradeFileName | translate }}</label>
+                <ng-container *ngIf="upgradeTypeError">
+                    <label class="alarm-tip ml-1 mt-1">{{ "UPGRADE.typeNeedImg" | translate }}</label>
+                </ng-container>
+            </div>
+            <div *ngIf="isIe">
+                <input class="fileSelector" type="file" (change)="onUpgradeFileChange($event.target.files)" id="upgradeFile">
+                <ng-container *ngIf="upgradeTypeError">
+                    <label class="alarm-tip ml-1 mt-1">{{ "UPGRADE.typeNeedImg" | translate }}</label>
+                </ng-container>
+            </div>
+            <ng-container *ngIf="upgradeOverSize">
+                <label class="alarm-tip ml-1 mt-1">{{ "UPGRADE.oversize" | translate }}</label>
+            </ng-container>
+            <button class="blue-btn right" id="upgrade-btn" (click)="onUpgrade()" [disabled]="!upgradeFile.file">{{ 'UPGRADE.upgrade' | translate }}</button>
+        </li>
+        <li class="part-content row col">
+            <label class="introduce">{{ 'UPGRADE.status' | translate }}</label>
+            <div class='process-func col-6'>
+                <label class="process-left mt-2 for-upgrade">&nbsp;</label>
+                <label class="process-right mt-2 for-upgrade">&nbsp;</label>
+            </div>
+        </li>
+        <li>
+            <ng-container *ngIf="lock.checkLock('onUpgrade')">
+                <label class="introduce">{{ 'UPGRADE.tip' | translate }}</label>
+            </ng-container>
+        </li>
+    </ul>
+    <div class="download-frame">
+        <iframe class="preview-iframe"></iframe>
+    </div>
+</div>

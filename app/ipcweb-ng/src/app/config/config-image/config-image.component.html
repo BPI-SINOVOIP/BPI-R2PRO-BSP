@@ -1,0 +1,45 @@
+<div class=container>
+  <ng-container *ngIf="selectedMenuItem === 'isp'">
+    <app-isp #isp [option]="option"></app-isp>
+  </ng-container>
+  <ng-container *ngIf="selectedMenuItem === 'osd'">
+    <app-osd #osd [option]="option"></app-osd>
+  </ng-container>
+  <ng-container *ngIf="selectedMenuItem === 'mask'">
+    <app-privacy-mask #mask [option]="option"></app-privacy-mask>
+  </ng-container>
+  <ng-container *ngIf="selectedMenuItem === 'pictureMask'">
+    <app-picture-mask #pic [option]="option"></app-picture-mask>
+  </ng-container>
+    <!-- <ul class="nav nav-tabs nav-underline nav-justified" role="tablist">
+      <ng-container *ngFor="let submenu of subMenuItems; first as isFirst;">
+        <li class="nav-item">
+          <a id="{{ submenu }}Tab" [ngClass]="{ 'nav-link': true, 'active': isFirst }" data-toggle="tab"
+            href="#{{ submenu }}" role="tab" [attr.aria-controls]="'#' + submenu"
+            [attr.aria-expanded]="isFirst" (click)="onClickTab(submenu)">{{ submenu | translate }}</a>
+        </li>
+      </ng-container>
+    </ul>
+    <div class="tab-content py-1 pl-1">
+      <ng-container *ngIf="selectedTab == 'isp'">
+        <div class="tab-pane active" id="isp" role="tabpanel" aria-expanded="true" aria-labelledby="ispTab">
+        <app-isp #isp></app-isp>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="selectedTab == 'osd'">
+        <div class="tab-pane" id="osd" role="tabpanel" aria-expanded="false" aria-labelledby="osdTab">
+        <app-osd #osd></app-osd>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="selectedTab == 'mask'">
+        <div class="tab-pane" id="mask" role="tabpanel" aria-expanded="false" aria-labelledby="maskTab">
+        <app-privacy-mask #mask></app-privacy-mask>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="selectedTab == 'pictureMask'">
+        <div class="tab-pane" id="pictureMask" role="tabpanel" aria-expanded="false" aria-labelledby="pictureMaskTab">
+        <app-picture-mask #pic></app-picture-mask>
+        </div>
+      </ng-container>
+    </div> -->
+</div>

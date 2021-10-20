@@ -1,0 +1,129 @@
+<div class="container-fluid row">
+    <div class="table-part">
+        <div class="gray-title">
+            <div class="float-left">
+                <span>{{'userList' | translate}}</span>
+            </div>
+            <div class="float-right">
+                <button class="blue-btn" (click)="getUser()">{{'fresh' | translate}}</button>
+                <button class="blue-btn" (click)="onShow('addOne')">{{'addOne' | translate}}</button>
+                <button class="blue-btn" (click)="onShow('delete')" [disabled]="tableManage.selectUserName === 'admin'">{{'delete' | translate}}</button>
+                <button class="blue-btn" (click)="onShow('modify')">{{'modify' | translate}}</button>
+            </div>
+        </div>
+        <ng-container *ngIf="isChrome">
+            <div class="grid-sample">
+                <div class="ty1-chrome"><label>{{'id' | translate}}</label></div>
+                <div class="ty2-chrome"><label>{{'userName' | translate}}</label></div>
+                <div class="ty3-chrome"><label>{{'userAuth' | translate}}</label></div>
+            </div>
+            <div *ngFor="let item of UserList;let i = index" [ngClass]="{'grid-sample': true, 'be-selected': isSelect(item), 'be-gray': isGray(item, i)}" (click)="selectOne(item)">
+                <div class="ty1-chrome"><label>{{ i + 1 }}</label></div>
+                <div class="ty2-chrome"><label>{{ item.sUserName | translate}}</label></div>
+                <div class="ty3-chrome"><label>{{ number2Auth[item.iUserLevel] | translate}}</label></div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="!isChrome">
+            <table>
+                <thead>
+                    <td><label class="ty1">{{'id' | translate}}</label></td>
+                    <td><label class="ty2">{{'userName' | translate}}</label></td>
+                    <td><label class="ty3">{{'userAuth' | translate}}</label></td>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of UserList;let i = index">
+                        <tr [ngClass]="{'be-selected': isSelect(item), 'be-gray': isGray(item, i)}" (click)="selectOne(item)">
+                            <td><label class="ty1">{{ i + 1 }}</label></td>
+                            <td><label class="ty2">{{ item.sUserName | translate}}</label></td>
+                            <td><label class="ty3">{{ number2Auth[item.iUserLevel] | translate}}</label></td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </ng-container>
+    </div>
+</div>
+<div id="simpleModal" class="modal" [formGroup]="UserForm">
+    <div class="modal-header">
+        <span>{{ titleManage.title | translate }}</span>
+        <button class='quit' (click)="onNo()" style="border: none;">X</button>
+    </div>
+    <div class="modal-body">
+        <ng-container *ngIf="!isChrome">
+            <div class="no-float">
+                <label class="introduce">{{'manager' | translate}}</label>
+                <input type="text" formControlName="sUserName"  id="d-admin">
+            </div>
+            <div class="no-float">
+                <label class="introduce">{{ 'managerPassword' | translate}}</label>
+                <input type="password" formControlName="sPassword">
+                <label *ngIf="tipManage.admin.status" class="alarm-tip">{{tipManage.admin.tip | translate}}</label>
+            </div>
+            <div class="no-float">
+                <label class="introduce">{{'userName' | translate}}</label>
+                <input type="text" formControlName="newUserName" id="d-username">
+                <label *ngIf="tipManage.modify.status" class="alarm-tip">{{tipManage.modify.tip | translate}}</label>
+                <label *ngIf="tipManage.add.status" class="alarm-tip">{{tipManage.add.tip | translate}}</label>
+            </div>
+            <div class="no-float" *ngIf="titleManage.title !== 'delete'">
+                <label class="introduce">{{'userAuth' | translate}}</label>
+                <select formControlName="iUserLevel">
+                    <ng-container *ngFor="let lv of registerAuth">
+                        <option [value]="lv">{{ number2Auth[lv] | translate}}</option>
+                    </ng-container>
+                </select>
+            </div>
+            <div class="no-float" *ngIf="titleManage.title !== 'delete'">
+                <label class="introduce">{{'newPassword' | translate}}</label>
+                <input type="password" formControlName="newPassword">
+            </div>
+            <div class="no-float" *ngIf="titleManage.title !== 'delete'">
+                <label class="introduce">{{'confirmPassword' | translate}}</label>
+                <input type="password" formControlName="secondNewPw">
+                <label class="alarm-tip" *ngIf="UserForm.errors?.pwWrong && (secondNewPw.dirty || secondNewPw.touched) && (newPassword.dirty || newPassword.touched)">
+                    {{'passwordsNotEqual' | translate}}
+                </label>
+            </div>
+            <div class="no-float">
+                <button class="blue-btn" [disabled]="UserForm.invalid" (click)="onSubmit()">{{'confirm' | translate}}</button>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="isChrome">
+            <div class="modal-grid">
+                <div><label>{{'manager' | translate}}</label></div>
+                <div><input type="text" formControlName="sUserName"  id="d-admin"></div>
+                <div></div>
+                <div><label>{{ 'managerPassword' | translate}}</label></div>
+                <div><input type="password" formControlName="sPassword"></div>
+                <div><label *ngIf="tipManage.admin.status" class="alarm-tip">{{tipManage.admin.tip | translate}}</label></div>
+                <div><label>{{'userName' | translate}}</label></div>
+                <div><input type="text" formControlName="newUserName" id="d-username"></div>
+                <div>
+                    <label *ngIf="tipManage.modify.status" class="alarm-tip">{{tipManage.modify.tip | translate}}</label>
+                    <label *ngIf="tipManage.add.status" class="alarm-tip">{{tipManage.add.tip | translate}}</label>
+                </div>
+                <div><label class="introduce">{{'userAuth' | translate}}</label></div>
+                <div>
+                    <select formControlName="iUserLevel">
+                        <ng-container *ngFor="let lv of registerAuth">
+                            <option [value]="lv">{{ number2Auth[lv] | translate}}</option>
+                        </ng-container>
+                    </select>
+                </div>
+                <div *ngIf="titleManage.title !== 'delete'"><label>{{'newPassword' | translate}}</label></div>
+                <div *ngIf="titleManage.title !== 'delete'"><input type="password" formControlName="newPassword"></div>
+                <div *ngIf="titleManage.title !== 'delete'"></div>
+                <div *ngIf="titleManage.title !== 'delete'"><label>{{'confirmPassword' | translate}}</label></div>
+                <div *ngIf="titleManage.title !== 'delete'"><input type="password" formControlName="secondNewPw"></div>
+                <div *ngIf="titleManage.title !== 'delete'">
+                    <label class="alarm-tip" *ngIf="UserForm.errors?.pwWrong && (secondNewPw.dirty || secondNewPw.touched) && (newPassword.dirty || newPassword.touched)">
+                        {{'passwordsNotEqual' | translate}}
+                    </label>
+                </div>
+                <div>
+                    <button class="blue-btn" [disabled]="UserForm.invalid" (click)="onSubmit()">{{'confirm' | translate}}</button>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

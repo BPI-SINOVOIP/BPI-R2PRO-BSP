@@ -1,0 +1,62 @@
+<div class="container col-12">
+    <div class="card" id="login-card">
+      <div class="card-header">
+        <h4 class="login-h4">{{'gateConfig' | translate}}</h4>
+      </div>
+      <div class="card-block">
+        <div [formGroup]="GateForm.get('relay')" class="box">
+            <label class="introduce"></label>
+            <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                <input type="checkbox" id="iEnableRelay" formControlName="iEnable">
+                <label class="stand"></label>
+                <label class="check-label" for="iEnableRelay">{{ 'relayEnabled' | translate }}</label>
+            </div>
+            <label class="tip"></label>
+        </div>
+        <div [formGroup]="GateForm.get('relay')" class="box">
+            <label class="introduce">{{ 'relayIndex' | translate }}</label>
+            <select formControlName="iIOIndex" class="content radius-select-stand">
+                <ng-container *ngFor="let inx of indexOption">
+                    <option [value]="inx">{{inx.toString()}}</option>
+                </ng-container>
+            </select>
+            <label class="tip"></label>
+        </div>
+        <div [formGroup]="GateForm.get('relay')" class="box">
+            <label class="introduce">{{ 'relayStatus' | translate }}</label>
+            <select formControlName="iValidLevel" class="content radius-select-stand">
+                <ng-container *ngFor="let status of relayStatus">
+                    <option [value]="status">{{ relayStatusRelation[status] | translate}}</option>
+                </ng-container>
+            </select>
+            <label class="tip"></label>
+        </div>
+        <div [formGroup]="GateForm.get('relay')" class="box">
+            <label class="introduce">{{ 'duration' | translate }}</label>
+            <input formControlName="iDuration" class="content radius-input-stand">
+            <label class="tip alarm-tip ml-1">500-5000ms</label>
+        </div>
+        <div [formGroup]="GateForm.get('weigen')" class="box">
+            <label class="introduce"></label>
+            <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                <input type="checkbox" id="iEnableWeigen" formControlName="iEnable">
+                <label class="stand"></label>
+                <label class="check-label" for="iEnableWeigen">{{ 'weigenEnabled' | translate }}</label>
+            </div>
+            <label class="tip"></label>
+        </div>
+        <div [formGroup]="GateForm.get('weigen')" class="box">
+            <label class="introduce">{{ 'weigenDigit' | translate }}</label>
+            <select formControlName="iWiegandBit" class="content radius-select-stand">
+                <ng-container *ngFor="let bit of bitOption">
+                    <option [value]="bit">{{bit + 'bit'}}</option>
+                </ng-container>
+            </select>
+            <label class="tip"></label>
+        </div>
+        <div class="box">
+            <button class="blue-btn" (click)="onSubmit()">{{'save' | translate}}</button>
+        </div>
+      </div>
+    </div>
+</div>

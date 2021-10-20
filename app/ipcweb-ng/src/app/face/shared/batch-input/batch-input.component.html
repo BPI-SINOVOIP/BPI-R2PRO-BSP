@@ -1,0 +1,124 @@
+<div class="container-fluid row" (window:resize)="onResize($event)">
+    <div class="col-md-9 col-xl-10 member-list">
+        <div class='table-part' id='table-part'>
+            <table class="member-table" id="member-table">
+                <thead>
+                    <td><label class="size1">{{ 'MNG.id' | translate }}</label></td>
+                    <td><label class="size1">{{ 'MNG.edit' | translate }}</label></td>
+                    <td><label class="size1">{{ 'MNG.type' | translate }}</label></td>
+                    <td><label class="size2">{{ 'MNG.name' | translate }}</label></td>
+                    <td><label class="size2">{{ 'MNG.AccessCardNumber' | translate }}</label></td>
+                    <td><label class="size1">{{ 'MNG.gender' | translate }}</label></td>
+                    <td><label class="size2">{{ 'MNG.registrationAvatar' | translate }}</label></td>
+                    <td><label class="size2">{{ 'MNG.registrationTime' | translate }}</label></td>
+                    <td><label class="size2">{{ 'MNG.birthday' | translate }}</label></td>
+                    <td><label class="size1">{{ 'MNG.typeOfCertification' | translate }}</label></td>
+                    <td><label class="size2">{{ 'MNG.CertificationId' | translate }}</label></td>
+                    <td><label class="size2">{{ 'MNG.phoneNumber' | translate }}</label></td>
+                    <td><label class="size1">{{ 'MNG.nation' | translate }}</label></td>
+                    <td><label class="size2">{{ 'MNG.hometown' | translate }}</label></td>
+                    <td><label class="size3">{{ 'MNG.address' | translate }}</label></td>
+                    <td><label class="size2">{{ 'MNG.remark' | translate }}</label></td>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of memberList;let i = index">
+                        <tr (dblclick)="onDblClick(item.id, $event, i)">
+                            <td><label class="size1">{{ item.id.toString() }}</label></td>
+                            <td class="center-align">
+                                <button class="blue-btn" (click)="onModify(item.id, i)">{{'modify' | translate}}</button>
+                                <button class="blue-btn" (click)="onDelete(item.id, i)">{{'delete' | translate}}</button>
+                            </td>
+                            <td><label class="size1">{{ item.sType | translate }}</label></td>
+                            <td><label class="size2">{{ item.sName }}</label></td>
+                            <td><label class="size2">{{ item.iAccessCardNumber }}</label></td>
+                            <td><label class="size1">{{ item.sGender | translate }}</label></td>
+                            <td><img [src]="item.sPicturePath" alt="{{ 'MNG.none' | translate}}" class="size2"></td>
+                            <td><label class="size2">{{ item.sRegistrationTime | translate }}</label></td>
+                            <td><label class="size2">{{ item.sBirthday | translate }}</label></td>
+                            <td><label class="size1">{{ item.sCertificateType | translate }}</label></td>
+                            <td><label class="size2">{{ item.sCertificateNumber | translate }}</label></td>
+                            <td><label class="size2">{{ item.sTelephoneNumber.toString() }}</label></td>
+                            <td><label class="size1">{{ item.sNation | translate }}</label></td>
+                            <td><label class="size2">{{ item.sHometown | translate }}</label></td>
+                            <td><label class="size3">{{ item.sAddress | translate }}</label></td>
+                            <td><label class="size2">{{ item.sNote | translate }}</label></td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <div class='page-foot' id="page-foot">
+            <div class='foot-part'>
+                <label class='foot-part-son' [innerHTML]="innerNumber"></label>
+                <button class='foot-part-son page-btn' (click)="pageDoubleUp()"><<</button>
+                <button class='foot-part-son page-btn' (click)="pageUp()"><</button>
+                <label class='foot-part-son' [innerHTML]="innerPage"></label>
+                <button class='foot-part-son page-btn' (click)="pageDown()">></button>
+                <button class='foot-part-son page-btn' (click)="pageDoubleDown()">>></button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-xl-2 sidebar right" id="right-bar">
+        <h5 class="sidebar-title mt-2">{{ 'batchInput' | translate }}</h5>
+        <div class="lay-center">
+            <button class="blue-btn" (click)="setInnerNumber()">{{ 'fresh' | translate }}</button>
+        </div>
+        <div class="lay-center mt-2">
+            <button class="blue-btn" (click)="onShow()" [disabled]="!isFaceReg">{{ 'batchInput' | translate }}</button>
+        </div>
+        <div class="lay-center mt-2">
+            <label class="alarm-tip" *ngIf="!isFaceReg">{{"faceRegDisabled" | translate}}</label>
+        </div>
+    </div>
+</div>
+<div id="simpleModal" class="modal" [formGroup]="AddForm">
+    <div class="modal-header">
+        <span>{{ "batchInputImage" | translate }}</span>
+        <button class='quit' (click)="onNo()" style="border: none;" [disabled]="imageReader.isShowWaitTip">X</button>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li class="modal-li">
+                <div class="changeInputFile" *ngIf="!isIe">
+                    <input type="file" accept="image/*" multiple="multiple" (change)="onFileChange($event)" class="batch-input-files" id="batch-input-files">
+                    <button class="blue-btn" (click)="onFileClick('batch-input-files')" [disabled]="imageReader.isShowWaitTip">{{'selectFile' | translate}}</button>
+                </div>
+                <div *ngIf="isIe">
+                    <input type="file" accept="image/*" multiple="multiple" (change)="onFileChange($event)" class="batch-input-files" id="batch-input-files">
+                </div>
+                <div *ngIf="isIe">
+                    <label class="alarm-tip">{{'ieInputTip' | translate}}</label>
+                </div>
+            </li>
+            <li class="modal-li">
+                <label class="input-file-tip" *ngIf="!imageReader.isShowWaitTip">{{imageReader.qualifiedFile}} {{ 'qualifiedFile' | translate }},{{imageReader.failedFile}} {{ 'failedFile' | translate }}</label>
+                <label class="input-file-tip alarm-tip" *ngIf="imageReader.isShowWaitTip">{{imageReader.waitTip | translate}}</label>
+                <label class="input-file ml-1 alarm-tip" *ngIf="imageReader.failedFile !== 0" (click)="onShowDetail()">{{ 'clickForDetail' | translate}}</label>
+            </li>
+            <li class="modal-li">
+                <span class="modal-title">
+                    {{'type' | translate}}
+                </span>
+                <select class="modal-content" formControlName="sType">
+                    <ng-container *ngFor="let item of conditionType">
+                        <option [value]="item">{{ item | translate }}</option>
+                    </ng-container>
+                </select>
+                <span class="modal-title">
+                    {{ 'MNG.listType' | translate}}
+                </span>
+                <select class="modal-content" formControlName="sListType">
+                    <ng-container *ngFor="let item of listType">
+                        <option [value]="item">{{ item | translate }}</option>
+                    </ng-container>
+                </select>
+            </li>
+            <li class="modal-li">
+                <button class="modal-btn blue-btn" (click)="onConfirm()" [disabled]="imageReader.isShowWaitTip">{{'upload' | translate}}</button>
+                <button class="modal-btn blue-btn" (click)="onNo()" [disabled]="imageReader.isShowWaitTip">{{'cancel' | translate}}</button>
+            </li>
+        </ul>
+    </div>
+</div>
+<app-add-member #add></app-add-member>
+<app-click-tip #click></app-click-tip>

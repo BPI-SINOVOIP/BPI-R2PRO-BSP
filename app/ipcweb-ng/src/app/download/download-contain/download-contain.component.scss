@@ -1,0 +1,262 @@
+.contain-fluid {
+    position: relative;
+    margin: 0px;
+    top: 0rem;
+    bottom: 2rem;
+    overflow: hidden;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0px;
+    width: 100%
+}
+
+.condition {
+    // width: 10rem;
+    width: 16rem;
+    min-width: 16rem;
+    min-height: 35rem;
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(140, 180, 200);
+    padding: 0px;
+    margin: 0px;
+}
+
+ul.condition-list {
+    padding-left: 1rem;
+}
+
+.preview {
+    margin-top: 3px;
+}
+
+.preview-title {
+    align-items: center;
+    height: 2rem;
+    width: 100%;
+    margin-left: 0px;
+    padding-left: 1rem;
+    border-top: solid;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: rgb(140, 180, 200);
+    background-color: #f8f8f8;
+    padding: 0px;
+    margin: 0px;
+}
+
+.preview-title span {
+    position: relative;
+    top: 4px;
+    padding-left: 1rem;
+}
+
+.preview-body {
+    background-color: black;
+    padding: 0px;
+    margin: 0px;
+    height: 149px;
+}
+
+iframe {
+    // width: 16.5rem;
+    // min-width: 16.5rem;
+    width: 100%;
+    height: 100%;
+}
+
+.download-list {
+    // width: auto;
+    min-height: 35rem;
+    max-height: 35rem;
+    overflow-y: auto;
+    border: solid;
+    border-width: 1px;
+    border-left: none;
+    border-color: rgb(140, 180, 200);
+    padding: 0px;
+    margin: 0px;
+}
+
+li.table-title {
+    align-items: center;
+    text-align: center, left;
+    height: 2.2rem;
+    width: 100%;
+    margin-left: 0px;
+    padding-left: 1rem;
+    border-bottom: solid;
+    border-width: 1px;
+    background-color: #f8f8f8;
+    border-color: rgb(140, 180, 200);
+}
+
+li.condition-content {
+    padding-top: 5px;
+}
+
+li.condition-title {
+    padding-top: 2px;
+}
+
+li.download-detail {
+    margin: 0px;
+    padding: 0px;
+    display: grid;
+    grid-template-columns: 20px 40px repeat(3, 1fr);
+}
+
+li.download-detail {
+    margin: 0px;
+    padding: 0px;
+    display: grid;
+    grid-template-columns: 20px 40px repeat(3, 1fr);
+}
+
+li.download-detail4picture {
+    margin: 0px;
+    padding: 0px;
+    display: grid;
+    grid-template-columns: 20px 40px repeat(4, 1fr);
+}
+
+.button-part {
+    position: absolute;
+    margin-right: 1px;
+    right: 1px;
+    // min-width: 17rem;
+    min-width: 8rem;
+}
+
+.page-foot {
+    min-height: 2rem;
+    padding: 0px;
+    margin: 0px;
+    border-bottom: solid;
+    border-left: solid;
+    border-right: solid;
+    border-width: 1px;
+    border-color: rgb(140, 180, 200);
+    background-color: #f8f8f8;
+    padding: 0px;
+    margin: 0px;
+}
+
+.foot-part {
+    position: absolute;
+    margin: 0px;
+    right: 0px;
+    min-width: 12rem;
+}
+
+.foot-part-son {
+    margin-top: 4px;
+    margin-left: 2px;
+}
+
+.download-list-title {
+    min-width: 10rem;
+}
+
+span {
+    margin: 0px;
+    padding: 0px;
+    align-self: center;
+}
+
+.not-last {
+    align-items: center;
+    align-items: left;
+    border-right: solid;
+    border-bottom: solid;
+    border-color: rgb(140, 180, 200);
+    border-width: 1px;
+    overflow-x: hidden;
+    padding-top: 0px;
+    padding-left: 2px;
+}
+
+.last {
+    align-items: center;
+    align-items: left;
+    border-bottom: solid;
+    border-color: rgb(140, 180, 200);
+    border-width: 1px;
+    overflow-x: hidden;
+    padding-top: 0px;
+    padding-left: 2px;
+}
+
+button.download-btn {
+    width: 8rem;
+}
+
+.page-btn {
+    border: hidden;
+    background-color: #e4e7ec;
+    color: #353a40;
+}
+
+.page-btn:hover {
+    border: hidden;
+    background-color: #b3b5bb;
+    color: #353a40;
+}
+
+.picture-preview {
+    width: 160px;
+    height: 90px;
+}
+
+.searchCondition {
+    overflow-y: auto;
+}
+
+thead {
+    background-color:#E8E8FF;
+}
+
+tr:nth-child(2n) {
+    background-color: #F1FAFA;
+}
+
+td {
+    border: solid;
+    border-color:#B6DBF2;
+    border-width: 2px;
+}
+
+.size1 {
+    text-align: 1.5rem;
+    min-width: 3rem;
+    margin: 3px;
+    text-align: center;
+}
+
+.size2 {
+    text-align: 1.5rem;
+    min-width: 8rem;
+    margin: 3px;
+    text-align: center;
+}
+
+.size3 {
+    text-align: 1.5rem;
+    min-width: 20rem;
+    margin: 3px;
+    text-align: center;
+}
+
+.float-right {
+    margin-top: 2px;
+}
+
+.float-right button {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}

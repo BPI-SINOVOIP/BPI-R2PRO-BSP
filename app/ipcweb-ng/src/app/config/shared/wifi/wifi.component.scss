@@ -1,0 +1,80 @@
+.form-setting.col-md-6.col-xs-12.mt-1 {
+    padding-left: 0px;
+}
+
+.table-head {
+    position: relative;
+    padding: 0px;
+}
+
+.table-head label{
+    color: #353a40;
+}
+
+.lay-right {
+    position: absolute;
+    right: 3px;
+}
+
+.float-bottom {
+    line-height: 35px;
+}
+
+.no-left {
+    padding-left: 0px;
+}
+
+.table-responsive {
+    max-height:400px;
+    min-height:300px;
+    overflow-y:auto;
+    border: 2px solid #e3ebf3;
+}
+
+.fail-cnt {
+    background-color: rgb(255, 67, 67);
+}
+
+.fail-cnt:hover {
+    background-color: rgb(255, 0, 0);
+}
+
+.fail-cnt-deep {
+    background-color: rgb(255, 0, 0);
+}
+
+.success-cnt {
+    background-color: rgb(173, 255, 47);
+}
+
+.success-cnt:hover {
+    background-color: rgb(150, 250, 0);
+}
+
+.success-cnt-deep {
+    background-color: rgb(150, 250, 0);
+}
+
+.wait-cnt {
+    background-color: rgb(255, 173, 80);
+}
+
+.wait-cnt:hover {
+    background-color: rgb(255, 136, 0);
+}
+
+.wait-cnt-deep {
+    background-color: rgb(255, 136, 0);
+}
+
+.table-gray {
+    background-color: #f1f1f1;
+}
+
+.table-gray:hover {
+    background-color: #f8f8f8;
+}
+
+.white-bg:hover {
+    background-color: #f8f8f8;
+}

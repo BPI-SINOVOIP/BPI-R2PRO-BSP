@@ -1,0 +1,18 @@
+#! /bin/sh
+
+## Simple script to automate common automake-related tasks
+
+echo "== Running aclocal =="
+aclocal -I m4 --install
+
+echo "== Running autoheader =="
+autoheader
+
+echo "== Running libtoolize =="
+libtoolize -f -i -c
+
+echo "== Running automake =="
+automake --add-missing -c -f
+
+echo "== Running autoconf =="
+autoconf

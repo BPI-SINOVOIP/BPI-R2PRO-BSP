@@ -1,0 +1,47 @@
+nav-item {
+  padding:2px;
+  margin-left: 7px;
+}
+
+.nav-link {
+  font-size: 35%;
+}
+
+.text-light.nav-link{
+  text-align: center;
+  margin-top: 5px;
+}
+
+.user-icon {
+    float: left;
+    width: 15px;
+    height: 15px;
+    margin-right: 7px;
+    background: url(/assets/images/top_icon_user_01.png) 0 center no-repeat;
+    background-size: 15px;
+    cursor: pointer;
+}
+
+.user-icon:hover {
+  background: url(/assets/images/top_icon_user_02.png) 0 center no-repeat;
+  background-size: inherit;
+}
+
+.nav-item.mts {
+  margin-top: 5px;
+}
+
+.exit-icon {
+    float: left;
+    width: 15px;
+    height: 15px;
+    margin-right: 7px;
+    background: url(/assets/images/top_icon_quit_01.png) 0 center no-repeat;
+    background-size: 15px;
+    cursor: pointer;
+}
+
+.exit-icon:hover {
+  background: url(/assets/images/top_icon_quit_02.png) 0 center no-repeat;
+  background-size: inherit;
+}

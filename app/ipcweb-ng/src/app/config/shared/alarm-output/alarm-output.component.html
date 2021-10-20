@@ -1,0 +1,50 @@
+<label>wait complete</label>
+<!-- <div class="container-fluid pt-3">
+    <div class="col-12">
+        <div class="inline-block py-1">
+            <label class="introduce standard-label">{{"alarmInputId" | translate}}</label>
+            <select class="content radius-select-stand">
+                <option>A<-1</option>
+            </select>
+            <label class="introduce standard-label ml-2">{{ "idAddress" | translate}}</label>
+            <input class="content radius-input-stand">
+        </div>
+        <div class="inline-block">
+            <label class="introduce standard-label">{{"alarmType" | translate}}</label>
+            <select class="content radius-select-stand">
+                <option>open</option>
+                <option>close</option>
+            </select>
+            <label class="introduce standard-label ml-2">{{ "alarmName" | translate}}</label>
+            <input class="content radius-input-stand">
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="contain-fluid">
+            <ul class="nav nav-tabs nav-underline" role="tablist">
+              <ng-container *ngFor="let submenu of menuItems; first as isFirst;">
+                <li class="nav-item">
+                  <a id="{{ submenu }}Tab" [ngClass]="{ 'nav-link': true, 'active': isFirst }" data-toggle="tab"
+                    href="#{{ submenu }}" role="tab" [attr.aria-controls]="'#' + submenu"
+                    [attr.aria-expanded]="isFirst" (click)="onClickTab(submenu)">{{ submenu | translate }}</a>
+                </li>
+              </ng-container>
+            </ul>
+            <div class="tab-content py-1 pl-1">
+              <ng-container *ngIf="selectedTab==='armingTime'">
+                <div class="container-fluid row">
+                  <div class="table-container col-md-10 col-xl-10">
+                      <app-time-table [option]="tabOption" #arming></app-time-table>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="selectedTab==='linkageMode'">
+                <app-motion-linkage #linkage></app-motion-linkage>
+              </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <button class="blue-btn ml-1" (click)="onSubmit()" id="intrusion-save">{{ 'save' | translate }}</button>
+    </div>
+</div> -->

@@ -1,0 +1,94 @@
+<div class="container-fluid row" (window:resize)="onResize($event)">
+    <div class="col-md-9 col-xl-10 member-list">
+        <div class='table-part' id='table-part'>
+            <table class="member-table" id="member-table">
+                <thead>
+                    <td><label class="size1">{{ 'id' | translate }}</label></td>
+                    <td *ngIf="modifyOp"><label class="size1">{{ 'MNG.edit' | translate }}</label></td>
+                    <td><label class="size3">{{ 'SNAP.time' | translate }}</label></td>
+                    <td><label class="size3">{{ 'avatar' | translate }}</label></td>
+                    <!-- <td><label class="size1">{{ 'status' | translate }}</label></td> -->
+                    <td><label class="size3">{{ 'remark' | translate }}</label></td>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of snapList;let i = index">
+                        <tr (dblclick)="onDblClick(item.id, i)" [ngClass]="{'table-primary': isItemSelected(item.id)}">
+                            <td><label class="size1">{{ item.id.toString() }}</label></td>
+                            <td class="size1" *ngIf="modifyOp">
+                                <div class="lay-center">
+                                    <button class="blue-btn" (click)="onModify(i)">{{'modify' | translate}}</button>
+                                </div>
+                                <div class="lay-center">
+                                    <button class="blue-btn" (click)="onDelete(item.id)">{{'delete' | translate}}</button>
+                                </div>
+                            </td>
+                            <td><label class="size3">{{ item.sTime }}</label></td>
+                            <td><img [src]="item.sPicturePath" alt="{{ 'MNG.none' | translate}}" class="size1"></td>
+                            <!-- <td><label class="size1">{{ item.sStatus | translate }}</label></td> -->
+                            <td><label class="size3">{{ item.sNote | translate }}</label></td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <div class='page-foot' id="page-foot">
+            <div class='foot-part'>
+                <label class='foot-part-son' [innerHTML]="innerNumber"></label>
+                <button class='foot-part-son page-btn' (click)="pageDoubleUp()"><<</button>
+                <button class='foot-part-son page-btn' (click)="pageUp()"><</button>
+                <label class='foot-part-son' [innerHTML]="innerPage"></label>
+                <button class='foot-part-son page-btn' (click)="pageDown()">></button>
+                <button class='foot-part-son page-btn' (click)="pageDoubleDown()">>></button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-xl-2 sidebar right" id="right-bar" [formGroup]="SnapForm">
+        <h5 class="sidebar-title mt-2">{{ 'SNAP.searchCondition' | translate }}</h5>
+        <div *ngIf="modifyOp" class="box mt-2">
+            <label class="label4btn">{{'switchMode' | translate}}</label>
+            <button class="blue-btn" (click)="onDeleteChecked()">{{modeBtnName | translate}}</button>
+        </div>
+        <br>
+        <ng-container *ngIf="isDeleteChecked">
+            <div class="mt-2 lay-center">
+                <button class="blue-btn" (click)="onSelectAll()">{{ 'MNG.selectAll' | translate }}</button>
+            </div>
+            <div class="mt-2 lay-center">
+                <button class="blue-btn" (click)="onUnselectAll()">{{ 'MNG.unselectAll' | translate }}</button>
+            </div>
+            <div class="mt-2 lay-center">
+                <button class="red-btn" (click)="onDeleteComfirm()">{{ 'MNG.confirmDelete' | translate }}</button>
+            </div>
+            <div class="mt-2 lay-center">
+                <button class="red-btn" (click)="onDeleteTTL()">{{ 'reset' | translate }}</button>
+            </div>
+            <div class="mt-2 lay-center">
+                <span>{{'MNG.dblClickTip' | translate}}</span>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="!isDeleteChecked">
+            <div class="box">
+                <div>
+                    <span>{{ 'MNG.startTime' | translate }}</span>
+                    <input type="datetime-local" step=1 class="time-input" formControlName="beginTime">
+                    <label *ngIf="beginTime.errors?.isStandardTime" class="alarm-tip">{{'MNG.startTime' | translate}}{{'isWrong' | translate}}</label>
+                </div>
+                <div>
+                    <span>{{ 'MNG.endTime' | translate }}</span>
+                    <input type="datetime-local" step=1 class="time-input" formControlName="endTime">
+                    <label *ngIf="endTime.errors?.isStandardTime" class="alarm-tip">{{'MNG.endTime' | translate}}{{'isWrong' | translate}}</label>
+                </div>
+                <div *ngIf="SnapForm.errors?.timeOrder && (SnapForm.dirty || SnapForm.touched)">
+                    <label class="alarm-tip">{{'timeOrder' | translate}}</label>
+                </div>
+            </div>
+            <div class="lay-center">
+                <button class="blue-btn" (click)="onSearch(1)" [disabled]="SnapForm.invalid">{{ 'search' | translate }}</button>
+            </div>
+            <div class="lay-center">
+                <button class="blue-btn mt-1" (click)="downloadJson()" [disabled]="ttlNumber<=0">{{ 'outputExcel' | translate }}</button>
+            </div>
+        </ng-container>
+    </div>
+</div>
+<app-add-member #add></app-add-member>

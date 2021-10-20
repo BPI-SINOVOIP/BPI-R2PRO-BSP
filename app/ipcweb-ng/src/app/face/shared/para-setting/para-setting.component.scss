@@ -1,0 +1,37 @@
+.introduce {
+    margin: 0px;
+    margin-top: 0.5rem;
+    float: left;
+    width: 10rem;
+    // margin-right: 2rem;
+    line-height: 2rem;
+}  
+
+.custom-range {
+    margin-top: 0.5rem;
+    float: left;
+    width: 12rem;
+    margin-right: 1rem;
+    min-height: 2rem;
+}
+
+.content {
+    margin-top: 0.5rem;
+    float: left;
+    margin-right: 2rem;
+    line-height: 2rem;
+    width: 12rem;
+}
+
+.alarm {
+    margin-top: 0.5rem;
+    float: left;
+    color: red;
+    font-weight: bolder;
+    line-height: 2rem;
+    margin-right: 2rem;
+}
+
+.no-float {
+    clear: both;
+}

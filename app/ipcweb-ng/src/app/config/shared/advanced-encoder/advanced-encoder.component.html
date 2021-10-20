@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <ng-container *ngFor="let mainItem of FormList; let mi=index">
+        <ng-container *ngFor="let subItem of mainItem; let si=index">
+            <div class="main-title" *ngIf="si===0" [formGroup]="subItem">
+                <div class="gray-title relative-space">
+                    <span>{{subItem.get('sFunction').value}}</span>
+                    <select formControlName="sStreamType" class="ml-5">
+                        <ng-container *ngFor="let op of streamList">
+                            <option [value]="op">{{op | translate}}</option>
+                        </ng-container>
+                    </select>
+                    <div class="right">
+                        <button class="blue-btn" (click)="onSubmit(mi)">{{'save' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row" [formGroup]="subItem"*ngIf="si===1">
+                <div class="col-4" *ngFor="let key of objectKeys(subItem.value)">
+                    <label class="radius-input-stand-introduce mt-1">{{key}}</label>
+                    <input type="number" class="radius-input-stand mt-1" [formControlName]="key">
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+</div>

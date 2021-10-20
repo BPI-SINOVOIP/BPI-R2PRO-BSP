@@ -1,0 +1,68 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-9 col-lg-9 col-xl-9 p-3">
+      <app-player [option]="playerOption" #player></app-player>
+    </div>
+    <div class="col-md-3 col-lg-3 col-xl-3 p-3">
+      <div class="ptz row">
+        <div class="left ptztoggle">
+          <div class="ptztoggleicon ptztoggleiconopen"></div>
+        </div>
+        <div class="ptz-operator">
+      <div class="ptz-name">{{ 'PTZ.Name' | translate }}</div>
+          <div class="ptz-ctrl row no-gutters">
+            <div class="ptz-ctrl-l">
+              <span *ngFor="let dir of directions" class="direction">
+                <i [ngClass]="'icon-ptz-' + dir" [class]="dir" [ngClass]="{'forbid-direction': !isPTZEnabled}"></i>
+              </span>
+            </div>
+            <div class="ptz-ctrl-r">
+              <span *ngFor="let ops of operations" class="operation">
+                <i [class]="ops + 'out'" [ngClass]="{'forbid-zo': !isPTZEnabled}"></i>
+                <i [class]="ops + 'in'" [ngClass]="{'forbid-zo': !isPTZEnabled}"></i>
+              </span>
+            </div>
+          </div>
+          <div class="ptz-slider"></div>
+          <div class="ptz-ctrl-bottom">
+            <!-- <span class="ctrl-i"> -->
+              <i class="icon-ptz-light" [ngClass]="{'forbid': !isPTZEnabled}"></i>
+            <!-- </span> -->
+            <!-- <span class="ctrl-i"> -->
+              <i class="icon-ptz-wiper" [ngClass]="{'forbid': !isPTZEnabled}"></i>
+            <!-- </span> -->
+            <i class="icon-ptz-auxfocus" [ngClass]="{'forbid': !isPTZEnabled}"></i>
+            <i class="icon-ptz-lensinit" [ngClass]="{'forbid': !isPTZEnabled}"></i>
+            <i class="icon-ptz-manualtrack" [ngClass]="{'forbid': !isPTZEnabled}"></i>
+            <i class="icon-ptz-zoom3d-disabled" [ngClass]="{'forbid': !isPTZEnabled}"></i>
+          </div>
+          <div class="tabs">
+            <ul class="nav nav-tabs" id="ptz-path" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="ptz-preset-tab" data-toggle="tab" href="#ptz-preset"
+                                                                                aria-controls="ptz-preset" aria-selected="true">{{ 'PTZPreset' | translate }}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="ptz-cruise-tab" data-toggle="tab" href="#ptz-cruise"
+                                                                          aria-controls="ptz-cruise" aria-selected="false">{{ 'PTZCruise' | translate }}</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="ptz-tab-content">
+              <div class="tab-pane fade show active" id="ptz-preset" role="tabpanel"
+                                                                    aria-labelledby="ptz-preset-tab" font-color="#FF0000">
+                PTZ Preset
+              </div>
+              <div class="tab-pane fade" id="ptz-cruise" role="tabpanel" aria-labelledby="ptz-cruise-tab" font-color="#FF0000">
+                PTZ Cruise
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div [formGroup]="testForm">
+        <input type="text" formControlName="url">
+        <button (click)="onConnect()">{{'test' | translate}}</button>
+      </div> -->
+    </div>
+  </div>
+</div>

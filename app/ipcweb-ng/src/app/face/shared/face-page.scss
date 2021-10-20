@@ -1,0 +1,132 @@
+.container-fluid {
+    padding: 0px;
+    margin: 0px;
+}
+
+.sidebar {
+    border: ridge;
+    padding-left: 0px;
+    padding-right: 0px;
+    min-height: 600px;
+    overflow-y: auto;
+    background-color:rgb(195, 176, 145);
+}
+
+.box {
+    background-color:#FAF4E1;
+    padding: 5px;
+    margin: 3px;
+    border-radius: 0.25rem;
+}
+
+.sidebar-title {
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.member-list {
+    border: ridge;
+    padding-right: 0px;
+    padding-left: 0px;
+    min-height: 600px;
+}
+
+.table-part {
+    min-height: 100%;
+    max-height: 100%;
+    overflow-y: atuo;
+    overflow-x: scroll;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.member-table {
+    margin-bottom: 3rem;
+}
+
+thead {
+    background-color:#E8E8FF;
+}
+
+tr:nth-child(2n) {
+    background-color: #F1FAFA;
+}
+
+td {
+    border: solid;
+    border-color:#B6DBF2;
+    border-width: 2px;
+}
+
+.size1 {
+    text-align: 1.5rem;
+    min-width: 6rem;
+    margin: 3px;
+    text-align: center;
+}
+
+.size2 {
+    text-align: 1.5rem;
+    min-width: 8rem;
+    margin: 3px;
+    text-align: center;
+}
+
+.size3 {
+    text-align: 1.5rem;
+    min-width: 10rem;
+    margin: 3px;
+    text-align: center;
+}
+
+.page-foot {
+    position: absolute;
+    height: 2.9rem;
+    bottom: 1.05rem;
+    background-color: #f8f8f8;
+}
+
+.foot-part {
+    position: absolute;
+    bottom: 0rem;
+    right: 1.3rem;
+}
+
+img {
+    width: 7rem;
+}
+
+.time-input {
+    width: 99%;
+}
+
+.page-btn {
+    border: hidden;
+    background-color: #e4e7ec;
+    color: #353a40;
+    margin-left: 2px;
+}
+
+.page-btn:hover {
+    border: hidden;
+    background-color: #b3b5bb;
+    color: #353a40;
+}
+
+.center-align {
+    text-align: center;
+}
+
+p {
+    margin: 0px;
+}
+
+.introduce {
+    min-width: 4rem;
+    margin: 0px;
+}
+
+.content {
+    max-width: 6rem;
+}
+

@@ -1,0 +1,65 @@
+<div class=container>
+  <ul class="nav nav-tabs nav-underline nav-justified" role="tablist">
+    <ng-container *ngFor="let submenu of subMenuItems; first as isFirst;">
+      <li class="nav-item">
+        <a id="{{ submenu }}Tab" [ngClass]="{ 'nav-link': true, 'active': isFirst }" data-toggle="tab"
+          href="#{{ submenu }}" role="tab" [attr.aria-controls]="'#' + submenu"
+          [attr.aria-expanded]="isFirst" (click)="setActiveTab(submenu)">{{ submenu | translate }}</a>
+      </li>
+    </ng-container>
+  </ul>
+  <div class="tab-content py-1 pl-1" *ngIf="selectedMenuItem === 'Basic'">
+    <div class="tab-pane active" id="TCPIP" role="tabpanel" aria-expanded="true" aria-labelledby="TCPIPTab">
+      <div class="container pt-1">
+        <ul class="nav nav-pills" role="tablist">
+          <li class="nav-item">
+            <a id="base-lan" class="nav-link active" data-toggle="tab" href="#lan" aria-expanded="true">LAN</a>
+          </li>
+          <li class="nav-item">
+            <a id="base-wlan" class="nav-link" data-toggle="tab" href="#wlan" aria-expanded="false">WLAN</a>
+          </li>
+        </ul>
+        <div class="tab-content px-1 pt-1">
+          <div class="tab-pane active" id="lan" aria-expanded="true" aria-labelledby="base-lan">
+            <app-tcpip iface="lan"></app-tcpip>
+          </div>
+          <div class="tab-pane" id="wlan" aria-expanded="false" aria-labelledby="base-wlan">
+            <app-tcpip iface="wlan"></app-tcpip>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="DDNS" role="tabpanel" aria-expanded="false" aria-labelledby="DDNSTab">
+      <app-ddns></app-ddns>
+    </div>
+    <div class="tab-pane" id="PPPoE" role="tabpanel" aria-expanded="false" aria-labelledby="PPPoETab">
+      <app-pppoe></app-pppoe>
+    </div>
+    <div class="tab-pane" id="Port" role="tabpanel" aria-expanded="false" aria-labelledby="PortTab">
+      <app-port></app-port>
+    </div>
+    <div class="tab-pane" id="uPnP" role="tabpanel" aria-expanded="false" aria-labelledby="uPnPTab">
+      <app-upnp></app-upnp>
+    </div>
+  </div>
+  <div class="tab-content py-1 pl-1" *ngIf="selectedMenuItem === 'Advanced'">
+    <div class="tab-pane active" id="Wi-Fi" role="tabpanel" aria-expanded="true" aria-labelledby="Wi-FiTab">
+      <app-wifi></app-wifi>
+    </div>
+    <div class="tab-pane" id="SMTP" role="tabpanel" aria-expanded="false" aria-labelledby="SMTPTab">
+      <app-smtp></app-smtp>
+    </div>
+    <div class="tab-pane" id="FTP" role="tabpanel" aria-expanded="false" aria-labelledby="FTPTab">
+      <app-ftp></app-ftp>
+    </div>
+    <div class="tab-pane" id="eMail" role="tabpanel" aria-expanded="false" aria-labelledby="eMailTab">
+      <app-email></app-email>
+    </div>
+    <div class="tab-pane" id="Cloud" role="tabpanel" aria-expanded="false" aria-labelledby="CloudTab">
+      <app-cloud></app-cloud>
+    </div>
+    <div class="tab-pane" id="Protocol" role="tabpanel" aria-expanded="false" aria-labelledby="ProtocolTab">
+      <app-protocol></app-protocol>
+    </div>
+  </div>
+</div>

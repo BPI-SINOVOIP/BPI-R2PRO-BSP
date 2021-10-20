@@ -1,0 +1,28 @@
+<div class="container-fluid row" [formGroup]="portsForm">
+  <form formArrayName="ports">
+    <div class="average-grid">
+      <ng-container *ngFor="let port of ports.controls; let i = index">
+        <div [formGroupName]="i" class="cell-div">
+          <label class="form-group-text col-md-4">{{ port.get("sProtocol").value | translate }}
+            {{ "port" | translate }}</label>
+          <input class="col-md-5 radius-input-stand" type="text" formControlName="iPortNo">
+          <div class="row no-padding" *ngIf="port.get('iPortNo').errors?.isNumberJudge">
+            <div class="col-md-4">
+              <span>&nbsp;</span>
+            </div>
+            <div class="col-md-6">
+              <span class="alarm-tip">{{'formatError' | translate}}</span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="average-grid">
+      <div class="cell-div col">
+        <button class="blue-btn" (click)="onSubmit()" [disabled]="portsForm.invalid">
+          {{ "save" | translate }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

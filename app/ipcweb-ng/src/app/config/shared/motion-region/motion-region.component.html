@@ -1,0 +1,30 @@
+<div class="container-fluid row">
+    <p class="header">
+        <span>{{ 'Motion.modeSetting' | translate }}</span>
+        <select class="mode-select" disabled>
+            <option>{{ 'Motion.normalMode' | translate }}</option>
+        </select>
+    </p>
+    <div class="player col-lx-7 col-md-6 mt-1">
+        <app-player [option]="playerOption" #player></app-player>
+    </div>
+    <br>
+    <div class="setting col-lx-5 col-md-6 mt-1" [formGroup]="RegionForm">
+        <p class="gray-title"><span>{{'paraSetting' | translate}}</span></p>
+        <ul>
+            <li>
+                <label class="sensitive">
+                    {{ 'Motion.sensitive' | translate }}
+                </label>
+                <input class="custom-range" type="range" min=0 max=100 step=20 name="sensitive" id="sensitive" 
+                    formControlName="iSensitivityLevel" (ngModelChange)="onRangeChange($event)">
+                <input class="sensitive-input" type="number" formControlName="iSensitivityLevel" readonly>
+            </li>
+            <br>
+            <li class="mt-3">
+                <button class="blue-btn" (click)="onSubmit()" [disabled]="RegionForm.invalid">{{'save' | translate}}</button>
+            </li>
+        </ul>
+    </div>
+</div>
+

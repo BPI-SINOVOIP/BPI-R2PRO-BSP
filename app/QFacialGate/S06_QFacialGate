@@ -1,0 +1,31 @@
+#!/bin/sh
+
+case "$1" in
+  start)
+    # if memory less than 256M, enable zram swap function
+    total=`grep MemTotal /proc/meminfo | awk '{print $2}'`
+    if [ $total -le 262144 ]; then
+        face=10000
+        echo 1 > /proc/sys/vm/overcommit_memory
+        echo 2 > /sys/block/zram0/max_comp_streams
+        echo lz4 > /sys/block/zram0/comp_algorithm
+        echo 64M > /sys/block/zram0/disksize
+        mkswap /dev/zram0
+        swapon /dev/zram0
+    else
+        face=30000
+    fi
+    #256M DDR face number 10000, great than 256M DDR face number 30000
+    export QT_QPA_FB_DRM=1
+    export QT_QPA_PLATFORM=linuxfb:rotation=0
+    QFacialGate -f $face &
+    ;;
+  stop)
+    killall QFacialGate
+    ;;
+  *)
+    echo "Usage: $0 {start|stop}"
+    exit 1
+    ;;
+esac
+exit 0

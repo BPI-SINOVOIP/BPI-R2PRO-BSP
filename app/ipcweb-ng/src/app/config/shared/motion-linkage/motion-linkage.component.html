@@ -1,0 +1,81 @@
+<div class="container row">
+    <table [formGroup]="LinkageForm">
+        <thead>
+            <tr>
+                <th class="one">
+                    <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                        <input type="checkbox" id="normal" class="normal" (click)="onChecked('normal')">
+                        <label class="stand"></label>
+                        <label for ="normal" class="for-new-check">{{ "Motion.normalLinkage" | translate }}</label>
+                    </div>
+                </th>
+                <th class="two">
+                    <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                        <input type="checkbox" id="output" class="output" (click)="onChecked('output')">
+                        <label class="stand"></label>
+                        <label for ="output" class="for-new-check">{{ "Motion.alarmOutput" | translate }}</label>
+                    </div>
+                </th>
+                <th class="three">
+                    <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                        <input type="checkbox" id="video" class="video" (click)="onChecked('video')">
+                        <label class="stand"></label>
+                        <label for ="video" class="for-new-check">{{ "Motion.videoLinkage" | translate }}</label>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="one">
+                    <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                        <input type="checkbox" id="mail" formControlName="iNotificationEmailEnabled">
+                        <label class="stand"></label>
+                        <label for ="mail" class="for-new-check">{{ "Motion.notificationMail" | translate }}</label>
+                    </div>
+                </td>
+                <td class="two">
+                    <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                        <input type="checkbox" id="a-2-1" formControlName="iNotificationIO1Enabled">
+                        <label class="stand"></label>
+                        <label for ="a-2-1" class="for-new-check">A->1</label>
+                    </div>
+                </td>
+                <td class="three">
+                    <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                        <input type="checkbox" id="a1" formControlName="iNotificationRecord1Enabled">
+                        <label class="stand"></label>
+                        <label for ="a1" class="for-new-check">A1</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="one">
+                    <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                        <input type="checkbox" id="notification-center" formControlName="iNotificationCenterEnabled">
+                        <label class="stand"></label>
+                        <label for ="notification-center" class="for-new-check">{{ "Motion.notificationCenter" | translate }}</label>
+                    </div>
+                </td>
+                <td class="two"></td>
+                <td class="three"></td>
+            </tr>
+            <tr>
+                <td class="one">
+                    <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+                        <input type="checkbox" id="ftp" formControlName="iNotificationFTPEnabled">
+                        <label class="stand"></label>
+                        <label for ="ftp" class="for-new-check">{{ "Motion.notificationFTP" | translate }}</label>
+                    </div>
+                </td>
+                <td class="two"></td>
+                <td class="three"></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <td class="one"><label>&nbsp;</label></td>
+            <td class="two"><label>&nbsp;</label></td>
+            <td class="three"><label>&nbsp;</label></td>
+        </tfoot>
+    </table>
+</div>

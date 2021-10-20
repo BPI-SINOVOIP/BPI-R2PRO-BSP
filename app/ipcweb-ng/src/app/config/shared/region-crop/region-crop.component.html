@@ -1,0 +1,28 @@
+<div class="container row py-3" style="min-height: 100%;">
+  <div class="col-lg-8 col-xl-8 col-md-8">
+    <app-player [option]="playerOption" #player></app-player>
+  </div>
+  <div class="col-lg-4 col-xl-4 col-md-4">
+    <form class="form" [formGroup]="RegionForm" (ngSubmit)="onSubmit()">
+      <p class="gray-title"><span>{{ 'Region.regionSetting' | translate }}</span></p>
+      <div [ngClass]="{'checkbox-space': isChrome, 'checkbox-space-ie': !isChrome}">
+        <input id="crop-enabled" type="checkbox" formControlName="iRegionClipEnabled">
+        <label class="stand"></label>
+        <label class="for-new-check" for="crop-enabled">{{ 'Region.enableCrop' | translate }}</label>
+      </div>
+      <p class="select-title">{{ 'streamType' | translate }}</p>
+      <select class="custom-select" disabled=true>
+          <option value="thirdStream">{{ 'thirdStream' | translate }}</option>
+      </select>
+      <p class="select-title">{{ 'resolution' | translate }}</p>
+      <select class="custom-select" formControlName="sResolution" (ngModelChange)="onPixelChange($event)">
+          <ng-container *ngFor="let item of pixelList">
+              <option [value]="item">{{ item }}</option>
+          </ng-container>
+        </select>
+      <button class="blue-btn mt-1" type="submit" [disabled]="!isUseful">{{ 'save' | translate }}</button>
+      <label class="alarm-tip" *ngIf="!isUseful">{{'functionForbid' | translate}}</label>
+    </form>
+  </div>
+</div>
+

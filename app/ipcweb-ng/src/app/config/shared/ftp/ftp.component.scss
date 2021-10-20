@@ -1,0 +1,36 @@
+.introduce {
+  min-width: 10rem;
+  line-height: 1.5;
+}
+
+.content {
+  margin-left: 5px;
+  width: 13rem;
+  min-width: 13rem;
+}
+
+.introduce.float-left {
+  float: left;
+  min-width: 10rem;
+  line-height: calc(1.5em + 0.75rem + 2px);
+  margin: 0px;
+  margin-top: 2%;
+}
+
+.blue-btn {
+  margin-left: 5px;
+}
+
+.checkbox-space-ie {
+  display: inline-block;
+  position: relative;
+  padding-left: 0px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.clear {
+  clear: both;
+}

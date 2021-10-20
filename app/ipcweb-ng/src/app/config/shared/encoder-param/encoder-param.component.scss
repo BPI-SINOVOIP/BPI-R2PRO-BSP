@@ -1,0 +1,29 @@
+.form-group {
+  margin-bottom: 0.75rem;
+}
+
+.form-group-text {
+  line-height: 2rem;
+}
+
+.row {
+  padding-bottom: 1rem;
+}
+
+.inline-block {
+  display: inline-block;
+  padding: 0px;
+}
+
+.float-left {
+  height: 2rem;
+}
+
+input[type="number"].float-left {
+  width: 40px;
+  margin-left: 0.8rem;
+}
+
+.input-gap {
+  padding-left: 0.75rem;
+}

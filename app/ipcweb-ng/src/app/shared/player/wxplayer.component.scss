@@ -1,0 +1,70 @@
+      html,
+      td,
+      th,
+      body {
+        font-size: 12px;
+        text-align: center;
+        background-color: #eee;
+      }
+
+      #wrapper {
+        width: 100%;
+        top: 50px;
+        text-align: center;
+        margin: auto;
+      }
+
+      #wrapper #header {
+        margin: auto;
+        text-align: left;
+        margin-bottom: 10px;
+        padding-top: 30px;
+      }
+
+      #wrapper input[type="number"] {
+        width: 40px;
+        height: 26px;
+        padding: 0;
+        margin: 0;
+        border: 1px solid #666;
+        text-align: center;
+      }
+
+      #wrapper button {
+        width: 80px;
+        height: 28px;
+        border: 1px solid #666;
+        background-color: #fff;
+        font-size: 14px;
+      }
+
+      #canvas {
+        margin: auto;
+        background-color: #333;
+      }
+
+      #resetBtn,#createBtn {
+        /* visibility: hidden; */
+        background-color: orange !important;
+      }
+
+      #createBtn{
+        margin-right: 10px;
+        width:110px !important;
+      }
+      #resetBtn{
+        display: none;
+      }
+
+      #footer {
+        display: none;
+        margin: 10px auto;
+      }
+      #footer > div.state > span {
+        display: inline-table;
+        color: gray;
+        min-width: 15%;
+      }
+      #footer > div.btn{
+        margin:10px
+      }

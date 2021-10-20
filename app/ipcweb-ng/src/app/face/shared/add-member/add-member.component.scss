@@ -1,0 +1,87 @@
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 10;
+    padding-top: 5%;
+    padding-left: 30%;
+    padding-right: 30%;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0,0.5);
+}
+
+.modal-header{
+    padding: 1%;
+    background-color: rgb(248, 170, 0);
+}
+
+.modal-body {
+    background-color: rgb(255, 255, 255);
+}
+
+.modal-body .row .body-left {
+    padding-right: 0px;
+}
+
+.pic-preview {
+    width: 200px;
+    height: 200px;
+    background-color: transparent;
+    display: block;
+    border: solid;
+    border-color: #e4e7ec;
+    border-width: 1px;
+}
+
+.left-bottom-part {
+    padding-top: 10px;
+}
+
+.quit {
+    position: relative;
+    top: 0px;
+    right: 0px;
+    background-color: transparent;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0px;
+}
+ 
+    li {
+        display: inline;
+    }
+
+        .introduce {
+            width: 40%;
+            text-align: right;
+            padding-right: 4px;
+            height: 1.5rem;
+        }
+
+        .content {
+            width: 50%;
+            height: 1.5rem;
+        }
+
+        .alarm-tip {
+            width: 50%;
+            height: 1.5rem;
+            color: red;
+            font-weight: bolder;
+        }
+
+.changeInputFile {
+    display: inline;
+}
+
+input .input-file-alter {
+    width: 100%;
+}
+
+.alarm-red {
+    color: red;
+    font-weight: bolder;
+}
