@@ -1,0 +1,4 @@
+# Prefer local packages
+Package: *
+Pin: release a=now
+Pin-Priority: 999
