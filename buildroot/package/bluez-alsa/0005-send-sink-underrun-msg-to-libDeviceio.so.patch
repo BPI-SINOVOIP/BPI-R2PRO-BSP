@@ -1,0 +1,109 @@
+diff --git a/src/bluez.c b/src/bluez.c
+index 5f35f87..f69cbed 100644
+--- a/src/bluez.c
++++ b/src/bluez.c
+@@ -14,8 +14,6 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+-#include <sys/socket.h>
+-#include <sys/un.h>
+ 
+ #include <gio/gunixfdlist.h>
+ 
+@@ -1029,33 +1027,6 @@ static void bluez_signal_interfaces_added(GDBusConnection *conn, const gchar *se
+ 	g_free(device_path);
+ }
+ 
+-static int rockchip_send_volume_to_deviceiolib(int volume)
+-{
+-	struct sockaddr_un serverAddr;
+-	int snd_cnt = 1;
+-	int sockfd;
+-	char buff[100] = {0};
+-
+-	sockfd = socket(AF_UNIX, SOCK_DGRAM, 0);
+-	if (sockfd < 0) {
+-		printf("FUNC:%s create sockfd failed!\n", __func__);
+-		return -1;
+-	}
+-
+-	serverAddr.sun_family = AF_UNIX;
+-	strcpy(serverAddr.sun_path, "/tmp/rk_deviceio_a2dp_volume");
+-	memset(buff, 0, sizeof(buff));
+-	sprintf(buff, "a2dp volume:%03d;", volume);
+-
+-	while(snd_cnt--) {
+-		sendto(sockfd, buff, strlen(buff), MSG_DONTWAIT, (struct sockaddr *)&serverAddr, sizeof(serverAddr));
+-		usleep(1000); //5ms
+-	}
+-
+-	close(sockfd);
+-	return 0;
+-}
+-
+ static void bluez_signal_transport_changed(GDBusConnection *conn, const gchar *sender,
+ 		const gchar *path, const gchar *interface, const gchar *signal, GVariant *params,
+ 		void *userdata) {
+@@ -1119,8 +1090,6 @@ static void bluez_signal_transport_changed(GDBusConnection *conn, const gchar *s
+ 			/* received volume is in range [0, 127]*/
+ 			t->a2dp.ch1_volume = t->a2dp.ch2_volume = g_variant_get_uint16(value);
+ 			bluealsa_ctl_event(BA_EVENT_UPDATE_VOLUME);
+-			/* Send volume chg to rockchip deviceio */
+-			rockchip_send_volume_to_deviceiolib(t->a2dp.ch2_volume);
+ 		}
+ 
+ 		g_variant_unref(value);
+diff --git a/utils/aplay.c b/utils/aplay.c
+index 7b71860..5abb075 100644
+--- a/utils/aplay.c
++++ b/utils/aplay.c
+@@ -21,6 +21,8 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <unistd.h>
++#include <sys/socket.h>
++#include <sys/un.h>
+ 
+ #include <alsa/asoundlib.h>
+ #include <gio/gio.h>
+@@ -285,6 +287,27 @@ static void pcm_worker_routine_exit(struct pcm_worker *worker) {
+ 	debug("Exiting PCM worker %s", worker->addr);
+ }
+ 
++static int rockchip_send_underrun_to_deviceiolib()
++{
++	struct sockaddr_un serverAddr;
++	int sockfd;
++
++	sockfd = socket(AF_UNIX, SOCK_DGRAM, 0);
++	if (sockfd < 0) {
++		printf("FUNC:%s create sockfd failed!\n", __func__);
++		return -1;
++	}
++
++	serverAddr.sun_family = AF_UNIX;
++	strcpy(serverAddr.sun_path, "/tmp/rk_deviceio_a2dp_underrun");
++
++	sendto(sockfd, "a2dp underrun;", strlen("a2dp underrun;"), MSG_DONTWAIT, (struct sockaddr *)&serverAddr, sizeof(serverAddr));
++	usleep(1000);
++
++	close(sockfd);
++	return 0;
++}
++
+ static void *pcm_worker_routine(void *arg) {
+ 	struct pcm_worker *w = (struct pcm_worker *)arg;
+ 
+@@ -445,6 +468,8 @@ static void *pcm_worker_routine(void *arg) {
+ 			switch (-frames) {
+ 			case EPIPE:
+ 				debug("An underrun has occurred");
++				/* Send underrun msg to rockchip deviceio */
++				rockchip_send_underrun_to_deviceiolib();
+ 				snd_pcm_prepare(w->pcm);
+ 				usleep(50000);
+ 				frames = 0;
+-- 
+2.17.1
+

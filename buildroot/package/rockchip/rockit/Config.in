@@ -1,0 +1,5 @@
+config BR2_PACKAGE_ROCKIT
+    bool "rockit"
+    select BR2_PACKAGE_MPP
+    help
+      rockit

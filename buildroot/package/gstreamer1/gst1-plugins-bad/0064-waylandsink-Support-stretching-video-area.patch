@@ -1,0 +1,30 @@
+From 0514c205ecfe8863e5c33f58855233e5c7a70fe6 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Mon, 8 Mar 2021 10:07:39 +0800
+Subject: [PATCH 64/68] waylandsink: Support stretching video area
+
+Set env WAYLANDSINK_STRETCH to enable it.
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ ext/wayland/wlwindow.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/ext/wayland/wlwindow.c b/ext/wayland/wlwindow.c
+index 6d5bc7c..202034f 100644
+--- a/ext/wayland/wlwindow.c
++++ b/ext/wayland/wlwindow.c
+@@ -449,6 +449,10 @@ gst_wl_window_resize_video_surface (GstWlWindow * window, gboolean commit)
+   dst.w = window->render_rectangle.w;
+   dst.h = window->render_rectangle.h;
+ 
++  /* stretch the video_subsurface to area_subsurface */
++  if (g_getenv ("WAYLANDSINK_STRETCH"))
++    src = dst;
++
+   if (window->video_viewport) {
+     gst_video_sink_center_rect (src, dst, &res, TRUE);
+     if (res.w > 0 && res.h > 0)
+-- 
+2.20.1
+

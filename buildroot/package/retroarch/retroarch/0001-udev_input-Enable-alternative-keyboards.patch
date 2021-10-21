@@ -1,0 +1,26 @@
+From d479f874e1bec8a1582e6b1b7115065a8d0f08a2 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Fri, 28 Dec 2018 11:52:23 +0800
+Subject: [PATCH 1/4] udev_input: Enable alternative keyboards
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ input/drivers/udev_input.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/input/drivers/udev_input.c b/input/drivers/udev_input.c
+index 2c63754..f0bd34d 100644
+--- a/input/drivers/udev_input.c
++++ b/input/drivers/udev_input.c
+@@ -92,7 +92,7 @@ enum udev_input_dev_type
+ /* NOTE: must be in sync with enum udev_input_dev_type */
+ static const char *g_dev_type_str[] =
+ {
+-   "ID_INPUT_KEYBOARD",
++   "ID_INPUT_KEY",
+    "ID_INPUT_MOUSE",
+    "ID_INPUT_TOUCHPAD"
+ };
+-- 
+2.11.0
+

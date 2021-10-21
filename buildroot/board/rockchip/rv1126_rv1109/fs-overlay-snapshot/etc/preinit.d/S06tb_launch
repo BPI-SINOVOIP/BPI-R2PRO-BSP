@@ -1,0 +1,29 @@
+#!/bin/sh
+#
+
+lunch_start()
+{
+	echo "Now we are ready to start your first application" > /dev/kmsg
+	rkmedia_snapshot_test -s /dev/v4l-subdev7 -d /dev/video34 -a /etc/iqfiles -n 1 > /dev/kmsg 2>&1 &
+}
+
+lunch_stop()
+{
+	echo "All applications have been stopped"
+    killall rkmedia_snapshot_test
+}
+
+case "$1" in
+	start)
+		lunch_start
+		;;
+	stop)
+		lunch_stop
+		;;
+	*)
+		echo "Usage: $0 {start|stop}"
+		exit 1
+		;;
+esac
+
+exit 0

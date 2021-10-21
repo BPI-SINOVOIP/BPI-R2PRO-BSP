@@ -1,0 +1,22 @@
+diff --git a/src/shared/log.c b/src/shared/log.c
+index 65f0fea..b202d22 100644
+--- a/src/shared/log.c
++++ b/src/shared/log.c
+@@ -50,12 +50,12 @@ static void vlog(int priority, const char *format, va_list ap) {
+ 	 * has to be temporally disabled. */
+ 	pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &oldstate);
+ 
+-	if (_syslog) {
++	//if (_syslog) {
+ 		va_list ap_syslog;
+ 		va_copy(ap_syslog, ap);
+ 		vsyslog(priority, format, ap_syslog);
+ 		va_end(ap_syslog);
+-	}
++	//}
+ 
+ 	flockfile(stderr);
+ 
+-- 
+2.17.1
+

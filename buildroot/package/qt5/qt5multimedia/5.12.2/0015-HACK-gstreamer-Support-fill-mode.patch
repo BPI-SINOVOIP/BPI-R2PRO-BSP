@@ -1,0 +1,51 @@
+From f3f52dda66af8c654884072cb48b4adb538b2fb0 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Tue, 30 Mar 2021 07:52:42 +0800
+Subject: [PATCH 15/15] HACK: gstreamer: Support fill mode
+
+Depends on gstreamer-sink property.
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ src/gsttools/qgstreamervideooverlay.cpp | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/src/gsttools/qgstreamervideooverlay.cpp b/src/gsttools/qgstreamervideooverlay.cpp
+index 330c37ea..704e5770 100644
+--- a/src/gsttools/qgstreamervideooverlay.cpp
++++ b/src/gsttools/qgstreamervideooverlay.cpp
+@@ -105,6 +105,7 @@ public:
+         m_hasHue = g_object_class_find_property(G_OBJECT_GET_CLASS(m_videoSink), "hue");
+         m_hasSaturation = g_object_class_find_property(G_OBJECT_GET_CLASS(m_videoSink), "saturation");
+         m_hasShowPrerollFrame = g_object_class_find_property(G_OBJECT_GET_CLASS(m_videoSink), "show-preroll-frame");
++        m_hasFillMode = g_object_class_find_property(G_OBJECT_GET_CLASS(m_videoSink), "fill-mode");
+     }
+ 
+     bool hasShowPrerollFrame() const override
+@@ -215,12 +216,23 @@ public:
+                          (mode == Qt::KeepAspectRatio),
+                          (const char*)NULL);
+         }
++        if (m_hasFillMode) {
++            // HACK: Match the gst-sink properties
++            int modes[] = {
++                [Qt::IgnoreAspectRatio] = 0,
++                [Qt::KeepAspectRatio] = 1,
++                [Qt::KeepAspectRatioByExpanding] = 2,
++            };
++            g_object_set(G_OBJECT(m_videoSink),
++                         "fill-mode", modes[mode], nullptr);
++        }
+     }
+ 
+ protected:
+ 
+     GstElement *m_videoSink = nullptr;
+     bool m_hasForceAspectRatio = false;
++    bool m_hasFillMode = false;
+     bool m_hasBrightness = false;
+     bool m_hasContrast = false;
+     bool m_hasHue = false;
+-- 
+2.20.1
+

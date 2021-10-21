@@ -1,0 +1,46 @@
+From c853ef08264398b67dbba4a6db97ff8738de8357 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Tue, 18 Sep 2018 19:00:35 +0800
+Subject: [PATCH 1/2] Add USE_SDL2 option
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ CMakeLists.txt | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index bffaa1132..c9803ac1a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -123,6 +123,7 @@ option(UNITTEST "Set to ON to generate the unittest target" ${UNITTEST})
+ option(SIMULATOR "Set to ON when targeting an x86 simulator of an ARM platform" ${SIMULATOR})
+ option(LIBRETRO "Set to ON to generate the libretro target" OFF)
+ # :: Options
++option(USE_SDL2 "Build with SDL2 support" ON)
+ option(USE_FFMPEG "Build with FFMPEG support" ${USE_FFMPEG})
+ option(USE_SYSTEM_FFMPEG "Dynamically link against system FFMPEG" ${USE_SYSTEM_FFMPEG})
+ option(USE_SYSTEM_LIBZIP "Dynamically link against system libzip" ${USE_SYSTEM_LIBZIP})
+@@ -185,7 +186,10 @@ if(NOT OPENGL_LIBRARIES)
+ 	find_package(OpenGL REQUIRED)
+ endif()
+ 
+-find_package(SDL2)
++if(USE_SDL2)
++	find_package(SDL2)
++endif()
++
+ include(FindThreads)
+ 
+ if(APPLE)
+@@ -816,7 +820,7 @@ elseif(TARGET SDL2::SDL2)
+       set(nativeExtraLibs ${nativeExtraLibs} pthread)
+    endif()
+    set(TargetBin PPSSPPSDL)
+-else()
++elseif(USE_SDL2)
+ 	message(FATAL_ERROR "Could not find SDL2. Failing.")
+ endif()
+ 
+-- 
+2.11.0
+

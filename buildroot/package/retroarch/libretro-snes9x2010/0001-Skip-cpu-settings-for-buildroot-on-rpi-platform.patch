@@ -1,0 +1,42 @@
+From 57d3d5db84d8e1f007bf557356ac221a57f7bd4a Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Mon, 6 May 2019 16:25:53 +0800
+Subject: [PATCH] Skip cpu settings for buildroot on rpi platform
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ Makefile.libretro | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/Makefile.libretro b/Makefile.libretro
+index 3eb9b97..eda6563 100644
+--- a/Makefile.libretro
++++ b/Makefile.libretro
+@@ -342,6 +342,9 @@ else ifneq (,$(findstring armv,$(platform)))
+ 	SHARED := -shared -Wl,--no-undefined
+ 	fpic := -fPIC
+ 	CC   ?= gcc
++
++ifeq (,$(findstring buildroot,$(platform)))
++
+ ifneq (,$(findstring cortexa8,$(platform)))
+ 		CFLAGS += -marm -mcpu=cortex-a8
+ 		ASFLAGS += -mcpu=cortex-a8
+@@ -362,6 +365,14 @@ else ifneq (,$(findstring hardfloat,$(platform)))
+ 		CFLAGS += -mfloat-abi=hard
+ 		ASFLAGS += -mfloat-abi=hard
+ endif
++
++else
++
++ifneq (,$(findstring neon,$(platform)))
++		HAVE_NEON = 1
++endif
++
++endif
+ 	CFLAGS += -DARM
+ 
+ # Emscripten
+-- 
+2.11.0
+

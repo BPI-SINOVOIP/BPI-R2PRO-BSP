@@ -1,0 +1,29 @@
+From a3192c47e67092f354edc3d9f8c16aa07ea81dc4 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Wed, 30 Jan 2019 20:19:23 +0800
+Subject: [PATCH] Skip cpu settings for buildroot on rpi platform
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ Makefile.libretro | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/Makefile.libretro b/Makefile.libretro
+index 535d5c7..232543b 100644
+--- a/Makefile.libretro
++++ b/Makefile.libretro
+@@ -288,8 +288,10 @@ else ifeq ($(platform), ctr)
+    OBJS +=platform/libretro/3ds/3ds_utils.o
+ 
+ # Raspberry Pi (original model) Raspbian
+-else ifeq ($(platform), raspberrypi)
++else ifneq (,$(findstring raspberrypi,$(platform)))
++   ifeq (,$(findstring buildroot,$(platform)))
+    CFLAGS += -marm -mfpu=vfp -mfloat-abi=hard -march=armv6j
++   endif
+    CFLAGS += -Wall -mword-relocations
+    CFLAGS += -fomit-frame-pointer -ffast-math
+    ARCH = arm
+-- 
+2.11.0
+

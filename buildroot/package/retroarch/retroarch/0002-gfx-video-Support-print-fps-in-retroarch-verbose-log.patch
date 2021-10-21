@@ -1,0 +1,48 @@
+From 305d273d8df518a70ff24fec6924c2448bb50bf9 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Fri, 1 Feb 2019 11:54:13 +0800
+Subject: [PATCH] gfx: video: Support print fps in retroarch verbose log
+
+Set env RETROARCH_LOG_FPS to enable it.
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ gfx/video_driver.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/gfx/video_driver.c b/gfx/video_driver.c
+index 9ef26c2..6a9ec49 100644
+--- a/gfx/video_driver.c
++++ b/gfx/video_driver.c
+@@ -166,6 +166,7 @@ static enum rarch_display_type video_driver_display_type = RARCH_DISPLAY_NONE;
+ static char video_driver_title_buf[64]                   = {0};
+ static char video_driver_window_title[128]               = {0};
+ static bool video_driver_window_title_update             = true;
++static bool video_driver_log_fps                         = false;
+ 
+ static retro_time_t video_driver_frame_time_samples[MEASURE_FRAME_TIME_SAMPLES_COUNT];
+ static uint64_t video_driver_frame_time_count            = 0;
+@@ -1126,6 +1127,8 @@ static bool video_driver_init_internal(bool *video_is_threaded)
+ 
+    command_event(CMD_EVENT_SHADER_DIR_INIT, NULL);
+ 
++   video_driver_log_fps = getenv("RETROARCH_LOG_FPS") != NULL;
++
+    return true;
+ 
+ error:
+@@ -2461,6 +2464,11 @@ void video_driver_frame(const void *data, unsigned width,
+          char frames_text[64];
+          last_fps = TIME_TO_FPS(curr_time, new_time, FPS_UPDATE_INTERVAL);
+ 
++         if (video_driver_log_fps)
++            RARCH_LOG("[Video]: FPS: %6.1f/%f || Frames : %" PRIu64 "\n",
++                      last_fps, video_driver_av_info.timing.fps,
++                      video_driver_frame_count);
++
+          if (video_info.fps_show)
+          {
+             snprintf(video_info.fps_text, sizeof(video_info.fps_text),
+-- 
+2.11.0
+

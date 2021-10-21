@@ -1,0 +1,42 @@
+From 7e0b84b1429a050d1808c08bfd96e4ac064d9626 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Tue, 18 Sep 2018 21:37:59 +0800
+Subject: [PATCH 1/2] Add ENABLE_OPENGL option and honer ENABLE_SDL
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ CMakeLists.txt | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index d5bf7c2..7ac234a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -8,6 +8,7 @@ if( COMMAND cmake_policy )
+ endif( COMMAND cmake_policy )
+ SET( CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeScripts )
+ 
++option( ENABLE_OPENGL "Build the OPENGL" ON )
+ option( ENABLE_SDL "Build the SDL port" ON )
+ option( ENABLE_GTK "Build the GTK+ GUI" ON )
+ option( ENABLE_WX "Build the wxWidgets port" OFF )
+@@ -61,8 +62,14 @@ endif( ENABLE_ASM_SCALERS )
+ # Look for some dependencies using CMake scripts
+ FIND_PACKAGE ( ZLIB REQUIRED )
+ FIND_PACKAGE ( PNG REQUIRED )
+-FIND_PACKAGE ( OpenGL REQUIRED )
+-FIND_PACKAGE ( SDL REQUIRED )
++
++if( ENABLE_OPENGL )
++    FIND_PACKAGE ( OpenGL REQUIRED )
++endif( ENABLE_OPENGL )
++
++if( ENABLE_SDL )
++    FIND_PACKAGE ( SDL REQUIRED )
++endif( ENABLE_SDL )
+ 
+ if( ENABLE_LINK )
+     FIND_PACKAGE ( SFML REQUIRED )
+-- 
+2.11.0
+

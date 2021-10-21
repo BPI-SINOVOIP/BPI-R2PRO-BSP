@@ -1,0 +1,30 @@
+From 70f76fdcd127d1bd59b43f46267a21949c552026 Mon Sep 17 00:00:00 2001
+From: Adam Duskett <Aduskett@gmail.com>
+Date: Sat, 30 Nov 2019 14:17:10 -0800
+Subject: [PATCH] fix static linking with openssl support
+
+Dynamic builds of libcrypto would also include libz, but during static builds
+this is not true. Always specifying -lz fixes building against static builds of
+openssl.
+
+Signed-off-by: Adam Duskett <Aduskett@gmail.com>
+---
+ asio/configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/asio/configure.ac b/asio/configure.ac
+index 2e20b84..ca74108 100644
+--- a/asio/configure.ac
++++ b/asio/configure.ac
+@@ -60,7 +60,7 @@ AC_CHECK_HEADER([openssl/ssl.h],,
+ ],[])
+ 
+ if test x$OPENSSL_FOUND != xno; then
+-  LIBS="$LIBS -lssl -lcrypto"
++  LIBS="$LIBS -lssl -lcrypto -lz"
+ fi
+ 
+ AM_CONDITIONAL(HAVE_OPENSSL,test x$OPENSSL_FOUND != xno)
+-- 
+2.23.0
+

@@ -1,0 +1,41 @@
+From 9da3401d60bcf9ff9bc463ea3e8863503ebf9fa1 Mon Sep 17 00:00:00 2001
+From: Johan Klokkhammer Helsing <johan.helsing@qt.io>
+Date: Thu, 5 Dec 2019 12:24:07 +0100
+Subject: [PATCH 05/23] Client: Always close popups when hiding a window
+
+It's not just popups that may have popups open on them. Always close open
+popups when hiding a window to prevent dangling pointers.
+
+[ChangeLog][QPA plugin] Fixed a crash when re-showing a popup after hiding its
+parent.
+
+Fixes: QTBUG-80562
+Change-Id: I7cdac5c7a30e0add5ebf00259401e4d74626ce96
+Reviewed-by: Paul Olav Tvete <paul.tvete@qt.io>
+Reviewed-by: David Edmundson <davidedmundson@kde.org>
+(cherry picked from commit 7c0833f4bc22d2d947c793f0711e3f1e1a09012c)
+
+Conflicts:
+	src/client/qwaylandwindow.cpp
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ src/client/qwaylandwindow.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/client/qwaylandwindow.cpp b/src/client/qwaylandwindow.cpp
+index be27ce39..63620970 100644
+--- a/src/client/qwaylandwindow.cpp
++++ b/src/client/qwaylandwindow.cpp
+@@ -389,7 +389,7 @@ void QWaylandWindow::setVisible(bool visible)
+         // case 'this' will be deleted. When that happens, we must abort right away.
+         QPointer<QWaylandWindow> deleteGuard(this);
+         QWindowSystemInterface::flushWindowSystemEvents();
+-        if (!deleteGuard.isNull() && window()->type() == Qt::Popup)
++        if (!deleteGuard.isNull())
+             closePopups(this);
+         if (!deleteGuard.isNull())
+             reset();
+-- 
+2.20.1
+

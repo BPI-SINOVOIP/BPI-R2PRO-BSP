@@ -1,0 +1,32 @@
+From 636fe3d10a834b4725c9ecc3a1f08ac0f29c07b8 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Tue, 8 Sep 2020 09:43:39 +0800
+Subject: [PATCH 20/23] qwaylandinputdevice: Ignore cursor events with no
+ screen
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ src/client/qwaylandinputdevice.cpp | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/src/client/qwaylandinputdevice.cpp b/src/client/qwaylandinputdevice.cpp
+index 90e138a3..bb843f04 100644
+--- a/src/client/qwaylandinputdevice.cpp
++++ b/src/client/qwaylandinputdevice.cpp
+@@ -364,7 +364,12 @@ uint32_t QWaylandInputDevice::cursorSerial() const
+ 
+ void QWaylandInputDevice::setCursor(Qt::CursorShape newShape, QWaylandScreen *screen)
+ {
+-    struct wl_cursor_image *image = screen->waylandCursor()->cursorImage(newShape);
++    struct wl_cursor_image *image;
++
++    if (!screen)
++        return;
++
++    image = screen->waylandCursor()->cursorImage(newShape);
+     if (!image) {
+         return;
+     }
+-- 
+2.20.1
+

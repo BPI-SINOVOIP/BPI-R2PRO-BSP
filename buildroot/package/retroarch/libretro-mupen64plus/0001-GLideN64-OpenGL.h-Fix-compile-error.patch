@@ -1,0 +1,25 @@
+From 6bfe2c706b0ac868ccbda4625bf00f8d217d8225 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Tue, 18 Sep 2018 21:07:04 +0800
+Subject: [PATCH] GLideN64: OpenGL.h: Fix compile error
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ GLideN64/src/OpenGL.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/GLideN64/src/OpenGL.h b/GLideN64/src/OpenGL.h
+index 1eabe0c..ee1ef40 100644
+--- a/GLideN64/src/OpenGL.h
++++ b/GLideN64/src/OpenGL.h
+@@ -15,6 +15,7 @@
+ 
+ #ifdef __LIBRETRO__
+ #include <glsm/glsmsym.h>
++#include <glsym/glsym.h>
+ #include <GLideN64_libretro.h>
+ #elif GLES2
+ #include <GLES2/gl2.h>
+-- 
+2.11.0
+

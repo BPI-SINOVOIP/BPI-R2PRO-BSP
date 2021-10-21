@@ -1,0 +1,33 @@
+From 7a01115df555be87297784faa4a1c8f41aa621ff Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Wed, 30 Jan 2019 20:01:29 +0800
+Subject: [PATCH] Skip cpu settings for buildroot
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ Makefile | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/Makefile b/Makefile
+index deb8820..af192a1 100644
+--- a/Makefile
++++ b/Makefile
+@@ -352,6 +352,7 @@ else ifneq (,$(findstring armv,$(platform)))
+    LDFLAGS +=  $(SHARED)
+    ARM_ENABLED = 1
+    X86_SH2DRC = 0
++ifeq (,$(findstring buildroot,$(platform)))
+ ifneq (,$(findstring cortexa8,$(platform)))
+    CCOMFLAGS += -marm -mcpu=cortex-a8
+    ASFLAGS += -mcpu=cortex-a8
+@@ -360,6 +361,7 @@ else ifneq (,$(findstring cortexa9,$(platform)))
+    ASFLAGS += -mcpu=cortex-a9
+ endif
+    CCOMFLAGS += -marm
++endif
+ ifneq (,$(findstring neon,$(platform)))
+    CCOMFLAGS += -mfpu=neon
+    ASFLAGS += -mfpu=neon
+-- 
+2.11.0
+

@@ -1,0 +1,587 @@
+From ec91c68690014125ce11c3ea3ba5388f50329831 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Tue, 14 May 2019 19:56:32 +0800
+Subject: [PATCH] sfc: performance: Async render_scanline
+
+---
+ Makefile                              |   2 +-
+ sfc/alt/ppu-performance/mmio/mmio.cpp | 113 ++++++++++++++++++----------------
+ sfc/alt/ppu-performance/ppu.cpp       |  41 +++++++++++-
+ sfc/alt/ppu-performance/ppu.hpp       |   8 +++
+ target-libretro/Makefile              |   2 +-
+ 5 files changed, 111 insertions(+), 55 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index e208c156..10737acf 100644
+--- a/Makefile
++++ b/Makefile
+@@ -32,7 +32,7 @@ sfc_lagfix := 1
+ ifeq ($(DEBUG), 1)
+   flags := -I. -Ilibco -O0 -g
+ else
+-  flags := -I. -Ilibco -O3 -fomit-frame-pointer
++  flags := -I. -Ilibco -Ofast -ffast-math -fomit-frame-pointer
+ endif
+ 
+ cflags := -std=gnu99 -xc
+diff --git a/sfc/alt/ppu-performance/mmio/mmio.cpp b/sfc/alt/ppu-performance/mmio/mmio.cpp
+index 46244e23..28748c6b 100644
+--- a/sfc/alt/ppu-performance/mmio/mmio.cpp
++++ b/sfc/alt/ppu-performance/mmio/mmio.cpp
+@@ -281,12 +281,14 @@ uint8 PPU::mmio_read(unsigned addr) {
+ void PPU::mmio_write(unsigned addr, uint8 data) {
+   cpu.synchronize_ppu();
+ 
++  pthread_mutex_lock(&render_mutex);
++
+   switch(addr & 0xffff) {
+   case 0x2100: {  //INIDISP
+     if(regs.display_disable && cpu.vcounter() == display.height) sprite.address_reset();
+     regs.display_disable = data & 0x80;
+     regs.display_brightness = data & 0x0f;
+-    return;
++    break;
+   }
+ 
+   case 0x2101: {  //OBSEL
+@@ -294,20 +296,20 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+     sprite.regs.nameselect = (data >> 3) & 3;
+     sprite.regs.tiledata_addr = (data & 3) << 14;
+     sprite.list_valid = false;
+-    return;
++    break;
+   }
+ 
+   case 0x2102: {  //OAMADDL
+     regs.oam_baseaddr = (regs.oam_baseaddr & 0x0100) | (data << 0);
+     sprite.address_reset();
+-    return;
++    break;
+   }
+ 
+   case 0x2103: {  //OAMADDH
+     regs.oam_priority = data & 0x80;
+     regs.oam_baseaddr = ((data & 1) << 8) | (regs.oam_baseaddr & 0x00ff);
+     sprite.address_reset();
+-    return;
++    break;
+   }
+ 
+   case 0x2104: {  //OAMDATA
+@@ -320,7 +322,7 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+     }
+     regs.oam_addr = (regs.oam_addr + 1) & 0x03ff;
+     sprite.set_first();
+-    return;
++    break;
+   }
+ 
+   case 0x2105: {  //BGMODE
+@@ -331,7 +333,7 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+     regs.bg3_priority = data & 0x08;
+     regs.bgmode = data & 0x07;
+     mmio_update_video_mode();
+-    return;
++    break;
+   }
+ 
+   case 0x2106: {  //MOSAIC
+@@ -340,43 +342,43 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+     bg3.regs.mosaic = (data & 0x04 ? mosaic_size : 0);
+     bg2.regs.mosaic = (data & 0x02 ? mosaic_size : 0);
+     bg1.regs.mosaic = (data & 0x01 ? mosaic_size : 0);
+-    return;
++    break;
+   }
+ 
+   case 0x2107: {  //BG1SC
+     bg1.regs.screen_addr = (data & 0x7c) << 9;
+     bg1.regs.screen_size = data & 3;
+-    return;
++    break;
+   }
+ 
+   case 0x2108: {  //BG2SC
+     bg2.regs.screen_addr = (data & 0x7c) << 9;
+     bg2.regs.screen_size = data & 3;
+-    return;
++    break;
+   }
+ 
+   case 0x2109: {  //BG3SC
+     bg3.regs.screen_addr = (data & 0x7c) << 9;
+     bg3.regs.screen_size = data & 3;
+-    return;
++    break;
+   }
+ 
+   case 0x210a: {  //BG4SC
+     bg4.regs.screen_addr = (data & 0x7c) << 9;
+     bg4.regs.screen_size = data & 3;
+-    return;
++    break;
+   }
+ 
+   case 0x210b: {  //BG12NBA
+     bg1.regs.tiledata_addr = (data & 0x07) << 13;
+     bg2.regs.tiledata_addr = (data & 0x70) <<  9;
+-    return;
++    break;
+   }
+ 
+   case 0x210c: {  //BG34NBA
+     bg3.regs.tiledata_addr = (data & 0x07) << 13;
+     bg4.regs.tiledata_addr = (data & 0x70) <<  9;
+-    return;
++    break;
+   }
+ 
+   case 0x210d: {  //BG1HOFS
+@@ -385,7 +387,7 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+ 
+     bg1.regs.hoffset = (data << 8) | (regs.bgofs_latchdata & ~7) | ((bg1.regs.hoffset >> 8) & 7);
+     regs.bgofs_latchdata = data;
+-    return;
++    break;
+   }
+ 
+   case 0x210e: {  //BG1VOFS
+@@ -394,43 +396,43 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+ 
+     bg1.regs.voffset = (data << 8) | regs.bgofs_latchdata;
+     regs.bgofs_latchdata = data;
+-    return;
++    break;
+   }
+ 
+   case 0x210f: {  //BG2HOFS
+     bg2.regs.hoffset = (data << 8) | (regs.bgofs_latchdata & ~7) | ((bg2.regs.hoffset >> 8) & 7);
+     regs.bgofs_latchdata = data;
+-    return;
++    break;
+   }
+ 
+   case 0x2110: {  //BG2VOFS
+     bg2.regs.voffset = (data << 8) | regs.bgofs_latchdata;
+     regs.bgofs_latchdata = data;
+-    return;
++    break;
+   }
+ 
+   case 0x2111: {  //BG3HOFS
+     bg3.regs.hoffset = (data << 8) | (regs.bgofs_latchdata & ~7) | ((bg3.regs.hoffset >> 8) & 7);
+     regs.bgofs_latchdata = data;
+-    return;
++    break;
+   }
+ 
+   case 0x2112: {  //BG3VOFS
+     bg3.regs.voffset = (data << 8) | regs.bgofs_latchdata;
+     regs.bgofs_latchdata = data;
+-    return;
++    break;
+   }
+ 
+   case 0x2113: {  //BG4HOFS
+     bg4.regs.hoffset = (data << 8) | (regs.bgofs_latchdata & ~7) | ((bg4.regs.hoffset >> 8) & 7);
+     regs.bgofs_latchdata = data;
+-    return;
++    break;
+   }
+ 
+   case 0x2114: {  //BG4VOFS
+     bg4.regs.voffset = (data << 8) | regs.bgofs_latchdata;
+     regs.bgofs_latchdata = data;
+-    return;
++    break;
+   }
+ 
+   case 0x2115: {  //VMAIN
+@@ -442,7 +444,7 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+     case 2: regs.vram_incsize = 128; break;
+     case 3: regs.vram_incsize = 128; break;
+     }
+-    return;
++    break;
+   }
+ 
+   case 0x2116: {  //VMADDL
+@@ -450,7 +452,7 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+     uint16 addr = get_vram_addr();
+     regs.vram_readbuffer  = vram_read(addr + 0) << 0;
+     regs.vram_readbuffer |= vram_read(addr + 1) << 8;
+-    return;
++    break;
+   }
+ 
+   case 0x2117: {  //VMADDH
+@@ -458,67 +460,67 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+     uint16 addr = get_vram_addr();
+     regs.vram_readbuffer  = vram_read(addr + 0) << 0;
+     regs.vram_readbuffer |= vram_read(addr + 1) << 8;
+-    return;
++    break;
+   }
+ 
+   case 0x2118: {  //VMDATAL
+     vram_write(get_vram_addr() + 0, data);
+     if(regs.vram_incmode == 0) regs.vram_addr += regs.vram_incsize;
+-    return;
++    break;
+   }
+ 
+   case 0x2119: {  //VMDATAH
+     vram_write(get_vram_addr() + 1, data);
+     if(regs.vram_incmode == 1) regs.vram_addr += regs.vram_incsize;
+-    return;
++    break;
+   }
+ 
+   case 0x211a: {  //M7SEL
+     regs.mode7_repeat = (data >> 6) & 3;
+     regs.mode7_vflip = data & 0x02;
+     regs.mode7_hflip = data & 0x01;
+-    return;
++    break;
+   }
+ 
+   case 0x211b: {  //M7A
+     regs.m7a = (data << 8) | regs.mode7_latchdata;
+     regs.mode7_latchdata = data;
+-    return;
++    break;
+   }
+ 
+   case 0x211c: {  //M7B
+     regs.m7b = (data << 8) | regs.mode7_latchdata;
+     regs.mode7_latchdata = data;
+-    return;
++    break;
+   }
+ 
+   case 0x211d: {  //M7C
+     regs.m7c = (data << 8) | regs.mode7_latchdata;
+     regs.mode7_latchdata = data;
+-    return;
++    break;
+   }
+ 
+   case 0x211e: {  //M7D
+     regs.m7d = (data << 8) | regs.mode7_latchdata;
+     regs.mode7_latchdata = data;
+-    return;
++    break;
+   }
+ 
+   case 0x211f: {  //M7X
+     regs.m7x = (data << 8) | regs.mode7_latchdata;
+     regs.mode7_latchdata = data;
+-    return;
++    break;
+   }
+ 
+   case 0x2120: {  //M7Y
+     regs.m7y = (data << 8) | regs.mode7_latchdata;
+     regs.mode7_latchdata = data;
+-    return;
++    break;
+   }
+ 
+   case 0x2121: {  //CGADD
+     regs.cgram_addr = data << 1;
+-    return;
++    break;
+   }
+ 
+   case 0x2122: {  //CGDATA
+@@ -529,7 +531,7 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+       cgram_write((regs.cgram_addr & ~1) + 1, data & 0x7f);
+     }
+     regs.cgram_addr = (regs.cgram_addr + 1) & 0x01ff;
+-    return;
++    break;
+   }
+ 
+   case 0x2123: {  //W12SEL
+@@ -541,7 +543,7 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+     bg1.window.two_invert = data & 0x04;
+     bg1.window.one_enable = data & 0x02;
+     bg1.window.one_invert = data & 0x01;
+-    return;
++    break;
+   }
+ 
+   case 0x2124: {  //W34SEL
+@@ -553,7 +555,7 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+     bg3.window.two_invert = data & 0x04;
+     bg3.window.one_enable = data & 0x02;
+     bg3.window.one_invert = data & 0x01;
+-    return;
++    break;
+   }
+ 
+   case 0x2125: {  //WOBJSEL
+@@ -565,27 +567,27 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+     sprite.window.two_invert = data & 0x04;
+     sprite.window.one_enable = data & 0x02;
+     sprite.window.one_invert = data & 0x01;
+-    return;
++    break;
+   }
+ 
+   case 0x2126: {  //WH0
+     regs.window_one_left = data;
+-    return;
++    break;
+   }
+ 
+   case 0x2127: {  //WH1
+     regs.window_one_right = data;
+-    return;
++    break;
+   }
+ 
+   case 0x2128: {  //WH2
+     regs.window_two_left = data;
+-    return;
++    break;
+   }
+ 
+   case 0x2129: {  //WH3
+     regs.window_two_right = data;
+-    return;
++    break;
+   }
+ 
+   case 0x212a: {  //WBGLOG
+@@ -593,13 +595,13 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+     bg3.window.mask = (data >> 4) & 3;
+     bg2.window.mask = (data >> 2) & 3;
+     bg1.window.mask = (data >> 0) & 3;
+-    return;
++    break;
+   }
+ 
+   case 0x212b: {  //WOBJLOG
+     screen.window.mask = (data >> 2) & 3;
+     sprite.window.mask = (data >> 0) & 3;
+-    return;
++    break;
+   }
+ 
+   case 0x212c: {  //TM
+@@ -608,7 +610,7 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+     bg3.regs.main_enable = data & 0x04;
+     bg2.regs.main_enable = data & 0x02;
+     bg1.regs.main_enable = data & 0x01;
+-    return;
++    break;
+   }
+ 
+   case 0x212d: {  //TS
+@@ -617,7 +619,7 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+     bg3.regs.sub_enable = data & 0x04;
+     bg2.regs.sub_enable = data & 0x02;
+     bg1.regs.sub_enable = data & 0x01;
+-    return;
++    break;
+   }
+ 
+   case 0x212e: {  //TMW
+@@ -626,7 +628,7 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+     bg3.window.main_enable = data & 0x04;
+     bg2.window.main_enable = data & 0x02;
+     bg1.window.main_enable = data & 0x01;
+-    return;
++    break;
+   }
+ 
+   case 0x212f: {  //TSW
+@@ -635,7 +637,7 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+     bg3.window.sub_enable = data & 0x04;
+     bg2.window.sub_enable = data & 0x02;
+     bg1.window.sub_enable = data & 0x01;
+-    return;
++    break;
+   }
+ 
+   case 0x2130: {  //CGWSEL
+@@ -643,7 +645,7 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+     screen.window.sub_mask = (data >> 4) & 3;
+     screen.regs.addsub_mode = data & 0x02;
+     screen.regs.direct_color = data & 0x01;
+-    return;
++    break;
+   }
+ 
+   case 0x2131: {  //CGADDSUB
+@@ -656,7 +658,7 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+     screen.regs.color_enable[2] = data & 0x04;
+     screen.regs.color_enable[1] = data & 0x02;
+     screen.regs.color_enable[0] = data & 0x01;
+-    return;
++    break;
+   }
+ 
+   case 0x2132: {  //COLDATA
+@@ -664,7 +666,7 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+     if(data & 0x40) screen.regs.color_g = data & 0x1f;
+     if(data & 0x20) screen.regs.color_r = data & 0x1f;
+     screen.regs.color = (screen.regs.color_b << 10) | (screen.regs.color_g << 5) | (screen.regs.color_r << 0);
+-    return;
++    break;
+   }
+ 
+   case 0x2133: {  //SETINI
+@@ -675,12 +677,17 @@ void PPU::mmio_write(unsigned addr, uint8 data) {
+     regs.interlace = data & 0x01;
+     mmio_update_video_mode();
+     sprite.list_valid = false;
+-    return;
++    break;
+   }
+   }
++
++  pthread_mutex_unlock(&render_mutex);
+ }
+ 
+ void PPU::mmio_reset() {
++
++  pthread_mutex_lock(&render_mutex);
++
+   //internal
+   regs.ppu1_mdr = 0;
+   regs.ppu2_mdr = 0;
+@@ -886,6 +893,8 @@ void PPU::mmio_reset() {
+   sprite.regs.range_over = 0;
+ 
+   mmio_update_video_mode();
++
++  pthread_mutex_unlock(&render_mutex);
+ }
+ 
+ #endif
+diff --git a/sfc/alt/ppu-performance/ppu.cpp b/sfc/alt/ppu-performance/ppu.cpp
+index b598cc70..c3cee939 100644
+--- a/sfc/alt/ppu-performance/ppu.cpp
++++ b/sfc/alt/ppu-performance/ppu.cpp
+@@ -27,6 +27,25 @@ void PPU::synchronize_cpu() {
+ 
+ void PPU::Enter() { ppu.enter(); }
+ 
++void *PPU::render_thread_fn(void *arg) {
++  PPU *ppu = (SuperFamicom::PPU *)arg;
++
++  while(true) {
++      pthread_mutex_lock(&ppu->render_mutex);
++      while (!ppu->render_busy)
++              pthread_cond_wait(&ppu->render_cond, &ppu->render_mutex);
++      pthread_mutex_unlock(&ppu->render_mutex);
++
++      ppu->render_scanline();
++      ppu->render_busy = 0;
++
++      pthread_mutex_lock(&ppu->render_mutex);
++      pthread_cond_signal(&ppu->render_cond);
++      pthread_mutex_unlock(&ppu->render_mutex);
++  }
++  return NULL;
++}
++
+ void PPU::enter() {
+   while(true) {
+     if(scheduler.sync == Scheduler::SynchronizeMode::All) {
+@@ -36,7 +55,15 @@ void PPU::enter() {
+     scanline();
+     if(vcounter() < display.height && vcounter()) {
+       add_clocks(512);
+-      render_scanline();
++
++      pthread_mutex_lock(&render_mutex);
++      while (render_busy)
++        pthread_cond_wait(&render_cond, &render_mutex);
++
++      render_busy = 1;
++      pthread_cond_signal(&render_cond);
++      pthread_mutex_unlock(&render_mutex);
++
+       add_clocks(lineclocks() - 512);
+     } else {
+       add_clocks(lineclocks());
+@@ -52,11 +79,17 @@ void PPU::add_clocks(unsigned clocks) {
+ 
+ void PPU::render_scanline() {
+   if(display.framecounter) return;  //skip this frame?
++
++  pthread_mutex_lock(&render_mutex);
+   bg1.scanline();
+   bg2.scanline();
+   bg3.scanline();
+   bg4.scanline();
++  pthread_mutex_unlock(&render_mutex);
++
+   if(regs.display_disable) return screen.render_black();
++
++  pthread_mutex_lock(&render_mutex);
+   screen.scanline();
+   bg1.render();
+   bg2.render();
+@@ -64,6 +97,7 @@ void PPU::render_scanline() {
+   bg4.render();
+   sprite.render();
+   screen.render();
++  pthread_mutex_unlock(&render_mutex);
+ }
+ 
+ void PPU::scanline() {
+@@ -141,6 +175,11 @@ screen(*this) {
+   display.height = 224;
+   display.frameskip = 0;
+   display.framecounter = 0;
++
++  render_busy = 0;
++  pthread_cond_init(&render_cond, NULL);
++  pthread_mutex_init(&render_mutex, NULL);
++  pthread_create(&render_thread, NULL, render_thread_fn, this);
+ }
+ 
+ PPU::~PPU() {
+diff --git a/sfc/alt/ppu-performance/ppu.hpp b/sfc/alt/ppu-performance/ppu.hpp
+index b3427e29..516209a1 100644
+--- a/sfc/alt/ppu-performance/ppu.hpp
++++ b/sfc/alt/ppu-performance/ppu.hpp
+@@ -1,3 +1,5 @@
++#include <pthread.h>
++
+ struct PPU : Thread, public PPUcounter {
+   uint8 vram[64 * 1024];
+   uint8 oam[544];
+@@ -58,6 +60,12 @@ private:
+   void add_clocks(unsigned clocks);
+   void render_scanline();
+ 
++  pthread_t render_thread;
++  volatile int render_busy;
++  pthread_cond_t render_cond;
++  pthread_mutex_t render_mutex;
++  static void *render_thread_fn(void *arg);
++
+   friend class PPU::Cache;
+   friend class PPU::Background;
+   friend class PPU::Sprite;
+diff --git a/target-libretro/Makefile b/target-libretro/Makefile
+index 997cd48b..56e316bf 100644
+--- a/target-libretro/Makefile
++++ b/target-libretro/Makefile
+@@ -46,7 +46,7 @@ obj/libretro-$(profile).o: $(ui)/libretro.cpp $(ui)/*
+ #targets
+ build: $(objects)
+ ifeq ($(platform),linux)
+-	$(compiler) -o out/bsnes_$(profile)_libretro.so -shared $(objects) -ldl -Wl,--no-undefined -Wl,--version-script=$(ui)/link.T
++	$(compiler) -o out/bsnes_$(profile)_libretro.so -shared $(objects) -ldl -Wl,--no-undefined -Wl,--version-script=$(ui)/link.T -lpthread
+ else ifneq (,$(findstring ios,$(platform)))
+   ifeq ($(platform),ios-arm64)
+ 		$(compiler) -o out/bsnes_$(profile)_libretro_ios.dylib -dynamiclib $(objects) -isysroot $(IOSSDK) -arch arm64
+-- 
+2.11.0
+

@@ -1,0 +1,91 @@
+diff --git a/src/io.c b/src/io.c
+index 05fdd06..06a7cd8 100644
+--- a/src/io.c
++++ b/src/io.c
+@@ -1691,17 +1691,12 @@ void *io_thread_sco(void *arg) {
+ 			const enum hfp_ind *inds = t->sco.rfcomm->rfcomm.hfp_inds;
+ 			if (sig == TRANSPORT_PCM_OPEN) {
+ 				info("Received transport pcm open event");
+-				/* Start a timer to wait for sco connection from
+-				 * AG. If timer is expired, connect to AG
+-				 */
+-				if (t->profile == BLUETOOTH_PROFILE_HFP_HF &&
+-				    inds[HFP_IND_CALL] == HFP_IND_CALL_ACTIVE)
+-					timeout_set(sco_timer, 3000);
+ 			}
+ 
+ 			if (sig == TRANSPORT_PCM_CLOSE) {
+ 				info("Received transport pcm close event");
+-				transport_release_bt_sco(t);
++				/* Don't disconnect SCO link positively */
++				/* transport_release_bt_sco(t); */
+ 				asrs.frames = 0;
+ 			}
+ 
+@@ -1876,15 +1871,9 @@ retry_sco_write:
+ 			 */
+ 
+ 			if (t->profile == BLUETOOTH_PROFILE_HFP_HF &&
+-			    inds[HFP_IND_CALL] == HFP_IND_CALL_NONE &&
+-			    inds[HFP_IND_CALLSETUP] == HFP_IND_CALLSETUP_NONE)
+-				release = true;
+-			if (release) {
+-				transport_release_bt_sco(t);
+-				asrs.frames = 0;
+-			} else {
++			    inds[HFP_IND_CALL] == HFP_IND_CALL_ACTIVE)
+ 				transport_acquire_bt_sco(t);
+-			}
++
+ 			continue;
+ 		}
+ 
+@@ -1903,22 +1892,11 @@ retry_sco_write:
+ 				error("Couldn't accept sco connection");
+ 				continue;
+ 			}
+-			/* For HFP HF we have to check if we are in the call
+-			 * stage or in the call setup stage. Otherwise, it might
+-			 * be not possible to acquire SCO connection. */
+-			if (t->profile == BLUETOOTH_PROFILE_HFP_HF &&
+-			    inds[HFP_IND_CALL] == HFP_IND_CALL_NONE &&
+-			    inds[HFP_IND_CALLSETUP] == HFP_IND_CALLSETUP_NONE)
+-				release = true;
+ 
+-			if (release) {
+-				transport_release_bt_sco(t);
+-				asrs.frames = 0;
+-			} else {
+-				transport_acquire_bt_sco2(t, sock);
+-				/* Kill timer that is used to create sco link */
+-				timeout_set(sco_timer, 0);
+-			}
++			transport_acquire_bt_sco2(t, sock);
++			/* Kill timer that is used to create sco link */
++			timeout_set(sco_timer, 0);
++
+ 			continue;
+ 		}
+ 
+diff --git a/src/rfcomm.c b/src/rfcomm.c
+index 1e32b46..64df3b1 100644
+--- a/src/rfcomm.c
++++ b/src/rfcomm.c
+@@ -240,9 +240,11 @@ static int rfcomm_handler_ciev_resp_cb(struct rfcomm_conn *c, const struct bt_at
+ 			if (value == 1)
+ 				transport_send_signal(t->rfcomm.sco,
+ 						      TRANSPORT_PCM_OPEN);
+-			else if (value == 0)
+-				transport_send_signal(t->rfcomm.sco,
+-						      TRANSPORT_PCM_CLOSE);
++			/* Don't trigger SCO thread to disconnect SCO link */
++			/* else if (value == 0)
++			 * 	transport_send_signal(t->rfcomm.sco,
++			 * 			      TRANSPORT_PCM_CLOSE);
++			 */
+ 			break;
+ 		case HFP_IND_CALLSETUP:
+ 			break;
+-- 
+2.17.1
+

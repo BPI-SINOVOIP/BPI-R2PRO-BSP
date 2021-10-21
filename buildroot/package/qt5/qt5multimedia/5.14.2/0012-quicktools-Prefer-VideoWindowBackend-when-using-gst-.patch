@@ -1,0 +1,60 @@
+From f5a229aeb94da8cdd9d21944ca346e519fcdcabd Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Fri, 15 Jan 2021 16:27:59 +0800
+Subject: [PATCH 12/12] quicktools: Prefer VideoWindowBackend when using gst
+ sink
+
+Prefer VideoWindowBackend for video overlay.
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ .../qdeclarativevideooutput.cpp                      | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/src/qtmultimediaquicktools/qdeclarativevideooutput.cpp b/src/qtmultimediaquicktools/qdeclarativevideooutput.cpp
+index 3216650..203ab4b 100644
+--- a/src/qtmultimediaquicktools/qdeclarativevideooutput.cpp
++++ b/src/qtmultimediaquicktools/qdeclarativevideooutput.cpp
+@@ -238,6 +238,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(QMediaPluginLoader, videoBackendFactoryLoader,
+ bool QDeclarativeVideoOutput::createBackend(QMediaService *service)
+ {
+     bool backendAvailable = false;
++    bool preferWindowBackend = !qgetenv( "QT_GSTREAMER_WINDOW_VIDEOSINK" ).isEmpty();
+ 
+     const auto instances = videoBackendFactoryLoader()->instances(QLatin1String("declarativevideobackend"));
+     for (QObject *instance : instances) {
+@@ -249,8 +250,10 @@ bool QDeclarativeVideoOutput::createBackend(QMediaService *service)
+             }
+         }
+     }
++
++retry:
+ #if QT_CONFIG(opengl)
+-    if (!backendAvailable) {
++    if (!backendAvailable && !preferWindowBackend) {
+         m_backend.reset(new QDeclarativeVideoRendererBackend(this));
+         if (m_backend->init(service))
+             backendAvailable = true;
+@@ -259,13 +262,18 @@ bool QDeclarativeVideoOutput::createBackend(QMediaService *service)
+ 
+     // QDeclarativeVideoWindowBackend only works when there is a service with a QVideoWindowControl.
+     // Without service, the QDeclarativeVideoRendererBackend should always work.
+-    if (!backendAvailable) {
++    if (!backendAvailable && service) {
+         Q_ASSERT(service);
+         m_backend.reset(new QDeclarativeVideoWindowBackend(this));
+         if (m_backend->init(service))
+             backendAvailable = true;
+     }
+ 
++    if (!backendAvailable && preferWindowBackend) {
++        preferWindowBackend = false;
++        goto retry;
++    }
++
+     if (backendAvailable) {
+         // Since new backend has been created needs to update its geometry.
+         m_geometryDirty = true;
+-- 
+2.20.1
+

@@ -1,0 +1,26 @@
+From 5547329e1758e0bfe82fe6a44be314144c3fefaf Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Thu, 31 Jan 2019 22:14:42 +0800
+Subject: [PATCH] armsnes: port: Disable FAST_LSB_WORD_ACCESS
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ src/port.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/port.h b/src/port.h
+index ac16405..fa44430 100644
+--- a/src/port.h
++++ b/src/port.h
+@@ -98,7 +98,7 @@ typedef short		int16_32;
+ #define PACKING __attribute__ ((packed))
+ #define ALIGN_BY_ONE  __attribute__ ((aligned (1), packed))
+ #define LSB_FIRST
+-#define FAST_LSB_WORD_ACCESS
++//#define FAST_LSB_WORD_ACCESS
+ #define SUPER_FX
+ 
+ EXTERN_C void S9xGenerateSound ();
+-- 
+2.11.0
+

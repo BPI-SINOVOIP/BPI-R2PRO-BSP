@@ -1,0 +1,126 @@
+From 0731915698fbec021b2894e2f7cdadcc91eac84c Mon Sep 17 00:00:00 2001
+From: Alexandros Frantzis <alexandros.frantzis@collabora.com>
+Date: Thu, 18 Feb 2021 11:43:12 +0200
+Subject: [PATCH] GLStateEGL: Avoid creating two EGLDisplay instances
+
+The current code calls the gladLoadEGLUserPtr() function twice, first to
+initialize some basic EGL function pointers so that we can then select
+and create an EGLDisplay, and the second time to perform the full
+initialization with the created EGLDisplay. This approach ends up
+creating two EGL displays (the first internally in glad), which can
+cause issues on some platforms.
+
+This commit removes the first call to gladLoadEGLUserPtr(), replacing it
+with manual loading of required EGL functions, thus avoiding creating
+two EGLDisplays. The EGL functions we load manually are all in EGL 1.0,
+so it's safe to use them without any additional version checks.
+
+(cherry picked from commit 9b8f7f8a880737a14bece6bd7dffb321f6596e4d)
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ src/gl-state-egl.cpp | 45 +++++++++++++++++++++++++++++---------------
+ 1 file changed, 30 insertions(+), 15 deletions(-)
+
+diff --git a/src/gl-state-egl.cpp b/src/gl-state-egl.cpp
+index b299f86..af341d5 100644
+--- a/src/gl-state-egl.cpp
++++ b/src/gl-state-egl.cpp
+@@ -317,11 +317,6 @@ GLStateEGL::init_display(void* native_display, GLVisualConfig& visual_config)
+         return false;
+     }
+ 
+-    if (gladLoadEGLUserPtr(EGL_NO_DISPLAY, load_egl_func, &egl_lib_) == 0) {
+-        Log::error("Loading EGL entry points failed\n");
+-        return false;
+-    }
+-
+     native_display_ = reinterpret_cast<EGLNativeDisplayType>(native_display);
+     requested_visual_config_ = visual_config;
+ 
+@@ -470,19 +465,37 @@ GLStateEGL::gotValidDisplay()
+     if (egl_display_)
+         return true;
+ 
++    /* Until we initialize glad EGL, load and use our own function pointers. */
++    PFNEGLQUERYSTRINGPROC egl_query_string =
++        reinterpret_cast<PFNEGLQUERYSTRINGPROC>(egl_lib_.load("eglQueryString"));
++    PFNEGLGETPROCADDRESSPROC egl_get_proc_address =
++        reinterpret_cast<PFNEGLGETPROCADDRESSPROC>(egl_lib_.load("eglGetProcAddress"));
++    PFNEGLGETERRORPROC egl_get_error =
++        reinterpret_cast<PFNEGLGETERRORPROC>(egl_lib_.load("eglGetError"));
++    PFNEGLGETDISPLAYPROC egl_get_display =
++        reinterpret_cast<PFNEGLGETDISPLAYPROC>(egl_lib_.load("eglGetDisplay"));
++    PFNEGLINITIALIZEPROC egl_initialize =
++        reinterpret_cast<PFNEGLINITIALIZEPROC>(egl_lib_.load("eglInitialize"));
++
++    if (!egl_query_string || !egl_get_proc_address || !egl_get_error ||
++        !egl_get_display || !egl_initialize)
++    {
++        return false;
++    }
++
+     char const * __restrict const supported_extensions =
+-        eglQueryString(EGL_NO_DISPLAY, EGL_EXTENSIONS);
++        egl_query_string(EGL_NO_DISPLAY, EGL_EXTENSIONS);
+ 
+     if (GLMARK2_NATIVE_EGL_DISPLAY_ENUM != 0 && supported_extensions
+         && strstr(supported_extensions, "EGL_EXT_platform_base"))
+     {
+         Log::debug("Using eglGetPlatformDisplayEXT()\n");
+-        PFNEGLGETPLATFORMDISPLAYEXTPROC get_platform_display =
++        PFNEGLGETPLATFORMDISPLAYEXTPROC egl_get_platform_display =
+             reinterpret_cast<PFNEGLGETPLATFORMDISPLAYEXTPROC>(
+-                eglGetProcAddress("eglGetPlatformDisplayEXT"));
++                egl_get_proc_address("eglGetPlatformDisplayEXT"));
+ 
+-        if (get_platform_display != nullptr) {
+-            egl_display_ = get_platform_display(
++        if (egl_get_platform_display != nullptr) {
++            egl_display_ = egl_get_platform_display(
+                 GLMARK2_NATIVE_EGL_DISPLAY_ENUM,
+                 reinterpret_cast<void*>(native_display_),
+                 nullptr);
+@@ -490,7 +503,7 @@ GLStateEGL::gotValidDisplay()
+ 
+         if (!egl_display_) {
+             Log::debug("eglGetPlatformDisplayEXT() failed with error: 0x%x\n",
+-                       eglGetError());
++                       egl_get_error());
+         }
+     }
+     else
+@@ -501,18 +514,18 @@ GLStateEGL::gotValidDisplay()
+     /* Just in case get_platform_display failed... */
+     if (!egl_display_) {
+         Log::debug("Falling back to eglGetDisplay()\n");
+-        egl_display_ = eglGetDisplay(native_display_);
++        egl_display_ = egl_get_display(native_display_);
+     }
+ 
+     if (!egl_display_) {
+-        Log::error("eglGetDisplay() failed with error: 0x%x\n", eglGetError());
++        Log::error("eglGetDisplay() failed with error: 0x%x\n", egl_get_error());
+         return false;
+     }
+ 
+     int egl_major(-1);
+     int egl_minor(-1);
+-    if (!eglInitialize(egl_display_, &egl_major, &egl_minor)) {
+-        Log::error("eglInitialize() failed with error: 0x%x\n", eglGetError());
++    if (!egl_initialize(egl_display_, &egl_major, &egl_minor)) {
++        Log::error("eglInitialize() failed with error: 0x%x\n", egl_get_error());
+         egl_display_ = 0;
+         return false;
+     }
+@@ -523,6 +536,8 @@ GLStateEGL::gotValidDisplay()
+         return false;
+     }
+ 
++    /* From this point on we can use the normal EGL function calls. */
++
+ #if GLMARK2_USE_GLESv2
+     EGLenum apiType(EGL_OPENGL_ES_API);
+ #if defined(WIN32)
+-- 
+2.20.1
+

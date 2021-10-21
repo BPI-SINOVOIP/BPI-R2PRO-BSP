@@ -1,0 +1,38 @@
+From ad8cd55c384fd269baf919564d5d828f4ad25ddb Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Tue, 30 Mar 2021 06:43:30 +0800
+Subject: [PATCH 23/23] qnamespace: Add FlushMode
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ src/corelib/global/qnamespace.h | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/src/corelib/global/qnamespace.h b/src/corelib/global/qnamespace.h
+index ad4150b3..36e9a787 100644
+--- a/src/corelib/global/qnamespace.h
++++ b/src/corelib/global/qnamespace.h
+@@ -1237,6 +1237,12 @@ public:
+         KeepAspectRatioByExpanding
+     };
+ 
++    enum FlushMode {
++        EmptyFrame,
++        FirstFrame,
++        LastFrame
++    };
++
+     enum DockWidgetArea {
+         LeftDockWidgetArea = 0x1,
+         RightDockWidgetArea = 0x2,
+@@ -1821,6 +1827,7 @@ public:
+     QT_Q_ENUM(CursorShape)
+     QT_Q_ENUM(GlobalColor)
+     QT_Q_ENUM(AspectRatioMode)
++    QT_Q_ENUM(FlushMode)
+     QT_Q_ENUM(TransformationMode)
+     QT_Q_FLAG(ImageConversionFlags)
+     QT_Q_ENUM(Key)
+-- 
+2.20.1
+

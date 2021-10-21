@@ -1,0 +1,65 @@
+From f20d5e3a9a416121715a22ae101e8808757d229d Mon Sep 17 00:00:00 2001
+From: Inho Lee <inho.lee@qt.io>
+Date: Mon, 20 Apr 2020 12:46:56 +0200
+Subject: [PATCH 02/18] Fix build error for -no-opengl
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Task-number: QTBUG-83653
+Change-Id: I604562fdc96c250eabba08d7fa8a9ec8f21cbbd1
+Reviewed-by: Tony Sarajärvi <tony.sarajarvi@qt.io>
+(cherry picked from commit 28e7d940c42c47cf039522709883ae3de9f4fb88)
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ src/compositor/configure.json            | 2 +-
+ src/compositor/extensions/extensions.pri | 6 +++++-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/src/compositor/configure.json b/src/compositor/configure.json
+index 0dbb33643..913f8dedf 100644
+--- a/src/compositor/configure.json
++++ b/src/compositor/configure.json
+@@ -163,7 +163,7 @@
+         "wayland-compositor-quick": {
+             "label": "QtQuick integration for wayland compositor",
+             "purpose": "Allows QtWayland compositor types to be used with QtQuick",
+-            "condition": "features.wayland-server && module.quick && features.opengl",
++            "condition": "features.wayland-server && module.quick",
+             "output": [ "publicFeature" ]
+         }
+     },
+diff --git a/src/compositor/extensions/extensions.pri b/src/compositor/extensions/extensions.pri
+index 06e3ef9ee..64b1439bf 100644
+--- a/src/compositor/extensions/extensions.pri
++++ b/src/compositor/extensions/extensions.pri
+@@ -8,7 +8,6 @@ WAYLANDSERVERSOURCES += \
+     ../extensions/touch-extension.xml \
+     ../extensions/qt-key-unstable-v1.xml \
+     ../extensions/qt-windowmanager.xml \
+-    ../extensions/qt-texture-sharing-unstable-v1.xml \
+     ../3rdparty/protocol/text-input-unstable-v2.xml \
+     ../3rdparty/protocol/viewporter.xml \
+     ../3rdparty/protocol/scaler.xml \
+@@ -75,6 +74,8 @@ SOURCES += \
+     extensions/qwaylandivisurface.cpp \
+ 
+ qtHaveModule(quick) {
++    QT += quick quick-private
++
+     HEADERS += \
+         extensions/qwaylandquickshellintegration.h \
+         extensions/qwaylandquickshellsurfaceitem.h \
+@@ -97,6 +98,9 @@ qtHaveModule(quick) {
+         extensions/qwaylandxdgshellintegration.cpp \
+ 
+     qtConfig(opengl) {
++        WAYLANDSERVERSOURCES += \
++            ../extensions/qt-texture-sharing-unstable-v1.xml
++
+         HEADERS += \
+             extensions/qwltexturesharingextension_p.h
+ 
+-- 
+2.20.1
+

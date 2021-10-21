@@ -1,0 +1,54 @@
+From 4f2545c0ebf299888828df789a5654a38f4f05e4 Mon Sep 17 00:00:00 2001
+From: Johan Klokkhammer Helsing <johan.helsing@qt.io>
+Date: Tue, 11 Feb 2020 15:45:32 +0100
+Subject: [PATCH 06/23] Client: Workaround for
+ QPlatformWindow::setVisible(true) being called twice
+
+Fixes a crash.
+
+Otherwise we created two shell surface objects in some cases.
+
+Change-Id: Ieded56261061da6acf27ccabba81c8f578ca1596
+Reviewed-by: Pier Luigi Fiorini <pierluigi.fiorini@liri.io>
+(cherry picked from commit 061e29274712f51d982eb29286229f0fca6e464d)
+
+Conflicts:
+	src/client/qwaylandwindow_p.h
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ src/client/qwaylandwindow.cpp | 5 +++++
+ src/client/qwaylandwindow_p.h | 1 +
+ 2 files changed, 6 insertions(+)
+
+diff --git a/src/client/qwaylandwindow.cpp b/src/client/qwaylandwindow.cpp
+index 63620970..95822acc 100644
+--- a/src/client/qwaylandwindow.cpp
++++ b/src/client/qwaylandwindow.cpp
+@@ -373,6 +373,11 @@ QWaylandScreen *QWaylandWindow::calculateScreenFromSurfaceEvents() const
+ 
+ void QWaylandWindow::setVisible(bool visible)
+ {
++    // Workaround for issue where setVisible may be called with the same value twice
++    if (lastVisible == visible)
++        return;
++    lastVisible = visible;
++
+     if (visible) {
+         if (window()->type() == Qt::Popup)
+             activePopups << this;
+diff --git a/src/client/qwaylandwindow_p.h b/src/client/qwaylandwindow_p.h
+index 41f8f185..912f875a 100644
+--- a/src/client/qwaylandwindow_p.h
++++ b/src/client/qwaylandwindow_p.h
+@@ -271,6 +271,7 @@ private:
+     void handleMouseEventWithDecoration(QWaylandInputDevice *inputDevice, const QWaylandPointerEvent &e);
+ 
+     bool mUpdateRequested;
++    bool lastVisible = false;
+ 
+     static const wl_callback_listener callbackListener;
+     static void frameCallback(void *data, struct wl_callback *wl_callback, uint32_t time);
+-- 
+2.20.1
+

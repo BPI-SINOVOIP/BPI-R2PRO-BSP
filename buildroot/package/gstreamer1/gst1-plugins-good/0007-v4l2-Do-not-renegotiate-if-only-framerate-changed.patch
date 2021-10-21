@@ -1,0 +1,63 @@
+From 0b9aeeac3263db3d6ca7df386852057570c1c33e Mon Sep 17 00:00:00 2001
+From: Xavier Claessens <xavier.claessens@collabora.com>
+Date: Tue, 26 May 2020 10:27:35 -0400
+Subject: [PATCH 7/7] v4l2: Do not renegotiate if only framerate changed
+
+Part-of: <https://gitlab.freedesktop.org/gstreamer/gst-plugins-good/-/merge_requests/602>
+(cherry picked from commit c187684b783378881d9ef94ce8c0d635a74b3a33)
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ sys/v4l2/gstv4l2videodec.c | 30 +++++++++++++++++++++++++++++-
+ 1 file changed, 29 insertions(+), 1 deletion(-)
+
+diff --git a/sys/v4l2/gstv4l2videodec.c b/sys/v4l2/gstv4l2videodec.c
+index 838ebff24..ca1eef34e 100644
+--- a/sys/v4l2/gstv4l2videodec.c
++++ b/sys/v4l2/gstv4l2videodec.c
+@@ -225,6 +225,34 @@ gst_v4l2_video_dec_stop (GstVideoDecoder * decoder)
+   return TRUE;
+ }
+ 
++static gboolean
++compatible_caps (GstV4l2VideoDec * self, GstCaps * new_caps)
++{
++  GstCaps *current_caps, *caps1, *caps2;
++  GstStructure *s;
++  gboolean ret;
++
++  current_caps = gst_v4l2_object_get_current_caps (self->v4l2output);
++  if (!current_caps)
++    return FALSE;
++
++  caps1 = gst_caps_copy (current_caps);
++  s = gst_caps_get_structure (caps1, 0);
++  gst_structure_remove_field (s, "framerate");
++
++  caps2 = gst_caps_copy (new_caps);
++  s = gst_caps_get_structure (caps2, 0);
++  gst_structure_remove_field (s, "framerate");
++
++  ret = gst_caps_is_equal (caps1, caps2);
++
++  gst_caps_unref (caps1);
++  gst_caps_unref (caps2);
++  gst_caps_unref (current_caps);
++
++  return ret;
++}
++
+ static gboolean
+ gst_v4l2_video_dec_set_format (GstVideoDecoder * decoder,
+     GstVideoCodecState * state)
+@@ -236,7 +264,7 @@ gst_v4l2_video_dec_set_format (GstVideoDecoder * decoder,
+   GST_DEBUG_OBJECT (self, "Setting format: %" GST_PTR_FORMAT, state->caps);
+ 
+   if (self->input_state) {
+-    if (gst_v4l2_object_caps_equal (self->v4l2output, state->caps)) {
++    if (compatible_caps (self, state->caps)) {
+       GST_DEBUG_OBJECT (self, "Compatible caps");
+       goto done;
+     }
+-- 
+2.20.1
+

@@ -1,0 +1,41 @@
+#!/bin/sh
+
+# Uncomment below to see more logs
+# set -x
+
+mount_start()
+{
+	insmod /lib/modules/dw_mmc-rockchip.ko &
+	cnt=0
+	while [ 1 ]
+	do
+		SDMMC_BLK=`ls /dev/mmcblk2`
+		if [ ! -z $SDMMC_BLK ]; then
+			break
+		fi
+		if [ $cnt -gt 10 ]; then
+			"Not found sdcard within one second"
+			exit
+		fi
+		let cnt+=1
+		sleep .1
+	done
+	mount /dev/mmcblk2p1 /mnt
+	echo "mount sdcard to /mnt ok" > /dev/kmsg
+	if [ $? == 0 ]; then
+		exit
+	fi
+	mount /dev/mmcblk2 /mnt
+}
+
+case "$1" in
+	start)
+		mount_start &
+		;;
+	stop)
+		;;
+	*)
+		echo "Usage: $0 {start|stop}"
+		exit 1
+		;;
+esac

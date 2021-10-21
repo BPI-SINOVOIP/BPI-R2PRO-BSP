@@ -1,0 +1,83 @@
+From f486d81803844092a101f52dceb922049c437d8b Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Mon, 17 Sep 2018 15:32:19 +0800
+Subject: [PATCH 1/4] Add support for arm/arm64
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ makefile              | 20 ++++++++++++++++++++
+ scripts/toolchain.lua |  9 +++++++++
+ 2 files changed, 29 insertions(+)
+
+diff --git a/makefile b/makefile
+index f4e2b9f642..25bdb9475d 100644
+--- a/makefile
++++ b/makefile
+@@ -1195,8 +1195,18 @@ endif
+ # gmake-linux
+ #-------------------------------------------------
+ 
++ifeq ($(PLATFORM),arm)
++$(PROJECTDIR)/gmake-linux/Makefile: makefile $(SCRIPTS) $(GENIE)
++	$(SILENT) $(GENIE) $(PARAMS) $(TARGET_PARAMS) --gcc=linux-arm --gcc_version=$(GCC_VERSION) gmake
++else
++ifeq ($(PLATFORM),arm64)
++$(PROJECTDIR)/gmake-linux/Makefile: makefile $(SCRIPTS) $(GENIE)
++	$(SILENT) $(GENIE) $(PARAMS) $(TARGET_PARAMS) --gcc=linux-arm64 --gcc_version=$(GCC_VERSION) gmake
++else
+ $(PROJECTDIR)/gmake-linux/Makefile: makefile $(SCRIPTS) $(GENIE)
+ 	$(SILENT) $(GENIE) $(PARAMS) $(TARGET_PARAMS) --gcc=linux-gcc --gcc_version=$(GCC_VERSION) gmake
++endif
++endif
+ 
+ .PHONY: linux_x64
+ linux_x64: generate $(PROJECTDIR)/gmake-linux/Makefile
+@@ -1217,8 +1227,18 @@ linux: generate $(PROJECTDIR)/gmake-linux/Makefile
+ # gmake-linux-clang
+ #-------------------------------------------------
+ 
++ifeq ($(PLATFORM),arm)
++$(PROJECTDIR)/gmake-linux-clang/Makefile: makefile $(SCRIPTS) $(GENIE)
++	$(SILENT) $(GENIE) $(PARAMS) $(TARGET_PARAMS) --gcc=linux-arm --gcc_version=$(CLANG_VERSION) gmake
++else
++ifeq ($(PLATFORM),arm64)
++$(PROJECTDIR)/gmake-linux-clang/Makefile: makefile $(SCRIPTS) $(GENIE)
++	$(SILENT) $(GENIE) $(PARAMS) $(TARGET_PARAMS) --gcc=linux-arm64 --gcc_version=$(CLANG_VERSION) gmake
++else
+ $(PROJECTDIR)/gmake-linux-clang/Makefile: makefile $(SCRIPTS) $(GENIE)
+ 	$(SILENT) $(GENIE) $(PARAMS) $(TARGET_PARAMS) --gcc=linux-clang --gcc_version=$(CLANG_VERSION) gmake
++endif
++endif
+ 
+ .PHONY: linux_x64_clang
+ linux_x64_clang: generate $(PROJECTDIR)/gmake-linux-clang/Makefile
+diff --git a/scripts/toolchain.lua b/scripts/toolchain.lua
+index 6e014eaa78..8eaaf99a46 100644
+--- a/scripts/toolchain.lua
++++ b/scripts/toolchain.lua
+@@ -23,6 +23,8 @@ newoption {
+ 		{ "android-x64",   "Android - x64"          },
+ 		{ "asmjs",         "Emscripten/asm.js"      },
+ 		{ "freebsd",       "FreeBSD"                },
++		{ "linux-arm",     "Linux - ARM"            },
++		{ "linux-arm64",   "Linux - ARM64"          },
+ 		{ "linux-gcc",     "Linux (GCC compiler)"   },
+ 		{ "linux-clang",   "Linux (Clang compiler)" },
+ 		{ "ios-arm",       "iOS - ARM"              },
+@@ -230,6 +232,13 @@ function toolchain(_buildDir, _subDir)
+ 			location (_buildDir .. "projects/" .. _subDir .. "/".. _ACTION .. "-ios-simulator")
+ 		end
+ 
++		if "linux-arm*" ~= _OPTIONS["gcc"] then
++			premake.gcc.cc  = toolchainPrefix .. "gcc"
++			premake.gcc.cxx = toolchainPrefix .. "g++"
++			premake.gcc.ar = toolchainPrefix .. "ar"
++			location (_buildDir .. "projects/" .. _subDir .. "/".. _ACTION .. "-linux")
++		end
++
+ 		if "linux-gcc" == _OPTIONS["gcc"] then
+ 			-- Force gcc-4.2 on ubuntu-intrepid
+ 			if _OPTIONS["distro"]=="ubuntu-intrepid" then
+-- 
+2.11.0
+

@@ -1,0 +1,33 @@
+From df38eb320ab82802885e875335e8e75808e60ab7 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Fri, 23 Nov 2018 11:46:02 +0800
+Subject: [PATCH 1/3] Skip cpu settings for buildroot
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ Makefile | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/Makefile b/Makefile
+index 622b0b0..169d7b2 100644
+--- a/Makefile
++++ b/Makefile
+@@ -223,6 +223,7 @@ else ifneq (,$(findstring armv,$(platform)))
+ 	TARGET := $(TARGET_NAME)_libretro.so
+ 	fpic := -fPIC
+ 	SHARED := -shared -Wl,-version-script=link.T -Wl,-no-undefined
++	ifeq (,$(findstring buildroot,$(platform)))
+ 	ifneq (,$(findstring cortexa5,$(platform)))
+ 		PLATFORM_DEFINES += -marm -mcpu=cortex-a5
+ 	else ifneq (,$(findstring cortexa8,$(platform)))
+@@ -239,6 +240,7 @@ else ifneq (,$(findstring armv,$(platform)))
+ 	else ifneq (,$(findstring hardfloat,$(platform)))
+ 		PLATFORM_DEFINES += -mfloat-abi=hard
+ 	endif
++	endif
+ 	PLATFORM_DEFINES += -DARM
+ 
+ else ifeq ($(platform), emscripten)
+-- 
+2.11.0
+

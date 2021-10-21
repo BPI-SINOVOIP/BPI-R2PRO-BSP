@@ -1,0 +1,27 @@
+From 10745a0f67a8c89733e965a475feb53b9557858b Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Mon, 26 Jul 2021 17:07:44 +0800
+Subject: [PATCH 13/15] qwaylandwindow: Clear mWaitingToApplyConfigure when
+ reset
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ src/client/qwaylandwindow.cpp | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/client/qwaylandwindow.cpp b/src/client/qwaylandwindow.cpp
+index 50cd0cf9..3610fc3c 100644
+--- a/src/client/qwaylandwindow.cpp
++++ b/src/client/qwaylandwindow.cpp
+@@ -243,6 +243,8 @@ bool QWaylandWindow::shouldCreateSubSurface() const
+ 
+ void QWaylandWindow::reset()
+ {
++    mWaitingToApplyConfigure = false;
++
+     delete mShellSurface;
+     mShellSurface = nullptr;
+     delete mSubSurfaceWindow;
+-- 
+2.20.1
+

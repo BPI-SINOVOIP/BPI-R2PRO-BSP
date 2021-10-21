@@ -1,0 +1,40 @@
+From 7813ffd04d40898aa8e2f1e1658cd8cddbaefa9b Mon Sep 17 00:00:00 2001
+From: Johan Klokkhammer Helsing <johan.helsing@qt.io>
+Date: Wed, 5 Jun 2019 13:10:38 +0200
+Subject: [PATCH 01/23] Client: Don't add all windows to activePopups
+
+Neither Qt::ToolTip nor Qt::Popup are single bits in Qt::WindowFlags, and do in
+fact include Qt::Window. This meant that when we or'ed them and did a bitwise
+and with QWindow::type(), we would match more types than just Qt::Popup and
+Qt::ToolTip. We would for instance get any Qt::Window as well, which meant the
+main window would be added to activePopups, leading to strange things
+happening, such as crashes and the main window closing unexpectedly.
+
+[ChangeLog][QPA plugin] Fixed a crash when closing multiple popups at once.
+
+Fixes: QTBUG-76124
+Change-Id: I1a6a59e161a436604a7ac8ab824396481dc99a20
+Reviewed-by: Paul Olav Tvete <paul.tvete@qt.io>
+
+(cherry picked from commit af9ec8a76d7e62444fadb518256fc58723fe5186)
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ src/client/qwaylandwindow.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/client/qwaylandwindow.cpp b/src/client/qwaylandwindow.cpp
+index c46c4981..bdd77b14 100644
+--- a/src/client/qwaylandwindow.cpp
++++ b/src/client/qwaylandwindow.cpp
+@@ -384,7 +384,7 @@ QWaylandScreen *QWaylandWindow::calculateScreenFromSurfaceEvents() const
+ void QWaylandWindow::setVisible(bool visible)
+ {
+     if (visible) {
+-        if (window()->type() & (Qt::Popup | Qt::ToolTip))
++        if (window()->type() == Qt::Popup || window()->type() == Qt::ToolTip)
+             activePopups << this;
+         initWindow();
+         mDisplay->flushRequests();
+-- 
+2.20.1
+

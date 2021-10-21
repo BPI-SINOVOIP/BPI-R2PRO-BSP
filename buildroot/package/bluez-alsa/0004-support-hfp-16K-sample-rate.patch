@@ -1,0 +1,153 @@
+diff --git a/src/rfcomm.c b/src/rfcomm.c
+index 86c0d4d..00dd9ab 100644
+--- a/src/rfcomm.c
++++ b/src/rfcomm.c
+@@ -417,23 +417,39 @@ static int rfcomm_handler_bcs_set_cb(struct rfcomm_conn *c, const struct bt_at *
+ 
+ static int rfcomm_handler_resp_bcs_ok_cb(struct rfcomm_conn *c, const struct bt_at *at) {
+ 	struct ba_transport * const t = c->t;
+-	struct ba_transport *t_sco;
+-	struct bt_voice voice = {
+-		.setting = BT_VOICE_CVSD_16BIT,
++
++	/* XXX: this param should be read from rtl8xxx_config */
++	struct pcmif_param {
++		uint8_t pcmifctrl1[2];
++		uint8_t pcmifctrl2[2];
++		uint8_t pcmifctrl3[2];
++		uint8_t pcmconv;
++		uint8_t scoconv;
++		uint8_t hci_ext_codec;
++	} pcmif = {
++		0x83, 0x10,
++		0x00, 0x00,
++		0x12, 0x80,
++		0x00,
++		0x00,
++		0x01
+ 	};
+ 
+ 	if (rfcomm_handler_resp_ok_cb(c, at) != 0)
+ 		return -1;
+ 
+-	/* Change voice setting according to codec */
+-	if (t->rfcomm.sco->codec == HFP_CODEC_MSBC)
+-		voice.setting = BT_VOICE_TRANSPARENT;
+-	t_sco = t->rfcomm.sco;
+-	if (setsockopt(t_sco->sco.listen_fd, SOL_BLUETOOTH, BT_VOICE,
+-		       &voice, sizeof(voice)) == -1) {
+-		error("setsockopt BT_VOICE error %d, %s", errno,
+-		      strerror(errno));
+-		return 0;
++	if (t->rfcomm.sco->codec == HFP_CODEC_MSBC) {
++		pcmif.hci_ext_codec = 0x41;
++		pcmif.pcmifctrl3[1] = 0x04;
++	} else if (t->rfcomm.sco->codec == HFP_CODEC_CVSD) {
++		pcmif.hci_ext_codec = 0x01;
++		pcmif.pcmifctrl3[1] = 0x80;
++	}
++
++	if (hci_submit_cmd_wait(0x3f, 0x93, (uint8_t *)&pcmif,
++				sizeof(pcmif)) < 0) {
++		error("Couldn't set controller pcm interface");
++		return -1;
+ 	}
+ 
+ 	/* When codec selection is completed, notify connected clients, that
+@@ -451,8 +467,24 @@ static int rfcomm_handler_bcs_resp_cb(struct rfcomm_conn *c, const struct bt_at
+ 		AT_TYPE_RESP, "", rfcomm_handler_resp_bcs_ok_cb };
+ 	struct ba_transport * const t = c->t;
+ 	const int fd = t->bt_fd;
++	struct ba_transport *t_sco;
++	struct bt_voice voice = {
++		.setting = BT_VOICE_CVSD_16BIT,
++	};
+ 
+ 	t->rfcomm.sco->codec = atoi(at->value);
++
++	/* Change voice setting according to codec */
++	if (t->rfcomm.sco->codec == HFP_CODEC_MSBC)
++		voice.setting = 0x0063;
++	t_sco = t->rfcomm.sco;
++	if (setsockopt(t_sco->sco.listen_fd, SOL_BLUETOOTH, BT_VOICE,
++			   &voice, sizeof(voice)) == -1) {
++		error("setsockopt BT_VOICE error %d, %s", errno,
++			  strerror(errno));
++		return 0;
++	}
++
+ 	if (rfcomm_write_at(fd, AT_TYPE_CMD_SET, "+BCS", at->value) == -1)
+ 		return -1;
+ 
+@@ -679,7 +711,7 @@ void *rfcomm_thread(void *arg) {
+ 				case HFP_SLC_BRSF_SET_OK:
+ 					if (t->rfcomm.hfp_features & HFP_AG_FEAT_CODEC) {
+ 						/* XXX: If mSBC is supported, please change 1 to 1,2 */
+-						if (rfcomm_write_at(pfds[1].fd, AT_TYPE_CMD_SET, "+BAC", "1") == -1)
++						if (rfcomm_write_at(pfds[1].fd, AT_TYPE_CMD_SET, "+BAC", "1,2") == -1)
+ 							goto ioerror;
+ 						conn.handler = &rfcomm_handler_resp_ok;
+ 						break;
+diff --git a/src/utils.c b/src/utils.c
+index 70d069e..6b36829 100644
+--- a/src/utils.c
++++ b/src/utils.c
+@@ -138,6 +138,42 @@ fail:
+ 	return -1;
+ }
+ 
++int hci_submit_cmd_wait(uint16_t ogf, uint16_t ocf, uint8_t *params,
++			uint8_t plen)
++{
++	int fd;
++	uint16_t index = 0;
++	uint8_t status;
++	int ret;
++	struct hci_request rq;
++
++	fd = hci_open_dev(index);
++	if (fd < 0) {
++		error("Couldn't open device: %s(%d)\n", strerror(errno), errno);
++		return -1;
++	}
++
++	memset(&rq, 0, sizeof(rq));
++	rq.ogf = ogf;
++	rq.ocf = ocf;
++	rq.cparam = params;
++	rq.clen = plen;
++	rq.rparam = &status;
++	rq.rlen = 1;
++
++	ret = hci_send_req(fd, &rq, 1000);
++	if (status || ret < 0) {
++		error("Can't send cmd for hci%d: %s (%d)\n", index,
++				strerror(errno), errno);
++		hci_close_dev(fd);
++		return -1;
++	}
++
++	hci_close_dev(fd);
++
++	return 0;
++}
++
+ /**
+  * Get BlueZ D-Bus object path for given profile and codec.
+  *
+diff --git a/src/utils.h b/src/utils.h
+index a15625f..46da2eb 100644
+--- a/src/utils.h
++++ b/src/utils.h
+@@ -28,6 +28,8 @@ int a2dp_sbc_default_bitpool(int freq, int mode);
+ 
+ int hci_devlist(struct hci_dev_info **di, int *num);
+ int hci_open_sco(const struct hci_dev_info *di, const bdaddr_t *ba, bool transparent);
++int hci_submit_cmd_wait(uint16_t ogf, uint16_t ocf, uint8_t *params,
++			uint8_t plen);
+ 
+ const char *bluetooth_profile_to_string(enum bluetooth_profile profile);
+ const char *bluetooth_a2dp_codec_to_string(uint16_t codec);
+-- 
+2.17.1
+

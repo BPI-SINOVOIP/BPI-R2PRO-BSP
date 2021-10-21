@@ -1,0 +1,34 @@
+From 658732200513ac99e8e4beb1b9893151c91bd970 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Tue, 18 Sep 2018 19:00:35 +0800
+Subject: [PATCH 2/2] Add USING_X11 option
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ CMakeLists.txt | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c9803ac1a..865588d63 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -114,6 +114,7 @@ option(USING_EGL "Set to ON if target environment uses EGL" ${USING_EGL})
+ option(USING_FBDEV "Set to ON if target environment uses fbdev (eg. Pandora)" ${USING_FBDEV})
+ option(USING_GLES2 "Set to ON if target device uses OpenGL ES 2.0" ${USING_GLES2})
+ option(RASPBIAN "Set to ON to workaround threading issues when building for ARMV7 on Raspbian" ${RASPBIAN})
++option(USING_X11 "Set to OFF if target environment doesn't use X11" ON)
+ option(USING_X11_VULKAN "Set to OFF if target environment doesn't use X11 for Vulkan" ON)
+ # :: Frontends
+ option(USING_QT_UI "Set to ON if you wish to use the Qt frontend wrapper" ${USING_QT_UI})
+@@ -474,7 +475,7 @@ if(TARGET SDL2::SDL2)
+ 	target_link_libraries(Common SDL2::SDL2)
+ endif()
+ 
+-if(USING_GLES2)
++if(USING_X11)
+ 	find_package(X11)
+ endif()
+ 
+-- 
+2.11.0
+

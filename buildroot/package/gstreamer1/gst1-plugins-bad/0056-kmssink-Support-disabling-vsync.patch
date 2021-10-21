@@ -1,0 +1,28 @@
+From 7ed0f1ecda02d9757350b6b2e7e1a5d9280cb736 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Fri, 20 Nov 2020 17:13:11 +0800
+Subject: [PATCH 56/68] kmssink: Support disabling vsync
+
+Set env KMSSINK_DISABLE_VSYNC to enable it.
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ sys/kms/gstkmssink.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/sys/kms/gstkmssink.c b/sys/kms/gstkmssink.c
+index 00ff417..aecc70c 100644
+--- a/sys/kms/gstkmssink.c
++++ b/sys/kms/gstkmssink.c
+@@ -1767,6 +1767,8 @@ retry_set_plane:
+   }
+ 
+ sync_frame:
++  /* HACK: Disable vsync might cause tearing */
++  if (!g_getenv ("KMSSINK_DISABLE_VSYNC"))
+   /* Wait for the previous frame to complete redraw */
+   if (!gst_kms_sink_sync (self)) {
+     GST_OBJECT_UNLOCK (self);
+-- 
+2.20.1
+

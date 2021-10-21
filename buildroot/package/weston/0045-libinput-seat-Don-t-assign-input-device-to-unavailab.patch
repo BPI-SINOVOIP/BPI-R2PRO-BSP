@@ -1,0 +1,85 @@
+From 48d556e52d8087dd070fa95ed080d94dcf70ff94 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Fri, 2 Apr 2021 09:49:09 +0800
+Subject: [PATCH 45/46] libinput-seat: Don't assign input device to unavailable
+ output
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ libweston/libinput-seat.c | 20 +++++++++++++++++++-
+ libweston/libinput-seat.h |  1 +
+ 2 files changed, 20 insertions(+), 1 deletion(-)
+
+diff --git a/libweston/libinput-seat.c b/libweston/libinput-seat.c
+index 9801551..9bb8d11 100644
+--- a/libweston/libinput-seat.c
++++ b/libweston/libinput-seat.c
+@@ -392,13 +392,16 @@ udev_seat_output_changed(struct udev_seat *seat, struct weston_output *output)
+ 	struct evdev_device *device;
+ 	struct weston_output *found;
+ 
++	if (output->unavailable)
++		return;
++
+ 	wl_list_for_each(device, &seat->devices_list, link) {
+ 		/* If we find any input device without an associated output
+ 		 * or an output name to associate with, just tie it with the
+ 		 * output we got here - the default assignment.
+ 		 */
+ 		if (!device->output_name) {
+-			if (!device->output)
++			if (!device->output || device->output->unavailable)
+ 				evdev_device_set_output(device, output);
+ 
+ 			continue;
+@@ -423,6 +426,16 @@ notify_output_create(struct wl_listener *listener, void *data)
+ 	udev_seat_output_changed(seat, output);
+ }
+ 
++static void
++notify_output_moved(struct wl_listener *listener, void *data)
++{
++	struct udev_seat *seat = container_of(listener, struct udev_seat,
++					      output_moved_listener);
++	struct weston_output *output = data;
++
++	udev_seat_output_changed(seat, output);
++}
++
+ static void
+ notify_output_heads_changed(struct wl_listener *listener, void *data)
+ {
+@@ -450,6 +463,10 @@ udev_seat_create(struct udev_input *input, const char *seat_name)
+ 	wl_signal_add(&c->output_created_signal,
+ 		      &seat->output_create_listener);
+ 
++	seat->output_moved_listener.notify = notify_output_moved;
++	wl_signal_add(&c->output_moved_signal,
++		      &seat->output_moved_listener);
++
+ 	seat->output_heads_listener.notify = notify_output_heads_changed;
+ 	wl_signal_add(&c->output_heads_changed_signal,
+ 		      &seat->output_heads_listener);
+@@ -471,6 +488,7 @@ udev_seat_destroy(struct udev_seat *seat)
+ 	udev_seat_remove_devices(seat);
+ 	weston_seat_release(&seat->base);
+ 	wl_list_remove(&seat->output_create_listener.link);
++	wl_list_remove(&seat->output_moved_listener.link);
+ 	wl_list_remove(&seat->output_heads_listener.link);
+ 	free(seat);
+ }
+diff --git a/libweston/libinput-seat.h b/libweston/libinput-seat.h
+index 315980d..32c47d2 100644
+--- a/libweston/libinput-seat.h
++++ b/libweston/libinput-seat.h
+@@ -39,6 +39,7 @@ struct udev_seat {
+ 	struct weston_seat base;
+ 	struct wl_list devices_list;
+ 	struct wl_listener output_create_listener;
++	struct wl_listener output_moved_listener;
+ 	struct wl_listener output_heads_listener;
+ };
+ 
+-- 
+2.20.1
+

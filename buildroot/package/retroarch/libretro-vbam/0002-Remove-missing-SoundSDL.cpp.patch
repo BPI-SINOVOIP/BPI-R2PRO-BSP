@@ -1,0 +1,25 @@
+From 33cd4c701a5d78380bbefc073a909cfdd71f02f1 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Tue, 18 Sep 2018 21:42:03 +0800
+Subject: [PATCH 2/2] Remove missing SoundSDL.cpp
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ CMakeLists.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 7ac234a..1db0920 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -236,7 +236,6 @@ SET(SRC_MAIN
+     src/Util.cpp
+     src/common/Patch.cpp
+     src/common/memgzio.c
+-    src/common/SoundSDL.cpp
+ )
+ 
+ if(ENABLE_FFMPEG)
+-- 
+2.11.0
+

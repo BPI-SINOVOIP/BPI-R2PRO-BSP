@@ -1,0 +1,114 @@
+From 037af9e746932634fd4d85359300775b411d6bb9 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Mon, 26 Jul 2021 17:07:24 +0800
+Subject: [PATCH 05/15] qwaylandwindow: Disable input when blocked
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ src/client/qwaylandwindow.cpp | 42 ++++++++++++++++++++++++++++-------
+ src/client/qwaylandwindow_p.h |  5 +++++
+ 2 files changed, 39 insertions(+), 8 deletions(-)
+
+diff --git a/src/client/qwaylandwindow.cpp b/src/client/qwaylandwindow.cpp
+index fd34798d..133b3359 100644
+--- a/src/client/qwaylandwindow.cpp
++++ b/src/client/qwaylandwindow.cpp
+@@ -78,6 +78,7 @@ QWaylandWindow::QWaylandWindow(QWindow *window, QWaylandDisplay *display)
+     , mDisplay(display)
+     , mFrameQueue(mDisplay->createFrameQueue())
+     , mResizeAfterSwap(qEnvironmentVariableIsSet("QT_WAYLAND_RESIZE_AFTER_SWAP"))
++    , mBlocked(false)
+ {
+     {
+         bool ok;
+@@ -455,24 +456,20 @@ void QWaylandWindow::lower()
+         mShellSurface->lower();
+ }
+ 
+-void QWaylandWindow::setMask(const QRegion &mask)
++void QWaylandWindow::updateInputRegion()
+ {
+-    if (mMask == mask)
+-        return;
+-
+-    mMask = mask;
+-
+     QReadLocker locker(&mSurfaceLock);
+     if (!mSurface)
+         return;
+ 
+-    if (mMask.isEmpty()) {
++    if (!mBlocked && mMask.isEmpty()) {
+         mSurface->set_input_region(nullptr);
+ 
+         if (isOpaque())
+             setOpaqueArea(QRect(QPoint(0, 0), geometry().size()));
+     } else {
+-        struct ::wl_region *region = mDisplay->createRegion(mMask);
++        struct ::wl_region *region =
++            mDisplay->createRegion(mBlocked ? QRegion() : mMask);
+         mSurface->set_input_region(region);
+         wl_region_destroy(region);
+ 
+@@ -483,6 +480,35 @@ void QWaylandWindow::setMask(const QRegion &mask)
+     mSurface->commit();
+ }
+ 
++void QWaylandWindow::setMask(const QRegion &mask)
++{
++    if (mMask == mask)
++        return;
++
++    mMask = mask;
++
++    if (!mBlocked)
++        updateInputRegion();
++}
++
++bool QWaylandWindow::windowEvent(QEvent *event)
++{
++    switch (event->type()) {
++    case QEvent::WindowBlocked: // Blocked by another modal window.
++        mBlocked = true;
++        updateInputRegion();
++        break;
++    case QEvent::WindowUnblocked:
++        mBlocked = false;
++        updateInputRegion();
++        break;
++    default:
++        break;
++    }
++
++    return QPlatformWindow::windowEvent(event);
++}
++
+ void QWaylandWindow::applyConfigureWhenPossible()
+ {
+     QMutexLocker resizeLocker(&mResizeLock);
+diff --git a/src/client/qwaylandwindow_p.h b/src/client/qwaylandwindow_p.h
+index 01337cff..8091f4c7 100644
+--- a/src/client/qwaylandwindow_p.h
++++ b/src/client/qwaylandwindow_p.h
+@@ -154,6 +154,8 @@ public:
+ 
+     void setMask(const QRegion &region) override;
+ 
++    bool windowEvent(QEvent *event) override;
++
+     int scale() const;
+     qreal devicePixelRatio() const override;
+ 
+@@ -278,6 +280,9 @@ private:
+     void handleScreensChanged();
+     void sendRecursiveExposeEvent();
+ 
++    bool mBlocked;
++    void updateInputRegion();
++
+     bool mInResizeFromApplyConfigure = false;
+     bool lastVisible = false;
+     QRect mLastExposeGeometry;
+-- 
+2.20.1
+

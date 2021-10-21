@@ -1,0 +1,46 @@
+From e6620901bb1e84d74e10b45379e1530b665e099a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Branimir=20Karad=C5=BEi=C4=87?= <branimirkaradzic@gmail.com>
+Date: Sat, 2 Jul 2016 20:56:27 -0700
+Subject: [PATCH 3/4] bgfx: Fixed issue #837.
+
+(cherry picked from bgfx commit 897ab8c69bf0ea772343e5e64dca5614659a2fc1)
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ 3rdparty/bgfx/src/glimports.h | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/3rdparty/bgfx/src/glimports.h b/3rdparty/bgfx/src/glimports.h
+index a12acb19d5..0766f18919 100644
+--- a/3rdparty/bgfx/src/glimports.h
++++ b/3rdparty/bgfx/src/glimports.h
+@@ -372,9 +372,7 @@ GL_IMPORT______(true,  PFNGLSTENCILMASKSEPARATEPROC,               glStencilMask
+ GL_IMPORT______(false, PFNGLSTENCILOPPROC,                         glStencilOp);
+ GL_IMPORT______(true,  PFNGLSTENCILOPSEPARATEPROC,                 glStencilOpSeparate);
+ GL_IMPORT______(false, PFNGLTEXIMAGE2DPROC,                        glTexImage2D);
+-GL_IMPORT______(true,  PFNGLTEXIMAGE2DMULTISAMPLEPROC,             glTexImage2DMultisample);
+ GL_IMPORT______(true,  PFNGLTEXIMAGE3DPROC,                        glTexImage3D);
+-GL_IMPORT______(true,  PFNGLTEXIMAGE3DMULTISAMPLEPROC,             glTexImage3DMultisample);
+ GL_IMPORT______(false, PFNGLTEXPARAMETERIPROC,                     glTexParameteri);
+ GL_IMPORT______(false, PFNGLTEXPARAMETERIVPROC,                    glTexParameteriv);
+ GL_IMPORT______(false, PFNGLTEXPARAMETERFPROC,                     glTexParameterf);
+@@ -446,6 +444,9 @@ GL_IMPORT_EXT__(true,  PFNGLDELETERENDERBUFFERSPROC,               glDeleteRende
+ GL_IMPORT_EXT__(true,  PFNGLRENDERBUFFERSTORAGEPROC,               glRenderbufferStorage);
+ GL_IMPORT_EXT__(true,  PFNGLRENDERBUFFERSTORAGEMULTISAMPLEPROC,    glRenderbufferStorageMultisample);
+ 
++GL_IMPORT______(true,  PFNGLTEXIMAGE2DMULTISAMPLEPROC,             glTexImage2DMultisample);
++GL_IMPORT______(true,  PFNGLTEXIMAGE3DMULTISAMPLEPROC,             glTexImage3DMultisample);
++
+ #	else // GLES
+ GL_IMPORT______(false, PFNGLCLEARDEPTHFPROC,                       glClearDepthf);
+ #	endif // BGFX_CONFIG_RENDERER_OPENGL
+@@ -488,6 +489,7 @@ GL_IMPORT_OES__(true,  PFNGLCOMPRESSEDTEXSUBIMAGE3DPROC,           glCompressedT
+ GL_IMPORT_EXT__(true,  PFNGLTEXSTORAGE2DPROC,                      glTexStorage2D);
+ GL_IMPORT_EXT__(true,  PFNGLTEXSTORAGE3DPROC,                      glTexStorage3D);
+ GL_IMPORT______(true,  PFNGLTEXIMAGE2DMULTISAMPLEPROC,             glTexImage2DMultisample);
++GL_IMPORT______(true,  PFNGLTEXIMAGE3DMULTISAMPLEPROC,             glTexImage3DMultisample);
+ 
+ GL_IMPORT_EXT__(true,  PFNGLINSERTEVENTMARKEREXTPROC,              glInsertEventMarker);
+ GL_IMPORT_EXT__(true,  PFNGLPUSHGROUPMARKEREXTPROC,                glPushGroupMarker);
+-- 
+2.11.0
+

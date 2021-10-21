@@ -1,0 +1,47 @@
+From bf9404feefd18b29767c7087c93b878881d575f1 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Sat, 27 Mar 2021 04:08:12 +0800
+Subject: [PATCH 22/22] bearer: Support prefer using active network
+
+Set env "QT_NETWORK_PREFER_ACTIVE" to enable it.
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ src/network/bearer/qnetworkconfigmanager_p.cpp | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/src/network/bearer/qnetworkconfigmanager_p.cpp b/src/network/bearer/qnetworkconfigmanager_p.cpp
+index a903ecda5f..4d4fa1d875 100644
+--- a/src/network/bearer/qnetworkconfigmanager_p.cpp
++++ b/src/network/bearer/qnetworkconfigmanager_p.cpp
+@@ -100,6 +100,11 @@ QNetworkConfiguration QNetworkConfigurationManagerPrivate::defaultConfiguration(
+ {
+     QMutexLocker locker(&mutex);
+ 
++    QNetworkConfigurationPrivatePointer defaultConfiguration;
++
++    if (getenv("QT_NETWORK_PREFER_ACTIVE"))
++        goto prefer_active;
++
+     for (QBearerEngine *engine : sessionEngines) {
+         QNetworkConfigurationPrivatePointer ptr = engine->defaultConfiguration();
+         if (ptr) {
+@@ -112,7 +117,6 @@ QNetworkConfiguration QNetworkConfigurationManagerPrivate::defaultConfiguration(
+     // Engines don't have a default configuration.
+ 
+     // Return first active snap
+-    QNetworkConfigurationPrivatePointer defaultConfiguration;
+ 
+     for (QBearerEngine *engine : sessionEngines) {
+         QMutexLocker locker(&engine->mutex);
+@@ -138,6 +142,7 @@ QNetworkConfiguration QNetworkConfigurationManagerPrivate::defaultConfiguration(
+         return config;
+     }
+ 
++prefer_active:
+     /*
+         No Active or Discovered SNAPs, find the perferred access point.
+         The following priority order is used:
+-- 
+2.20.1
+

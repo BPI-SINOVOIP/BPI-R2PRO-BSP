@@ -1,0 +1,31 @@
+From 9446eb4cffc55b741814570191eeb357db778932 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Thu, 25 Mar 2021 07:01:33 +0800
+Subject: [PATCH 13/13] gsttools: videowidget: Fix resource leaking in destroy
+ path
+
+Add missing cleanup.
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ src/gsttools/qgstreamervideowidget.cpp | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/src/gsttools/qgstreamervideowidget.cpp b/src/gsttools/qgstreamervideowidget.cpp
+index b9f234b..84596bc 100644
+--- a/src/gsttools/qgstreamervideowidget.cpp
++++ b/src/gsttools/qgstreamervideowidget.cpp
+@@ -133,6 +133,10 @@ QGstreamerVideoWidgetControl::QGstreamerVideoWidgetControl(QObject *parent, cons
+ 
+ QGstreamerVideoWidgetControl::~QGstreamerVideoWidgetControl()
+ {
++    if (!m_widget)
++        return;
++
++    m_widget->removeEventFilter(this);
+     delete m_widget;
+ }
+ 
+-- 
+2.20.1
+

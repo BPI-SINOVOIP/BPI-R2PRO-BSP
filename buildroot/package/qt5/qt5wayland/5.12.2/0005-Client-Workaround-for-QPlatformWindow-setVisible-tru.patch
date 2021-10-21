@@ -1,0 +1,54 @@
+From 9ee151c5f98a9dd1922004e036f14a20af96c501 Mon Sep 17 00:00:00 2001
+From: Johan Klokkhammer Helsing <johan.helsing@qt.io>
+Date: Tue, 11 Feb 2020 15:45:32 +0100
+Subject: [PATCH 05/23] Client: Workaround for
+ QPlatformWindow::setVisible(true) being called twice
+
+Fixes a crash.
+
+Otherwise we created two shell surface objects in some cases.
+
+Change-Id: Ieded56261061da6acf27ccabba81c8f578ca1596
+Reviewed-by: Pier Luigi Fiorini <pierluigi.fiorini@liri.io>
+(cherry picked from commit 061e29274712f51d982eb29286229f0fca6e464d)
+
+Conflicts:
+	src/client/qwaylandwindow_p.h
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ src/client/qwaylandwindow.cpp | 5 +++++
+ src/client/qwaylandwindow_p.h | 1 +
+ 2 files changed, 6 insertions(+)
+
+diff --git a/src/client/qwaylandwindow.cpp b/src/client/qwaylandwindow.cpp
+index ee64faec..15aa757f 100644
+--- a/src/client/qwaylandwindow.cpp
++++ b/src/client/qwaylandwindow.cpp
+@@ -388,6 +388,11 @@ QWaylandScreen *QWaylandWindow::calculateScreenFromSurfaceEvents() const
+ 
+ void QWaylandWindow::setVisible(bool visible)
+ {
++    // Workaround for issue where setVisible may be called with the same value twice
++    if (lastVisible == visible)
++        return;
++    lastVisible = visible;
++
+     if (visible) {
+         if (window()->type() == Qt::Popup || window()->type() == Qt::ToolTip)
+             activePopups << this;
+diff --git a/src/client/qwaylandwindow_p.h b/src/client/qwaylandwindow_p.h
+index c62a4b84..da0f4ad5 100644
+--- a/src/client/qwaylandwindow_p.h
++++ b/src/client/qwaylandwindow_p.h
+@@ -256,6 +256,7 @@ private:
+     void handleScreenChanged();
+ 
+     bool mUpdateRequested = false;
++    bool lastVisible = false;
+     QRect mLastExposeGeometry;
+ 
+     static const wl_callback_listener callbackListener;
+-- 
+2.20.1
+

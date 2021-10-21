@@ -1,0 +1,63 @@
+From 59d6000405321d826a0b4088d4fe854e8533bb8c Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Wed, 15 May 2019 10:36:05 +0800
+Subject: [PATCH] Use -Ofast -ffast-math
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ Makefile.libretro        | 4 ++++
+ scripts/genie.lua        | 3 ++-
+ scripts/src/3rdparty.lua | 1 +
+ 3 files changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/Makefile.libretro b/Makefile.libretro
+index 7cc1b2c804..2645f4db99 100644
+--- a/Makefile.libretro
++++ b/Makefile.libretro
+@@ -7,6 +7,7 @@ NO_USE_MIDI ?= 1
+ NO_USE_PORTAUDIO ?= 1
+ PTR64 ?= 1 
+ TARGET ?= mame
++OPTIMIZE ?= fast
+ # OS ?= linux
+ # TARGETOS ?= linux
+ PYTHON_EXECUTABLE ?= python2
+@@ -95,6 +96,9 @@ ifeq ($(DEBUG),1)
+ else
+ 	BUILDFLAGS += CONFIG=libretro
+ endif
++ifneq ($(OPTIMIZE),)
++	TARGETFLAGS += OPTIMIZE=$(OPTIMIZE)
++endif
+ 
+ 
+ ###########################################################################
+diff --git a/scripts/genie.lua b/scripts/genie.lua
+index 48d03d3b15..ac24342d60 100644
+--- a/scripts/genie.lua
++++ b/scripts/genie.lua
+@@ -871,7 +871,8 @@ end
+ if _OPTIONS["OPTIMIZE"] then
+ 	buildoptions {
+ 		"-O".. _OPTIONS["OPTIMIZE"],
+-		"-fno-strict-aliasing"
++		"-fno-strict-aliasing",
++		"-ffast-math",
+ 	}
+ 	if _OPTIONS["OPT_FLAGS"] then
+ 		buildoptions {
+diff --git a/scripts/src/3rdparty.lua b/scripts/src/3rdparty.lua
+index 2a31b4ee39..1e2d3e57c4 100644
+--- a/scripts/src/3rdparty.lua
++++ b/scripts/src/3rdparty.lua
+@@ -965,6 +965,7 @@ project "sqlite3"
+ 			"-Wno-unused-but-set-variable",
+ 			"-Wno-bad-function-cast",
+ 			"-Wno-undef",
++			"-fno-fast-math",
+ 		}
+ if _OPTIONS["gcc"]~=nil and ((string.find(_OPTIONS["gcc"], "clang") or string.find(_OPTIONS["gcc"], "asmjs") or string.find(_OPTIONS["gcc"], "android"))) then
+ 		buildoptions_c {
+-- 
+2.11.0
+

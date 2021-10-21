@@ -1,0 +1,32 @@
+From 491087a8f9f3d4cc8af70fad74287ae6bd3596d9 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Tue, 6 Jul 2021 18:00:08 +0800
+Subject: [PATCH] npy_pkg_config.py: Honor _python_sysroot
+
+Support cross-compiling with _python_sysroot.
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ numpy/distutils/npy_pkg_config.py | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/numpy/distutils/npy_pkg_config.py b/numpy/distutils/npy_pkg_config.py
+index 48584b4..9df42da 100644
+--- a/numpy/distutils/npy_pkg_config.py
++++ b/numpy/distutils/npy_pkg_config.py
+@@ -320,6 +320,12 @@ def _read_config_imp(filenames, dirs=None):
+         mod = sys.modules[pkgname]
+         vars["pkgdir"] = _escape_backslash(os.path.dirname(mod.__file__))
+ 
++        if "_python_sysroot" in os.environ:
++            _sysroot=os.environ.get('_python_sysroot')
++            _prefix = _sysroot + os.environ.get('_python_prefix')
++            vars["pkgdir"] = re.sub(os.path.normpath(sys.prefix),
++                                    os.path.normpath(_prefix),vars["pkgdir"])
++
+     return LibraryInfo(name=meta["name"], description=meta["description"],
+             version=meta["version"], sections=sections, vars=VariableSet(vars))
+ 
+-- 
+2.20.1
+

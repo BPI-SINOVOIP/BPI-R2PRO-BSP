@@ -1,0 +1,26 @@
+From 1537f92885b1b3f5d1c923a239e1a12dfe6b72ad Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Tue, 29 Jan 2019 19:53:37 +0800
+Subject: [PATCH] gfx16: Fix compile error on newer gcc
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ src/gfx16.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/gfx16.cpp b/src/gfx16.cpp
+index ad6ddfd..3a07364 100644
+--- a/src/gfx16.cpp
++++ b/src/gfx16.cpp
+@@ -2787,7 +2787,7 @@ asm volatile (\
+ "	ldrhih	r1, [%[p], %[delta]]	\n"\
+ "	bls	74f			\n"\
+ \
+-_ROP_##rop##half \
++ _ROP_##rop##half \
+ \
+ "72:		\n"\
+ "	add	%[p], %[p], #2		\n"\
+-- 
+2.11.0
+

@@ -1,0 +1,26 @@
+From 9bb68a00dc4f31120b84e3ace1ac734c35493c67 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Fri, 21 Sep 2018 14:57:56 +0800
+Subject: [PATCH] cpu: cyclone: Fix cross compile error
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ cpu/cyclone/Makefile | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/cpu/cyclone/Makefile b/cpu/cyclone/Makefile
+index 98a578a..1b248e8 100644
+--- a/cpu/cyclone/Makefile
++++ b/cpu/cyclone/Makefile
+@@ -1,3 +1,8 @@
++CC = gcc
++CXX = g++
++CFLAGS = -fPIC
++LDFLAGS =
++
+ CFLAGS += -Wall -ggdb
+ ifdef CONFIG_FILE
+ CFLAGS += -DCONFIG_FILE="\"$(CONFIG_FILE)\""
+-- 
+2.11.0
+

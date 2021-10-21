@@ -1,0 +1,174 @@
+diff --git a/src/bluealsa.c b/src/bluealsa.c
+index 4278d13..8335904 100644
+--- a/src/bluealsa.c
++++ b/src/bluealsa.c
+@@ -24,9 +24,11 @@
+ struct ba_config config = {
+ 
+ 	/* enable output profiles by default */
+-	.enable.a2dp_source = true,
+-	.enable.hsp_ag = true,
+-	.enable.hfp_ag = true,
++	.enable.a2dp_source = false,
++	.enable.a2dp_sink = true,
++	.enable.hsp_ag = false,
++	.enable.hfp_ag = false,
++	.enable.hfp_hf = true,
+ 
+ 	/* omit chown if audio group is not defined */
+ 	.gid_audio = -1,
+diff --git a/src/bluez.c b/src/bluez.c
+index 0c595d7..5f35f87 100644
+--- a/src/bluez.c
++++ b/src/bluez.c
+@@ -14,6 +14,8 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include <sys/socket.h>
++#include <sys/un.h>
+ 
+ #include <gio/gunixfdlist.h>
+ 
+@@ -1027,6 +1029,33 @@ static void bluez_signal_interfaces_added(GDBusConnection *conn, const gchar *se
+ 	g_free(device_path);
+ }
+ 
++static int rockchip_send_volume_to_deviceiolib(int volume)
++{
++	struct sockaddr_un serverAddr;
++	int snd_cnt = 1;
++	int sockfd;
++	char buff[100] = {0};
++
++	sockfd = socket(AF_UNIX, SOCK_DGRAM, 0);
++	if (sockfd < 0) {
++		printf("FUNC:%s create sockfd failed!\n", __func__);
++		return -1;
++	}
++
++	serverAddr.sun_family = AF_UNIX;
++	strcpy(serverAddr.sun_path, "/tmp/rk_deviceio_a2dp_volume");
++	memset(buff, 0, sizeof(buff));
++	sprintf(buff, "a2dp volume:%03d;", volume);
++
++	while(snd_cnt--) {
++		sendto(sockfd, buff, strlen(buff), MSG_DONTWAIT, (struct sockaddr *)&serverAddr, sizeof(serverAddr));
++		usleep(1000); //5ms
++	}
++
++	close(sockfd);
++	return 0;
++}
++
+ static void bluez_signal_transport_changed(GDBusConnection *conn, const gchar *sender,
+ 		const gchar *path, const gchar *interface, const gchar *signal, GVariant *params,
+ 		void *userdata) {
+@@ -1090,7 +1119,8 @@ static void bluez_signal_transport_changed(GDBusConnection *conn, const gchar *s
+ 			/* received volume is in range [0, 127]*/
+ 			t->a2dp.ch1_volume = t->a2dp.ch2_volume = g_variant_get_uint16(value);
+ 			bluealsa_ctl_event(BA_EVENT_UPDATE_VOLUME);
+-
++			/* Send volume chg to rockchip deviceio */
++			rockchip_send_volume_to_deviceiolib(t->a2dp.ch2_volume);
+ 		}
+ 
+ 		g_variant_unref(value);
+diff --git a/src/rfcomm.c b/src/rfcomm.c
+index 64df3b1..86c0d4d 100644
+--- a/src/rfcomm.c
++++ b/src/rfcomm.c
+@@ -16,6 +16,8 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <unistd.h>
++#include <sys/socket.h>
++#include <sys/un.h>
+ 
+ #include "bluealsa.h"
+ #include "ctl.h"
+@@ -33,6 +35,9 @@ struct at_reader {
+ 	char *next;
+ };
+ 
++/* RockChip add this code for cooperating with rk deviceio */
++static int rockchip_send_msg_to_deviceiolib(char * buff);
++
+ /**
+  * Read AT message.
+  *
+@@ -73,6 +78,13 @@ retry:
+ 		return -1;
+ 	}
+ 
++	if (strstr(at_type2str(reader->at.type), "RESP") && strstr(reader->at.value, "RING"))
++		rockchip_send_msg_to_deviceiolib("hfp_hf_ring");
++	else if (strstr(at_type2str(reader->at.type), "RESP") && strstr(reader->at.command, "+BCS"))
++		rockchip_send_msg_to_deviceiolib(msg);
++	else if (strstr(at_type2str(reader->at.type), "RESP") && strstr(reader->at.command, "+CIEV"))
++		rockchip_send_msg_to_deviceiolib(msg);
++
+ 	reader->next = tmp[0] != '\0' ? tmp : NULL;
+ 	return 0;
+ }
+@@ -108,6 +120,33 @@ retry:
+ 	return 0;
+ }
+ 
++static int rockchip_send_msg_to_deviceiolib(char *msg)
++{
++	struct sockaddr_un serverAddr;
++	int snd_cnt = 1;
++	int sockfd;
++	char buff[100] = {0};
++
++	sockfd = socket(AF_UNIX, SOCK_DGRAM, 0);
++	if (sockfd < 0) {
++		printf("FUNC:%s create sockfd failed!\n", __func__);
++		return -1;
++	}
++
++	serverAddr.sun_family = AF_UNIX;
++	strcpy(serverAddr.sun_path, "/tmp/rk_deviceio_rfcomm_status");
++	memset(buff, 0, sizeof(buff));
++	sprintf(buff, "rfcomm status:%s;", msg);
++
++	while(snd_cnt--) {
++		sendto(sockfd, buff, strlen(buff), MSG_DONTWAIT, (struct sockaddr *)&serverAddr, sizeof(serverAddr));
++		usleep(1000); //5ms
++	}
++
++	close(sockfd);
++	return 0;
++}
++
+ /**
+  * HFP set state wrapper for debugging purposes. */
+ static void rfcomm_set_hfp_state(struct rfcomm_conn *c, enum hfp_state state) {
+@@ -671,6 +710,7 @@ void *rfcomm_thread(void *arg) {
+ 					break;
+ 				case HFP_SLC_CMER_SET_OK:
+ 					rfcomm_set_hfp_state(&conn, HFP_SLC_CONNECTED);
++					rockchip_send_msg_to_deviceiolib("hfp_slc_connected");
+ 					/* fall-through */
+ 				case HFP_SLC_CONNECTED:
+ 					if (t->rfcomm.hfp_features & HFP_AG_FEAT_CODEC)
+@@ -680,6 +720,7 @@ void *rfcomm_thread(void *arg) {
+ 				case HFP_CC_BCS_SET_OK:
+ 				case HFP_CC_CONNECTED:
+ 					rfcomm_set_hfp_state(&conn, HFP_CONNECTED);
++					rockchip_send_msg_to_deviceiolib("hfp_hf_connected");
+ 					/* fall-through */
+ 				case HFP_CONNECTED:
+ 					bluealsa_ctl_event(BA_EVENT_TRANSPORT_ADDED);
+@@ -835,6 +876,7 @@ ioerror:
+ 		case ETIMEDOUT:
+ 			/* exit the thread upon socket disconnection */
+ 			debug("RFCOMM disconnected: %s", strerror(errno));
++			rockchip_send_msg_to_deviceiolib("hfp_slc_disconnected");
+ 			goto fail;
+ 		default:
+ 			error("RFCOMM IO error: %s", strerror(errno));
+-- 
+2.17.1
+

@@ -1,0 +1,62 @@
+From 364db3251a77ce6757a14b9c463aaef29f37d465 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Fri, 2 Apr 2021 11:23:36 +0800
+Subject: [PATCH 46/46] backend-drm: Bind Nth primary plane to Nth crtc
+
+The vop2 allows primary planes to bind with random crtc, but we need to
+use the same pair as the driver registered when using drm legacy API.
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ libweston/backend-drm/drm.c | 19 ++++++++++++++++++-
+ 1 file changed, 18 insertions(+), 1 deletion(-)
+
+diff --git a/libweston/backend-drm/drm.c b/libweston/backend-drm/drm.c
+index d148b50..675e66b 100644
+--- a/libweston/backend-drm/drm.c
++++ b/libweston/backend-drm/drm.c
+@@ -1271,6 +1271,7 @@ drm_output_find_special_plane(struct drm_backend *b, struct drm_output *output,
+ 			      enum wdrm_plane_type type)
+ {
+ 	struct drm_plane *plane;
++	int num_primary;
+ 	bool prefer_modifier =
+ 		b->fb_modifiers && type == WDRM_PLANE_TYPE_PRIMARY;
+ 
+@@ -1297,9 +1298,16 @@ drm_output_find_special_plane(struct drm_backend *b, struct drm_output *output,
+ 	}
+ 
+ retry:
+-	wl_list_for_each(plane, &b->plane_list, link) {
++	num_primary = 0;
++	wl_list_for_each_reverse(plane, &b->plane_list, link) {
+ 		struct drm_output *tmp;
+ 		bool found_elsewhere = false;
++		bool is_primary = plane->type == WDRM_PLANE_TYPE_PRIMARY;
++
++		if (!plane->plane_id)
++			continue;
++
++		num_primary += is_primary;
+ 
+ 		if (!drm_plane_is_available(plane, output))
+ 			continue;
+@@ -1330,6 +1338,15 @@ retry:
+ 		if (plane->type != type)
+ 			continue;
+ 
++		/**
++		 * HACK: Assuming Nth primary plane (or cursor) is the primary
++		 * plane for the Nth crtc.
++		 * See:
++		 * https://lore.kernel.org/dri-devel/20200807090706.GA2352366@phenom.ffwll.local/
++		 */
++		if (is_primary && num_primary != output->pipe + 1)
++			continue;
++
+ 		plane->possible_crtcs = (1 << output->pipe);
+ 		return plane;
+ 	}
+-- 
+2.20.1
+

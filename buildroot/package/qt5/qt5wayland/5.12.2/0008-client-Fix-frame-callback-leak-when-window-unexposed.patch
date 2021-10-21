@@ -1,0 +1,60 @@
+From bb2808386c122db226358e938385b6d78f3352c5 Mon Sep 17 00:00:00 2001
+From: Eskil Abrahamsen Blomfeldt <eskil.abrahamsen-blomfeldt@qt.io>
+Date: Mon, 19 Apr 2021 08:41:22 +0200
+Subject: [PATCH 08/23] client: Fix frame callback leak when window unexposed
+
+If we get a new update while already waiting for a frame callback
+and the window is unexposed, we would previously destroy the
+callback and issue a new one. But if the window is unexposed, the
+compositor may accumulate these and answer all the callbacks when
+the window is shown again. This may cause overflows and the client
+to be killed by the compositor in some cases where the number of
+pending updates is too high.
+
+To avoid this, we skip requesting new callbacks if there is already
+one pending and the window is unexposed. When the window is
+re-exposed, the existing pending callback will be triggered anyway,
+and until then there is no need to repeatedly verify that we
+still cannot render.
+
+One risk is that there may be compositors which never issues a response
+to the callbacks requested while the window was unexposed. But that
+would probably be in conflict with the specification and possibly cause
+other issues as well. The patch was tested with Weston and Mutter, and
+seems to improve behavior in both of these at least.
+
+[ChangeLog][Client] Fixed a bug where Wayland clients would continuously
+request frame callbacks while unexposed, which potentially caused crashes
+on some compositors.
+
+Fixes: QTBUG-81504
+Change-Id: I16dbe51cc5a9acf1f49b4070af91e7f2c8996122
+Reviewed-by: Aleix Pol Gonzalez <aleixpol@kde.org>
+Reviewed-by: Paul Olav Tvete <paul.tvete@qt.io>
+(cherry picked from commit 93058de8d7e7c2f320c22b3bd898aa06cf5babcd)
+
+Conflicts:
+	src/client/qwaylandwindow.cpp
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ src/client/qwaylandwindow.cpp | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/src/client/qwaylandwindow.cpp b/src/client/qwaylandwindow.cpp
+index d45c4eca..1fdc0010 100644
+--- a/src/client/qwaylandwindow.cpp
++++ b/src/client/qwaylandwindow.cpp
+@@ -548,6 +548,9 @@ void QWaylandWindow::attach(QWaylandBuffer *buffer, int x, int y)
+         return;
+ 
+     if (mFrameCallback) {
++        if (!isExposed())
++            return;
++
+         wl_callback_destroy(mFrameCallback);
+         mFrameCallback = nullptr;
+     }
+-- 
+2.20.1
+

@@ -1,0 +1,93 @@
+From 4f73967ec23e8d0ff2c4f9cb73562fcbb15b5cd3 Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Wed, 21 Apr 2021 04:44:38 +0800
+Subject: [PATCH 68/68] kmssink: Support NV12_10LE40
+
+https://bugzilla.gnome.org/show_bug.cgi?id=795462
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ configure.ac              |  8 ++++++++
+ sys/kms/gstkmsallocator.c |  3 +++
+ sys/kms/gstkmsutils.c     | 11 +++++++++++
+ 3 files changed, 22 insertions(+)
+
+diff --git a/configure.ac b/configure.ac
+index ac5677a..7e30e8f 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -256,6 +256,14 @@ AG_GST_CHECK_UNINSTALLED_SETUP([
+   AG_GST_CHECK_GST_PLUGINS_LIBAV($GST_API_VERSION, [0.11.0])
+ ])
+ 
++dnl checks for GST_VIDEO_FORMAT_NV12_10LE40
++SAVED_CFLAGS="$CFLAGS"
++CFLAGS="$CFLAGS $GST_CFLAGS"
++AC_CHECK_DECL(GST_VIDEO_FORMAT_NV12_10LE40,
++  AC_DEFINE(HAVE_NV12_10LE40, 1, [Have NV12_10LE40]), [],
++  [#include <gst/video/video-format.h>])
++CFLAGS="$SAVED_CFLAGS"
++
+ dnl Check for documentation xrefs
+ GLIB_PREFIX="`$PKG_CONFIG --variable=prefix glib-2.0`"
+ GST_PREFIX="`$PKG_CONFIG --variable=prefix gstreamer-$GST_API_VERSION`"
+diff --git a/sys/kms/gstkmsallocator.c b/sys/kms/gstkmsallocator.c
+index 916326b..a9f0b63 100644
+--- a/sys/kms/gstkmsallocator.c
++++ b/sys/kms/gstkmsallocator.c
+@@ -147,6 +147,9 @@ extrapolate_stride (const GstVideoFormatInfo * finfo, gint plane, gint stride)
+   switch (finfo->format) {
+     case GST_VIDEO_FORMAT_NV12:
+     case GST_VIDEO_FORMAT_NV12_64Z32:
++#ifdef HAVE_NV12_10LE40
++    case GST_VIDEO_FORMAT_NV12_10LE40:
++#endif
+     case GST_VIDEO_FORMAT_NV21:
+     case GST_VIDEO_FORMAT_NV16:
+     case GST_VIDEO_FORMAT_NV61:
+diff --git a/sys/kms/gstkmsutils.c b/sys/kms/gstkmsutils.c
+index 90311f3..3bf201e 100644
+--- a/sys/kms/gstkmsutils.c
++++ b/sys/kms/gstkmsutils.c
+@@ -31,6 +31,10 @@
+ 
+ #include "gstkmsutils.h"
+ 
++#ifndef DRM_FORMAT_NV12_10
++#define DRM_FORMAT_NV12_10 fourcc_code('N', 'A', '1', '2')
++#endif
++
+ /* *INDENT-OFF* */
+ static const struct
+ {
+@@ -49,6 +53,9 @@ static const struct
+   DEF_FMT (XBGR8888, RGBx),
+   DEF_FMT (BGR888, RGB),
+   DEF_FMT (RGB888, BGR),
++#ifdef HAVE_NV12_10LE40
++  DEF_FMT (NV12_10, NV12_10LE40),
++#endif
+ #else
+   DEF_FMT (ARGB8888, ARGB),
+   DEF_FMT (XRGB8888, xRGB),
+@@ -111,6 +118,9 @@ gst_drm_bpp_from_drm (guint32 drmfmt)
+     case DRM_FORMAT_NV16:
+       bpp = 8;
+       break;
++    case DRM_FORMAT_NV12_10:
++      bpp = 10;
++      break;
+     case DRM_FORMAT_UYVY:
+     case DRM_FORMAT_YUYV:
+     case DRM_FORMAT_YVYU:
+@@ -138,6 +148,7 @@ gst_drm_height_from_drm (guint32 drmfmt, guint32 height)
+     case DRM_FORMAT_YVU420:
+     case DRM_FORMAT_YUV422:
+     case DRM_FORMAT_NV12:
++    case DRM_FORMAT_NV12_10:
+     case DRM_FORMAT_NV21:
+       ret = height * 3 / 2;
+       break;
+-- 
+2.20.1
+

@@ -1,0 +1,26 @@
+From c28fad40358d6285576d587f373c3e270eb81cfa Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Fri, 21 Sep 2018 19:32:18 +0800
+Subject: [PATCH] Makefile: Add CPUFLAGS to ASFLAGS
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index ad2c722b..5ee15762 100644
+--- a/Makefile
++++ b/Makefile
+@@ -852,7 +852,7 @@ CFLAGS += -DINLINE="inline"
+ CXXFLAGS += -DINLINE="inline"
+ endif
+ 
+-ASFLAGS     := $(ASFLAGS) $(CFLAGS)
++ASFLAGS     := $(ASFLAGS) $(CFLAGS) $(CPUFLAGS)
+ 
+ ### Finalize ###
+ OBJECTS     += $(SOURCES_CXX:.cpp=.o) $(SOURCES_C:.c=.o) $(SOURCES_ASM:.S=.o)
+-- 
+2.11.0
+

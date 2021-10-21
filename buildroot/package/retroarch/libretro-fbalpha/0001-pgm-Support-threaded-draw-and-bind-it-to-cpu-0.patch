@@ -1,0 +1,254 @@
+From 4bcf194c5017d4f2af2025a6b22f14e8d1c8cacc Mon Sep 17 00:00:00 2001
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+Date: Mon, 29 Oct 2018 09:54:50 +0800
+Subject: [PATCH] pgm: Support threaded draw, and bind it to cpu 0
+
+Signed-off-by: Jeffy Chen <jeffy.chen@rock-chips.com>
+---
+ makefile.libretro_common         |   6 ++
+ src/burn/drv/pgm/pgm.h           |  22 +++++++
+ src/burn/drv/pgm/pgm_draw.cpp    |  13 ++++
+ src/burn/drv/pgm/pgm_run.cpp     | 133 +++++++++++++++++++++++++++++++++++++++
+ src/burner/libretro/libretro.cpp |   4 +-
+ 5 files changed, 177 insertions(+), 1 deletion(-)
+
+diff --git a/makefile.libretro_common b/makefile.libretro_common
+index b7b2850..28b0beb 100644
+--- a/makefile.libretro_common
++++ b/makefile.libretro_common
+@@ -315,3 +315,9 @@ GIT_VERSION := " $(shell git rev-parse --short HEAD || echo unknown)"
+ ifneq ($(GIT_VERSION)," unknown")
+ 	CXXFLAGS += -DGIT_VERSION=\"$(GIT_VERSION)\"
+ endif
++
++ENABLE_PGM_THREADED_DRAW = 1
++ifeq ($(ENABLE_PGM_THREADED_DRAW),1)
++	FBA_DEFINES += -DPGM_THREADED_DRAW
++	LDFLAGS += -lpthread
++endif
+diff --git a/src/burn/drv/pgm/pgm.h b/src/burn/drv/pgm/pgm.h
+index 5927233..7d83d85 100644
+--- a/src/burn/drv/pgm/pgm.h
++++ b/src/burn/drv/pgm/pgm.h
+@@ -6,6 +6,28 @@
+ 
+ #define HARDWARE_IGS_JAMMAPCB		0x0002
+ 
++// threaded pgm draw
++#ifdef PGM_THREADED_DRAW
++
++/* Mirror memory for pgmDraw() */
++struct PGM_DRAW_CONTEXT {
++	/* Sizes come from pgm_run.cpp:pgmMemIndex() */
++	UINT32 PGMBgRAM[0x0001000 / 4];
++	UINT32 PGMTxtRAM[0x0002000 / 4];
++	UINT16 PGMRowRAM[0x0001000 / 2];
++	UINT16 PGMPalRAM[0x0001400 / 2];
++	UINT16 PGMVidReg[0x0010000 / 2];
++	UINT16 PGMSprBuf[0x0000a00 / 2];
++	UINT32 RamCurPal[0x0001204 / 2];
++
++	UINT8 *pBurnDraw;
++	volatile int nDirty;
++};
++
++extern struct PGM_DRAW_CONTEXT PgmDrawCtx;
++
++#endif // PGM_THREADED_DRAW
++
+ // pgm_run
+ extern INT32 nPGM68KROMLen;
+ extern INT32 nPGMSPRColMaskLen;
+diff --git a/src/burn/drv/pgm/pgm_draw.cpp b/src/burn/drv/pgm/pgm_draw.cpp
+index bbf070c..604f01a 100644
+--- a/src/burn/drv/pgm/pgm_draw.cpp
++++ b/src/burn/drv/pgm/pgm_draw.cpp
+@@ -1,6 +1,19 @@
+ #include "pgm.h"
+ #include "pgm_sprite.h"
+ 
++#ifdef PGM_THREADED_DRAW
++
++/* Redirect to mirror draw ctx */
++#define PGMBgRAM	PgmDrawCtx.PGMBgRAM
++#define PGMTxtRAM	PgmDrawCtx.PGMTxtRAM
++#define PGMRowRAM	PgmDrawCtx.PGMRowRAM
++#define PGMPalRAM	PgmDrawCtx.PGMPalRAM
++#define PGMVidReg	PgmDrawCtx.PGMVidReg
++#define PGMSprBuf	PgmDrawCtx.PGMSprBuf
++#define RamCurPal	PgmDrawCtx.RamCurPal
++
++#endif
++
+ //#define DUMP_SPRITE_BITMAPS
+ //#define DRAW_SPRITE_NUMBER
+ 
+diff --git a/src/burn/drv/pgm/pgm_run.cpp b/src/burn/drv/pgm/pgm_run.cpp
+index cf8ab4d..30db0ea 100644
+--- a/src/burn/drv/pgm/pgm_run.cpp
++++ b/src/burn/drv/pgm/pgm_run.cpp
+@@ -4,6 +4,139 @@
+ #include "ics2115.h"
+ #include "timer.h"
+ 
++#ifdef PGM_THREADED_DRAW
++
++#include <pthread.h>
++#include <sched.h>
++#include <sys/syscall.h>
++#include <unistd.h>
++
++#define gettid() syscall(SYS_gettid)
++
++#define PGM_DRAW_SIZE (nScreenWidth * nScreenHeight * sizeof(UINT32)) 
++
++struct PGM_DRAW_CONTEXT PgmDrawCtx;
++static struct PGM_DRAW_CONTEXT PgmTempDrawCtx;
++
++static pthread_t PgmDrawThread;
++static volatile int PgmDrawThreadExit = 0;
++
++static pthread_mutex_t PgmDrawMutex;
++static pthread_mutex_t PgmBurnDrawMutex;
++
++static inline void pgmInitDrawReal() { pgmInitDraw(); }
++static inline void pgmExitDrawReal() { pgmExitDraw(); }
++static inline void pgmDrawReal() { pgmDraw(); }
++#define pgmInitDraw() pgmInitThreadDraw()
++#define pgmExitDraw() pgmExitThreadDraw()
++#define pgmDraw() pgmThreadedDraw()
++
++extern void *pBurnDrawCustom;
++
++static void pgmThreadedDraw()
++{
++	pthread_mutex_lock(&PgmDrawMutex);
++
++	// Update mirror memory.
++#define PGM_COPY_CTX(ctx, area) memcpy(ctx.area, area, sizeof(ctx.area))
++	PGM_COPY_CTX(PgmTempDrawCtx, PGMBgRAM);
++	PGM_COPY_CTX(PgmTempDrawCtx, PGMTxtRAM);
++	PGM_COPY_CTX(PgmTempDrawCtx, PGMRowRAM);
++	PGM_COPY_CTX(PgmTempDrawCtx, PGMPalRAM);
++	PGM_COPY_CTX(PgmTempDrawCtx, PGMVidReg);
++	PGM_COPY_CTX(PgmTempDrawCtx, PGMSprBuf);
++	PGM_COPY_CTX(PgmTempDrawCtx, RamCurPal);
++
++	PgmTempDrawCtx.nDirty = 1;
++	pthread_mutex_unlock(&PgmDrawMutex);
++
++	// Update pBurnDrawCustom.
++	pthread_mutex_lock(&PgmBurnDrawMutex);
++	memcpy(pBurnDrawCustom, PgmTempDrawCtx.pBurnDraw, PGM_DRAW_SIZE);
++	pthread_mutex_unlock(&PgmBurnDrawMutex);
++}
++
++/* Try to bind draw thread to the cpu 0. */
++static void pgm_draw_thread_bind_cpu()
++{
++	int i;
++	cpu_set_t mask;
++
++	CPU_ZERO(&mask);
++	CPU_SET(0, &mask);
++
++	if (pthread_setaffinity_np(pthread_self(), sizeof(mask), &mask) < 0)
++		perror("pthread_setaffinity_np");
++
++	if (pthread_getaffinity_np(pthread_self(), sizeof(mask), &mask) < 0)
++		perror("pthread_getaffinity_np");
++
++	printf("Thread(%ld) bound to cpu:", gettid());
++	for (i = 0; i < CPU_SETSIZE; i++) {
++		if (CPU_ISSET(i, &mask))
++			printf(" %d", i);
++	}
++	printf("\n");
++}
++
++void *pgmDrawFunc(void *arg)
++{
++	pgm_draw_thread_bind_cpu();
++
++	while (!PgmDrawThreadExit) {
++		if (!PgmTempDrawCtx.nDirty) {
++			pthread_yield();
++			continue;
++		}
++
++		// The PgmTempDrawCtx is dirty.
++		pthread_mutex_lock(&PgmDrawMutex);
++		memcpy(&PgmDrawCtx, &PgmTempDrawCtx, sizeof(PgmDrawCtx));
++		PgmTempDrawCtx.nDirty = 0;
++		pthread_mutex_unlock(&PgmDrawMutex);
++
++		pgmDrawReal();
++
++		// Update PgmTempDrawCtx.pBurnDraw.
++		pthread_mutex_lock(&PgmBurnDrawMutex);
++		memcpy(PgmTempDrawCtx.pBurnDraw, pBurnDraw, PGM_DRAW_SIZE);
++		pthread_mutex_unlock(&PgmBurnDrawMutex);
++	}
++	return NULL;
++}
++
++static void pgmInitThreadDraw()
++{
++	pgmInitDrawReal();
++
++	memset(&PgmDrawCtx, 0, sizeof(PgmDrawCtx));
++	memset(&PgmTempDrawCtx, 0, sizeof(PgmTempDrawCtx));
++
++	PgmTempDrawCtx.pBurnDraw = (UINT8*)BurnMalloc(PGM_DRAW_SIZE);
++	pBurnDrawCustom = BurnMalloc(PGM_DRAW_SIZE);
++
++	pthread_mutex_init(&PgmDrawMutex, NULL);
++	pthread_mutex_init(&PgmBurnDrawMutex, NULL);
++
++	PgmDrawThreadExit = 0;
++	pthread_create(&PgmDrawThread, NULL, pgmDrawFunc, NULL);
++}
++
++static void pgmExitThreadDraw()
++{
++	PgmDrawThreadExit = 1;
++	pthread_join(PgmDrawThread, NULL);
++
++	pthread_mutex_destroy(&PgmDrawMutex);
++	pthread_mutex_destroy(&PgmBurnDrawMutex);
++
++	BurnFree (pBurnDrawCustom);
++	BurnFree (PgmTempDrawCtx.pBurnDraw);
++
++	pgmExitDrawReal();
++}
++#endif
++
+ UINT8 PgmJoy1[8] = {0,0,0,0,0,0,0,0};
+ UINT8 PgmJoy2[8] = {0,0,0,0,0,0,0,0};
+ UINT8 PgmJoy3[8] = {0,0,0,0,0,0,0,0};
+diff --git a/src/burner/libretro/libretro.cpp b/src/burner/libretro/libretro.cpp
+index 241dfec..3fc2d02 100644
+--- a/src/burner/libretro/libretro.cpp
++++ b/src/burner/libretro/libretro.cpp
+@@ -149,6 +149,7 @@ static unsigned fba_devices[5] = { RETROPAD_CLASSIC, RETROPAD_CLASSIC, RETROPAD_
+ INT32 g_audio_samplerate = 48000;
+ INT32 nAudSegLen = 0;
+ 
++void *pBurnDrawCustom = NULL;
+ static uint32_t *g_fba_frame;
+ static int16_t *g_audio_buf;
+ 
+@@ -1499,7 +1500,8 @@ void retro_run()
+          nBurnPitch = width * pitch_size;
+    }
+ 
+-   video_cb(g_fba_frame, width, height, nBurnPitch);
++   // Allow overriding frame data.
++   video_cb(pBurnDrawCustom ? pBurnDrawCustom : g_fba_frame, width, height, nBurnPitch);
+    audio_batch_cb(g_audio_buf, nBurnSoundLen);
+    bool updated = false;
+ 
+-- 
+2.11.0
+
