@@ -1,0 +1,301 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * Copyright (c) 2020 Rockchip Electronics Co., Ltd.
+ *
+ */
+
+#include "rk3568-bpi-r2pro-port.dtsi"
+
+/ {
+
+	vcc3v3_pcie: gpio-regulator {
+		compatible = "regulator-gpio";
+		regulator-name = "vcc3v3_pcie";
+		regulator-min-microvolt = <100000>;
+		regulator-max-microvolt = <3300000>;
+		gpios = <&gpio0 RK_PD4 GPIO_ACTIVE_HIGH>;
+		gpios-states = <0x1>;
+		states = <100000 0x0
+			  3300000 0x1>;
+	};
+	
+	/* vcc3v3_pcie: vcc3v3_pcie-regulator {
+		compatible = "regulator-fixed";
+		regulator-name = "vcc3v3_pcie";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		enable-active-high;
+		gpios = <&gpio0 RK_PD4 GPIO_ACTIVE_HIGH>;
+		startup-delay-us = <20000>;
+		vin-supply = <&vcc5v0_sys>;
+	}; */
+	
+	vcc3v3_minipcie: vcc3v3_minipcie-regulator {
+		compatible = "regulator-fixed";
+		regulator-name = "vcc3v3_minipcie";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		regulator-always-on;
+		regulator-boot-on;
+		enable-active-high;
+		gpio = <&gpio0 RK_PC6 GPIO_ACTIVE_HIGH>;
+		//startup-delay-us = <5000>;
+		vin-supply = <&vcc3v3_sys>;
+	};
+
+	vcc3v3_ngff: vcc3v3_ngff-regulator {
+		compatible = "regulator-fixed";
+		regulator-name = "vcc3v3_ngff";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		regulator-always-on;
+		regulator-boot-on;
+		enable-active-high;
+		gpio = <&gpio4 RK_PC1 GPIO_ACTIVE_HIGH>;
+		//startup-delay-us = <5000>;
+		vin-supply = <&vcc3v3_sys>;
+	};
+
+	bpi_r2pro_leds: leds {
+		status = "okay";
+		compatible = "gpio-leds";
+
+		green_led: green_led_user {
+			label = "bpi-r2pro_green_led";
+			linux,default-trigger = "green-led-click";
+			default-state = "off";
+			gpios = <&gpio0 RK_PD5 GPIO_ACTIVE_HIGH>;
+			pinctrl-names = "default";
+			pinctrl-0 = <&green_led_pin>;
+		};
+
+		blue_led: blue_led_user {
+			label = "bpi-r2pro_blue_led";
+			linux,default-trigger = "blue-led-click";
+			default-state = "off";
+			gpios = <&gpio0 RK_PD6 GPIO_ACTIVE_HIGH>;
+			pinctrl-names = "default";
+			pinctrl-0 = <&blue_led_pin>;
+		};
+
+    };
+};
+
+&csi2_dphy0 {
+	status = "okay";
+
+	ports {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		port@0 {
+			reg = <0>;
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			mipi_in_ucam3: endpoint@4 {
+				reg = <4>;
+				data-lanes = <1 2>;
+			};
+			mipi_in_ucam4: endpoint@5 {
+				reg = <5>;
+				data-lanes = <1 2>;
+			};
+		};
+		port@1 {
+			reg = <1>;
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			csidphy_out: endpoint@0 {
+				reg = <0>;
+				remote-endpoint = <&isp0_in>;
+			};
+		};
+	};
+};
+
+&i2c0 {
+	status = "okay";
+};
+
+&i2c1 {
+	status = "okay";
+};
+
+&i2c3 {
+	status = "okay";
+};
+
+&i2c4 {
+	status = "okay";
+};
+
+&pca9555 {
+	status = "disabled";
+};
+
+&i2c5 {
+	status = "okay";
+};
+
+&hym8563 {
+	status = "okay";
+};
+
+&mc3230 {
+	status = "okay";
+};
+
+&uart3 {
+	status = "okay";
+};
+
+&uart4 {
+        status = "okay";
+};
+
+&spi1 {
+	status = "disabled";
+};
+
+&spi_wk2xxx {
+	status = "disabled";
+};
+
+&pcie30phy {
+       status = "okay";
+};
+
+&pcie3x1 {
+	rockchip,bifurcation;
+	reset-gpios = <&gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
+	vpcie3v3-supply = <&vcc3v3_pcie>;
+	//ngff3v3-supply = <&vcc3v3_ngff>;
+	status = "okay";
+};
+
+&pcie3x2 {
+	rockchip,bifurcation;
+	reset-gpios = <&gpio2 RK_PD6 GPIO_ACTIVE_HIGH>;
+	vpcie3v3-supply = <&vcc3v3_pcie>;
+	//minipcie3v3-supply = <&vcc3v3_minipcie>;
+      	status = "okay";
+};
+
+&its {
+	status = "okay";
+};
+
+&can1 {
+	status = "disabled";
+};
+
+&can2 {
+	status = "disabled";
+};
+
+&gmac0 {
+	status = "okay";
+};
+
+&gmac1 {
+	status = "okay";
+
+	fixed-link {
+		speed = <1000>;
+		full-duplex;
+		pause;
+	};
+};
+
+&rgmii_phy0 {
+	led_status_value = <0x6940>;
+};
+
+/*
+&rgmii_phy1 {
+	led_status_value = <0x6940>;
+};
+*/
+
+&uart8 {
+	status = "disabled";
+};
+
+&sdio_pwrseq {
+	status = "okay";
+	reset-gpios = <&gpio3 RK_PD5 GPIO_ACTIVE_LOW>;
+	post-power-on-delay-ms = <100>;
+};
+
+&sdmmc2 {
+	status = "okay";
+	max-frequency = <100000000>;
+};
+
+&wireless_wlan {
+	wifi_chip_type = "ap6275s";
+	status = "disabled";
+};
+
+&wireless_bluetooth {
+	status = "disabled";
+};
+
+&spdif_8ch{
+    status = "disabled";
+};
+
+&rk809 {
+    rtc {
+        status = "disabled";
+    };
+};
+
+&pwm7 {
+	status = "okay";
+};
+
+&sata2 {
+	status = "okay";
+};
+
+&vcc3v3_vga {
+	status = "disabled";
+};
+
+&vcc5v0_otg {
+	status = "disabled";
+};
+
+&combphy0_us {
+	status = "okay";
+};
+
+&usbdrd_dwc3 {
+	dr_mode = "host";
+	status = "okay";
+};
+
+&usb2phy0 {
+	status = "okay";
+};
+
+&u2phy0_otg {
+	/delete-property/ vbus-supply;
+	status = "okay";
+};
+
+
+&pinctrl {
+
+	leds {
+		green_led_pin: green_led_pin {
+			rockchip,pins = <0 RK_PD5 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+
+		blue_led_pin: blue_led_pin {
+			rockchip,pins = <0 RK_PD6 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+	};
+};

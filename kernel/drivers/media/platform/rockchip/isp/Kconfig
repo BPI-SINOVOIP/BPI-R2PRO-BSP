@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: GPL-2.0
+config VIDEO_ROCKCHIP_ISP
+	tristate "Rockchip Image Signal Processing Unit driver"
+	depends on VIDEO_V4L2 && VIDEO_V4L2_SUBDEV_API
+	depends on ARCH_ROCKCHIP || COMPILE_TEST
+	select VIDEOBUF2_DMA_CONTIG
+	select VIDEOBUF2_VMALLOC
+	select VIDEOBUF2_DMA_SG
+	select V4L2_FWNODE
+	select PHY_ROCKCHIP_MIPI_RX
+	default n
+	help
+	  Support for ISP on the rockchip SoC.
+
+config VIDEO_ROCKCHIP_THUNDER_BOOT_ISP
+	bool "Rockchip Image Signal Processing Thunderboot helper"
+	depends on ROCKCHIP_THUNDER_BOOT
+	help
+	  Say y if enable thunderboot helper for isp.
