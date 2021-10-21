@@ -1,0 +1,67 @@
+/*
+ * Copyright (C) 2020 Rockchip Electronics Co., Ltd
+ *
+ * SPDX-License-Identifier: GPL-2.0
+ */
+
+/dts-v1/;
+/ {
+    description = "U-Boot FIT source file for arm";
+
+    images {
+        fdt {
+            data = /incbin/("kernel/arch/arm64/boot/dts/rk3568-evb1-ddr4-v10-linux.dtb");
+            type = "flat_dt";
+            arch = "arm64";
+            compression = "none";
+            load = <0xffffff00>;
+
+            hash {
+                algo = "sha256";
+            };
+        };
+
+        kernel {
+            data = /incbin/("kernel/arch/arm64/boot/Image.lz4");
+            type = "kernel";
+            arch = "arm64";
+            os = "linux";
+            compression = "lz4";
+            entry = <0xffffff01>;
+            load = <0xffffff01>;
+
+            hash {
+                algo = "sha256";
+            };
+        };
+
+        resource {
+            data = /incbin/("kernel/resource.img");
+            type = "multi";
+            arch = "arm64";
+            compression = "none";
+
+            hash {
+                algo = "sha256";
+            };
+        };
+    };
+
+    configurations {
+        default = "conf";
+
+        conf {
+            rollback-index = <0x00>;
+            fdt = "fdt";
+            kernel = "kernel";
+            multi = "resource";
+
+            signature {
+                algo = "sha256,rsa2048";
+                padding = "pss";
+                key-name-hint = "dev";
+                sign-images = "fdt", "kernel", "multi";
+            };
+        };
+    };
+};
