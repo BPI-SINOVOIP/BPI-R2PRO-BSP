@@ -1,0 +1,88 @@
+From 8c9a4027426b0a2c56cc834da0dbad5b8378c2c6 Mon Sep 17 00:00:00 2001
+From: Andrej Valek <andrej.valek@siemens.com>
+Date: Fri, 17 Apr 2020 09:43:32 +0200
+Subject: [PATCH] chromium: icu: use system library only targets
+
+ - use bundled one for native/v8 internal builds
+
+Complete system ICU library using requires ICU dev package
+be installed on host. Enabling dependency on native package
+is not enough due to V8 hosttools toolchain. V8 toolchain
+is not using native sysroot, only a host packages.
+On the other hand webenegine does not produce external
+native artifacts. So external system ICU linking is not
+needed.
+
+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ chromium/third_party/icu/BUILD.gn | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
+
+diff --git a/chromium/third_party/icu/BUILD.gn b/chromium/third_party/icu/BUILD.gn
+index 023d6e13a2c..312f34d6186 100644
+--- a/chromium/third_party/icu/BUILD.gn
++++ b/chromium/third_party/icu/BUILD.gn
+@@ -7,9 +7,13 @@ import("//build/config/host_byteorder.gni")
+ import("//build/config/linux/pkg_config.gni")
+ import("//build/shim_headers.gni")
+ import("//third_party/icu/config.gni")
++import("//v8/gni/snapshot_toolchain.gni")
+ 
+ declare_args() {
+   use_system_icu = false
++
++  # Use only target icu library, when system using is enabled
++  use_system_icu_target_only = false
+ }
+ 
+ if (is_android) {
+@@ -20,6 +24,12 @@ if (is_mac) {
+   import("//build/config/sanitizers/sanitizers.gni")
+ }
+ 
++if (use_system_icu) {
++  # Use system library only for target, otherwise use bundled
++  if ((current_toolchain != host_toolchain) && (current_toolchain != v8_snapshot_toolchain)) {
++    use_system_icu_target_only = true
++  }
++}
+ # Meta target that includes both icuuc and icui18n. Most targets want both.
+ # You can depend on the individually if you need to.
+ group("icu") {
+@@ -1207,7 +1217,7 @@ config("system_icu_config") {
+   }
+ }
+ 
+-if (use_system_icu) {
++if (use_system_icu_target_only) {
+   pkg_config("system_icui18n") {
+     packages = [ "icu-i18n" ]
+   }
+@@ -1420,7 +1430,7 @@ shim_headers("icuuc_shim") {
+ }
+ 
+ config("icu_config") {
+-  if (use_system_icu) {
++  if (use_system_icu_target_only) {
+     configs = [ ":system_icu_config"]
+   } else {
+     configs = [ ":bundled_icu_config"]
+@@ -1428,7 +1438,7 @@ config("icu_config") {
+ }
+ 
+ group("icuuc") {
+-  if (use_system_icu) {
++  if (use_system_icu_target_only) {
+     deps = [ ":icuuc_shim" ]
+     public_configs = [
+       ":system_icu_config",
+@@ -1440,7 +1450,7 @@ group("icuuc") {
+ }
+ 
+ group("icui18n") {
+-  if (use_system_icu) {
++  if (use_system_icu_target_only) {
+     deps = [ ":icui18n_shim" ]
+     public_configs = [
+       ":system_icu_config",

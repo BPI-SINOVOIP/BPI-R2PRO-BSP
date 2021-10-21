@@ -1,0 +1,13 @@
+image: kasproject/kas:latest
+
+meta-python2-image:
+  stage: build
+  script:
+    - kas build kas/kas-meta-python2-image.yml
+
+meta-python2-ptest-image:
+  stage: build
+  script:
+    - kas build kas/kas-meta-python2-ptest-image.yml
+    - kas build -c testimage kas/kas-meta-python2-ptest-image.yml
+

@@ -1,0 +1,114 @@
+meta-python2
+============
+
+Preamble
+--------
+
+Python 2 is going EOL (end of life) in January 2020 [1]. This means that all support for the
+language will be on the shoulders of the community and the upstream python developers will
+no longer be supporting it. This has been in the works for several years and it should come
+as no surprise to ANYONE that the support is ending.
+
+In light of the above, oe-core, meta-oe, meta-python and other layers are actively dropping
+python2 recipes. This also means that the core developers for YP/OE will no longer have any
+motivation to maintain python2 or python2 recipes. This includes the creator of this layer.
+
+If your organization has legacy python2 code or depends upon upstream python2-only code, the
+time has come for you to move on. Porting from python2 to python3 is well documented [2].
+
+Continuing to depend upon python2-only code will increasingly open you up to security issues,
+vulnerabilities and breakage.
+
+[1] https://www.python.org/doc/sunset-python-2/
+[2] https://docs.python.org/3/howto/pyporting.html
+
+Introduction
+------------
+
+This layer is intended to be the home of legacy python2 modules for OpenEmbedded.
+
+Dependencies
+------------
+
+The meta-python2 layer depends on:
+
+	URI: git://git.openembedded.org/openembedded-core
+	layers: meta
+	branch: master
+	revision: HEAD
+
+	URI: git://git.openembedded.org/meta-openembedded
+	layers: meta-oe
+	branch: master
+	revision: HEAD
+
+Please follow the recommended setup procedures of your OE distribution.
+
+Building and Continuous Integration
+-----------------------------------
+
+We have provided 'kas' [3,4] YAML files to make it easier to build the basic images supplied by
+this layer. In order to make running 'kas' in a virtual environmnt easier, we have also provided
+a 'Pipfile' to enable using 'pipenv' [5].
+
+For instance, your CI workflow could include:
+
+$ pipenv install
+$ pipenv shell
+$ kas build path/to/meta-python/kas-meta-python2-image.yml
+
+Continous Integration via GitLab is also enabled by providing a .gitlab-ci.yml file.
+
+[3] https://github.com/siemens/kas
+[4] https://kas.readthedocs.io/en/latest/
+[5] https://github.com/pypa/pipenv
+
+Contributing
+------------
+
+Recipes in this layer use Debian naming, which means if it is a python library it should be prefixed
+with 'python-'. The only exception to this is when the recipe is providing an executable application
+that is installed in /usr/bin for example. Exceptions to Debian naming are very rare.
+
+It is expected that recipes will provide SUMMARY, DESCRIPTION, HOMEPAGE, BUGTRACKER and SECTION
+variables, unless the values are unknown. It is strongly recommended to use the pypi.bbclass unless
+your python module is not available on pypi.org.
+
+It is expected that ANY upgrades to a recipe will have undergone run-time testing before submitting
+the upgrade. Many other developers depend upon the quality of this layer and will be quite upset with
+you when you break their builds.
+
+It is expected that any patch adding a new recipe will also add the recipe to packagegroup-meta-python2.
+This packagegroup is critical to the function of the CI system behind maintenance of this layer.
+
+Commit messages must include a "Signed-off-by:" line, including a valid email address and a legal name
+(not a nickname). The "Signed-off-by:" line means that you are either the author or have the legal right
+to submit the work. Please refer to the "Submitting a patch to OpenEmbedded" [6] and "Commit Patch
+Message Guidelines" [7] for guidance.
+
+The meta-openembedded mailinglist
+(openembedded-devel@lists.openembedded.org) is used for questions,
+comments and patch review. It is subscriber only, so please register
+before posting.
+
+Send pull requests to openembedded-devel@lists.openembedded.org with
+'[meta-python2]' in the subject.
+
+When sending single patches, please use something like: 
+'git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-prefix=meta-python2][PATCH'
+
+When a patch only applies to a stable branch, please include the branch name in the subject line,
+something like '[meta-python2][zeus]'...
+
+[6] https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
+[7] https://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
+
+Maintenance
+-------------------------
+
+Layer Maintainers:
+        Tim "moto-timo" Orling <TicoTimo@gmail.com>
+
+NOTE: Support by the above maintainer will end when Yocto Project 3.1 is released in
+approximately April 2020. Creation and maintainence of this layer is entirely a volunteer
+effort and the author has ZERO REASON to continue using or supporting python2.

@@ -1,0 +1,31 @@
+From fd66df54245e9e67f4d9e96337658ddc707f5ad0 Mon Sep 17 00:00:00 2001
+From: Tim Orling <ticotimo@gmail.com>
+Date: Sat, 30 Nov 2019 18:39:15 -0800
+Subject: [PATCH] setup.py: remove setup_requires for setuptools-scm
+
+The setup_requires argument forces the download of the egg file for setuptools-scm
+during the do_compile phase.  This download is incompatible with the typical fetch
+and mirror structure.  The only usage of scm is the generation of the _version.py
+file and in the release tarball it is already correctly created
+
+Upstream-Status: Inappropriate [oe specific]
+
+Signed-off-by: Derek Straka <derek@asterius.io>
+Signed-off-by: Tim Orling <ticotimo@gmail.com>
+---
+ setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/setup.py b/setup.py
+index 491a6f5..c6af9e2 100644
+--- a/setup.py
++++ b/setup.py
+@@ -23,7 +23,7 @@ INSTALL_REQUIRES = [
+ def main():
+     setup(
+         use_scm_version={"write_to": "src/_pytest/_version.py"},
+-        setup_requires=["setuptools-scm", "setuptools>=40.0"],
++        setup_requires=["setuptools>=40.0"],
+         package_dir={"": "src"},
+         # fmt: off
+         extras_require={

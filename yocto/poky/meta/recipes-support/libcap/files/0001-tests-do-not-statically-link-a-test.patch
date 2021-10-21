@@ -1,0 +1,46 @@
+From e4fe6890e07821d60f01f000a95f7944f3d68139 Mon Sep 17 00:00:00 2001
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+Date: Wed, 15 Jan 2020 17:16:28 +0100
+Subject: [PATCH] tests: do not statically link a test
+
+This fails on e.g. centos 7
+
+Upstream-Status: Inappropriate [oe-core specific]
+Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
+
+---
+ tests/Makefile | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/tests/Makefile b/tests/Makefile
+index 876a8b9..93a0e3a 100644
+--- a/tests/Makefile
++++ b/tests/Makefile
+@@ -26,23 +26,23 @@ psx_test: psx_test.c $(DEPS)
+ run_libcap_psx_test: libcap_psx_test
+ 
+ libcap_psx_test: libcap_psx_test.c $(DEPS)
+-	$(CC) $(CFLAGS) $(IPATH) $< -o $@ $(LIBCAPLIB) $(LIBPSXLIB) -Wl,-wrap,pthread_create --static
++	$(CC) $(CFLAGS) $(IPATH) $< -o $@ $(LIBCAPLIB) $(LIBPSXLIB) -Wl,-wrap,pthread_create
+ 
+ run_libcap_launch_test: libcap_launch_test libcap_psx_launch_test noop
+ 	sudo ./libcap_launch_test
+ 	sudo ./libcap_psx_launch_test
+ 
+ libcap_launch_test: libcap_launch_test.c $(DEPS)
+-	$(CC) $(CFLAGS) $(IPATH) $< -o $@ $(LIBCAPLIB) --static
++	$(CC) $(CFLAGS) $(IPATH) $< -o $@ $(LIBCAPLIB)
+ 
+ # this varies only slightly from the above insofar as it currently
+ # only links in the pthreads fork support. TODO() we need to change
+ # the source to do something interesting with pthreads.
+ libcap_psx_launch_test: libcap_launch_test.c $(DEPS)
+-	$(CC) $(CFLAGS) $(IPATH) -DWITH_PTHREADS $< -o $@ $(LIBCAPLIB) $(LIBPSXLIB) -Wl,-wrap,pthread_create --static
++	$(CC) $(CFLAGS) $(IPATH) -DWITH_PTHREADS $< -o $@ $(LIBCAPLIB) $(LIBPSXLIB) -Wl,-wrap,pthread_create
+ 
+ noop: noop.c
+-	$(CC) $(CFLAGS) $< -o $@ --static
++	$(CC) $(CFLAGS) $< -o $@
+ 
+ clean:
+ 	rm -f psx_test libcap_psx_test libcap_launch_test *~

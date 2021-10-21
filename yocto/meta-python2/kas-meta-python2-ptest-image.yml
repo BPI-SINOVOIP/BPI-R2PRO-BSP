@@ -1,0 +1,24 @@
+header:
+  version: 8
+  includes:
+    - kas-meta-python2-image-base.yml
+
+machine: qemux86-64
+distro: poky
+target: meta-python2-ptest-image
+
+local_conf_header:
+  enable_gtk_in_qemu: |
+    DISTRO_FEATURES_append = "opengl"
+    PACKAGECONFIG_pn-qemu-system-native = "fdt alsa kvm virglrenderer glx gtk+"
+  enable_ptest_and_testimage: |
+    IMAGE_CLASSES += " testimage"
+    DISTRO_FEAURES_append = " ptest"
+    EXTRA_IMAGE_FEATURES = "debug-tweaks"
+    TESTIMAGE_AUTO = "1"
+    TEST_SUITES = " ping ssh python2 ptest"
+    TEST_QEMUPARAMS += "-smp 4 -m 8192"
+    TEST_RUNQEMUPARAMS = "kvm gl-es gtk"
+    IMAGE_ROOTFS_SIZE ?= "8192"
+    IMAGE_ROOTFS_EXTRA_SPACE_append = "${@bb.utils.contains("DISTRO_FEATURES", "systemd", " + 4096", "", d)}"
+    IMAGE_INSTALL_append = " ptest-runner dropbear procps coreutils iproute2 sysstat"
