@@ -1,0 +1,104 @@
+/*
+ * (C) Copyright 2017 Rockchip Electronics Co., Ltd
+ *
+ * SPDX-License-Identifier:     GPL-2.0+
+ */
+
+/ {
+	aliases {
+		mmc0 = &emmc;
+		mmc1 = &sdmmc;
+	};
+
+	chosen {
+		u-boot,spl-boot-order = &emmc, &sdmmc;
+		stdout-path = &uart2;
+	};
+};
+
+&dmc {
+	u-boot,dm-pre-reloc;
+};
+
+&uart5 {
+	clock-frequency = <24000000>;
+	u-boot,dm-pre-reloc;
+};
+
+&uart2 {
+	clock-frequency = <24000000>;
+	u-boot,dm-pre-reloc;
+};
+
+&nandc0 {
+	u-boot,dm-spl;
+	status = "okay";
+};
+
+&sdmmc {
+	u-boot,dm-spl;
+};
+
+&emmc {
+	u-boot,dm-spl;
+};
+
+&pmugrf {
+	u-boot,dm-pre-reloc;
+};
+
+&cru {
+	u-boot,dm-pre-reloc;
+};
+
+&crypto {
+	u-boot,dm-pre-reloc;
+};
+
+&pmucru {
+	u-boot,dm-pre-reloc;
+};
+
+&saradc {
+	u-boot,dm-spl;
+	status = "okay";
+};
+
+&gpio0 {
+	u-boot,dm-spl;
+	status = "disabled";
+};
+
+&gpio1 {
+	u-boot,dm-spl;
+	status = "disabled";
+};
+
+&gpio2 {
+	u-boot,dm-spl;
+	status = "disabled";
+};
+
+&gpio3 {
+	u-boot,dm-spl;
+	status = "disabled";
+};
+
+&usb20_otg {
+	u-boot,dm-spl;
+};
+
+&usb2phy_grf {
+	u-boot,dm-spl;
+	status = "okay";
+};
+
+&u2phy {
+	u-boot,dm-spl;
+	status = "okay";
+};
+
+&u2phy_otg {
+	u-boot,dm-spl;
+	status = "okay";
+};
