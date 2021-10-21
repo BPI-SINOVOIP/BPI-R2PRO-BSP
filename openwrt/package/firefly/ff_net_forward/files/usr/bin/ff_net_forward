@@ -1,0 +1,46 @@
+#!/bin/sh
+
+. /lib/functions/uci-defaults.sh
+
+function snat()
+{
+        local dev=$1
+        if [ -n "$dev" ];then
+                if [ "$(uci get firewall.@defaults[0].forward)" != "ACCEPT" ];then
+                        uci set firewall.@defaults[0].forward='ACCEPT'
+                        uci commit
+                        /etc/init.d/firewall restart
+                        sleep 1
+                fi
+                iptables -t nat -A POSTROUTING -o ${dev} -j MASQUERADE
+        fi
+}
+
+# success, return 1
+# otherwise, return 0
+function network_forward()
+{
+        local dev=$1
+        local timeout=1
+        local target=www.baidu.com
+        local ret_code
+        local dev
+
+        [ -z "$dev" ] && return 0
+
+        ret_code=`curl --interface ${dev} -I -s --connect-timeout ${timeout} ${target} -w %{http_code} | tail -n1`
+        if [ "x$ret_code" = "x200" ]; then
+                snat $dev
+                return 1
+        fi
+
+        return 0
+}
+
+wan_default=$(uci get network.wan.device)
+wan_ec20=$(uci get network.ec20_wan.device)
+wan_ec200s=$(uci get network.ec200s_wan.device)
+
+[ $(network_forward $wan_default) ] || \
+[ $(network_forward $wan_ec20) ] || \
+[ $(network_forward $wan_ec200s) ]

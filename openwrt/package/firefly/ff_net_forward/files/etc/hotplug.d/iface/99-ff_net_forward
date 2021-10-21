@@ -1,0 +1,1 @@
+[ ifup = "$ACTION" ] && [ "$INTERFACE" == "wan" ] && /usr/bin/ff_net_forward 

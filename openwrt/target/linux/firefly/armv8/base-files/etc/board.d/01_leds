@@ -1,0 +1,21 @@
+
+. /lib/functions/leds.sh
+. /lib/functions/uci-defaults.sh
+
+board=$(board_name)
+
+board_config_update
+
+case $board in
+firefly,rk3308b-roc-cc-plus-amic-ext_emmc)
+    ucidef_set_led_timer "health" "health" "firefly:green:L1" "200" "800"
+    ucidef_set_led_netdev "wifi" "wifi" "firefly:green:L3" "wlan0" "link"
+    ucidef_set_led_netdev "4G" "4G" "firefly:green:L5" "usb0" "link"
+    ucidef_set_led_netdev "WAN" "WAN" "firefly:green:L4" "eth1" "link"
+    ucidef_set_led_netdev "LAN" "LAN" "firefly:green:L6" "eth0" "link"
+    ;;
+esac
+
+board_config_flush
+
+exit 0

@@ -1,0 +1,19 @@
+#!/bin/sh /etc/rc.common
+
+START=25
+
+start()
+{
+    start-stop-daemon -S -b -q -x /usr/bin/ff_wps_button adc-keys 2 5 firefly:green:L2
+}
+
+stop()
+{
+    start-stop-daemon -K -n ff_wps_button
+}
+
+reload()
+{
+    stop
+    start
+}

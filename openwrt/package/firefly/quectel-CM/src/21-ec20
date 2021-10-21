@@ -1,0 +1,5 @@
+#!/bin/sh
+[ "$ACTION" = add -a "$SUBSYSTEM" = net ] || exit 0
+
+[ "$DEVTYPE" = wwan -a "$INTERFACE" = wwan0 ] &&
+	start-stop-daemon -S -b -q -x /usr/bin/quectel-CM

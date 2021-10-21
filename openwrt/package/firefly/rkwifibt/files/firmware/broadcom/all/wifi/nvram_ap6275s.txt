@@ -1,0 +1,1 @@
+../../AP6275S/wifi/nvram_ap6275s.txt

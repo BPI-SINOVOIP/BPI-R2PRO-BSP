@@ -1,0 +1,9 @@
+#!/bin/sh
+
+[ "$ACTION" = add -a "$DEVTYPE" = usb_device ] || exit 0
+
+# ec200s
+if [ "${PRODUCT}" == "2c7c/6002/318" ];then
+    start-stop-daemon -S -b -q -x /usr/bin/ec200s_init.sh
+fi
+

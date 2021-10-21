@@ -1,0 +1,47 @@
+
+. /lib/functions.sh
+. /lib/functions/uci-defaults.sh
+. /lib/functions/system.sh
+
+firefly_setup_macs()
+{
+    local board="$1"
+    local lan_mac=""
+    local wan_mac=""
+
+    case "$board" in
+    firefly,rk3308b-roc-cc-plus-amic-ext_emmc)
+        wan_mac=$(macaddr_setbit_la "$(cat /sys/class/net/eth0/address)")
+        lan_mac=$(macaddr_add "$lan_mac" 1)
+        ;;  
+    esac
+
+    [ -n "$lan_mac" ] && ucidef_set_interface_macaddr "lan" $lan_mac
+    [ -n "$wan_mac" ] && ucidef_set_interface_macaddr "wan" $wan_mac
+}
+
+firefly_setup_interfaces()
+{
+    local board="$1"
+    case "$board" in
+    firefly,rk3308b-roc-cc-plus-amic-ext_emmc)
+        ucidef_set_interfaces_lan_wan "eth1" "eth0"
+        ucidef_set_interface "ec200s_wan" device "usb0" protocol "dhcp"
+        ;;
+    rockchip,rk3568-firefly-roc-pc)
+        ucidef_set_interfaces_lan_wan "eth1" "eth0"
+        ucidef_set_interface "ec20_wan" device "wwan0" protocol "dhcp"
+        ;;
+    *)
+        ucidef_set_interfaces_lan_wan "eth1" "eth0"
+        ;;
+    esac
+}
+
+board_config_update
+board=$(board_name)
+firefly_setup_interfaces $board
+firefly_setup_macs $board
+board_config_flush
+
+exit 0

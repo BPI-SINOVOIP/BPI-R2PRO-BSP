@@ -1,0 +1,123 @@
+#!/bin/sh
+wifi_help()
+{
+        echo "$0 set <ap/sta> <ssid> <key>"
+        echo "$0 set <ap/sta> <on/off>"
+        echo "$0 up"
+        echo "$0 down"
+}
+
+wifi_prepare()
+{
+        [ ! -f /etc/config/wireless ] && wifi config
+}
+
+wifi_set()
+{
+        local mode=$1
+        local ssid=""
+        local key=""
+        local radio="radio0"
+
+        case "$mode" in
+                ap) 
+                        wifi_prepare
+
+                        if [ -z "$(uci get wireless.$radio 2> /dev/null)" ];then
+                                exit 1
+                        fi
+
+                        if [ "$2" == "on" ];then
+                                uci set wireless.$radio.disabled='0' 
+                                uci commit
+                                exit 0
+                        elif [ "$2" == "off" ];then
+                                uci set wireless.$radio.disabled='1' 
+                                uci commit
+                                exit 0
+                        fi
+
+                        ssid=$2
+                        key=$3
+
+                        uci set wireless.default_$radio.network='lan'
+                        uci set wireless.default_$radio.mode='ap'
+                        uci set wireless.default_$radio.ssid=$ssid
+                        uci set wireless.default_$radio.key=$key
+                        uci set wireless.default_$radio.encryption=psk2
+
+                        if [ -z "$(uci get network.lan 2> /dev/null)" ];then
+                                uci set network.@device[0]=device
+                                uci set network.@device[0].name='br-lan'
+                                uci set network.@device[0].type='bridge'
+                                uci set network.@device[0].ports='eth0'
+
+                                uci set network.lan=interface
+                                uci set network.lan.ifname='br-lan'
+                                uci set network.lan.proto='static'
+                                uci set network.lan.ipaddr='192.168.3.1'
+                                uci set network.lan.netmask='255.255.255.0'
+                                uci set network.lan.ip6assign='60'
+                        fi
+                        uci commit
+                ;;
+                sta)
+                        wifi_prepare
+
+                        if [ -z "$(uci get wireless.$radio 2> /dev/null)" ];then
+                                exit 1
+                        fi
+
+                        if [ "$2" == "on" ];then
+                                uci set wireless.$radio.disabled='0' 
+                                uci commit 
+                                exit 0
+                        elif [ "$2" == "off" ];then
+                                uci set wireless.$radio.disabled='1' 
+                                uci commit
+                                exit 0
+                        fi
+
+                        ssid=$2
+                        key=$3
+
+                        uci set wireless.default_$radio.network='wwan'
+                        uci set wireless.default_$radio.mode='sta'
+                        uci set wireless.default_$radio.ssid=$ssid
+                        uci set wireless.default_$radio.key=$key
+                        uci set wireless.default_$radio.encryption=psk2
+
+                        if [ -z "$(uci get network.wwan 2> /dev/null)" ];then
+                                uci set network.wwan='interface'
+                                uci set network.wwan.proto='dhcp'
+                        fi
+                        uci commit 
+                ;;
+                *)
+                        wifi_help
+                ;;
+        esac
+}
+
+wifi_up()
+{
+	ip link set dev wlan0 up
+	wifi reconf
+	wifi up
+}
+
+wifi_down()
+{
+	wifi reconf
+	wifi down
+	ip link set dev wlan0 down
+}
+
+
+case "$1" in
+        set|up|down)
+                action=$1; shift
+                eval "wifi_$action $@" ;;
+        *|--help)
+                wifi_help ;;
+esac
