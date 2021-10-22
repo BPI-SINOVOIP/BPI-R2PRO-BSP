@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<include layout="@layout/alexa_toolbar"/>-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:background="?attr/colorPrimary" >
+
+        <TextView
+            android:id="@+id/toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_toolbar_back" />
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_20"
+            android:text="Signed in"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_20" />
+
+        <TextView
+            android:id="@+id/toolbar_loginout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:textSize="@dimen/sp_14"
+            android:textColor="@android:color/white"
+            android:text="Sign Out"/>
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/frag_alexa_auth_success_hint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <ImageView
+            android:layout_width="@dimen/dp_68"
+            android:layout_height="@dimen/dp_68"
+            android:src="@drawable/ic_author_success" />
+
+        <TextView
+            android:id="@+id/frag_alexa_auth_success_hint_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_08"
+            android:textSize="@dimen/sp_22" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/frag_alexa_auth_success_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/dp_08"
+            android:textSize="@dimen/sp_22"
+            android:text="@string/action_author_success"/>
+
+        <Button
+            android:id="@+id/frag_alexa_auth_success_info_device_setup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12"
+            android:textSize="@dimen/sp_22"
+            android:text="@string/device_setup"/>
+    </LinearLayout>
+
+</LinearLayout>

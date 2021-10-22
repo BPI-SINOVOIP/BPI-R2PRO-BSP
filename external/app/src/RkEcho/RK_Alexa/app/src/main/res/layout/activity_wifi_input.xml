@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:baselineAligned="false">
+
+    <!--<include layout="@layout/alexa_toolbar"/>-->
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:background="?attr/colorPrimary" >
+
+        <TextView
+            android:id="@+id/toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_toolbar_back" />
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_20"
+            android:text="Wifi Setup"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_20" />
+
+        <TextView
+            android:id="@+id/toolbar_loginout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:textSize="@dimen/sp_14"
+            android:textColor="@android:color/white"
+            android:text="Skip"/>
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dp_36"
+        android:paddingBottom="@dimen/dp_36"
+        android:paddingLeft="@dimen/dp_36"
+        android:paddingRight="@dimen/dp_36"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/dp_110"
+            android:layout_height="@dimen/dp_110"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/wifi_index"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_36"
+        android:paddingRight="@dimen/dp_36"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/frag_wifi_input_ssid"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_56"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="@dimen/sp_24"
+            android:text="Wifi Name"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_56"
+            android:background="@drawable/edt_bg">
+
+            <ImageView
+                android:id="@+id/frag_wifi_input_lock"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/dp_06"
+                android:paddingBottom="@dimen/dp_06"
+                android:src="@drawable/password_input_01"/>
+            <EditText
+                android:id="@+id/frag_wifi_input_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/dp_06"
+                android:paddingBottom="@dimen/dp_06"
+                android:background="@null"
+                android:inputType="textPassword"
+                android:layout_toRightOf="@+id/frag_wifi_input_lock"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/frag_wifi_input_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_56"
+            android:textSize="@dimen/dp_16"
+            android:text="@string/confirm"
+            android:paddingTop="@dimen/dp_08"
+            android:layout_marginTop="@dimen/dp_16"
+            android:background="@color/colorPrimary"
+            android:gravity="center"/>
+    </LinearLayout>
+
+<!--    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="100px"
+        android:paddingRight="100px"
+        android:paddingBottom="10px"
+        android:paddingTop="10px"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="48px"
+            android:text="确认"/>
+        </LinearLayout>-->
+</LinearLayout>

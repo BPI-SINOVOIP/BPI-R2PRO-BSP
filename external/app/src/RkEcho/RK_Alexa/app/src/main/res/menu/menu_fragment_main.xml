@@ -1,0 +1,10 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_exit"
+        android:orderInCategory="100"
+        android:title="Skip"
+        app:showAsAction="always|withText"/>
+</menu>

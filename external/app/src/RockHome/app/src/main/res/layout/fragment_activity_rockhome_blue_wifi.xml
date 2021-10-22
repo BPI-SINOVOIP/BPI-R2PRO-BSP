@@ -1,0 +1,76 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/fragment_activity_rockhome_blue_tv_addr"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="28sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <TextView
+            android:id="@+id/fragment_activity_rockhome_blue_tv_input_ssid"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:textSize="24sp"
+            android:text="@string/no_wifi"/>
+
+        <ImageView
+            android:id="@+id/fragment_activity_rockhome_blue_iv_expand"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icn_expand"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@drawable/edt_bg">
+
+        <ImageView
+            android:id="@+id/fragment_activity_rockhome_blue_iv_pwd_lock"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:src="@drawable/password_input_01"/>
+
+        <EditText
+            android:id="@+id/fragment_activity_rockhome_blue_et_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:background="@null"
+            android:textColor="@color/colorBlack"
+            android:inputType="textPassword"
+            android:layout_toRightOf="@id/fragment_activity_rockhome_blue_iv_pwd_lock"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/fragment_activity_rockhome_blue_tv_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:textSize="16dp"
+        android:text="Confirm"
+        android:paddingTop="8dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorPrimary"
+        android:gravity="center"/>
+</LinearLayout>

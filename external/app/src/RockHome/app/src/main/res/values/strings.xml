@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Rock Home</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <!-- fragment_activity_rockchip_default -->
+    <string name="btn_continue">Continue</string>
+    <string name="tv_type_hint">侧滑选择配置方式，使用Bluetooth请继续</string>
+
+    <!-- fragment_activity_rockchip_blue -->
+    <string name="blue_start_lescan">Start Scan</string>
+    <string name="blue_stop_lescan">Stop Scan</string>
+    <string name="fragment_blue_guide">点击搜索可配置蓝牙设备</string>
+    <string name="no_blue_device_found">没有搜索到可配置蓝牙设备</string>
+    <string name="no_wifi">&lt;Tap to select a wifi&gt;</string>
+    <string name="devices_searched">搜索到可配置设备</string>
+
+    <!-- fragment_activity_rockchip_wifi -->
+    <string name="search_device">Search devices</string>
+    <string name="fragment_wifi_guide">点击搜索可配置Ap设备</string>
+    <string name="no_wifi_device_found">没有搜索到可配置Ap设备</string>
+
+    <!-- dialog text -->
+    <string name="dialog_getting_wifilist">正在获取WIFI列表</string>
+    <string name="dialog_connect_to">正在连接</string>
+    <string name="dialog_wifi_configuring">正在配置WIFI</string>
+
+    <!-- Toast text -->
+    <string name="toast_config_success">配置成功</string>
+    <string name="toast_config_fail">配置失败</string>
+    <string name="select_wifi">Please select a wifi first!</string>
+    <string name="pwd_invalid">Wifi password is invalid, please check!</string>
+    <string name="send_msg_error">发送数据失败</string>
+    <string name="connect_wifi_success">连接成功</string>
+    <string name="connect_wifi_fail">连接失败</string>
+    <string name="need_remove_network_first">不允许应用程序改变其他应用程序创建的网络，请先在设置中忘记此网络</string>
+</resources>

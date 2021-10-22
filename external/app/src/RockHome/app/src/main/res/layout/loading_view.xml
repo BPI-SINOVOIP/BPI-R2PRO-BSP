@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/AVLoadingIndicatorView"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        app:indicatorName="BallSpinFadeLoaderIndicator"
+        app:indicatorColor="@color/colorWhite"
+        style="@style/AVLoadingIndicatorView.Small"/>
+
+
+    <TextView
+        android:id="@+id/tvcontent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+</LinearLayout>

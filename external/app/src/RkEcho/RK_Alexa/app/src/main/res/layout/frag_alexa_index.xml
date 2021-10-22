@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<include layout="@layout/alexa_toolbar"/>-->
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:background="?attr/colorPrimary" >
+
+        <TextView
+            android:id="@+id/toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_toolbar_back" />
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_20"
+            android:text="Alexa"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_20" />
+
+        <TextView
+            android:id="@+id/toolbar_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:textSize="@dimen/sp_14"
+            android:textColor="@android:color/white"
+            android:text="Skip"/>
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dp_36"
+        android:paddingBottom="@dimen/dp_36"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="@dimen/dp_182"
+            android:layout_height="@dimen/dp_86"
+            android:src="@drawable/alexa_logo"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dp_36"
+        android:paddingBottom="@dimen/dp_36"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_20"
+            android:text="Your device includes access to Alexa.\nConnect your Amazon account to "
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_26"
+            android:text="access personalized features."
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/dp_32"/>
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_16"
+            android:text="Alexa allows you to use your voice\nto play music and get news, sports scores,\nweather and more—all hands-free. "
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_22"
+            android:text="All you have to do is ask Alexa."
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/dp_78"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_24"
+        android:paddingRight="@dimen/dp_24"
+        android:paddingBottom="@dimen/dp_24"
+        android:orientation="vertical"
+        android:layout_weight="0.1"
+        android:gravity="bottom"
+        android:layout_gravity="bottom">
+        <Button
+            android:id="@+id/frag_alexa_index_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_54"
+            android:text="Sign in with Amazon"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+</LinearLayout>

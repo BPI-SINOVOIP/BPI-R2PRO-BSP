@@ -1,0 +1,64 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '28.0.3'
+
+//    aaptOptions.cruncherEnabled = false
+//    aaptOptions.useNewCruncher = false
+
+    defaultConfig {
+        applicationId "com.rockchip.alexa.jacky"
+        minSdkVersion 16
+        targetSdkVersion 19
+        versionCode 1
+        versionName "1.1.06301739"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        externalNativeBuild {
+            cmake {
+                // Passes optional arguments to CMake.
+                arguments "-DANDROID_ARM_NEON=TRUE", "-DANDROID_TOOLCHAIN=clang"
+                cppFlags "-D__STDC_FORMAT_MACROS"
+                cFlags "-D_EXAMPLE_C_FLAG1", "-D_EXAMPLE_C_FLAG2"
+            }
+        }
+    }
+    buildTypes {
+        release {
+            // 混淆
+//            minifyEnabled true
+//            // Zipalign优化
+//            zipAlignEnabled true
+//            // 移除无用的resource文件
+//            shrinkResources true
+            // 前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明，后一个文件是自己的定义混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path 'CMakeLists.txt'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:25.1.1'
+    implementation 'org.apache.commons:commons-lang3:3.4'
+    implementation files('libs/fastjson-1.2.8.jar')
+    implementation 'commons-io:commons-io:2.4'
+    implementation files('libs/login-with-amazon-sdk.jar')
+    implementation files('libs/commons-codec-1.10.jar')
+
+    implementation 'com.tbruyelle.rxpermissions:rxpermissions:0.7.0@aar'
+    implementation 'io.reactivex:rxjava:1.1.6' //需要引入RxJava
+    implementation 'com.zhousf.lib:okhttp3:2.7.0'
+    implementation 'com.coolerfall:android-http-download-manager:1.6.1'
+}

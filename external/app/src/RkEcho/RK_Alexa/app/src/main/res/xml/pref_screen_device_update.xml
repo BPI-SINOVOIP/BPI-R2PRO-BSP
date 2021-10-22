@@ -1,0 +1,18 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="@string/pref_category_net_update"
+        android:title="@string/pref_category_net_update">
+        <Preference
+            android:key = "@string/pref_update_item_set_ip"
+            android:title = "@string/pref_update_item_set_ip">
+        </Preference>
+        <Preference
+            android:key = "@string/pref_update_item_check_version"
+            android:title = "@string/pref_update_item_check_version">
+        </Preference>
+        <Preference
+            android:key = "@string/pref_update_item_download_update"
+            android:title = "@string/pref_update_item_download_update">
+        </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>

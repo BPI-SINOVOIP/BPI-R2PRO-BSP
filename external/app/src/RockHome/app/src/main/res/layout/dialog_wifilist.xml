@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000">
+
+    <fragment
+        android:id="@+id/wifi_picker_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        class="com.rockchip.smart.rockhome.WifiListFragment"
+        android:tag="wifi_picker_id" />
+
+</LinearLayout>

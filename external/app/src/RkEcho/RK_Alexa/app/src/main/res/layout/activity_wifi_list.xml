@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ScrollView1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:background="?attr/colorPrimary" >
+
+        <TextView
+            android:id="@+id/toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_toolbar_back" />
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_20"
+            android:text="Wifi List"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_20" />
+    </android.support.v7.widget.Toolbar>
+
+    <include layout="@layout/wifi_list"></include>
+
+</LinearLayout>

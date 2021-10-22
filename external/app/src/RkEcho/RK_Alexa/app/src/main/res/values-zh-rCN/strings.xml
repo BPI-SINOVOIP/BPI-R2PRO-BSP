@@ -1,0 +1,274 @@
+<resources>
+    <string name="app_name">RK_Alexa</string>
+
+    <string name="action_to_wifi_mode">长按设备顶部按键3S以上,至亮绿灯进入WIFI模式</string>
+    <string name="action_author_success">您已经成功登录Amazon</string>
+    <string name="device_setup">开始配置</string>
+
+    <string name="dialog_loading">正在加载...</string>
+    <string name="request_send_success">发送成功</string>
+    <string name="request_send_fail">发送失败</string>
+    <string name="title_prompt">提示</string>
+    <string name="device_not_connected">当前未连接到设备热点</string>
+    <string name="confirm">确认</string>
+    <string name="cancel">取消</string>
+    <string name="blu_tag_connected">已连接设备</string>
+    <string name="blu_tag_paired">已配对设备</string>
+    <string name="blu_tag_scaned">已扫描设备</string>
+    <string name="wifi_connecting">正在连接WIFI...</string>
+    <string name="wifi_connected_fail">连接设备热点失败</string>
+    <string name="wifi_connected_timeout">连接设备设备超时</string>
+    <string name="name_scan_device">搜索到附近设备</string>
+    <string name="if_continue_setup_wifi">当前设备未授权，是否继续设置WIFI?</string>
+    <string name="not_connected_wifi">当前未连接到设备热点</string>
+    <string name="error_pwd">密码填写错误，请检查</string>
+    <string name="author_info_expire">授权信息已过期，请重新获取</string>
+    <string name="author_info_send_success">授权信息发送成功</string>
+    <string name="if_continue_setup_wifi_after_fail">授权信息发送失败,是否继续发送WiFi信息</string>
+    <string name="wifi_send_success">Wifi信息发送成功</string>
+    <string name="wifi_send_fail">Wifi信息发送失败</string>
+    <string name="wifi_setting_up">正在配网...</string>
+
+    <string name="wifi_already_opened">亲，Wifi正在开启，不用再开了</string>
+    <string name="wifi_already_closed">亲，Wifi已经关闭，不用再关了</string>
+    <string name="wifi_clos_again">请重新关闭</string>
+    <string name="wifi_closing">Wifi正在关闭</string>
+    <string name="wifi_closed">Wifi已经关闭</string>
+    <string name="wifi_opening">Wifi正在打开</string>
+    <string name="wifi_opened">Wifi已经打开</string>
+    <string name="wifi_state_not_get">没有获取到Wifi状态</string>
+    <string name="wifi_not_scaned_this_region">当前区域没有无线网络</string>
+    <string name="wifi_opening_wait">wifi正在开启，请稍后扫描</string>
+    <string name="wifi_not_opened">Wifi没有开启</string>
+
+    <string name="jump_to_second">发掘网络邻居</string>
+
+    <string name="discover_start">开始发掘 ...</string>
+    <string name="discover_finished">发掘完成 !</string>
+    <string name="discover_canceled">取消发掘 !</string>
+    <string name="discover_proxy_title">Proxy Error</string>
+    <string name="discover_proxy_msg">Discovery is canceled, because a mac address appeared multiple times, you probably are behind a proxy.\n\nGo to your Gateway from the browser : http://%s</string>
+    <string name="discover_root_title">Installation: Root</string>
+    <string name="discover_root_install">Do you want to install the scan daemon for root ?</string>
+    <string name="discover_root_restart">Restarting application ...</string>
+    <string name="discover_empty">请开始发掘</string>
+    <string name="discover_action_title">选择</string>
+    <string name="discover_action_scan">Scan ports</string>
+    <string name="discover_action_rename">Change name</string>
+    <string name="discover_action_tcpsocket">tcp socket</string>
+    <string name="discover_action_saved">更改成功!</string>
+    <string name="discover_action_deleted">取消改名</string>
+    <string name="discover_myphone_name">MyPhone</string>
+
+
+
+    <string name="check_wifi_state">检查WIFi状态</string>
+    <string name="open_wifi">打开WiFi</string>
+    <string name="close_wifi">关闭WiFi</string>
+    <string name="scan_wifi">扫描附近WiFi</string>
+    <string name="send">发送</string>
+    <string name="send_message">发送的数据</string>
+    <string name="receive">接收</string>
+    <string name="receive_message">接收的数据</string>
+    <string name="save_send">保存数据</string>
+    <string name="configure_port">配置端口号</string>
+    <string name="open_server">开启服务</string>
+    <string name="other_port">对方开启的端口号</string>
+    <string name="server_ip_address">服务器端ip地址</string>
+    <string name="timing">定时ms</string>
+    <string name="timing_send">定时发送</string>
+    <string name="local_ip_address">本机IP地址</string>
+
+    <string name="app_loading">Loading</string>
+
+    <string name="btn_configure">配置</string>
+    <string name="btn_configure_port">配置端口号</string>
+    <string name="btn_connect">连接</string>
+    <string name="btn_discover">发掘</string>
+    <string name="btn_discover_cancel">取消</string>
+    <string name="btn_options">选项</string>
+    <string name="btn_yes">Yes</string>
+    <string name="btn_no">No</string>
+    <string name="btn_ok">Ok</string>
+    <string name="btn_open_content">打开目录</string>
+    <string name="btn_export">Export</string>
+    <string name="btn_close">Close</string>
+    <string name="btn_save">保存数据</string>
+    <string name="btn_scan">Scan</string>
+    <string name="btn_send">发送</string>
+    <string name="btn_back">Back</string>
+    <string name="btn_info">Info</string>
+    <string name="btn_ports">Ports</string>
+    <string name="btn_remove">Remove</string>
+    <string name="btn_set">设置</string>
+    <string name="btnrd_receive_text">文本</string>
+    <string name="btnrd_receive_ascall">hex</string>
+    <string name="ckbx_time">t</string>
+    <string name="ckbx_timing">定时</string>
+    <string name="tt_port">端口：</string>
+    <string name="tt_local_port">本地端口</string>
+    <string name="tt_remote_port">远程端口</string>
+
+    <string name="task_db">Downloading and installing %s database ...</string>
+    <string name="task_services">Creating Services database ...\nThis may take a while ...</string>
+
+    <string name="package_missing">%s must be installed from the market !</string>
+
+    <string name="wifi_enabled">Wifi is enabled</string>
+    <string name="wifi_enabling">Wifi is enabling</string>
+    <string name="wifi_disabling">Wifi is disabling</string>
+    <string name="wifi_disabled">Wifi is disabled</string>
+    <string name="wifi_scanning">Wifi is scanning</string>
+    <string name="wifi_associating">Wifi is associating with %s</string>
+    <string name="wifi_dhcp">Obtaining IP address from %s</string>
+    <string name="wifi_unknown">Wifi 状态未知</string>
+
+    <string name="no_permisssion">没有权限</string>
+    <string name="net_ip">IP: %1$s/%2$d (%3$s)</string>
+    <string name="net_carrier">CARRIER: %s</string>
+    <string name="net_ssid">SSID: %s</string>
+    <string name="net_mode">MODE: %s</string>
+    <string name="net_mode_wifi">WiFi (%1$s %2$s)</string>
+    <string name="net_mode_mobile">Mobile</string>
+    <string name="net_mode_eth">Ethernet (Not supported yet)</string>
+    <string name="net_mode_unknown">Unknown</string>
+
+    <string name="scan_single_title">Scan IP</string>
+    <string name="scan_single_summary">Enter an IP address or FQDN to scan, i.e. scanme.nmap.org</string>
+    <string name="scan_noport">No open port found !</string>
+    <string name="scan_noaction">No associated action !</string>
+    <string name="scan_connect">Connect</string>
+    <string name="scan_start">Scan started ...</string>
+    <string name="scan_finished">Scan finished !</string>
+    <string name="scan_canceled">Scan canceled !</string>
+    <string name="scan_open">Open (%s)</string>
+    <string name="scan_closed">Closed (%s)</string>
+    <string name="scan_host_unreachable">Host unreachable !</string>
+    <string name="scan_banner_title">Port %s/tcp</string>
+
+    <string name="info_time">Response time:</string>
+    <string name="info_mac">MAC Address:</string>
+    <string name="info_nic">NIC vendor:</string>
+    <string name="info_ports_open">Open ports:</string>
+    <string name="info_ports_closed">Closed ports:</string>
+    <string name="info_unknown">Unknown</string>
+
+    <string name="export_finished">File saved !</string>
+    <string name="export_choose">Choose file destination</string>
+    <string name="export_save">Save</string>
+    <string name="export_exists_title">File already exists</string>
+    <string name="export_exists_msg">Do you want to overwrite ?</string>
+
+    <string name="help_discovery_title">Hosts discovery</string>
+    <string name="help_discovery_content">The method that is being used, does not need to have root privileges. In future release there will be more advanced techniques, once the non-root ones are polished.\n\nHere is how it works: \n1. Calculate the subnetwork range\n2. Iterate throught IP and query them\n3. First it sends an ICMP ping or Echo on tcp/7 (with InetAddress.isReachable())\n4. If it does not work, it tries to connect() on well known open tcp ports such as: 135, 139, 22, 111, 80\n5. If none of the above is successful, the host is not discovered</string>
+    <string name="help_portscan_title">Port scan</string>
+    <string name="help_portscan_content">Port scan is event driven, using Java\'s Selector and SocketChannel.\nThere is a fake timeout by registrering the time in ms at socket\'s creation and checking regularly this value.\nThe port scan method, as discovery, uses full tcp connection check. (will be more granular in the future with root features.)\n\nA maximum of 127 Sockets are opened at a time, so this is not always accurate, but quite fast. Again, a new feature is coming that will adapt times between requests according to host response time (kind of software network congestion control)\n\nA port is considered open when tcp connect() is fully successful, closed when no service is listening on the other end, or filtered when the timeout is reached.</string>
+    <string name="help_links_title">Links</string>
+    <string name="help_links_content">- TCP connect scan: http://nmap.org/book/man-port-scanning-techniques.html#id421401\n\n- Host discovery: http://nmap.org/book/man-host-discovery.html</string>
+
+    <string name="preferences_help">Help</string>
+    <string name="preferences_export"></string>
+    <string name="preferences_credits">Credits</string>
+    <string name="preferences_discover">Discovery</string>
+    <string name="preferences_portscan">Port Scan</string>
+    <string name="preferences_advanced">General</string>
+
+    <string name="preferences_donate">Donate: If you like this app, you can buy me a beer.</string>
+    <string name="preferences_resolve_name_title">Resolve Hostname</string>
+    <string name="preferences_resolve_name_summary">Use system DNS to resolve ip addresses</string>
+    <string name="preferences_vibrate_title">Vibrate</string>
+    <string name="preferences_vibrate_summary">Vibrate when Scan is completed</string>
+    <string name="preferences_ratecontrol_enable_title">Rate control</string>
+    <string name="preferences_ratecontrol_enable_summary">Enable automatic rate detection</string>
+    <string name="preferences_timeout_discover_title">Custom rate</string>
+    <string name="preferences_timeout_discover_summary">Rate of discovery in millisecondes</string>
+    <string name="preferences_port_start_title">First Port</string>
+    <string name="preferences_port_start_summary">First TCP Port to scan. 1-65535</string>
+    <string name="preferences_port_end_title">Last Port</string>
+    <string name="preferences_port_end_summary">Last TCP Port to scan. 1-65535</string>
+    <string name="preferences_banner_title">Services banners</string>
+    <string name="preferences_banner_summary">Read banner from a connected socket (ex.: SSH-2.0-OpenSSH_5.1p1)</string>
+    <string name="preferences_timeout_force_title">Custom timeout</string>
+    <string name="preferences_timeout_force_summary">Manually set connect timeout</string>
+    <string name="preferences_timeout_title">Connect timeout</string>
+    <string name="preferences_timeout_summary">Timeout of a port connection in millisecondes</string>
+    <string name="preferences_allow_mobile_title">Allow mobile discovery</string>
+    <string name="preferences_allow_mobile_summary">Scan over edge/3g/... usually leading to strange results, if any</string>
+    <string name="preferences_ssh_user_title">SSH User</string>
+    <string name="preferences_ssh_user_summary">Username for the SSH connection</string>
+    <string name="preferences_threads_title">Threads pool</string>
+    <string name="preferences_threads_summary">Maximum number of threads to use in host discovery (1-256)</string>
+    <string name="preferences_resetdb_title">Update NIC Database</string>
+    <string name="preferences_resetdb_summary">Pull and update MAC addresses database</string>
+    <string name="preferences_resetdb_action">Do you want to download %1$s ? (~%2$sk)</string>
+    <string name="preferences_resetdb_ok">Database updated ! %s new entries ...</string>
+    <string name="preferences_version_title">Version</string>
+    <string name="preferences_website_title">Website</string>
+    <string name="preferences_email_title">Contact</string>
+    <string name="preferences_intf_title">Network interface</string>
+    <string name="preferences_intf_summary">Choose which interface to use</string>
+    <string name="preferences_discover_method_title">Discover Method</string>
+    <string name="preferences_discover_method_summary">Change to different method of host discovery</string>
+    <string name="preferences_discover_method_title_dialog">Choose a method</string>
+    <string name="preferences_ip_start_title">IP start</string>
+    <string name="preferences_ip_start_summary">First IP address to scan</string>
+    <string name="preferences_ip_end_title">IP end</string>
+    <string name="preferences_ip_end_summary">Last IP address to scan</string>
+    <string name="preferences_ip_custom_title">Custom IP range</string>
+    <string name="preferences_ip_custom_summary">Manually set start/end IPs</string>
+    <string name="preferences_cidr_custom_title">Custom CIDR</string>
+    <string name="preferences_cidr_custom_summary">Manually set CIDR (defines subnet)</string>
+    <string name="preferences_cidr">Change CIDR</string>
+
+    <string name="preferences_error1">Error: First is bigger than Last !</string>
+    <string name="preferences_error2">Error: Number of Threads must be between 1 and 256 !</string>
+    <string name="preferences_error3">Error: File transfer interrupted !</string>
+    <string name="preferences_error4">Error: Value is not a valid IP address !</string>
+
+    <string name="auth_success_time_hint">登录成功! %dS后跳转...</string>
+
+    // about device update
+    <string name="pref_category_local_update">本地升级</string>
+
+    <string name="pref_activity_update_title">设备&amp;更新</string>
+    <string name="pref_category_net_update">网络升级</string>
+    <string name="pref_update_item_check_version">检查新版本</string>
+    <string name="pref_update_item_set_ip">服务器IP设置</string>
+    <string name="pref_update_item_download_update">下载&amp;更新</string>
+    <string name="message_new_version_on">当前有可用版本更新</string>
+
+    <string name="str_version_upgrade_info">版本更新信息</string>
+    <string name="request_error_for_network">网络连接出错,请检查后重试</string>
+    <string name="request_error_for_server">服务器异常,请稍后重试</string>
+    <string name="message_get_new_version_ing">正在获取最新版本..</string>
+    <string name="message_newest_version_on">当前已是最新版本</string>
+    <string name="message_new_version_has_downloaded">固件下载完成，点击进行设备升级</string>
+    <string name="message_new_version_on2">当前有可用版本更新,请点击下载更新</string>
+    <string name="dialog_title_alert">提示</string>
+    <string name="dialog_button_confirm">确定</string>
+    <string name="dialog_button_cancel">取消</string>
+    <string name="download_manager_downloading">正在下载中</string>
+    <string name="firmware_downloading">升级固件下载中</string>
+    <string name="firmware_wait_to_download">升级固件排入队列,等待开启下载..</string>
+    <string name="firmware_download_backstage">后台下载</string>
+    <string name="firmware_download_cancel">取消下载</string>
+    <string name="firmware_data_handle_ing">固件数据校验处理中..</string>
+    <string name="connecting_to_server">正在连接服务器..</string>
+    <string name="firmware_device_data_send_warn">固件包下载解压完成，但设备升级需要手机接入设备SOFTAP，是否立刻前往配置？</string>
+    <string name="firmware_download_complete">升级固件下载完成,是否进行设备升级？</string>
+    <string name="firmware_device_upgrading">设备升级中..</string>
+    <string name="firmware_device_upgrade_preparing">正在进行升级前准备..</string>
+    <string name="firmware_device_rebooting">请等待设备重启完成..</string>
+    <string name="firmware_data_error">固件数据读取错误,请重新下载.</string>
+    <string name="device_update_success">设备更新成功.</string>
+    <string name="device_update_failed">设备更新失败,请检查设备状态</string>
+    <string name="device_version_latest">检测到设备版本已经是最新..</string>
+    <string name="dialog_warm">警告</string>
+    <string name="dialog_network_set_title">网络设置提示</string>
+    <string name="dialog_network_set_message">网络连接出错，是否前往配置?</string>
+    <string name="dialog_network_set_positive_button">前往配置</string>
+    <string name="dialog_network_set_negative_button">取消</string>
+    // 服务器IP设置
+    <string name="server_ip_set">服务器IP设置</string>
+    <string name="server_ip_set_success">服务器IP设置成功，新服务器IP为：</string>
+</resources>

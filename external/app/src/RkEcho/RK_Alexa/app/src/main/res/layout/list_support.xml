@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_padding_lr"
+    android:paddingRight="@dimen/activity_padding_lr"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/list_support_wifi_setup"
+        android:layout_width="match_parent"
+        android:paddingTop="@dimen/dp_08"
+        android:paddingBottom="@dimen/dp_08"
+        android:layout_height="@dimen/dp_60">
+
+        <ImageView
+            android:id="@+id/item_wifi_setup_logo"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_06"
+            android:layout_centerVertical="true"
+            android:src="@drawable/wifi_index"/>
+
+        <TextView
+            android:id="@+id/item_wifi_setup_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_24"
+            android:layout_toRightOf="@id/item_wifi_setup_logo"
+            android:layout_centerVertical="true"
+            android:text="Wifi Setup"/>
+
+        <ToggleButton
+            android:id="@+id/item_wifi_setup_tob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/item_wifi_setup_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kitchen Hub"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/item_wifi_setup_auxiv"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:src="@drawable/ic_local_more"
+            android:layout_alignTop="@+id/item_wifi_setup_logo"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_02"
+        android:background="#66CCFF"/>
+
+    <RelativeLayout
+        android:id="@+id/list_support_alexa"
+        android:layout_width="match_parent"
+        android:paddingTop="@dimen/dp_08"
+        android:paddingBottom="@dimen/dp_08"
+        android:layout_height="@dimen/dp_60">
+
+        <ImageView
+            android:id="@+id/item_partner_logo"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_06"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_alexa"/>
+
+        <TextView
+            android:id="@+id/item_partner_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_24"
+            android:layout_toRightOf="@id/item_partner_logo"
+            android:layout_centerVertical="true"
+            android:text="Amazon Alexa"/>
+
+        <ToggleButton
+            android:id="@+id/item_partner_tob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/item_partner_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kitchen Hub"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/item_partner_auxiv"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:src="@drawable/ic_local_more"
+            android:layout_alignTop="@+id/item_partner_logo"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_02"
+        android:background="#66CCFF"/>
+
+    <RelativeLayout
+        android:id="@+id/list_support_blu_setup"
+        android:layout_width="match_parent"
+        android:paddingTop="@dimen/dp_08"
+        android:paddingBottom="@dimen/dp_08"
+        android:layout_height="@dimen/dp_60">
+
+        <ImageView
+            android:id="@+id/item_blu_setup_logo"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_06"
+            android:layout_centerVertical="true"
+            android:src="@drawable/device_update_index"/>
+
+        <TextView
+            android:id="@+id/item_blu_setup_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_24"
+            android:layout_toRightOf="@id/item_blu_setup_logo"
+            android:layout_centerVertical="true"
+            android:text="Bluetooth Setup" />
+
+        <ToggleButton
+            android:id="@+id/item_blu_setup_tob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/item_blu_setup_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kitchen Hub"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/item_blu_setup_auxiv"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:src="@drawable/ic_local_more"
+            android:layout_alignTop="@id/item_blu_setup_logo"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_02"
+        android:background="#66CCFF"/>
+
+    <RelativeLayout
+        android:id="@+id/list_support_update"
+        android:layout_width="match_parent"
+        android:paddingTop="@dimen/dp_08"
+        android:paddingBottom="@dimen/dp_08"
+        android:layout_height="@dimen/dp_60">
+
+        <ImageView
+            android:id="@+id/item_update_logo"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_06"
+            android:layout_centerVertical="true"
+            android:src="@drawable/device_update_index"/>
+
+        <TextView
+            android:id="@+id/item_update_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_24"
+            android:layout_toRightOf="@id/item_update_logo"
+            android:layout_centerVertical="true"
+            android:text="Device Update" />
+
+        <ToggleButton
+            android:id="@+id/item_update_tob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/item_update_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kitchen Hub"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/item_update_auxiv"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:src="@drawable/ic_local_more"
+            android:layout_alignTop="@+id/item_update_logo"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_02"
+        android:background="#66CCFF"/>
+
+
+</LinearLayout>

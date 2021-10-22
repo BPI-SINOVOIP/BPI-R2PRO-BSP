@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_activity_rockhome_default_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"
+        android:text="@string/tv_type_hint"/>
+
+    <Button
+        android:id="@+id/fragment_activity_rockhome_default_bt_continue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bt_shape"
+        android:text="@string/btn_continue" />
+
+</LinearLayout>

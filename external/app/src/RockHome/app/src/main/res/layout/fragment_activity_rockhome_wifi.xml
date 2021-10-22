@@ -1,0 +1,56 @@
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/search_devices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bt_shape"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/search_device" />
+
+    <include
+        android:id="@+id/fragment_activity_rockhome_wifi_ll_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toTopOf="@id/search_devices"
+        layout="@layout/fragment_activity_rockhome_wifi_guide" />
+
+    <include
+        android:id="@+id/fragment_activity_rockhome_wifi_ll_deviceList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toTopOf="@id/search_devices"
+        layout="@layout/fragment_activity_rockhome_wifi_devicelist"
+        android:visibility="gone"/>
+
+    <include
+        android:id="@+id/fragment_activity_rockhome_wifi_ll_nodevice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toTopOf="@id/search_devices"
+        layout="@layout/fragment_activity_rockhome_wifi_nodevice"
+        android:visibility="gone"/>
+
+    <include
+        android:id="@+id/fragment_activity_rockhome_wifi_ll_wifi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        layout="@layout/fragment_activity_rockhome_wifi_wifi"
+        android:visibility="gone"/>
+</android.support.constraint.ConstraintLayout>
