@@ -1,0 +1,2 @@
+keytest.json为按键配置文件，kv-按键名、keyCode
+ringmic.json为通道配置文件，kv-通道，对应的数据类型（0-无数据，1-mic信号）

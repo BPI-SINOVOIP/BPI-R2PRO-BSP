@@ -1,0 +1,9 @@
+{
+"keyset":[
+{"name":"Up_key","value":115},
+{"name":"Down_key","value":114},
+{"name":"StopMic_key","value":248},
+{"name":"Play_key","value":164},
+{"name":"Change_key","value":373}
+]
+}
