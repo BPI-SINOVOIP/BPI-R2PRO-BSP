@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# Start linux launcher...
+#
+
+case "$1" in
+  start)
+		/usr/bin/minigui_desktop &
+	;;
+  stop)
+		killall minigui_desktop
+		printf "stop finished"
+        ;;
+  *)
+        echo "Usage: $0 {start|stop}"
+        exit 1
+        ;;
+esac
+exit 0

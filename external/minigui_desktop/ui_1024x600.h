@@ -1,0 +1,369 @@
+/*
+ * Rockchip App
+ *
+ * Copyright (C) 2017 Rockchip Electronics Co., Ltd.
+ *
+ * This software is available to you under a choice of one of two
+ * licenses.  You may choose to be licensed under the terms of the GNU
+ * General Public License (GPL), available from the file
+ * COPYING in the main directory of this source tree, or the
+ * OpenIB.org BSD license below:
+ *
+ *     Redistribution and use in source and binary forms, with or
+ *     without modification, are permitted provided that the following
+ *     conditions are met:
+ *
+ *      - Redistributions of source code must retain the above
+ *        copyright notice, this list of conditions and the following
+ *        disclaimer.
+ *
+ *      - Redistributions in binary form must reproduce the above
+ *        copyright notice, this list of conditions and the following
+ *        disclaimer in the documentation and/or other materials
+ *        provided with the distribution.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+#ifndef __UI_1024X600_H__
+#define __UI_1024X600_H__
+
+#define LCD_W    1024
+#define LCD_H    600
+
+#define TTF_FONT_SIZE    24
+#define TTF_TITLE_FONT_SIZE    16
+
+#define STATUS_BAR_X    0
+#define STATUS_BAR_Y    0
+#define STATUS_BAR_W    LCD_W
+#define STATUS_BAR_H    45
+#define STATUS_BAR_ICO_SPAC    40
+
+#define STATUS_BAR_ICO_OFFSET   20
+
+#define REALTIME_PINT_X    (LCD_W - 70)
+#define REALTIME_PINT_Y    21
+#define REALTIME_PINT_W    70
+#define REALTIME_PINT_H    24
+
+#define REALDATE_PINT_X    (LCD_W - 180)
+#define REALDATE_PINT_Y    21
+#define REALDATE_PINT_W    180
+#define REALDATE_PINT_H    24
+
+#ifdef ENABLE_BATT
+#define BATT_PINT_X    (REALDATE_PINT_X -STATUS_BAR_ICO_SPAC)
+#else
+#define BATT_PINT_X    REALDATE_PINT_X
+#endif
+#define BATT_PINT_Y    25
+#define BATT_PINT_W    28
+#define BATT_PINT_H    15
+
+#ifdef ENABLE_WIFI
+#define WIFI_PINT_X    (BATT_PINT_X - STATUS_BAR_ICO_SPAC)
+#else
+#define WIFI_PINT_X    BATT_PINT_X
+#endif
+#define WIFI_PINT_Y    20
+#define WIFI_PINT_W    28
+#define WIFI_PINT_H    20
+
+#define WIFI_SIGNAL_PINT_W  24
+#define WIFI_SIGNAL_PINT_H  24
+
+#define WIFI_KEY_PINT_W  30
+#define WIFI_KEY_PINT_H  25
+
+#define VOLUME_PINT_X    (WIFI_PINT_X - STATUS_BAR_ICO_SPAC+3)
+#define VOLUME_PINT_Y    20
+#define VOLUME_PINT_W    28
+#define VOLUME_PINT_H    20
+
+#define BACK_PINT_X    10
+#define BACK_PINT_Y    15
+#define BACK_PINT_W    50
+#define BACK_PINT_H    30
+
+#define BG_PINT_X    0
+#define BG_PINT_Y    0
+#define BG_PINT_W    LCD_W
+#define BG_PINT_H    LCD_H
+
+#define DESKTOP_DLG_X    0
+#define DESKTOP_DLG_Y    (TITLE_LINE_PINT_Y+TITLE_LINE_PINT_H)
+#define DESKTOP_DLG_W    LCD_W - DESKTOP_DLG_X
+#define DESKTOP_DLG_H    LCD_H - DESKTOP_DLG_Y
+#define DESKTOP_DLG_STRING    "desktop"
+
+#define TITLE_PINT_X    80
+#define TITLE_PINT_Y    15
+#define TITLE_PINT_W    130
+#define TITLE_PINT_H    40
+
+#define TITLE_LINE_PINT_X    0
+#define TITLE_LINE_PINT_Y    60
+#define TITLE_LINE_PINT_W    LCD_W
+#define TITLE_LINE_PINT_H    2
+
+//desktop_dialog
+#define ICON_SPAC      190
+
+#define MUSIC_PINT_W    100
+#define MUSIC_PINT_H    100
+#define MUSIC_PINT_X    90
+#define MUSIC_PINT_Y    LCD_H - MUSIC_PINT_H - 16
+
+#define PHOTO_PINT_X    MUSIC_PINT_X + ICON_SPAC
+#define PHOTO_PINT_Y    MUSIC_PINT_Y
+#define PHOTO_PINT_W    MUSIC_PINT_W
+#define PHOTO_PINT_H    MUSIC_PINT_H
+
+#define VIDEO_PINT_X    PHOTO_PINT_X + ICON_SPAC
+#define VIDEO_PINT_Y    MUSIC_PINT_Y
+#define VIDEO_PINT_W    MUSIC_PINT_W
+#define VIDEO_PINT_H    MUSIC_PINT_H
+
+#define FOLDE_PINT_X    VIDEO_PINT_X + ICON_SPAC
+#define FOLDE_PINT_Y    MUSIC_PINT_Y
+#define FOLDE_PINT_W    MUSIC_PINT_W
+#define FOLDE_PINT_H    MUSIC_PINT_H
+
+#define SETTING_PINT_X    FOLDE_PINT_X + ICON_SPAC
+#define SETTING_PINT_Y    MUSIC_PINT_Y
+#define SETTING_PINT_W    MUSIC_PINT_W
+#define SETTING_PINT_H    MUSIC_PINT_H
+
+#define MENU_ICON_ZOOM_W    (MUSIC_PINT_W / 5)
+#define MENU_ICON_ZOOM_H    (MUSIC_PINT_H / 5)
+
+#define PHOTO_ICON_PINT_X    100
+#define PHOTO_ICON_PINT_Y    200
+#define PHOTO_ICON_PINT_W    160
+#define PHOTO_ICON_PINT_H    90
+#define PHOTO_ICON_SPAC      300
+#define PHOTO_ICON_ZOOM_W    (PHOTO_ICON_PINT_W / 5)
+#define PHOTO_ICON_ZOOM_H    (PHOTO_ICON_PINT_H / 5)
+
+#define PHOTO_ICON_NUM_PERPAGE  3
+
+#define PHOTO_PREVIEW_CENTER_W  (LCD_W / 3)
+#define PHOTO_PREVIEW_CENTER_H  (LCD_H / 3)
+#define PHOTO_PREVIEW_CENTER_X  ((LCD_W - PHOTO_PREVIEW_CENTER_W)/ 2)
+#define PHOTO_PREVIEW_CENTER_Y  ((LCD_H - PHOTO_PREVIEW_CENTER_H)/ 2)
+
+#define PHOTO_PREVIEW_LEFT_W  (LCD_W / 6)
+#define PHOTO_PREVIEW_LEFT_H  (LCD_H / 6)
+#define PHOTO_PREVIEW_LEFT_X  100
+#define PHOTO_PREVIEW_LEFT_Y  (PHOTO_PREVIEW_CENTER_Y + (PHOTO_PREVIEW_CENTER_H - PHOTO_PREVIEW_LEFT_H))
+
+#define PHOTO_PREVIEW_RIGHT_W  (LCD_W / 6)
+#define PHOTO_PREVIEW_RIGHT_H  (LCD_H / 6)
+#define PHOTO_PREVIEW_RIGHT_X  (LCD_W - PHOTO_PREVIEW_RIGHT_W - 100)
+#define PHOTO_PREVIEW_RIGHT_Y  PHOTO_PREVIEW_LEFT_Y
+
+#define DESKTOP_PAGE_DOT_X    (LCD_W / 2)
+#define DESKTOP_PAGE_DOT_Y    (MUSIC_PINT_Y - 10)
+#define DESKTOP_PAGE_DOT_DIA  4
+#define DESKTOP_PAGE_DOT_SPAC  40
+
+//audioplay_dialog
+#define ALBUM_ICON_PINT_W    128
+#define ALBUM_ICON_PINT_H    128
+#define ALBUM_ICON_PINT_X    ((LCD_W - ALBUM_ICON_PINT_W) / 2)
+#define ALBUM_ICON_PINT_Y    ((LCD_H - ALBUM_ICON_PINT_H) / 2 - 60)
+
+#define FILENAME_PINT_W    LCD_W
+#define FILENAME_PINT_H    24
+#define FILENAME_PINT_X    0
+#define FILENAME_PINT_Y    (ALBUM_ICON_PINT_Y + ALBUM_ICON_PINT_H + 20)
+
+#define FILENUM_PINT_W    LCD_W
+#define FILENUM_PINT_H    24
+#define FILENUM_PINT_X    0
+#define FILENUM_PINT_Y    (LCD_H - FILENUM_PINT_H - 10)
+
+#define PROGRESSBAR_PINT_X    20
+#define PROGRESSBAR_PINT_Y    (LCD_H - 50)
+#define PROGRESSBAR_PINT_W    (LCD_W - PROGRESSBAR_PINT_X * 2)
+#define PROGRESSBAR_PINT_H    4
+
+#define TIME_PINT_W    100
+#define TIME_PINT_H    24
+#define TIME_PINT_X    (LCD_W - PROGRESSBAR_PINT_X - TIME_PINT_W)
+#define TIME_PINT_Y    (PROGRESSBAR_PINT_Y - TIME_PINT_H)
+
+#define PLAY_BUTTON_SPAC    60
+
+#define PLAYSTATUS_PINT_W   36
+#define PLAYSTATUS_PINT_H   48
+#define PLAYSTATUS_PINT_X   ((LCD_W-PLAYSTATUS_PINT_W)/2)
+#define PLAYSTATUS_PINT_Y   PLAYPREV_PINT_Y
+
+#define PLAYPREV_PINT_W     36
+#define PLAYPREV_PINT_H     48
+#define PLAYPREV_PINT_X     (PLAYSTATUS_PINT_X-PLAY_BUTTON_SPAC)
+#define PLAYPREV_PINT_Y     (PROGRESSBAR_PINT_Y - PLAYPREV_PINT_H - 8)
+
+#define PLAYNEXT_PINT_W     36
+#define PLAYNEXT_PINT_H     48
+#define PLAYNEXT_PINT_X     (PLAYSTATUS_PINT_X+PLAY_BUTTON_SPAC)
+#define PLAYNEXT_PINT_Y     PLAYPREV_PINT_Y
+
+//browser_dialog
+#define BROWSER_LIST_STR_PINT_X    30
+#define BROWSER_LIST_STR_PINT_Y    (TITLE_LINE_PINT_Y +TITLE_LINE_PINT_H + 9)
+#define BROWSER_LIST_STR_PINT_W    24
+#define BROWSER_LIST_STR_PINT_H    44
+#define BROWSER_LIST_STR_PINT_SPAC      56
+
+#define BROWSER_LIST_PIC_PINT_W    32
+#define BROWSER_LIST_PIC_PINT_H    32
+
+#define BROWSER_LIST_SEL_PINT_H    56
+
+#define FILE_NUM_PERPAGE  14
+
+#define BROWSER_PAGE_DOT_X    (LCD_W / 2)
+#define BROWSER_PAGE_DOT_Y    (LCD_H - 10)
+#define BROWSER_PAGE_DOT_DIA  4
+#define BROWSER_PAGE_DOT_SPAC  40
+//setting
+#define SETTING_NUM_PERPAGE    10
+#define WIFI_NUM_PERPAGE 8
+
+#define SETTING_LIST_STR_PINT_X    30
+#define SETTING_LIST_STR_PINT_Y    (TITLE_LINE_PINT_Y +TITLE_LINE_PINT_H+9)
+#define SETTING_LIST_STR_PINT_W    44
+#define SETTING_LIST_STR_PINT_H    44
+#define SETTING_LIST_STR_PINT_SPAC      56
+
+#define SETTING_LIST_SEL_PINT_H    56
+
+#define SETTING_LIST_DOT_PINT_X    LCD_W - 40
+#define SETTING_LIST_DOT_PINT_W    16
+#define SETTING_LIST_DOT_PINT_H    16
+
+#define SETTING_INFO_PINT_X    30
+#define SETTING_INFO_PINT_Y    70
+#define SETTING_INFO_PINT_W    LCD_W - SETTING_INFO_PINT_X *2
+#define SETTING_INFO_PINT_H    44
+#define SETTING_INFO_PINT_SPAC      50
+
+#define SETTING_PAGE_DOT_X    (LCD_W / 2)
+#define SETTING_PAGE_DOT_Y    (LCD_H - 10)
+#define SETTING_PAGE_DOT_DIA  4
+#define SETTING_PAGE_DOT_SPAC  40
+
+#define SETTING_AIRKISS_PINT_W    480
+#define SETTING_AIRKISS_PINT_H    384
+#define SETTING_AIRKISS_PINT_X    ((LCD_W - SETTING_AIRKISS_PINT_W)/ 2)
+#define SETTING_AIRKISS_PINT_Y    ((LCD_H - SETTING_AIRKISS_PINT_H)/ 2)
+
+//setting_volume_dialog
+#define VOLUME_LINE_X (LCD_W-500)/2
+#define VOLUME_LINE_Y (LCD_H-TITLE_LINE_PINT_Y)/2+TITLE_LINE_PINT_Y
+#define VOLUME_LINE_W (500)
+#define VOLUME_LINE_H 4
+
+#define VOLUME_DATA_X (VOLUME_LINE_X + VOLUME_LINE_W +40)
+#define VOLUME_DATA_Y (VOLUME_LINE_Y -VOLUME_DATA_H/2)
+#define VOLUME_DATA_W 56
+#define VOLUME_DATA_H 30
+
+#define DOT_PINT_H 24
+#define DOT_PINT_W 24
+
+
+
+//videoplay_hw_dialog
+#define VIDEO_TOPBAR_H           48
+#define VIDEO_BOTTOMBAR_H        120
+
+#define VIDEO_FILENAME_PINT_W    LCD_W
+#define VIDEO_FILENAME_PINT_H    24
+#define VIDEO_FILENAME_PINT_X    0
+#define VIDEO_FILENAME_PINT_Y    20
+
+#define VIDEO_FILENUM_PINT_W    LCD_W
+#define VIDEO_FILENUM_PINT_H    24
+#define VIDEO_FILENUM_PINT_X    0
+#define VIDEO_FILENUM_PINT_Y    (LCD_H - VIDEO_FILENUM_PINT_H - 10)
+
+#define VIDEO_PROGRESSBAR_PINT_X    20
+#define VIDEO_PROGRESSBAR_PINT_Y    (LCD_H - 40)
+#define VIDEO_PROGRESSBAR_PINT_W    (LCD_W - VIDEO_PROGRESSBAR_PINT_X * 2)
+#define VIDEO_PROGRESSBAR_PINT_H    4
+
+#define VIDEO_TIME_PINT_W    100
+#define VIDEO_TIME_PINT_H    24
+#define VIDEO_TIME_PINT_X    (LCD_W - VIDEO_PROGRESSBAR_PINT_X - VIDEO_TIME_PINT_W)
+#define VIDEO_TIME_PINT_Y    (VIDEO_PROGRESSBAR_PINT_Y - VIDEO_TIME_PINT_H)
+
+#define VIDEO_BUTTON_SPAC   60
+
+#define VIDEO_PLAYSTATUS_PINT_W    36
+#define VIDEO_PLAYSTATUS_PINT_H    48
+#define VIDEO_PLAYSTATUS_PINT_X    ((LCD_W - VIDEO_PLAYSTATUS_PINT_W) / 2)
+#define VIDEO_PLAYSTATUS_PINT_Y    VIDEO_PLAYPREV_PINT_Y
+
+#define VIDEO_PLAYPREV_PINT_W    36
+#define VIDEO_PLAYPREV_PINT_H    48
+#define VIDEO_PLAYPREV_PINT_X    (VIDEO_PLAYSTATUS_PINT_X - VIDEO_BUTTON_SPAC)
+#define VIDEO_PLAYPREV_PINT_Y    (VIDEO_PROGRESSBAR_PINT_Y - VIDEO_PLAYSTATUS_PINT_H - 8)
+
+#define VIDEO_PLAYNEXT_PINT_W    36
+#define VIDEO_PLAYNEXT_PINT_H    48
+#define VIDEO_PLAYNEXT_PINT_X    (VIDEO_PLAYSTATUS_PINT_X + VIDEO_BUTTON_SPAC)
+#define VIDEO_PLAYNEXT_PINT_Y    VIDEO_PLAYPREV_PINT_Y
+
+#define TIME_INPUT_X    (LCD_W / 4)
+#define TIME_INPUT_Y    (LCD_H / 4)
+#define TIME_INPUT_H    (LCD_H / 2)
+#define TIME_INPUT_W    (LCD_W / 2)
+
+#define TIME_INPUT_ARROW_Y_1        50
+#define TIME_INPUT_ARROW_Y_2        (TIME_INPUT_ARROW_Y_1 + 100)
+#define TIME_INPUT_ARROW_H          30
+#define TIME_INPUT_ARROW_W          50
+#define TIME_INPUT_ARROW_X_12_1     80
+#define TIME_INPUT_ARROW_X_12_2     (TIME_INPUT_ARROW_X_12_1 + 150)
+#define TIME_INPUT_ARROW_X_12_3     (TIME_INPUT_ARROW_X_12_2 + 150)
+#define TIME_INPUT_ARROW_X_24_1     (TIME_INPUT_W / 3 - TIME_INPUT_ARROW_W / 2)
+#define TIME_INPUT_ARROW_X_24_2     (TIME_INPUT_W * 2 / 3 - TIME_INPUT_ARROW_W / 2)
+
+#define TIME_TEXT_Y         (TIME_INPUT_ARROW_Y_1 + 50)
+#define TIME_TEXT_W         (TIME_INPUT_W / 3)
+#define TIME_TEXT_W_24      (TIME_INPUT_W / 2 -90)
+#define TIME_TEXT_H         30
+#define TIME_TIME_X_12_1    (TIME_INPUT_ARROW_X_12_1 - (TIME_TEXT_W - TIME_INPUT_ARROW_W) / 2)
+#define TIME_TIME_X_12_2    (TIME_INPUT_ARROW_X_12_2 - (TIME_TEXT_W - TIME_INPUT_ARROW_W) / 2)
+#define TIME_TIME_X_12_3    (TIME_INPUT_ARROW_X_12_3 - (TIME_TEXT_W - TIME_INPUT_ARROW_W) / 2)
+#define TIME_TIME_X_24_1    (TIME_INPUT_ARROW_X_24_1 - (TIME_TEXT_W_24 - TIME_INPUT_ARROW_W) / 2)
+#define TIME_TIME_X_24_2    (TIME_INPUT_ARROW_X_24_2 - (TIME_TEXT_W_24 - TIME_INPUT_ARROW_W) / 2)
+
+#define TIME_INPUT_OK_PADDING   20
+#define TIME_INPUT_OK_X     0
+#define TIME_INPUT_OK_H     50
+#define TIME_INPUT_OK_W     (TIME_INPUT_W / 2)
+#define TIME_INPUT_OK_Y     (TIME_INPUT_H - TIME_INPUT_OK_H)
+
+#define TIME_INPUT_CANCEL_Y   TIME_INPUT_OK_Y
+#define TIME_INPUT_CANCEL_H   TIME_INPUT_OK_H
+#define TIME_INPUT_CANCEL_W   TIME_INPUT_OK_W
+#define TIME_INPUT_CANCEL_X   (TIME_INPUT_W / 2)
+
+#define POWER_OFF_X    (LCD_W / 4)
+#define POWER_OFF_Y    (LCD_H / 4)
+#define POWER_OFF_W    (LCD_W / 2)
+#define POWER_OFF_H    (LCD_H / 2)
+
+#endif
