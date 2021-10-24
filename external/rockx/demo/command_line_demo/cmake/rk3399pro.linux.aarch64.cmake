@@ -1,0 +1,3 @@
+
+set(TARGET_SOC rk3399pro)
+set(CMAKE_SYSTEM_NAME Linux)

@@ -1,0 +1,3 @@
+
+set(TARGET_SOC rk1806)
+set(CMAKE_SYSTEM_NAME Linux)

@@ -1,0 +1,18 @@
+V1.2.0
+======
+1. Support RK1806
+2. Support 1.3.0 NPU driver
+3. Add english developer guide documents
+
+V1.1.0
+======
+1. Add Python SDK
+2. Support config target device on rockx_create via rockx_config_t
+3. Use RGA to preprocess input image on RK3399Pro/RK1808
+4. Change rockx_carplate_align function define
+5. Use rockx-data to replace model library
+6. Fix some memory leak issue
+
+V1.0.0
+======
+1. First Release
