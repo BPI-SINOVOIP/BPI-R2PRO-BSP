@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=rknn_demo
+Exec=/usr/bin/rknn_demo
+Icon=/usr/local/share/rknn_demo/resource/ai.png
+Type=Application
+
