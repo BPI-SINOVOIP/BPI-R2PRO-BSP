@@ -1,0 +1,5 @@
+Mini driver (folder name contains mini) only support rknn models with precompiled mode.
+
+linux-aarch64: RK1808
+linux-arm: RK1806
+linux-armhf-puma: RV1109/RV1126
