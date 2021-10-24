@@ -1,0 +1,504 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>RockFace: /home/yhc/workspace/lion/rockx/RockX-dev/rockface/include/rockface_recog.h 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">RockFace
+   &#160;<span id="projectnumber">1.3.6</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle">
+<div class="title">rockface_recog.h 文件参考</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="rockface__type_8h_source.html">rockface_type.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="rockface__image_8h_source.html">rockface_image.h</a>&quot;</code><br />
+</div>
+<p><a href="rockface__recog_8h_source.html">浏览源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:a92973347d9bcbb6461f3af47832995a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rockface__recog_8h.html#a92973347d9bcbb6461f3af47832995a4">rockface_init_recognizer</a> (<a class="el" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a> handle)</td></tr>
+<tr class="separator:a92973347d9bcbb6461f3af47832995a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4d2df9b98af040d2f352df693b6e0bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rockface__recog_8h.html#ab4d2df9b98af040d2f352df693b6e0bc">rockface_init_mask_recognizer</a> (<a class="el" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a> handle)</td></tr>
+<tr class="separator:ab4d2df9b98af040d2f352df693b6e0bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b92b6e797d1f79fd6ecea6f5cfc919a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rockface__recog_8h.html#a5b92b6e797d1f79fd6ecea6f5cfc919a">rockface_feature_extract</a> (<a class="el" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a> handle, <a class="el" href="structrockface__image__t.html">rockface_image_t</a> *in_img, <a class="el" href="structrockface__feature__t.html">rockface_feature_t</a> *out_feature)</td></tr>
+<tr class="separator:a5b92b6e797d1f79fd6ecea6f5cfc919a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a895bb0305097e8f435f12a2777bcf9b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rockface__recog_8h.html#a895bb0305097e8f435f12a2777bcf9b6">rockface_mask_feature_extract</a> (<a class="el" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a> handle, <a class="el" href="structrockface__image__t.html">rockface_image_t</a> *in_img, <a class="el" href="structrockface__rect__t.html">rockface_rect_t</a> *face_box, int mode, <a class="el" href="structrockface__feature__float__t.html">rockface_feature_float_t</a> *out_feature)</td></tr>
+<tr class="separator:a895bb0305097e8f435f12a2777bcf9b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f6fc11b0cef00f8c9a893a70b93afde"><td class="memItemLeft" align="right" valign="top"><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rockface__recog_8h.html#a3f6fc11b0cef00f8c9a893a70b93afde">rockface_feature_compare</a> (<a class="el" href="structrockface__feature__t.html">rockface_feature_t</a> *in_feature1, <a class="el" href="structrockface__feature__t.html">rockface_feature_t</a> *in_feature2, float *out_similarity)</td></tr>
+<tr class="separator:a3f6fc11b0cef00f8c9a893a70b93afde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37b26c5ccfbfec92ee5cad3581570d7b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rockface__recog_8h.html#a37b26c5ccfbfec92ee5cad3581570d7b">rockface_face_library_init</a> (<a class="el" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a> handle, void *face_array, int num, size_t face_data_size, size_t feature_offset)</td></tr>
+<tr class="separator:a37b26c5ccfbfec92ee5cad3581570d7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26334afff184da79b6a7f7fd94fdec3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rockface__recog_8h.html#a26334afff184da79b6a7f7fd94fdec3a">rockface_face_library_init2</a> (<a class="el" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a> handle, <a class="el" href="rockface__type_8h.html#a3f969d89909cdf5805c648cabef7ae96">rockface_recog_version</a> version, void *face_array, int num, size_t face_data_size, size_t feature_offset)</td></tr>
+<tr class="separator:a26334afff184da79b6a7f7fd94fdec3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd68f6ec238d993be719a32233e2dc8b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rockface__recog_8h.html#abd68f6ec238d993be719a32233e2dc8b">rockface_face_library_release</a> (<a class="el" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a> handle)</td></tr>
+<tr class="separator:abd68f6ec238d993be719a32233e2dc8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecd7639b36121a549060cf591de6597f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rockface__recog_8h.html#aecd7639b36121a549060cf591de6597f">rockface_feature_search</a> (<a class="el" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a> handle, <a class="el" href="structrockface__feature__t.html">rockface_feature_t</a> *in_feature, float threshold, <a class="el" href="structrockface__search__result__t.html">rockface_search_result_t</a> *out_result)</td></tr>
+<tr class="separator:aecd7639b36121a549060cf591de6597f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">函数说明</h2>
+<a id="a37b26c5ccfbfec92ee5cad3581570d7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37b26c5ccfbfec92ee5cad3581570d7b">&#9670;&nbsp;</a></span>rockface_face_library_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> rockface_face_library_init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a>&#160;</td>
+          <td class="paramname"><em>handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>face_array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>face_data_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>feature_offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>初始化人脸库</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handle</td><td>[in] Handle，如果该Handle之前有初始化过人脸库，需要先调用（ <a class="el" href="rockface__recog_8h.html#abd68f6ec238d993be719a32233e2dc8b">rockface_face_library_release</a> ）释放后再初始化 </td></tr>
+    <tr><td class="paramname">face_array</td><td>[in] 人脸数组，数组元素可以是用户自定义的结构体，但必须包含一个rockface_feature_t类型的结构体成员（注意，初始化后该数组不能被释放） </td></tr>
+    <tr><td class="paramname">num</td><td>[in] 人脸数组数量 </td></tr>
+    <tr><td class="paramname">face_data_size</td><td>[in] 用户定义结构体的大小 </td></tr>
+    <tr><td class="paramname">feature_offset</td><td>[in] 用户定义结构体中 <a class="el" href="structrockface__feature__t.html">rockface_feature_t</a> 成员的偏移位置 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> </dd></dl>
+
+</div>
+</div>
+<a id="a26334afff184da79b6a7f7fd94fdec3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26334afff184da79b6a7f7fd94fdec3a">&#9670;&nbsp;</a></span>rockface_face_library_init2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> rockface_face_library_init2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a>&#160;</td>
+          <td class="paramname"><em>handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="rockface__type_8h.html#a3f969d89909cdf5805c648cabef7ae96">rockface_recog_version</a>&#160;</td>
+          <td class="paramname"><em>version</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>face_array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>face_data_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>feature_offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>初始化人脸库</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handle</td><td>[in] Handle，如果该Handle之前有初始化过人脸库，需要先调用（ <a class="el" href="rockface__recog_8h.html#abd68f6ec238d993be719a32233e2dc8b">rockface_face_library_release</a> ）释放后再初始化 </td></tr>
+    <tr><td class="paramname">face_array</td><td>[in] 人脸数组，数组元素可以是用户自定义的结构体，但必须包含一个rockface_feature_t类型的结构体成员（注意，初始化后该数组不能被释放） </td></tr>
+    <tr><td class="paramname">num</td><td>[in] 人脸数组数量 </td></tr>
+    <tr><td class="paramname">face_data_size</td><td>[in] 用户定义结构体的大小 </td></tr>
+    <tr><td class="paramname">feature_offset</td><td>[in] 用户定义结构体中 <a class="el" href="structrockface__feature__t.html">rockface_feature_t</a> 成员的偏移位置 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> </dd></dl>
+
+</div>
+</div>
+<a id="abd68f6ec238d993be719a32233e2dc8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd68f6ec238d993be719a32233e2dc8b">&#9670;&nbsp;</a></span>rockface_face_library_release()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> rockface_face_library_release </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a>&#160;</td>
+          <td class="paramname"><em>handle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>释放人脸库</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handle</td><td>[in] Handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> </dd></dl>
+
+</div>
+</div>
+<a id="a3f6fc11b0cef00f8c9a893a70b93afde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f6fc11b0cef00f8c9a893a70b93afde">&#9670;&nbsp;</a></span>rockface_feature_compare()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> rockface_feature_compare </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structrockface__feature__t.html">rockface_feature_t</a> *&#160;</td>
+          <td class="paramname"><em>in_feature1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structrockface__feature__t.html">rockface_feature_t</a> *&#160;</td>
+          <td class="paramname"><em>in_feature2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>out_similarity</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>比较两个人脸特征的相似度 (使用欧式距离)， 开发者可以设置阈值(建议阈值范围0.7~1.3，可根据不同人脸库和应用场景调整)，如果小于阈值可以判断为同一人</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in_feature1</td><td>[in] 人脸特征1 </td></tr>
+    <tr><td class="paramname">in_feature2</td><td>[in] 人脸特征2 </td></tr>
+    <tr><td class="paramname">out_similarity</td><td>[out] 相似度 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> </dd></dl>
+
+</div>
+</div>
+<a id="a5b92b6e797d1f79fd6ecea6f5cfc919a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b92b6e797d1f79fd6ecea6f5cfc919a">&#9670;&nbsp;</a></span>rockface_feature_extract()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> rockface_feature_extract </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a>&#160;</td>
+          <td class="paramname"><em>handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structrockface__image__t.html">rockface_image_t</a> *&#160;</td>
+          <td class="paramname"><em>in_img</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structrockface__feature__t.html">rockface_feature_t</a> *&#160;</td>
+          <td class="paramname"><em>out_feature</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>对已对齐的人脸图像提取人脸特征</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handle</td><td>[in] 已初始化的Handle（调用 <a class="el" href="rockface__recog_8h.html#a92973347d9bcbb6461f3af47832995a4">rockface_init_recognizer</a> 函数初始化） </td></tr>
+    <tr><td class="paramname">in_img</td><td>[in] 对齐后的人脸图像 </td></tr>
+    <tr><td class="paramname">out_feature</td><td>[out] 人脸特征 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> </dd></dl>
+
+</div>
+</div>
+<a id="aecd7639b36121a549060cf591de6597f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecd7639b36121a549060cf591de6597f">&#9670;&nbsp;</a></span>rockface_feature_search()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> rockface_feature_search </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a>&#160;</td>
+          <td class="paramname"><em>handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structrockface__feature__t.html">rockface_feature_t</a> *&#160;</td>
+          <td class="paramname"><em>in_feature</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>threshold</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structrockface__search__result__t.html">rockface_search_result_t</a> *&#160;</td>
+          <td class="paramname"><em>out_result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>搜索人脸，得到小于阈值情况下，和输入特征最相似的目标</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handle</td><td>[in] Handle </td></tr>
+    <tr><td class="paramname">in_feature</td><td>[in] 要搜索的人脸特征 </td></tr>
+    <tr><td class="paramname">threshold</td><td>[in] 阈值(建议阈值范围0.7~1.3，可根据不同人脸库和应用场景调整，阈值越小越严格) </td></tr>
+    <tr><td class="paramname">out_result</td><td>[out] 搜索结果 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> </dd></dl>
+
+</div>
+</div>
+<a id="ab4d2df9b98af040d2f352df693b6e0bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4d2df9b98af040d2f352df693b6e0bc">&#9670;&nbsp;</a></span>rockface_init_mask_recognizer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> rockface_init_mask_recognizer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a>&#160;</td>
+          <td class="paramname"><em>handle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>初始化戴口罩人脸识别器</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handle</td><td>[in] 需要初始化的Handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> </dd></dl>
+
+</div>
+</div>
+<a id="a92973347d9bcbb6461f3af47832995a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92973347d9bcbb6461f3af47832995a4">&#9670;&nbsp;</a></span>rockface_init_recognizer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> rockface_init_recognizer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a>&#160;</td>
+          <td class="paramname"><em>handle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>初始化人脸识别器</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handle</td><td>[in] 需要初始化的Handle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> </dd></dl>
+
+</div>
+</div>
+<a id="a895bb0305097e8f435f12a2777bcf9b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a895bb0305097e8f435f12a2777bcf9b6">&#9670;&nbsp;</a></span>rockface_mask_feature_extract()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> rockface_mask_feature_extract </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a>&#160;</td>
+          <td class="paramname"><em>handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structrockface__image__t.html">rockface_image_t</a> *&#160;</td>
+          <td class="paramname"><em>in_img</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structrockface__rect__t.html">rockface_rect_t</a> *&#160;</td>
+          <td class="paramname"><em>face_box</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structrockface__feature__float__t.html">rockface_feature_float_t</a> *&#160;</td>
+          <td class="paramname"><em>out_feature</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>对佩戴口罩的人脸图像提取人脸特征</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">handle</td><td>[in] 已初始化的Handle（调用 <a class="el" href="rockface__recog_8h.html#ab4d2df9b98af040d2f352df693b6e0bc">rockface_init_mask_recognizer</a> 函数初始化） </td></tr>
+    <tr><td class="paramname">in_img</td><td>[in] 原始图像（为了保证精度最好不要缩放） </td></tr>
+    <tr><td class="paramname">face_box</td><td>[in] 人脸检测框 </td></tr>
+    <tr><td class="paramname">mode</td><td>[in] 特征提取模式（0：注册模式，输入图像是注册底库，无口罩；1：识别模式，输入图像有佩戴口罩） </td></tr>
+    <tr><td class="paramname">out_feature</td><td>[out] 人脸特征 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd><a class="el" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者 &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

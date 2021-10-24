@@ -1,0 +1,19 @@
+Source: rkscript
+Priority: optional
+Maintainer: Eddie Cai <eddie.cai.linux@gmail.com>
+Uploaders: Eddie Cai <eddie.cai.linux@gmail.com>
+Build-Depends: debhelper (>= 9), udev, alsa-utils
+Standards-Version: 4.1.4
+Section: libs
+Vcs-Git: https://github.com/rockchip-linux/rkscript
+Vcs-Browser: https://github.com/rockchip-linux/rkscript
+Homepage: https://github.com/rockchip-linux/rkscript
+
+Package: rkscript
+Section: libdevel
+Architecture: any-arm armhf arm64
+Depends:
+ ${misc:Depends},
+Multi-Arch: same
+Description: some script used in Rockchip SDK
+ 

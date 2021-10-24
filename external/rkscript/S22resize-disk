@@ -1,0 +1,12 @@
+#!/bin/sh
+
+
+case "$1" in
+	start|"")
+	if [ ! -e /var/lib/misc/firstrun ]; then
+        	/usr/sbin/resize-helper
+	        mkdir -p /var/lib/misc
+        	touch /var/lib/misc/firstrun
+	fi
+	;;
+esac

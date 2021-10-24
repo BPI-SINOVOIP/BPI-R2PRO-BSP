@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# start n4
+#
+if [ -f "/usr/bin/n4" ]
+then
+	sleep 5
+	echo "start n4"
+	n4 &
+fi

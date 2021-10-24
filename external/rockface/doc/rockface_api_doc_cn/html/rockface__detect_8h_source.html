@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>RockFace: /home/yhc/workspace/lion/rockx/RockX-dev/rockface/include/rockface_detect.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">RockFace
+   &#160;<span id="projectnumber">1.3.6</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">rockface_detect.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="rockface__detect_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/****************************************************************************</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">*</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">*    Copyright (c) 2017 - 2019 by Rockchip Corp.  All rights reserved.</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">*</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">*    The material in this file is confidential and contains trade secrets</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">*    of Rockchip Corporation. This is proprietary information owned by</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">*    Rockchip Corporation. No part of this work may be disclosed,</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">*    reproduced, copied, transmitted, or used in any way for any purpose,</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">*    without the express written permission of Rockchip Corporation.</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">*</span></div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">*****************************************************************************/</span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#ifndef _ROCKFACE_DETECT_H</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#define _ROCKFACE_DETECT_H</span></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="rockface__type_8h.html">rockface_type.h</a>&quot;</span></div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="rockface__image_8h.html">rockface_image.h</a>&quot;</span></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif</span></div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<a class="code" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> <a class="code" href="rockface__detect_8h.html#a6876d6f3722139a5a7581a6c6fa2c789">rockface_init_detector</a>(<a class="code" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a> handle);</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<a class="code" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> <a class="code" href="rockface__detect_8h.html#a363bf8a8969c65b8e0fa97480190d3b0">rockface_init_detector2</a>(<a class="code" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a> handle, <span class="keywordtype">int</span> version);</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<a class="code" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> <a class="code" href="rockface__detect_8h.html#ac2f41e634f15574a5b6f838bb814a07a">rockface_init_person_detector</a>(<a class="code" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a> handle);</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<a class="code" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> <a class="code" href="rockface__detect_8h.html#abd5378229df9dbd076e7533d4ebe8736">rockface_detect</a>(<a class="code" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a> handle, <a class="code" href="structrockface__image__t.html">rockface_image_t</a> *in_img, <a class="code" href="structrockface__det__array__t.html">rockface_det_array_t</a> *face_array);</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<a class="code" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> <a class="code" href="rockface__detect_8h.html#aa03c2935fd253d80f4ed82b223de024e">rockface_person_detect</a>(<a class="code" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a> handle, <a class="code" href="structrockface__image__t.html">rockface_image_t</a> *in_img, <a class="code" href="structrockface__det__person__array__t.html">rockface_det_person_array_t</a> *person_array);</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<a class="code" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> <a class="code" href="rockface__detect_8h.html#a54f81398738dc5767711b47eaba8b2b6">rockface_track</a>(<a class="code" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a> handle, <a class="code" href="structrockface__image__t.html">rockface_image_t</a> *in_img, <span class="keywordtype">int</span> max_track_time,</div><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <a class="code" href="structrockface__det__array__t.html">rockface_det_array_t</a>* in_track_face, <a class="code" href="structrockface__det__array__t.html">rockface_det_array_t</a>* out_track_face);</div><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<a class="code" href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a> <a class="code" href="rockface__detect_8h.html#a6c2e876fb9d99ff8f7f1f078e301cd9e">rockface_autotrack</a>(<a class="code" href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a> handle, <a class="code" href="structrockface__image__t.html">rockface_image_t</a> *in_img, <span class="keywordtype">int</span> max_track_time,</div><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <a class="code" href="structrockface__det__array__t.html">rockface_det_array_t</a>* in_track_face, <a class="code" href="structrockface__det__array__t.html">rockface_det_array_t</a>* out_track_face, <span class="keywordtype">bool</span> enable_autotrack);</div><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;} <span class="comment">//extern &quot;C&quot;</span></div><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#endif</span></div><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#endif // _ROCKFACE_DETECT_H</span></div><div class="ttc" id="structrockface__det__person__array__t_html"><div class="ttname"><a href="structrockface__det__person__array__t.html">rockface_det_person_array_t</a></div><div class="ttdoc">表示检测到人形的数组 </div><div class="ttdef"><b>Definition:</b> <a href="rockface__type_8h_source.html#l00225">rockface_type.h:225</a></div></div>
+<div class="ttc" id="rockface__image_8h_html"><div class="ttname"><a href="rockface__image_8h.html">rockface_image.h</a></div></div>
+<div class="ttc" id="rockface__detect_8h_html_a54f81398738dc5767711b47eaba8b2b6"><div class="ttname"><a href="rockface__detect_8h.html#a54f81398738dc5767711b47eaba8b2b6">rockface_track</a></div><div class="ttdeci">rockface_ret_t rockface_track(rockface_handle_t handle, rockface_image_t *in_img, int max_track_time, rockface_det_array_t *in_track_face, rockface_det_array_t *out_track_face)</div></div>
+<div class="ttc" id="rockface__detect_8h_html_a6876d6f3722139a5a7581a6c6fa2c789"><div class="ttname"><a href="rockface__detect_8h.html#a6876d6f3722139a5a7581a6c6fa2c789">rockface_init_detector</a></div><div class="ttdeci">rockface_ret_t rockface_init_detector(rockface_handle_t handle)</div></div>
+<div class="ttc" id="rockface__type_8h_html_afe8d9ff15ebb65abe41cb15a31518a62"><div class="ttname"><a href="rockface__type_8h.html#afe8d9ff15ebb65abe41cb15a31518a62">rockface_handle_t</a></div><div class="ttdeci">void * rockface_handle_t</div><div class="ttdoc">rockface handle </div><div class="ttdef"><b>Definition:</b> <a href="rockface__type_8h_source.html#l00027">rockface_type.h:27</a></div></div>
+<div class="ttc" id="rockface__detect_8h_html_a6c2e876fb9d99ff8f7f1f078e301cd9e"><div class="ttname"><a href="rockface__detect_8h.html#a6c2e876fb9d99ff8f7f1f078e301cd9e">rockface_autotrack</a></div><div class="ttdeci">rockface_ret_t rockface_autotrack(rockface_handle_t handle, rockface_image_t *in_img, int max_track_time, rockface_det_array_t *in_track_face, rockface_det_array_t *out_track_face, bool enable_autotrack)</div></div>
+<div class="ttc" id="structrockface__image__t_html"><div class="ttname"><a href="structrockface__image__t.html">rockface_image_t</a></div><div class="ttdoc">表示一个二维图像 </div><div class="ttdef"><b>Definition:</b> <a href="rockface__type_8h_source.html#l00122">rockface_type.h:122</a></div></div>
+<div class="ttc" id="structrockface__det__array__t_html"><div class="ttname"><a href="structrockface__det__array__t.html">rockface_det_array_t</a></div><div class="ttdoc">表示检测到人脸的数组 </div><div class="ttdef"><b>Definition:</b> <a href="rockface__type_8h_source.html#l00217">rockface_type.h:217</a></div></div>
+<div class="ttc" id="rockface__detect_8h_html_abd5378229df9dbd076e7533d4ebe8736"><div class="ttname"><a href="rockface__detect_8h.html#abd5378229df9dbd076e7533d4ebe8736">rockface_detect</a></div><div class="ttdeci">rockface_ret_t rockface_detect(rockface_handle_t handle, rockface_image_t *in_img, rockface_det_array_t *face_array)</div></div>
+<div class="ttc" id="rockface__type_8h_html"><div class="ttname"><a href="rockface__type_8h.html">rockface_type.h</a></div></div>
+<div class="ttc" id="rockface__detect_8h_html_a363bf8a8969c65b8e0fa97480190d3b0"><div class="ttname"><a href="rockface__detect_8h.html#a363bf8a8969c65b8e0fa97480190d3b0">rockface_init_detector2</a></div><div class="ttdeci">rockface_ret_t rockface_init_detector2(rockface_handle_t handle, int version)</div></div>
+<div class="ttc" id="rockface__detect_8h_html_aa03c2935fd253d80f4ed82b223de024e"><div class="ttname"><a href="rockface__detect_8h.html#aa03c2935fd253d80f4ed82b223de024e">rockface_person_detect</a></div><div class="ttdeci">rockface_ret_t rockface_person_detect(rockface_handle_t handle, rockface_image_t *in_img, rockface_det_person_array_t *person_array)</div></div>
+<div class="ttc" id="rockface__detect_8h_html_ac2f41e634f15574a5b6f838bb814a07a"><div class="ttname"><a href="rockface__detect_8h.html#ac2f41e634f15574a5b6f838bb814a07a">rockface_init_person_detector</a></div><div class="ttdeci">rockface_ret_t rockface_init_person_detector(rockface_handle_t handle)</div></div>
+<div class="ttc" id="rockface__type_8h_html_aea18e08829d7b19be892fcde6a75c025"><div class="ttname"><a href="rockface__type_8h.html#aea18e08829d7b19be892fcde6a75c025">rockface_ret_t</a></div><div class="ttdeci">rockface_ret_t</div><div class="ttdoc">函数返回值 </div><div class="ttdef"><b>Definition:</b> <a href="rockface__type_8h_source.html#l00032">rockface_type.h:32</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者 &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>
