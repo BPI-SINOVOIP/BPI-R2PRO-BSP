@@ -5,7 +5,6 @@
 #
 # Normal rules
 #
-.*
 *.o
 *.o.*
 *.a
@@ -17,8 +16,6 @@
 *.order
 *.elf
 *.swp
-*.bin
-*.patch
 *.cfgtmp
 *.img
 
