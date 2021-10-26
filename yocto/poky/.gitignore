@@ -21,7 +21,6 @@ hob-image-*.bb
 !meta-yocto-bsp
 !meta-yocto-imported
 /documentation/*/eclipse/
-/documentation/*/*.html
 /documentation/*/*.pdf
 /documentation/*/*.tgz
 /bitbake/doc/bitbake-user-manual/bitbake-user-manual.html
