@@ -20,7 +20,6 @@ cmake_build/
 /tensorflow/python/framework/fast_tensor_util.cpp
 Pods
 Podfile.lock
-*.pbxproj
 *.xcworkspacedata
 /tensorflow/contrib/lite/downloads/**
 /tensorflow/contrib/lite/gen/**

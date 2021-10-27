@@ -3,9 +3,6 @@
 *.la
 *.al
 *.a
-*.so
-Makefile
-Makefile.in
 .deps/
 .libs/
 /acinclude.m4
@@ -21,5 +18,4 @@ Makefile.in
 /libtool
 /*.pc
 /*config.h
-/*config.h.in
 
