@@ -17,12 +17,17 @@ export RK_PACKAGE_FILE=rk356x-package-file-bpi-r2pro-openwrt
 export RK_PARAMETER=parameter-rk3568-bpi-r2pro-pc-openwrt-fit.txt
 
 # Buildroot config
-export RK_CFG_BUILDROOT=
+export RK_CFG_BUILDROOT=rockchip_rk356x_recovery
 # Recovery config
-export RK_CFG_RECOVERY=
+export RK_CFG_RECOVERY=rockchip_rk356x_recovery
 # OEM config
 export RK_OEM_DIR=
 # userdata config
  export RK_USERDATA_DIR=
 # rootfs_system
 export RK_ROOTFS_SYSTEM=openwrt
+
+# Openwrt version select
+export RK_OPENWRT_VERSION_SELECT=openwrt
+# Openwrt defconfig
+export RK_OPENWRT_DEFCONFIG=rk356x_config

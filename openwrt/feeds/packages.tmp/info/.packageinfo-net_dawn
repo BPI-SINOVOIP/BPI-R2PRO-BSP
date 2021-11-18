@@ -1,0 +1,23 @@
+Source-Makefile: feeds/packages/net/dawn/Makefile
+
+Package: dawn
+Version: 2021-10-26-ddc007e32ced2df48212c0bc65ce2f77a8617bd2-0
+Depends: +libc +USE_GLIBC:librt +USE_GLIBC:libpthread +libubus +libubox +libblobmsg-json +libuci +libgcrypt +libiwinfo +umdns
+Conflicts: 
+Menu-Depends: 
+Provides: 
+Section: net
+Category: Network
+Repository: base
+Title: Decentralized wifi controller
+Maintainer: Nick Hainke <vincent@systemli.org>
+Source: dawn-2021-10-26-ddc007e32ced2df48212c0bc65ce2f77a8617bd2.tar.xz
+License: GPL-2.0-only
+LicenseFiles: LICENSE
+Type: ipkg
+Description:   This package implements a decentralized wireless daemon.
+https://github.com/berlin-open-wireless-lab/DAWN.git
+Nick Hainke <vincent@systemli.org>
+@@
+
+
