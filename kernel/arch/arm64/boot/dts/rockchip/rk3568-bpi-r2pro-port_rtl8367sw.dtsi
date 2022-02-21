@@ -221,10 +221,10 @@
 		     &gmac0_rgmii_bus>;
 		    /* &gmac0_clkinout>; */
 
-	tx_delay = <0x4f>;
-	rx_delay = <0x26>;
+	tx_delay = <0x3c>;
+	rx_delay = <0x2f>;
 
-	/* phy-handle = <&rgmii_phy0>; */
+	phy-handle = <&rgmii_phy0>;
 	status = "disabled";
 };
 
@@ -232,7 +232,7 @@
 	phy-mode = "rgmii";
 	clock_in_out = "output";
 
-	snps,reset-gpio = <&gpio3 RK_PB0 GPIO_ACTIVE_LOW>; 
+	snps,reset-gpio = <&gpio0 RK_PB7 GPIO_ACTIVE_LOW>; 
 	snps,reset-active-low; 
 	/* Reset time is 20ms, 100ms for rtl8211f */
 	snps,reset-delays-us = <0 20000 100000>; 
@@ -247,10 +247,10 @@
 		     &gmac1m1_rgmii_clk
 		     &gmac1m1_rgmii_bus>;
 
-	tx_delay = <0x3c>;
-	rx_delay = <0x2f>;
+	tx_delay = <0x4f>;
+	rx_delay = <0x26>;
 
-	phy-handle = <&rgmii_phy1>; 
+	/* phy-handle = <&rgmii_phy1>; */
 	status = "disabled";
 };
 
@@ -396,21 +396,21 @@
 	};
 };
 
-/*
 &mdio0 {
 	rgmii_phy0: phy@0 {
 		compatible = "ethernet-phy-ieee802.3-c22";
 		reg = <0x0>;
 	};
 };
-*/
 
+/*
 &mdio1 {
 	rgmii_phy1: phy@0 {
 		compatible = "ethernet-phy-ieee802.3-c22";
 		reg = <0x0>;
 	};
 };
+*/
 
 &pcie30phy {
 	status = "disabled";

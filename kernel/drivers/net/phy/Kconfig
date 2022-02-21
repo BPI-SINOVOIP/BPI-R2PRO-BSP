@@ -216,6 +216,8 @@ config RTL8367RB_GSW
 	help
 	  This driver supports rtl8367rb in rk3568
 
+source "drivers/net/phy/mtk/mt753x/Kconfig"
+
 comment "MII PHY device drivers"
 
 config SFP

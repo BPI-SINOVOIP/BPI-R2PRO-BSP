@@ -1,0 +1,26 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * Copyright (c) 2020 Rockchip Electronics Co., Ltd.
+ *
+ */
+
+/dts-v1/;
+
+#include "rk3568-bpi-r2pro-pc.dtsi"
+
+/ {
+    model = "BananaPi RK3568-BPI-R2PRO-PC HDMI (Linux)";
+    compatible = "rockchip,rk3568-bpi-r2pro-pc", "rockchip,rk3568";
+
+     rtkgsw: rtkgsw@0 {
+	     compatible = "rockchip,rtk-gsw";
+	     rockchip,mdio = <&mdio1>;
+	     rockchip,reset-pin = <&gpio3 RK_PB0 GPIO_ACTIVE_HIGH>;
+	     status = "okay";
+     };
+};
+
+&route_hdmi {
+    status = "okay";
+    connect = <&vp0_out_hdmi>;
+};

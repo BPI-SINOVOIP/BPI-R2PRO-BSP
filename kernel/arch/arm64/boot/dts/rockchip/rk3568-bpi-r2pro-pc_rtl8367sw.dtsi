@@ -51,7 +51,7 @@
 		regulator-always-on;
 		regulator-boot-on;
 		enable-active-high;
-		gpio = <&gpio0 RK_PB7 GPIO_ACTIVE_HIGH>;
+		gpio = <&gpio4 RK_PC1 GPIO_ACTIVE_HIGH>;
 		//startup-delay-us = <5000>;
 		vin-supply = <&vcc3v3_sys>;
 	};
@@ -169,16 +169,16 @@
 &pcie3x1 {
 	rockchip,bifurcation;
 	reset-gpios = <&gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
-	//vpcie3v3-supply = <&vcc3v3_pcie>;
-	ngff3v3-supply = <&vcc3v3_ngff>;
+	vpcie3v3-supply = <&vcc3v3_pcie>;
+	//ngff3v3-supply = <&vcc3v3_ngff>;
 	status = "okay";
 };
 
 &pcie3x2 {
 	rockchip,bifurcation;
 	reset-gpios = <&gpio2 RK_PD6 GPIO_ACTIVE_HIGH>;
-	//vpcie3v3-supply = <&vcc3v3_pcie>;
-	minipcie3v3-supply = <&vcc3v3_minipcie>;
+	vpcie3v3-supply = <&vcc3v3_pcie>;
+	//minipcie3v3-supply = <&vcc3v3_minipcie>;
       	status = "okay";
 };
 
@@ -196,6 +196,10 @@
 
 &gmac0 {
 	status = "okay";
+};
+
+&gmac1 {
+	status = "okay";
 
 	fixed-link {
 		speed = <1000>;
@@ -204,20 +208,15 @@
 	};
 };
 
-&gmac1 {
-	status = "okay";
-};
-
-/*
 &rgmii_phy0 {
 	led_status_value = <0x6940>;
 };
-*/
 
+/*
 &rgmii_phy1 {
 	led_status_value = <0x6940>;
 };
-
+*/
 
 &uart8 {
 	status = "disabled";
