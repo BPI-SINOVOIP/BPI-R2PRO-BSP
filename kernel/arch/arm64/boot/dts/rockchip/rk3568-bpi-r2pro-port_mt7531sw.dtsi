@@ -222,7 +222,7 @@
 		    /* &gmac0_clkinout>; */
 
 	tx_delay = <0x4f>;
-	rx_delay = <0x26>;
+	rx_delay = <0x0f>;
 
 	/* phy-handle = <&rgmii_phy0>; */
 	status = "disabled";
