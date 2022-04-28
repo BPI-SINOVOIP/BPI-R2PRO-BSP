@@ -151,7 +151,7 @@
 };
 
 &uart4 {
-        status = "okay";
+        status = "disabled";
 };
 
 &spi1 {
@@ -253,7 +253,7 @@
     };
 };
 
-&pwm7 {
+&pwm8 {
 	status = "okay";
 };
 
