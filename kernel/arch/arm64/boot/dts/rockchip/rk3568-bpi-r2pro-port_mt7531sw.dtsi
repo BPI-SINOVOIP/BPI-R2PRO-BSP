@@ -121,11 +121,14 @@
 	wireless_wlan: wireless-wlan {
 		compatible = "wlan-platdata";
 		rockchip,grf = <&grf>;
-		wifi_chip_type = "ap6398s";
+		/* wifi_chip_type = "ap6398s"; */
+		wifi_chip_type = "rtl8822cs";
 		pinctrl-names = "default";
 		pinctrl-0 = <&wifi_host_wake_irq>;
+		WIFI,reset_gpio    = <&gpio3 RK_PD5 GPIO_ACTIVE_HIGH>;
 		WIFI,host_wake_irq = <&gpio3 RK_PD4 GPIO_ACTIVE_HIGH>;
-		status = "disabled";
+		/* status = "disabled"; */
+		status = "okay";
 	};
 
 	wireless_bluetooth: wireless-bluetooth {
@@ -137,10 +140,11 @@
 		pinctrl-names = "default", "rts_gpio";
 		pinctrl-0 = <&uart8m0_rtsn>;
 		pinctrl-1 = <&uart8_gpios>;
-		BT,reset_gpio    = <&gpio3 RK_PA0 GPIO_ACTIVE_HIGH>;
-		BT,wake_gpio     = <&gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
-		BT,wake_host_irq = <&gpio3 RK_PA2 GPIO_ACTIVE_HIGH>;
-		status = "disabled";
+		/* BT,reset_gpio    = <&gpio3 RK_PA0 GPIO_ACTIVE_HIGH>; */
+		/* BT,wake_gpio     = <&gpio3 RK_PA1 GPIO_ACTIVE_HIGH>; */
+		BT,wake_host_irq = <&gpio3 RK_PA0 GPIO_ACTIVE_HIGH>;
+		/* status = "disabled"; */
+		status = "okay";
 	};
 };
 
